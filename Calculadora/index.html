@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Calculadora</title>
+</head>
+<body>
+    <main class="container">
+        <div class="calculadora">
+            <span class="ponteiro"></span>
+            <div class="cont-tela">
+                <p class="tela"></p>
+            </div>
+            <div class="buttons">
+                <div class="buttons-Numbers">
+                    <input type="button" value="CE" class="but-Clear" onclick="Clear()">
+                    <input type="button" value="C" class="but-Clear-Parcial" onclick="Clear()">
+                    <input type="button" value="&larr;" class="but-BackSpace" onclick="BackSpace()">
+
+                    <input type="button" value="7" class="but-Number">
+                    <input type="button" value="8" class="but-Number">
+                    <input type="button" value="9" class="but-Number">
+
+                    <input type="button" value="4" class="but-Number">
+                    <input type="button" value="5" class="but-Number">
+                    <input type="button" value="6" class="but-Number">
+
+                    <input type="button" value="1" class="but-Number">
+                    <input type="button" value="2" class="but-Number">
+                    <input type="button" value="3" class="but-Number">
+
+                    <input type="button" value="0" class="but-Number">
+                    <input type="button" value="." class="but-ponto" onclick="btnPontoLogica()">
+
+                </div>
+                <div class="buttons-Operators">
+                    <button class="but-Operator" value="/">/</button>
+                    <button class="but-Operator" value="*">x</button>
+                    <button class="but-Operator" value="-">-</button>
+                    <button class="but-Operator" value="+">+</button>
+                    <button class="but-Soma">=</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="CalculadorA.js"></script>
+    <script src="script.js" defer></script>
+    <script src="logica.js"></script>
+    <script src="calcular.js"></script>
+   
+</body>
+</html>

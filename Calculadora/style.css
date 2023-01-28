@@ -1,0 +1,116 @@
+body{
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(16, 55, 80);
+}
+.calculadora{
+    position: relative;
+    width: 240px;
+    background-color:rgb(244, 244, 244);
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 10px solid rgb(201, 201, 201);
+    box-shadow: 2px 3px 10px rgba(15, 28, 36, 0.387);
+    border-radius: 10px;
+}
+.ponteiro{
+    opacity: 0;
+    position: absolute;
+    height: 20px;
+    width: 2px;
+    background-color: rgb(38, 38, 38);
+    top: 49px;
+    right: 18px;
+    animation: ponteiroPisc 500ms infinite alternate;
+}
+.cont-tela{
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    box-sizing: border-box;
+    
+    height: 100px;
+    max-width: 200px;
+    padding-right: 6px;
+    border: 5px solid gray;
+    border-radius: 5px;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+}
+.buttons-Numbers{
+    
+    display: grid;
+    grid-template-columns: repeat(3, 48px);
+    grid-auto-rows: 48px;
+    gap: 3px;
+    
+}
+.buttons-Operators{
+    display: grid;
+    grid-template-columns: repeat(1, 48px);
+    grid-auto-rows: 48px;
+    gap: 3px;
+    margin-left: 3px;
+    
+}
+
+.but-Number, 
+.but-Operator, 
+.but-Soma, 
+.but-ponto{
+    cursor: pointer;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 50%;
+    transition: background-color 300ms;
+    box-shadow: 2px 2px 5px  rgba(33, 33, 33, 0.179);
+    outline: none;
+}
+
+.but-Number:hover, 
+.but-Operator:hover, 
+.but-Soma:hover, 
+.but-ponto:hover{
+    background-color: rgb(199, 199, 199);
+}
+.but-Soma{
+    border-radius: 10px;
+    width: 100px;
+    margin-left: -50px;
+}
+.but-Clear, 
+.but-Clear-Parcial, 
+.but-BackSpace{
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 300ms;
+    box-shadow: 2px 2px 5px  rgba(33, 33, 33, 0.179);
+    outline: none;
+}
+.but-Clear:hover, 
+.but-Clear-Parcial:hover, 
+.but-BackSpace:hover{
+    background-color: rgb(199, 199, 199);
+}
+
+.calculadora input:active, 
+.calculadora button:active{
+    background-color: black;
+}
+
+@keyframes ponteiroPisc {
+    0%{opacity: 1};
+    50%{opacity: 0};
+    100%{opacity: 1};
+}
