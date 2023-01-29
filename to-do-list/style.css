@@ -47,13 +47,12 @@ hr{
 .add-new-visible:hover{
     background-color: rgb(193, 193, 193);
 }
-
-.open-add-new{
-    color: green;
-}
 .add-new-datas{
     display: flex;
     margin-top: 10px;
+}
+.open-datas{
+    display: flex;
 }
 .add-new-datas input{
     outline: none;
@@ -66,7 +65,12 @@ hr{
 .add-new-cont span{
     margin-left: 5px;
 }
+.add-button{
+    cursor: pointer;
+    color: green;
+}
 
+/*List*/
 .list{
     display: flex;
     flex-direction: column;
@@ -80,4 +84,66 @@ hr{
     justify-content: space-between;
     flex-direction: row;
     width: 100%;
+    padding: 0 5px;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+.list-item:nth-child(even){
+    background-color: rgb(230, 230, 230);
+}
+
+.list-item  div{
+    display: flex;
+    height: 35px;
+    align-items: center;
+}
+.list-item div p{
+    display: inline-block;
+}
+.list-item div:not(:last-child){
+    width: 85%;
+}
+.item-edit-button{
+    cursor: pointer;
+}
+.item-delet-button{
+    font-size: 25px;
+    margin-top: 5px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+.item-edit-input{
+    display: none;
+    border: none;
+    border-bottom: 1px solid gray;
+    width: 100%;
+}
+.label-checkbox{
+    position: relative;
+    height: 18px;
+    width: 18px;
+    border-radius: 2px;
+    margin-right: 7px;
+    background-color: rgb(131, 131, 131);
+    
+}
+
+.label-checkbox::before{
+    display: none;
+    content: '✔';
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    top: -3px;
+    left: 3px;
+    color: white;
+}
+.check-done{
+    display: none;
+}
+.check-done:checked + .label-checkbox{
+    background-color: rgb(0, 105, 70);
+}
+.check-done:checked + .label-checkbox::before{
+    display: block;
 }

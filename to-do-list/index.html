@@ -25,7 +25,7 @@
             <div class="add-new-cont">
                 <div class="add-new-visible">
                     <span>Add New Item </span>
-                    <span for="open-add-new-checkbox" class="material-symbols-outlined open-add-new">format_list_bulleted_add</span>
+                    <span for="open-add-new-checkbox" class="material-symbols-outlined">format_list_bulleted_add</span>
                 </div>
                 <div class="add-new-datas">
                     <input type="text" placeholder="Descrição" id="add-new-text">
@@ -35,8 +35,9 @@
             <ul class="list">
                 <li class="list-item">
                     <div>
-                        <input type="checkbox">
-                        <p class="item-text" style="display: inline-block;">Text Here</p>
+                        <input type="checkbox" id="check-done-1" class="check-done">
+                        <label for="check-done-1" class="label-checkbox"></label>
+                        <p class="item-text">Text Here</p>
                         <input type="text" class="item-edit-input">
                     </div>
                     <div>
@@ -44,8 +45,11 @@
                         <span class="material-symbols-outlined item-delet-button">delete</span>
                     </div>
                 </li>
+                
             </ul>
         </section>
     </main>
+
+    <script src="script.js"></script>
 </body>
 </html>
