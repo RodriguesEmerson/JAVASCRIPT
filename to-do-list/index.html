@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="style.css">
+    <title>To Do List</title>
+    <style>
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 48
+        }
+        </style>
+</head>
+<body>
+    <main class="container">
+        <section class="list-cont">
+            <h2>To Do List</h2>
+            <hr>
+            <div class="add-new-cont">
+                <div class="add-new-visible">
+                    <span>Add New Item </span>
+                    <span for="open-add-new-checkbox" class="material-symbols-outlined open-add-new">format_list_bulleted_add</span>
+                </div>
+                <div class="add-new-datas">
+                    <input type="text" placeholder="Descrição" id="add-new-text">
+                    <span class="material-symbols-outlined add-button">add_circle</span>
+                </div>
+            </div>
+            <ul class="list">
+                <li class="list-item">
+                    <div>
+                        <input type="checkbox">
+                        <p class="item-text" style="display: inline-block;">Text Here</p>
+                        <input type="text" class="item-edit-input">
+                    </div>
+                    <div>
+                        <span class="material-symbols-outlined item-edit-button">edit_square</span>
+                        <span class="material-symbols-outlined item-delet-button">delete</span>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>
