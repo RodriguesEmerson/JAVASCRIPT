@@ -1,3 +1,6 @@
+html{
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
 :root{
     --colorTexInput: rgb(71, 71, 71);
     --status: 'edit';
@@ -48,7 +51,7 @@ hr{
     cursor: pointer;
     transition: background-color 300ms;
 }
-.add-new-visible:hover{
+.add-new-visible:active{
     background-color: rgb(193, 193, 193);
 }
 .add-new-datas{
@@ -74,6 +77,10 @@ hr{
 .add-button{
     cursor: pointer;
     color: green;
+}
+.add-button:active{
+    color: rgb(0, 63, 0);
+    font-variation-settings: 'FILL' 1;
 }
 
 /*List**********************************/
@@ -115,14 +122,14 @@ hr{
 .item-edit-button{
     position: relative;
     cursor: pointer;
-    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    
 }
 .item-delet-button{
     position: relative;
     font-size: 25px;
     margin-top: 5px;
     cursor: pointer;
-    margin-left: 5px;
+    margin-left: 5px;   
 }
 .item-edit-input{
     display: none;
@@ -140,6 +147,7 @@ hr{
 }
 .item-delet-button:active{
     color: rgb(184, 1, 1);
+    font-variation-settings: 'FILL' 1;
 }
 .item-edit-button::selection, .item-delet-button::selection, .add-button::selection{
     background-color: white !important;
@@ -192,6 +200,9 @@ hr{
     }
 }
 @media screen and (min-width: 800px){
+    .add-new-visible:hover{
+        background-color: rgb(193, 193, 193);
+    }
     /*Hover delete Button*/
     .item-delet-button::before{
         position: absolute;

@@ -68,6 +68,7 @@ function CreateElements(){
 
     let new_EditTextItem = document.createElement('input')
     new_EditTextItem.setAttribute('type', 'text')
+    new_EditTextItem.setAttribute('maxlength', '40')
     new_EditTextItem.setAttribute('class', 'item-edit-input')
 
     let new_BtnEditItem = document.createElement('span')
