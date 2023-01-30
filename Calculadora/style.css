@@ -76,12 +76,7 @@ body{
     outline: none;
 }
 
-.but-Number:hover, 
-.but-Operator:hover, 
-.but-Soma:hover, 
-.but-ponto:hover{
-    background-color: rgb(199, 199, 199);
-}
+
 .but-Soma{
     border-radius: 10px;
     width:176px;
@@ -97,15 +92,10 @@ body{
     box-shadow: 2px 2px 5px  rgba(33, 33, 33, 0.179);
     outline: none;
 }
-.but-Clear:hover, 
-.but-Clear-Parcial:hover, 
-.but-BackSpace:hover{
-    background-color: rgb(199, 199, 199);
-}
 
 .calculadora input:active, 
 .calculadora button:active{
-    background-color: black;
+    background-color: rgb(199, 199, 199);
 }
 
 @keyframes ponteiroPisc {
