@@ -140,16 +140,23 @@ hr{
 .item-delet-button:active{
     color: rgb(184, 1, 1);
 }
+.item-edit-button::selection, .item-delet-button::selection, .add-button::selection{
+    background-color: white !important;
+}
 
 
 /*Check Box Sett*/
 .label-checkbox{
     position: relative;
+    cursor: pointer;
     height: 18px;
     min-width: 18px;
     border-radius: 2px;
     margin-right: 7px;
     background-color: rgb(131, 131, 131);
+}
+.label-checkbox::selection{
+    background-color: white !important;
 }
 .label-checkbox::before{
     display: none;
