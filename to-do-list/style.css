@@ -143,6 +143,9 @@ hr{
 .item-edit-button::selection, .item-delet-button::selection, .add-button::selection{
     background-color: white !important;
 }
+.item-edit-button::-moz-selection, .item-delet-button::-moz-selection, .add-button::-moz-selection{
+    background-color: white !important;
+}
 
 
 /*Check Box Sett*/
