@@ -115,6 +115,7 @@ hr{
 .item-edit-button{
     position: relative;
     cursor: pointer;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 .item-delet-button{
     position: relative;
@@ -141,9 +142,6 @@ hr{
     color: rgb(184, 1, 1);
 }
 .item-edit-button::selection, .item-delet-button::selection, .add-button::selection{
-    background-color: white !important;
-}
-.item-edit-button::-moz-selection, .item-delet-button::-moz-selection, .add-button::-moz-selection{
     background-color: white !important;
 }
 
