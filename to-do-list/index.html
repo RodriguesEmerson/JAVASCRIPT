@@ -17,7 +17,7 @@
         }
         </style>
 </head>
-<body>
+<body onload="carregaList()">
     <main class="container">
         <section class="list-cont">
             <h2>To Do List</h2>
@@ -33,11 +33,11 @@
                 </div>
             </div>
             <ul class="list">
-                <li class="list-item">
+                <li class="list-item list-item-1" id="1">
                     <div>
                         <input type="checkbox" id="check-done-1" class="check-done">
                         <label for="check-done-1" class="label-checkbox"></label>
-                        <p class="item-text">Text Here</p>
+                        <p class="item-text open">Text Here</p>
                         <input type="text" class="item-edit-input">
                     </div>
                     <div>
@@ -46,10 +46,11 @@
                     </div>
                 </li>
                 
+                
             </ul>
         </section>
     </main>
 
-    <script src="script.js"></script>
+    <script src="script.js" ></script>
 </body>
 </html>

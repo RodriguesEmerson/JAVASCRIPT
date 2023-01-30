@@ -48,7 +48,7 @@ hr{
     background-color: rgb(193, 193, 193);
 }
 .add-new-datas{
-    display: flex;
+    display: none;
     margin-top: 10px;
 }
 .open-datas{
@@ -61,6 +61,7 @@ hr{
     width: 350px;
     text-indent: 5px;
     color: var(--colorTexInput);
+    
 }
 .add-new-cont span{
     margin-left: 5px;
@@ -91,17 +92,18 @@ hr{
 .list-item:nth-child(even){
     background-color: rgb(230, 230, 230);
 }
-
 .list-item  div{
     display: flex;
     height: 35px;
     align-items: center;
 }
-.list-item div p{
-    display: inline-block;
-}
 .list-item div:not(:last-child){
     width: 85%;
+}
+
+
+.item-text{
+    display: none;
 }
 .item-edit-button{
     cursor: pointer;
@@ -115,8 +117,13 @@ hr{
 .item-edit-input{
     display: none;
     border: none;
+    outline: none;
     border-bottom: 1px solid gray;
     width: 100%;
+    color: var(--colorTexInput);
+    background:none;
+    text-indent: 5px;
+    font-size: 18px;
 }
 .label-checkbox{
     position: relative;
@@ -127,7 +134,9 @@ hr{
     background-color: rgb(131, 131, 131);
     
 }
-
+.open{
+    display: block !important;
+}
 .label-checkbox::before{
     display: none;
     content: '✔';
@@ -146,4 +155,7 @@ hr{
 }
 .check-done:checked + .label-checkbox::before{
     display: block;
+}
+.cheked{
+    
 }
