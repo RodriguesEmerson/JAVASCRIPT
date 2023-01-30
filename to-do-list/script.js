@@ -1,4 +1,4 @@
-var newID = 1
+var newID = 1 //Cria um número unico para cada item da lista
 
 
 //Add New Container
@@ -12,6 +12,7 @@ let list = document.querySelector('.list')
 
 openAddNew.addEventListener('click', function(){
     AddNewDatas.classList.toggle('open-datas')
+    textAddNew.focus()
 })
 
 btn_AddNew.addEventListener('click', function(){
@@ -19,9 +20,10 @@ btn_AddNew.addEventListener('click', function(){
 })
 
 textAddNew.addEventListener('keydown', function(e){
-
-   if(e.code == 'Enter'){
+    //console.log(e)
+   if(e.which == 13){
         conditionCreateElements()
+        
    }else{
         textAddNew.style.borderBottom = '1px solid gray'
         textAddNew.setAttribute('placeholder', 'Descrição')
@@ -41,6 +43,7 @@ function conditionCreateElements(){
     textAddNew.value = ''
 }
 
+//***************criando os elementos no dom **********************/
 function CreateElements(){
 
     let new_ListItem = document.createElement('li')
@@ -89,13 +92,14 @@ function CreateElements(){
     newID++
     atualizaLocalStorage()
 }
-list.addEventListener('click', function(element){
-    let clickedElement = element.target.closest('li')
+
+//*****************adicionando eventos aos itens clicados************************************/
+list.addEventListener('click', function(element){ //pega o elemento que foi clicado, o parâmetro é o elemento
+    let clickedElement = element.target.closest('li') //o elemento "li" mais próximo
     let childElement = element.target
     let fatherLi = clickedElement.getAttribute('id')
 
     let listItem = document.querySelector(`.list-item-${fatherLi}`)
-    console.log(listItem)
     let textItem = document.querySelector(`.list-item-${fatherLi} .item-text`)
     let editTextItem = document.querySelector(`.list-item-${fatherLi} .item-edit-input`)
     let btn_editItem = document.querySelector(`.list-item-${fatherLi} .item-edit-button`)
@@ -104,6 +108,7 @@ list.addEventListener('click', function(element){
 
     if(childElement.classList.contains('item-delet-button')){
        list.removeChild(listItem)
+       atualizaLocalStorage()
     }else if(childElement.classList.contains('item-edit-button')){
         
         if(textItem.classList.contains('open')){
@@ -111,12 +116,18 @@ list.addEventListener('click', function(element){
             editTextItem.classList.add('open')
             editTextItem.value = textItem.textContent
             editTextItem.focus()
+            btn_editItem.textContent = 'Done'
+            btn_editItem.style.color = 'green'
+            
         }else {
             editTextItem.classList.remove('open')
             textItem.classList.add('open')
-           
+            btn_editItem.textContent = 'edit_square'
+            btn_editItem.style.color = 'black'
+
             if(editTextItem.value.length != 0){
                 textItem.textContent = editTextItem.value
+                atualizaLocalStorage()
             }
         }
     }else if(childElement.classList.contains('check-done')){
@@ -127,9 +138,12 @@ list.addEventListener('click', function(element){
             checkbox.classList.add('checked')
             checkbox.setAttribute('checked','')
         }
+        atualizaLocalStorage()
     }
-    atualizaLocalStorage()
+    
 })
+
+//********carrega e atualiza o local storange */
 function carregaList(){
     list.innerHTML = localStorage.getItem('listDatas')
     if(localStorage.getItem('newID') === null){

@@ -1,27 +1,32 @@
 :root{
     --colorTexInput: rgb(71, 71, 71);
+    --status: 'edit';
 }
 
 body{
     font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(231, 231, 231);
 }
 .list-cont{
-    width: 500px;
-    border: 1px solid lightgray;
-    padding: 10px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: auto;
+    max-width: 600px;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.103);
+    border-radius: 10px;
+    
 }
 .list-cont h2{
     text-align: center;
-
+    margin-bottom: 0;
 }
 hr{
     width: 85%;
 }
-
+/*Add New Item Panel*************************/
 .add-new-cont{
     width: 85%;
     display: flex;
@@ -35,14 +40,13 @@ hr{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 385px;
+    width: 96%;
     margin: 10px 0 ;
     padding: 5px;
     background-color: rgb(221, 221, 221);
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 300ms;
-   
 }
 .add-new-visible:hover{
     background-color: rgb(193, 193, 193);
@@ -50,6 +54,7 @@ hr{
 .add-new-datas{
     display: none;
     margin-top: 10px;
+    width: 96%
 }
 .open-datas{
     display: flex;
@@ -58,7 +63,7 @@ hr{
     outline: none;
     border:none;
     border-bottom: 1px solid gray;
-    width: 350px;
+    width: 96%;
     text-indent: 5px;
     color: var(--colorTexInput);
     
@@ -71,7 +76,7 @@ hr{
     color: green;
 }
 
-/*List*/
+/*List**********************************/
 .list{
     display: flex;
     flex-direction: column;
@@ -79,6 +84,7 @@ hr{
     width: 85%;
     padding: 0;
 }
+/*List Item*/
 .list-item{
     display: flex;
     align-items: center;
@@ -92,6 +98,7 @@ hr{
 .list-item:nth-child(even){
     background-color: rgb(230, 230, 230);
 }
+/*Divs*/
 .list-item  div{
     display: flex;
     height: 35px;
@@ -100,15 +107,17 @@ hr{
 .list-item div:not(:last-child){
     width: 85%;
 }
-
-
+/*Buttons and Inputs*/
 .item-text{
     display: none;
+    font-size: 14px;
 }
 .item-edit-button{
+    position: relative;
     cursor: pointer;
 }
 .item-delet-button{
+    position: relative;
     font-size: 25px;
     margin-top: 5px;
     cursor: pointer;
@@ -123,19 +132,24 @@ hr{
     color: var(--colorTexInput);
     background:none;
     text-indent: 5px;
-    font-size: 18px;
+    font-size: 15px;
 }
+.item-edit-button:active{
+    color: green;
+}
+.item-delet-button:active{
+    color: rgb(184, 1, 1);
+}
+
+
+/*Check Box Sett*/
 .label-checkbox{
     position: relative;
     height: 18px;
-    width: 18px;
+    min-width: 18px;
     border-radius: 2px;
     margin-right: 7px;
     background-color: rgb(131, 131, 131);
-    
-}
-.open{
-    display: block !important;
 }
 .label-checkbox::before{
     display: none;
@@ -143,7 +157,7 @@ hr{
     height: 15px;
     width: 15px;
     position: absolute;
-    top: -3px;
+    top: -2.5px;
     left: 3px;
     color: white;
 }
@@ -155,7 +169,64 @@ hr{
 }
 .check-done:checked + .label-checkbox::before{
     display: block;
+    
 }
 .cheked{
-    
+    content: ''
+}
+.open{
+    display: block !important;
+}
+
+@media screen and (max-width: 500px){
+    .list-item{
+        height: 70px;
+    }
+}
+@media screen and (min-width: 800px){
+    /*Hover delete Button*/
+    .item-delet-button::before{
+        position: absolute;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        z-index: 1;
+        content: 'delete';
+        top: -18px;
+        left: -11px;
+        height: 20px;
+        width: 45px;
+        background-color: rgb(20, 20, 20);
+        color: white;
+        border-radius: 5px;
+        transition: 500ms;
+    }
+    .item-delet-button:hover::before{
+        display: flex;
+    }
+
+    /*Hover edit Button*/
+    .item-edit-button::before{
+        position: absolute;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        z-index: 1;
+        content: var(--status);
+        top: -18px;
+        left: -11px;
+        height: 20px;
+        width: 45px;
+        background-color: rgb(20, 20, 20);
+        color: white;
+        border-radius: 5px;
+        transition: 500ms;
+    }
+    .item-edit-button:hover::before{
+        display: flex;
+    }
 }
