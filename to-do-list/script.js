@@ -1,6 +1,6 @@
 var newID = 1 //Cria um número unico para cada item da lista
 
-
+console.log(localStorage)
 //Add New Container
 let openAddNew = document.querySelector('.add-new-visible')
 let AddNewDatas = document.querySelector('.add-new-datas')
@@ -21,13 +21,11 @@ btn_AddNew.addEventListener('click', function(){
 
 textAddNew.addEventListener('keydown', function(e){
     //console.log(e)
-   if(e.which == 13){
-        conditionCreateElements()
-        
-   }else{
-        textAddNew.style.borderBottom = '1px solid gray'
-        textAddNew.setAttribute('placeholder', 'Descrição')
-   }
+   if(e.which == 13) return  conditionCreateElements()
+  
+    textAddNew.style.borderBottom = '1px solid gray'
+    textAddNew.setAttribute('placeholder', 'Descrição')
+
     
 })
 function conditionCreateElements(){
@@ -156,5 +154,6 @@ function carregaList(){
 function atualizaLocalStorage(){
     localStorage.clear()
     localStorage.setItem('listDatas', list.innerHTML)
+    if (list.children.length == 0) return newID = 1
     localStorage.setItem('newID', newID)
 }
