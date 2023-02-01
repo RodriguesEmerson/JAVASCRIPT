@@ -1,0 +1,11 @@
+@mixin dFlex() {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+body{
+    @include dFlex();
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: calc(100vh - 50px);
+    background-color: rgb(230, 230, 230);
+}

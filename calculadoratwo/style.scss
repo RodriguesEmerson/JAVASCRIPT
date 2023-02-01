@@ -1,0 +1,18 @@
+@import "declaracoes";
+
+.calculadora{
+    background-color: white;
+    .tela{
+        @include dFlex();
+        align-items: flex-end;
+        
+    }
+}
+.buttons{
+    display: grid;
+    grid-template-columns: repeat(4, 80px);
+    grid-auto-rows: 100px;
+    .clear{
+        columns: span 2;
+    }
+}
