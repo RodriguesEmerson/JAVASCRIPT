@@ -37,4 +37,4 @@ let have = dados.filter(v => v.nome.includes('Rodrigues'))
 //console.log(have)
 
 let foi = dados.filter( p => p.sexo == 'Masculino')
-console.log(foi)
+//console.log(foi)
