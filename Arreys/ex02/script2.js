@@ -8,6 +8,7 @@ function comprimenta(){
    if (hora > 12 && hora <= 18) return 'Boa tarde'
    return 'Boa noite'
 }
+
 function ho(){
     return new Date().getHours()
 } 
@@ -38,4 +39,4 @@ let a = function(){
 
 let exclam = exc(upper(hora(ho())))
 
-console.log(exclam)
+//console.log(exclam)
