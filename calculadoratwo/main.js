@@ -1,3 +1,4 @@
+let leng = 0
 let button = document.querySelectorAll('.btn')
 let display = document.querySelector('.display')
 let regex = /^\d/
@@ -11,24 +12,48 @@ for(let i = 0; i < button.length; i++){
         addNumber(button[i].value)
     })
 }
-
 function addNumber(n){
-    display.value = display.value += n
+    if(leng == 0){
+        display.value = display.value = n 
+        leng = 1
+    }else{
+        display.value = display.value += n 
+    }  
 }
+
 function addOperator(n){
     let lastValue = display.value.slice(-1)
 
     if(regex.test(lastValue) == false){
         bakcSpace()
     }
-    display.value = display.value += n  
+    if(display.value.length == 0 ) return
+    display.value = display.value += n
+    leng = 1
 }
+
 function bakcSpace(){
     display.value = display.value.slice(0, -1)
 }
+
 function ClearDisplay(){
-    display.value = ''
+    display.value = '0'
+    display.style.color = 'black'
+    leng = 0
 }
-function calcula(){
-    display.value = 'Doing'
+
+
+class Calculadora{
+    adicao(x,y){
+        return x + y
+    }
+    subtracao(x,y){
+        return x - y
+    }
+    divisao(x,y){
+        return x / y
+    }
+    multiplicacao(x,y){
+        return x * y
+    }
 }
