@@ -1,5 +1,7 @@
 @import "declaracoes";
-
+html{
+    -webkit-tap-highlight-color: rgba(255, 255, 255,0);
+}
 .calculadora{
     background-color: white;
     border: 10px solid gray;
@@ -9,7 +11,7 @@
         @include dFlex();
         justify-content: flex-end;
         position: relative;
-        height: 150px;
+        height: 200px;
         width: 320px;
         border-bottom: 1px solid gray;
         padding: 0 5px;
@@ -41,6 +43,7 @@
     display: grid;
     grid-template-columns: repeat(4, 80px);
     grid-auto-rows: 80px;
+    gap: 3px;
     .clear, .calcula{
         grid-column: span 2;
     }
@@ -50,11 +53,12 @@
     .btn{
         font-size: 25px;
         border: none;
-        background-color: white;
+        background-color: rgba(241, 241, 241, 0.644);
         border-radius: 5px;
-        transition: background-color 300ms;
+        transition: background-color 200ms;
         &:active{
             background-color: rgb(168, 168, 168);
+            font-size: 20px;
         }
     }
 }

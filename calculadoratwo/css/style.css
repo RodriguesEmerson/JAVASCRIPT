@@ -13,6 +13,10 @@ body {
   background-color: #e6e6e6;
 }
 
+html {
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+
 .calculadora {
   background-color: white;
   border: 10px solid gray;
@@ -35,7 +39,7 @@ body {
       -ms-flex-pack: end;
           justify-content: flex-end;
   position: relative;
-  height: 150px;
+  height: 200px;
   width: 320px;
   border-bottom: 1px solid gray;
   padding: 0 5px;
@@ -70,9 +74,10 @@ body {
 .buttons {
   display: -ms-grid;
   display: grid;
-  /*-ms-grid-columns: (80px)[4];*/
+  -ms-grid-columns: (80px)[4];
       grid-template-columns: repeat(4, 80px);
   grid-auto-rows: 80px;
+  gap: 3px;
 }
 
 .buttons .clear, .buttons .calcula {
@@ -86,14 +91,15 @@ body {
 .buttons .btn {
   font-size: 25px;
   border: none;
-  background-color: white;
+  background-color: rgba(241, 241, 241, 0.644);
   border-radius: 5px;
-  -webkit-transition: background-color 300ms;
-  transition: background-color 300ms;
+  -webkit-transition: background-color 200ms;
+  transition: background-color 200ms;
 }
 
 .buttons .btn:active {
   background-color: #a8a8a8;
+  font-size: 20px;
 }
 
 @-webkit-keyframes pisc {
