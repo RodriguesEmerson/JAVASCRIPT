@@ -8,10 +8,12 @@ for(let i = 0; i < button.length; i++){
         if(button[i].value == 'backS') return bakcSpace()
         if(button[i].value == 'clear') return ClearDisplay()
         if(button[i].value == '=') return calcula()
+        if(button[i].value == '.') return addPonto(button[i].value)
         if(regex.test(button[i].value) == false) return addOperator(button[i].value)
         addNumber(button[i].value)
     })
 }
+
 function addNumber(n){
     if(leng == 0){
         display.value = display.value = n 
@@ -20,14 +22,20 @@ function addNumber(n){
         display.value = display.value += n 
     }  
 }
+function addPonto(n){
+    let verifyVirg = display.value.split(/\/|\-|\*|\+/)
+    if (verifyVirg[verifyVirg.length-1].includes('.') == true) return
+    display.value = display.value += n
+    leng = 1
+}
 
 function addOperator(n){
     let lastValue = display.value.slice(-1)
-
     if(regex.test(lastValue) == false){
         bakcSpace()
     }
     if(display.value.length == 0 ) return
+    
     display.value = display.value += n
     leng = 1
 }

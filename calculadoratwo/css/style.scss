@@ -1,0 +1,66 @@
+@import "declaracoes";
+
+.calculadora{
+    background-color: white;
+    border: 10px solid gray;
+    border-radius: 5px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.192);
+    .tela{
+        @include dFlex();
+        justify-content: flex-end;
+        position: relative;
+        height: 150px;
+        width: 320px;
+        border-bottom: 1px solid gray;
+        padding: 0 5px;
+        box-sizing: border-box;
+        
+        #result{
+            text-align: end;
+            font-size: 25px;
+            width: 100%;
+            padding-right: 3px;
+            border: none;
+            background-color: white;
+            color: black !important;
+        }
+        .pont{
+            z-index: 10;
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            height: 30px;
+            width: 1.6px;
+            background-color: rgb(53, 53, 53);
+            transform: translate(0, -50%);
+            animation: pisc 900ms infinite;
+        }
+    }
+}
+.buttons{
+    display: grid;
+    grid-template-columns: repeat(4, 80px);
+    grid-auto-rows: 80px;
+    .clear, .calcula{
+        grid-column: span 2;
+    }
+    button{
+        cursor: pointer;
+    }
+    .btn{
+        font-size: 25px;
+        border: none;
+        background-color: white;
+        border-radius: 5px;
+        transition: background-color 300ms;
+        &:active{
+            background-color: rgb(168, 168, 168);
+        }
+    }
+}
+
+@keyframes pisc{
+    0%{visibility: hidden;}
+    50%{visibility: hidden;}
+    100%{visibility: visible;}
+}

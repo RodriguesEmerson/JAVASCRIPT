@@ -15,6 +15,10 @@ body {
 
 .calculadora {
   background-color: white;
+  border: 10px solid gray;
+  border-radius: 5px;
+  -webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.192);
+          box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.192);
 }
 
 .calculadora .tela {
@@ -30,9 +34,10 @@ body {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
+  position: relative;
   height: 150px;
   width: 320px;
-  border: 1px solid gray;
+  border-bottom: 1px solid gray;
   padding: 0 5px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -42,13 +47,30 @@ body {
   text-align: end;
   font-size: 25px;
   width: 100%;
+  padding-right: 3px;
   border: none;
+  background-color: white;
+  color: black !important;
+}
+
+.calculadora .tela .pont {
+  z-index: 10;
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  height: 30px;
+  width: 1.6px;
+  background-color: #353535;
+  -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+  -webkit-animation: pisc 900ms infinite;
+          animation: pisc 900ms infinite;
 }
 
 .buttons {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (80px)[4];
+  /*-ms-grid-columns: (80px)[4];*/
       grid-template-columns: repeat(4, 80px);
   grid-auto-rows: 80px;
 }
@@ -59,5 +81,42 @@ body {
 
 .buttons button {
   cursor: pointer;
+}
+
+.buttons .btn {
+  font-size: 25px;
+  border: none;
+  background-color: white;
+  border-radius: 5px;
+  -webkit-transition: background-color 300ms;
+  transition: background-color 300ms;
+}
+
+.buttons .btn:active {
+  background-color: #a8a8a8;
+}
+
+@-webkit-keyframes pisc {
+  0% {
+    visibility: hidden;
+  }
+  50% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: visible;
+  }
+}
+
+@keyframes pisc {
+  0% {
+    visibility: hidden;
+  }
+  50% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: visible;
+  }
 }
 /*# sourceMappingURL=style.css.map */
