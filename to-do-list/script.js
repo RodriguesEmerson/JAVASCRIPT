@@ -1,6 +1,7 @@
 var newID = 1 //Cria um número unico para cada item da lista
 
-console.log(localStorage)
+
+
 //Add New Container
 let openAddNew = document.querySelector('.add-new-visible')
 let AddNewDatas = document.querySelector('.add-new-datas')
@@ -9,6 +10,9 @@ let btn_AddNew = document.querySelector('.add-button')
 
 //List
 let list = document.querySelector('.list')
+
+
+
 
 openAddNew.addEventListener('click', function(){
     AddNewDatas.classList.toggle('open-datas')
@@ -143,17 +147,17 @@ list.addEventListener('click', function(element){ //pega o elemento que foi clic
 })
 
 //********carrega e atualiza o local storange */
-function carregaList(){
-    list.innerHTML = localStorage.getItem('listDatas')
-    if(localStorage.getItem('newID') === null){
-        newID = 1
-    }else{
-        newID = localStorage.getItem('newID')
+    function carregaList(){
+        //list.innerHTML = localStorage.getItem('listDatas')
+        //if(localStorage.getItem('newID') === null){
+        //    newID = 1
+        //}else{
+        //    newID = localStorage.getItem('newID')
+        //}
     }
-}
-function atualizaLocalStorage(){
-    localStorage.clear()
-    localStorage.setItem('listDatas', list.innerHTML)
-    if (list.children.length == 0) return newID = 1
-    localStorage.setItem('newID', newID)
-}
+    function atualizaLocalStorage(){
+        //localStorage.clear()
+        //localStorage.setItem('listDatas', list.innerHTML)
+        //if (list.children.length == 0) return newID = 1
+        //localStorage.setItem('newID', newID)
+    }
