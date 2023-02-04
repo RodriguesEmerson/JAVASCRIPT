@@ -1,116 +1,96 @@
-
+//===================================================================//
+//ESTUDOS DE MANIPULAÇÃO DE OBJETOS, DOM E PARÂMETROS                //
+//===================================================================//
 let list = document.querySelector('.list')
-function CreateElements(id, text, status){
-
-    let new_ListItem = document.createElement('li')
-    new_ListItem.setAttribute('class', `list-item`)
-    new_ListItem.setAttribute('id', `${id}`)
-
-    let new_divOne = document.createElement('div')
-    let new_divTwo = document.createElement('div')
-
-    let new_CheckBox = document.createElement('input')
-    new_CheckBox.setAttribute('type', 'checkbox')
-    if(status == 'checked'){new_CheckBox.setAttribute(`checked`,'')}
-    new_CheckBox.setAttribute('class', 'check-done')
-    new_CheckBox.setAttribute('id', `check-done-${id}`)
-
-    let new_Label = document.createElement('label')
-    new_Label.setAttribute('class', 'label-checkbox')
-    new_Label.setAttribute('for', `check-done-${id}`)
-
-    let new_TextItem = document.createElement('p')
-    new_TextItem.setAttribute('class', 'item-text open')
-    new_TextItem.textContent = text
-
-    let new_EditTextItem = document.createElement('input')
-    new_EditTextItem.setAttribute('type', 'text')
-    new_EditTextItem.setAttribute('maxlength', '40')
-    new_EditTextItem.setAttribute('class', 'item-edit-input')
-
-    let new_BtnEditItem = document.createElement('span')
-    new_BtnEditItem.setAttribute('class', 'material-symbols-outlined item-edit-button')
-    new_BtnEditItem.textContent = 'edit_square'
-
-    let new_BtnDeletItem = document.createElement('span')
-    new_BtnDeletItem.setAttribute('class', 'material-symbols-outlined item-delet-button')
-    new_BtnDeletItem.textContent = 'delete'
-
-    list.appendChild(new_ListItem)
-        new_ListItem.appendChild(new_divOne)
-            new_divOne.appendChild(new_CheckBox)
-            new_divOne.appendChild(new_Label)
-            new_divOne.appendChild(new_TextItem)
-            new_divOne.appendChild(new_EditTextItem)
-        new_ListItem.appendChild(new_divTwo)
-            new_divTwo.appendChild(new_BtnEditItem)
-            new_divTwo.appendChild(new_BtnDeletItem)
-
-    DelEdit(new_BtnDeletItem, new_BtnEditItem, new_Label) 
-    //Add a eventListener
+function randomId(){
+    min = Math.ceil(1)
+    max = Math.floor(10000)
+    return (Math.floor(Math.random() * (max - min) + min))
 }
-id = 'l1'
-let aArray = [
-    {element:'li', typeAtt1: 'class', att1:`list-item`, typeAtt2: 'id', att2: `${id}`, 
-    typeAtt3: '', att3: '', typeAtt4: '', att4: ''},
+id = randomId()
 
-    {element:'div', typeAtt1: 'class', att1:`123`, typeAtt2: '', att2: ``, 
-    typeAtt3: '', att3: '', typeAtt4: '', att4: ''},
+let dados = [
+    {id: `l${randomId()}`, status: 'checked', content: 'Test1'},
+    {id: `l${randomId()}`, status: '', content: 'Test2'},
+]
+console.log(dados.length)
+function bb(){
+    for(let ind = 0; ind < dados.length; ind++){
+        aArray.map(function (e){
+        
+            if (e.element == 'li'){ e.att2 = dados[ind].id}
+            if(e.att1 == 'checkbox'){
+                e.att3 = `check-done-${dados[ind].id}`; 
+                e.status = dados[ind].status
+            }
+            if(e.element == 'label'){e.att2 = `check-done-${dados[ind].id}`}
+            if(e.content == 'edit_square'){
+                if(dados[ind].content != "edit_square"){}
+                if(dados[ind].content != "Done"){}
+            }
+            if(e.element == 'p'){
+                e.content = dados[ind].content
+                if(dados[ind].content == "edit_square"){ e.content = ''}
+                if(dados[ind].content == "Done"){e.content = ''}
+                if(dados[ind].content == "delete"){e.content = ''}
+                
+            }
+
+            criar(e.element, e.typeAtt1, e.att1, e.typeAtt2, e.att2, e.typeAtt3, e.att3, e.typeAtt4, e.att4, e.status, e.content)
+        })
+    }
+} 
+
+
+
+let aArray = [
+    {element:'li', typeAtt1: 'class', att1:`list-item`, typeAtt2: 'id', att2: ``, 
+    typeAtt3: '', att3: '', typeAtt4: '', att4: '', status: '', content: ''},
+
+    {element:'div', typeAtt1: '', att1:``, typeAtt2: '', att2: ``, 
+    typeAtt3: '', att3: '', typeAtt4: '', att4: '', status: '', content: ''},
 
     {element:'input', typeAtt1: 'type', att1:`checkbox`, typeAtt2: 'class', att2: `check-done`, 
-    typeAtt3: 'id', att3: `check-done-${id}`, typeAtt4: 'checked', att4: ''},
+    typeAtt3: 'id', att3: ``, typeAtt4: '', att4: '', status: '', content: ''},
 
-    {element:'label', typeAtt1: 'class', att1:`label-checkbox`, typeAtt2: 'for', att2: `check-done-${id}`, 
-    typeAtt3: '', att3: ``, typeAtt4: '', att4: ''},
+    {element:'label', typeAtt1: 'class', att1:`label-checkbox`, typeAtt2: 'for', att2: ``, 
+    typeAtt3: '', att3: ``, typeAtt4: '', att4: '', status: '', content: ''},
 
     {element:'p', typeAtt1: 'class', att1:`item-text open`, typeAtt2: '', att2: ``, 
-    typeAtt3: '', att3: ``, typeAtt4: '', att4: ''},
+    typeAtt3: '', att3: ``, typeAtt4: '', att4: '', status: '', content: ''},
 
     {element:'input', typeAtt1: 'type', att1:`text`, typeAtt2: 'maxlength', att2: `40`, 
-    typeAtt3: 'class', att3: `item-edit-input`, typeAtt4: '', att4: ''},
+    typeAtt3: 'class', att3: `item-edit-input`, typeAtt4: '', att4: '', status: '', content: ''},
 
-    {element:'div', typeAtt1: 'class', att1:`321`, typeAtt2: '', att2: ``, 
-    typeAtt3: '', att3: '', typeAtt4: '', att4: ''},
+    {element:'div', typeAtt1: '', att1:``, typeAtt2: '', att2: ``, 
+    typeAtt3: '', att3: '', typeAtt4: '', att4: '', status: '', content: ''},
 
     {element:'span', typeAtt1: 'class', att1:`material-symbols-outlined item-edit-button`, typeAtt2: '', att2: ``, 
-    typeAtt3: '', att3: ``, typeAtt4: '', att4: ''},
+    typeAtt3: '', att3: ``, typeAtt4: '', att4: '', status: '', content: 'edit_square'},
 
     {element:'span', typeAtt1: 'class', att1:`material-symbols-outlined item-delet-button`, typeAtt2: '', att2: ``, 
-    typeAtt3: '', att3: ``, typeAtt4: '', att4: ''},
-
+    typeAtt3: '', att3: ``, typeAtt4: '', att4: '', status: '', content: 'delete'},
 ]
 
-function aa(){
-    aArray.map(function(e){
-        console.log(e)
-        criar(e.element, e.typeAtt1, e.att1, e.typeAtt2, e.att2, e.typeAtt3, e.att3, e.typeAtt4, e.att4)
-    })
-}
 
-function criar(p1, tp1, att1, tp2, att2, tp3, att3, tp4, att4){
+let listItem = ''
+let wdiv = ''
+function criar(p1, tp1, att1, tp2, att2, tp3, att3, tp4, att4, status, content){
     let el = document.createElement(p1)
     
-    //list.appendChild(el)
-    if(p1 == 'li'){ list.appendChild(el) }
-    if(p1 == 'div'){
-        let listItem = document.querySelector('#l1')
-        let li = el.closest('li')
-        li.appendChild(el)
-    }
-    if(p1 == 'input' || p1 == 'label' || p1 == 'p'){
-        let div = document.querySelector('div')
-        div.appendChild(el)
-    }
-    
-    
+    if(p1 == 'li') {list.appendChild(el); listItem = el}
+    if(p1 == 'div'){listItem.appendChild(el); wdiv = el}
+    if(p1 != 'div' && p1 != 'li'){wdiv.appendChild(el)}
+
     if (att1 != ''){ el.setAttribute(tp1, att1)}
-    if (att2 != ''){ el.setAttribute(tp2, att2)}
+    if (att2 != ''){ el.setAttribute(tp2, att2)} 
     if (att3 != ''){ el.setAttribute(tp3, att3)}
     if (att4 != ''){ el.setAttribute(tp4, att4)}
-     
+    if (status != ''){el.setAttribute(status, '')}else{el.removeAttribute(status)}
+    if (content != ''){el.textContent = content}
+    
 }
 
 
-aa()
 
-//console.log(document.querySelector('.list-item'))
+bb() 
