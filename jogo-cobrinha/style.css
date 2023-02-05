@@ -11,14 +11,16 @@ body{
     justify-content: center;
 }
 .square{
+    overflow: hidden;
     position: relative;
     width: 320px;
     height: 320px;
-    background-color: rgb(207, 205, 205);
+    background-color: rgb(254, 254, 254);
 }
-.snake, .snake2, .snake3{
+.snake, .alvo{
     position: absolute;
     background-color: black;
     width: 10px; height: 10px;
-    border: 1px solid rgb(207, 205, 205);
+    border: 1px solid rgb(255, 255, 255);
+    
 }
