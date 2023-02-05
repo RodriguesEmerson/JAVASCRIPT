@@ -21,18 +21,22 @@ let direction = 3
 
 let moves ={
     moveUp: () => {
+        if(invalidMoviment('u') == true) return
         snake[0].style.top = dTop - 10+'px'; dTop -= 10; direction = 1;
         moveIt(0, -10); getAlvo(); bumpedIt(); bumpedItSelf()
     },
     moveDown: () => {
+        if(invalidMoviment('d') == true) return
         snake[0].style.top = dTop + 10 +'px';  dTop += 10; direction = 2;
         moveIt(0, +10); getAlvo(); bumpedIt(); bumpedItSelf()
     },
     moveRight: () => {
+        if(invalidMoviment('r') == true) return
         snake[0].style.left = dLeft + 10 +'px'; dLeft += 10; direction = 3;
         moveIt(+10, 0); getAlvo(); bumpedIt(); bumpedItSelf()
     },
     moveLeft: () =>{
+        if(invalidMoviment('l') == true) return
         snake[0].style.left = dLeft - 10 +'px'; dLeft -= 10; direction = 4;
         moveIt(-10, 0); getAlvo(); bumpedIt(); bumpedItSelf()
     }
@@ -66,10 +70,27 @@ function moveIt(x, y){
         }
     }
 }
+
+//===========================LOGICA QUE USEI=================================
+//Toda vez que um botão de direção é clicado, chama a, agora, função moveIt(),
+//fazendo assim um loop/laço, em cada parte do corpo da cobrinha.
+//Cada vez que o loop passa por um span, literalmente, ele guarda sua posição
+//atual, tanto left quanto top, dentro de variáveis, a odLeft e odTop repecti-
+//vamente. Com essa informação guardada, o laço passa por outra parte do corpo
+//e, dessa vez salva a posição do span em outras duas variáveis, para não 
+//sobrescrever a posição que eu quero que ela passa a ter. O left, dessa vez,
+//é guardado na variável odLeft2 e o top na variável odTop2.
+//  Com a posição da parte atual do corpo guardada, então aplico a posição
+//anteriormente guarda nas variáveis odLeft e odTop. E esse processo é repetido
+//para todas as outras partes do corpo da little snake :) !!!
+//Os parâmentros x e y passados para a função moveIt(x,y), são basicamente
+//quantos pixels quero que seja deslocado em cada direção, x - horizontal
+//e y - vertical. Lembrando sempre que - com - é + e + com - é -!!!
+//===========================================================================
+
 //=======================================================================
 //       COLOQUEI TODOS ESSES COMANDOS DENTRO DE UM OBJETO             //
 //=======================================================================
-
 // if (e.key == 'ArrowUp'){snake[0].style.top = dTop - 10+'px';
 //     dTop -= 10; goUp(); getAlvo(); bumpedIt(); bumpedItSelf()
 // }
