@@ -4,22 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="style.css">
     <title>Jogo da cobrinha</title>
+    <style>
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 1,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 48
+        }
+        </style>
 </head>
 <body>
     <section class="container">
+        <div class="controls">
+            <button class="btn-control btn-control-1">
+                <span class="material-symbols-outlined">send</span>
+            </button>
+            <button class="btn-control btn-control-2">
+                <span class="material-symbols-outlined">send</span>
+            </button>
+            <button class="btn-control btn-control-3">
+                <span class="material-symbols-outlined">send</span>
+            </button>
+            <button class="btn-control btn-control-4">
+                <span class="material-symbols-outlined">send</span>
+            </button>
+        </div>
+
+        <div class="start">
+            <img class="ible" src="imagens/ible.png">
+            <button class="bplay">Play</button>
+        </div>
         <div class="square">
+            <span class="snake" id="snake-head"></span>
             <span class="snake"></span>
             <span class="snake"></span>
-            <span class="snake"></span>
-            <span class="snake"></span>  
             
             <span class="alvo"></span>
         </div>
     </section>
 
+    <script src="controles.js"></script>
     <script src="script.js"></script>
     <script src="walk.js"></script>
+    
 </body>
 </html>

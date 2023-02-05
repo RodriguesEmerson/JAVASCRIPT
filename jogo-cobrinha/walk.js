@@ -1,24 +1,22 @@
-let dLeft = 0
+let dLeft = 20
 let dTop = 0
 let odLeft = 0
 let odTop = 0
 let odLeft2 = 0
 let odTop2 = 0
 let whR = 1
-let game = 'playing'
+let game = 'game over'
 let direction = 3
-
+let Dificult = 500
 //============================================
-    //setInterval(() => {
-    //    if(game == 'game over') return
-    //    if(direction == 1) moves.moveUp()
-    //    if(direction == 2) moves.moveDown()
-    //    if(direction == 3) moves.moveRight()
-    //    if(direction == 4) moves.moveLeft()
-    //}, 500);
+    setInterval(() => {
+       if(game == 'game over') return
+       if(direction == 1) moves.moveUp()
+       if(direction == 2) moves.moveDown()
+       if(direction == 3) moves.moveRight()
+       if(direction == 4) moves.moveLeft()
+    }, 250);
 //============================================
-
-
 let moves ={
     moveUp: () => {
         if(invalidMoviment('u') == true) return

@@ -1,26 +1,37 @@
-let body = document.querySelector('body')
 let square = document.querySelector('.square')
 let snake = document.querySelectorAll('.snake')
 let alvo = document.querySelector('.alvo')
+let telaInicial = document.querySelector('.start')
 
+//Posições de começo
+snake[0].style.left = '20px'
+snake[1].style.left = '10px'
+snake[2].style.left = '0px'
 newPosition()
 
-body.addEventListener('keydown', e => {
-    if(game == 'game over') return
-    if (e.key == 'ArrowUp') moves.moveUp()
-    
-    if (e.key == 'ArrowDown') moves.moveDown()
-
-    if (e.key == 'ArrowRight') moves.moveRight()
-
-    if (e.key == 'ArrowLeft') moves.moveLeft()
-})
+function Reposition(){
+    snake[0].style.left = '20px'
+    snake[1].style.left = '10px'
+    snake[2].style.left = '0px'
+    snake[0].style.top = '0px'
+    snake[1].style.top = '0px'
+    snake[2].style.top = '0px'
+    dLeft = 20
+    dTop = 0
+    odLeft = 0
+    odTop = 0
+    odLeft2 = 0
+    odTop2 = 0
+    whR = 1
+    direction = 3
+}
 //Cria uma nova parte do corpo (novo span no DOM)
 function addNewSnake(){
     let newSnake = document.createElement('span')
     newSnake.setAttribute('class', 'snake')
 
     square.appendChild(newSnake)
+    newSnake.style.left = '-10px'
     snake = document.querySelectorAll('.snake') 
 }
 //Verifica se o alvo doi capturado
@@ -57,8 +68,13 @@ function bumpedIt(){
         snake[0].offsetLeft > 310 ||
         snake[0].offsetTop > 310  
     ){
-        square.style.backgroundColor = 'red'
+        telaInicial.style.visibility = 'visible'
         game = 'game over'
+        Reposition()
+        for(let ind = 3; ind < snake.length; ind++){
+            console.log(snake[ind])
+            square.removeChild(snake[ind])
+        }
     }
 }
 //Verifica se a snake[0] colidiu com aguma parte
@@ -68,8 +84,14 @@ function bumpedItSelf(){
 
         if(snake[0].offsetLeft == snake[i].offsetLeft && 
             snake[0].offsetTop == snake[i].offsetTop){
-                square.style.backgroundColor = 'red'
-                game = 'game over'
+
+            telaInicial.style.visibility = 'visible'
+            game = 'game over'
+            Reposition()
+            for(let ind = 3; ind < snake.length; ind++){
+                console.log(snake[ind])
+                square.removeChild(snake[ind])
+            }
         }else{ }
     }
 }
