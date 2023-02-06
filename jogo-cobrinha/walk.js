@@ -7,7 +7,7 @@ let odTop2 = 0
 let whR = 1
 let game = 'game over'
 let direction = 3
-let Dificult = 500
+let Dificult = 400
 //============================================
     setInterval(() => {
        if(game == 'game over') return
@@ -39,7 +39,6 @@ let moves ={
         moveIt(-10, 0); getAlvo(); bumpedIt(); bumpedItSelf()
     }
 }
-
 function moveIt(x, y){
     for(let i = 1; i < snake.length; i++){ 
         if([i] == 1){
