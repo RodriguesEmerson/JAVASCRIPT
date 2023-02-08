@@ -5,12 +5,16 @@ let btn_AddNew = document.querySelector('.add-button')
 let list = document.querySelector('.list')
 let listItem = document.querySelector('.list-item')
 
-let datas = [
-    //{id: '5', status: '', content: ''},
-]
+let datas = []
+if(localStorage.getItem('datas') != null){
+    datas = localStorage.getItem('datas')
+    datas = JSON.parse(datas)
+}
+datas.map(function(elem){
+    CreateElements(elem.id, elem.content, elem.status)
+})
 
 btn_AddNew.addEventListener('click', () => {
-    
     list.innerHTML = ''
     datas.push({
         id: `l${randomId()}`, 
@@ -20,6 +24,7 @@ btn_AddNew.addEventListener('click', () => {
     datas.map(function(elem){
         CreateElements(elem.id, elem.content, elem.status)
     })
+    SaveDatas()
 })
 
 function randomId(){
@@ -27,14 +32,6 @@ function randomId(){
     max = Math.floor(10000)
     return (Math.floor(Math.random() * (max - min ) + min))
 }
-
-function UpdateDatas(){
-    list.innerHTML = ''
-    datas.map(function(elem){
-        CreateElements(elem.id, elem.content, elem.status)
-    })
-}
-
 function CreateElements(id, text, status){
 
     let new_ListItem = document.createElement('li')
@@ -83,6 +80,7 @@ function CreateElements(id, text, status){
 
     DelEdit(new_BtnDeletItem, new_BtnEditItem, new_Label) 
     //Add a eventListener
+
 }
 
 function DelEdit(delButton, editButton, checkBox){
@@ -109,6 +107,12 @@ function DelEdit(delButton, editButton, checkBox){
             texItem.classList.add('open')
             if(editInput.value == '') return
             texItem.textContent = editInput.value
+            datas.find(v => {
+                if(v.id == fatherId){
+                    v.content = texItem.textContent
+                    SaveDatas()
+                }
+            })
         }
     })
 
@@ -116,11 +120,13 @@ function DelEdit(delButton, editButton, checkBox){
         let fatherId = findFather(e)
         datas.find( v => {
             if(v.id == fatherId){
-                if(v.status == '') return v.status = 'checked'
-                return v.status = ''
+                if(v.status == '') { v.status = 'checked'}
+                else{ v.status = ''}
+                SaveDatas()
             } 
         })
     })
+    
 }
 
 function findFather(f){
@@ -128,4 +134,17 @@ function findFather(f){
     return listItem.getAttribute('id')
 }
 
-
+function UpdateDatas(){
+    list.innerHTML = ''
+    datas.map(function(elem){
+        CreateElements(elem.id, elem.content, elem.status)
+    })
+    SaveDatas()
+}
+function SaveDatas(){
+    localStorage.clear()
+    localStorage.setItem('datas', JSON.stringify(datas))
+    
+    datas = localStorage.getItem('datas')
+    datas = JSON.parse(datas)
+}

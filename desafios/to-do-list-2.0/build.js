@@ -91,6 +91,3 @@ function criar(p1, tp1, att1, tp2, att2, tp3, att3, tp4, att4, status, content){
     
 }
 
-
-
-bb() 
