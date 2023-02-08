@@ -13,4 +13,8 @@ const test = {
 //sayAge.apply(test, ['Nome', '20'])
 
 const NewFnc = sayAge.bind()
-NewFnc('Emerson', 24)
+//NewFnc('Emerson', 24)
+
+let ftest = a =>{
+
+}
