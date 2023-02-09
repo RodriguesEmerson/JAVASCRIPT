@@ -1,7 +1,49 @@
 @charset "UTF-8";
+@font-face{
+    font-family: 'JV-Fonte';
+    src: url('../fontes/eEstebu.ttf') format('truetype')
+    
+}
+html{
+    -webkit-tap-highlight-color: rgba(240, 248, 255, 0);
+}
 body{
     font-family: Arial, Helvetica, sans-serif;
     /*background-color: rgb(0, 59, 47);*/
+}
+.start{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+        height: 300px;
+        width: 300px;
+    background: radial-gradient(rgba(0, 0, 0, 0.397), rgba(0, 0, 0, 0.712));
+}
+.player-Name, .btn-play{
+    font-family: 'JV-Fonte', Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 15px;
+        height: 40px;
+        width: 180px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.267);
+    outline-color: rgb(0, 64, 107);
+}
+.btn-play{
+    font-size: 30px;
+    background: rgb(206, 117, 1);
+    color: white;
+    margin: 0;
+        width: 210px;
+        height: 50px;
+        transition: background-color 200ms;
+}
+.btn-play:active{
+    background-color: rgb(116, 66, 2)
 }
 .container{
     display: flex;
@@ -15,7 +57,8 @@ body{
     grid-template-columns: repeat(3, 100px);
         height: 300px;
         width: 300px;
-    border: 1px solid gray;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.267);
+    background-image: linear-gradient(to bottom, rgb(2, 101, 126), rgb(1, 53, 102)) 
 }
 .square{
     display: flex;
@@ -23,6 +66,9 @@ body{
     align-items: center;
         height: 100px;
         width: 100px;
-    border: 1px solid gray;
+    border: 1px solid rgba(255, 255, 255, 0.418);
     box-sizing: border-box;
+    font-size: 40px;
+    font-family: 'JV-Fonte' ;
+    color: white;
 }
