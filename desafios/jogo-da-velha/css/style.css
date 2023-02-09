@@ -33,6 +33,12 @@ body{
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.267);
     outline-color: rgb(0, 64, 107);
 }
+.resp{
+    display: none;
+    color: white;
+    font-family: 'JV-Fonte', Arial, Helvetica, sans-serif;
+    font-size: 25px;
+}
 .btn-play{
     font-size: 30px;
     background: rgb(206, 117, 1);

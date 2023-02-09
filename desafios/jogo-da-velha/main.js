@@ -2,26 +2,32 @@ let square = document.querySelectorAll('.square')
 let btn = document.querySelector('.btn-play')
 let namePlayer = document.querySelectorAll('.player-Name')
 let start = document.querySelector('.start')
+let resp = document.querySelector('.resp')
 
 btn.addEventListener('click', () => {
     start.style.visibility = 'hidden'
     for(i in square){
         square[i].innerText = ''
     }
+    if(btn.textContent == 'Play'){
+        jogo.players[0] = `${namePlayer[0].value}`
+        jogo.players[1] = `${namePlayer[1].value}`
+    }
 })
-
 for(let ind = 0; ind < square.length; ind++){
     square[ind].addEventListener('click', () => {
         jogo.play(square[ind], jogo.character)
         jogo.checkWinner()
     })
 }
+
 let jogo = {
-    players: [namePlayer[0],[namePlayer[1]]],
+    players: ['',''],
     player: 1,
     character: 'X',
     play: function(s ,v){
-        if(s.innerText == '') s.innerText = v;
+        if(s.innerText != '') return
+        s.innerText = v;
         this.player = (this.player == 1 ? 0 : 1)
         this.character = (this.character == 'X' ? 'O' : 'X')
     },
@@ -36,12 +42,30 @@ let jogo = {
             if(square[this.win[i][0]].innerText == v && 
             square[this.win[i][1]].innerText == v && 
             square[this.win[i][2]].innerText == v){
-                this.Winner()
+                this.Winner('')
+                return
+            }else{
+                for ( i in square){
+                    
+                    if(square[i].innerText == '') return this.empate = true
+                    console.log(this.empate)
+                }
             }
         }
+        
     },
+    empate: true,
     Winner: function(){
-       start.style.visibility = 'visible'
+        start.style.visibility = 'visible'
+        namePlayer[0].style.display = 'none'
+        namePlayer[1].style.display = 'none'
+        resp.style.display = 'block'
+
+        resp.textContent = (this.character == 'O' 
+            ? `${this.players[0]} Gangou!` 
+            : `${this.players[1]} Gangou!`)
+
+        btn.textContent = 'Play Again'
         this.character = 'X'
         this.player = 1;
     }
