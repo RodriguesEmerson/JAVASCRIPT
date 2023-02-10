@@ -42,19 +42,20 @@ let jogo = {
             if(square[this.win[i][0]].innerText == v && 
             square[this.win[i][1]].innerText == v && 
             square[this.win[i][2]].innerText == v){
-                this.Winner('')
+                this.Winner()
                 return
-            }else{
-                for ( i in square){
-                    
-                    if(square[i].innerText == '') return this.empate = true
-                    console.log(this.empate)
-                }
             }
         }
-        
+        this.checkEmpate()
     },
-    empate: true,
+    empate: false,
+    checkEmpate: function(){
+        this.empate = false
+        for (let i = 0; i < square.length; i++){
+            if(square[i].innerText == '') return this.empate = true
+        }
+        this.Winner()
+    },
     Winner: function(){
         start.style.visibility = 'visible'
         namePlayer[0].style.display = 'none'
@@ -65,6 +66,7 @@ let jogo = {
             ? `${this.players[0]} Gangou!` 
             : `${this.players[1]} Gangou!`)
 
+        this.empate == false ? resp.innerText = 'Empate' : ''
         btn.textContent = 'Play Again'
         this.character = 'X'
         this.player = 1;
