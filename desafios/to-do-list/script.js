@@ -1,7 +1,5 @@
 var newID = 1 //Cria um número unico para cada item da lista
 
-
-
 //Add New Container
 let openAddNew = document.querySelector('.add-new-visible')
 let AddNewDatas = document.querySelector('.add-new-datas')

@@ -1,5 +1,5 @@
 //===================================================================//
-//ESTUDOS DE MANIPULAÇÃO DE OBJETOS, DOM E PARÂMETROS                //
+//       ESTUDOS DE MANIPULAÇÃO DE OBJETOS, DOM E PARÂMETROS         //
 //===================================================================//
 let list = document.querySelector('.list')
 function randomId(){
@@ -7,13 +7,11 @@ function randomId(){
     max = Math.floor(10000)
     return (Math.floor(Math.random() * (max - min) + min))
 }
-id = randomId()
 
 let dados = [
     {id: `l${randomId()}`, status: 'checked', content: 'Test1'},
     {id: `l${randomId()}`, status: '', content: 'Test2'},
 ]
-console.log(dados.length)
 function bb(){
     for(let ind = 0; ind < dados.length; ind++){
         aArray.map(function (e){
