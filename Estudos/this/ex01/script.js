@@ -22,3 +22,11 @@ let ob = {
 }
 
 //ob.fun()
+
+myArray = ['zero','one','two']
+myArray.myMethod = function(sProp){
+    console.log( arguments.length > 0 ? this[sProp] : this);
+    
+}
+myArray.myMethod()
+myArray.myMethod(1)
