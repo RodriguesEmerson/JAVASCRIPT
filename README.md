@@ -1,2 +1,3 @@
 # JAVASCRIPT
- Curso JavaScript com Guanabara
+ Estudando javascript!!!
+ 
