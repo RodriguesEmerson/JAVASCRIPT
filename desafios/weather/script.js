@@ -10,6 +10,8 @@ const humidity = document.querySelector('.humidity')
 const wind = document.querySelector('.wind')
 const visibility = document.querySelector('.visibility')
 const temp_icon = document.querySelector('.temp-icon')
+
+
 btn_search.addEventListener('click', (e) => {
     e.preventDefault()
     weather.search()
@@ -43,7 +45,7 @@ const weather = {
             time.textContent = this.data.weather[0].description
             temp_icon.setAttribute('src', `https://openweathermap.org/img/wn/${this.data.weather[0].icon}.png` )
 
-            look.innerHTML =`Sensação térmica:  <strong>${parseInt(this.data.main.feels_like)}C°</strong>` 
+            look.innerHTML =`Sensação térmica:  <strong>${temp.textContent}</strong>` 
             humidity.innerHTML = `Umidade: <strong>${this.data.main.humidity}%</strong>`
             wind.innerHTML = `Vento: <strong>${this.data.wind.speed} km/h</strong>`
             visibility.innerHTML  = `Visibilidade: <strong>${this.data.visibility}m</strong>`
@@ -54,7 +56,7 @@ const weather = {
 }
 
 
-weather.main('Londres')
+//weather.main('Londres')
 
 
 

@@ -4,42 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script type="module" src="./script/map.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="css/style.css">
     <title>Weather</title>
 </head>
 <body>
+    <header class="header">
+        <form class="cont-search">
+            
+            <input type="text" id="input-search" placeholder="Procurar cidade" required>
+            <button type="submit" class="btn-search">Procurar</button>
+        </form>
+    </header>
     <main class="container">
+        <div id="map"></div>
         <section class="cont-weather">
-            <form class="cont-search">
-                <input type="text" id="input-search" required>
-                <button type="submit" class="btn-search">
-                    <span class="material-symbols-outlined country-flag">
-                        search
-                    </span>
-                </button>
-            </form>
             <div class="cont-description">
                 <div>
-                    <img class="flag" src="" alt="coutry flag"></img>
+                    <img class="flag" src="imagens/br.png" alt="coutry flag"></img>
                     <span class="city">São Paulo</span>
                 </div>
                 
-                <span class="temp">30C°</span>
+                <span class="temp">30°c</span>
                 <div class="clima">
                     <span class="time">Céu limpo</span>
-                    <img class="temp-icon" src="02d@2x.png" alt="clima">
+                    <img class="temp-icon" src="imagens/02d@2x.png" alt="clima">
                 </div>
-                <span class="look">Sensação térmica: 28C°</span>
+                <span class="look">Sensação térmica: 28°c</span>
                 <span class="humidity">Humidade: 50%</span>
                 <span class="wind">Velocidade do vento: 10 km/h</span>
                 <span class="visibility">Visibilidade: 5km</span>
-                
-                
-
             </div>
         </section>
     </main>
     <script src="script.js"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly"
+      defer
+    ></script>
+
 </body>
 </html>
