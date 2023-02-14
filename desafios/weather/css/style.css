@@ -23,22 +23,29 @@
     .cont-search{
         display: flex;
         justify-content: space-between;
-
         margin-top: 30px;
             height: 50px;
             width: 375px;
     }
         .btn-search{
-            height: 40px;
-            width: 100px;
+                height: 40px;
+                width: 100px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
         }
+            .btn-search:active{
+                background-color: rgb(170, 170, 170);
+            }
         #input-search{
                 height: 40px;
                 width: 270px;
             border:  1px solid gray;
+            background-color: white;
             border-radius: 5px;
             text-indent: 7px;
             font-size: 1.2em;
+            border: none;
         }
 /*CONTAINER*/
 .container{
@@ -70,7 +77,7 @@
             margin-top: 30px;
         }
             .city{
-                font-size: 1.5em;
+                font-size: 2em;
             }
         .temp{
             display: block;
@@ -95,7 +102,3 @@
             .temp-icon{
                 width: 60px;
             }
-/*MAPA*/
-#map {
-    height: 100%;
-}
