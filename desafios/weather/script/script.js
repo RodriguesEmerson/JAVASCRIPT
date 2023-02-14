@@ -10,6 +10,8 @@ const humidity = document.querySelector('.humidity')
 const wind = document.querySelector('.wind')
 const visibility = document.querySelector('.visibility')
 const temp_icon = document.querySelector('.temp-icon')
+const bar_loading = document.querySelector('.bar-loading')
+const cont_desc = document.querySelector('.cont-description')
 
 
 btn_search.addEventListener('click', (e) => {
@@ -35,6 +37,8 @@ const weather = {
     },
     main:  async function(city_name){
         try{
+            bar_loading.classList.remove('close')
+            cont_desc.classList.add('close')
             await this.getDatas(city_name)
             city.textContent = this.data.name
 
@@ -49,6 +53,9 @@ const weather = {
             humidity.innerHTML = `Umidade: <strong>${this.data.main.humidity}%</strong>`
             wind.innerHTML = `Vento: <strong>${this.data.wind.speed} km/h</strong>`
             visibility.innerHTML  = `Visibilidade: <strong>${this.data.visibility}m</strong>`
+
+            bar_loading.classList.add('close')
+            cont_desc.classList.remove('close')
         }catch{
             console.log('Cidade não encontrada!')
         }
@@ -56,7 +63,7 @@ const weather = {
 }
 
 
-//weather.main('Londres')
+weather.main('Londres')
 
 
 
