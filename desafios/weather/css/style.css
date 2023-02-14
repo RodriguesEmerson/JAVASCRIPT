@@ -13,6 +13,9 @@
   'opsz' 48
 }
 .container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-family: Arial, Helvetica, sans-serif;
     background-color: rgb(215, 235, 253);
         height: 100vh;
@@ -46,6 +49,8 @@
                 width: 230px;
             border:  1px solid gray;
             border-radius: 5px;
+            text-indent: 7px;
+            font-size: 1.2em;
         }
 
 .cont-description{
@@ -55,6 +60,7 @@
     .cont-description div{
         display: flex;
         justify-content: center;
+        align-items: center;
         margin-top: 30px;
     }
         .city{
@@ -64,5 +70,22 @@
         display: block;
         font-size: 2em;
         text-align: center;
-        margin: 20px;
+        margin: 20px 0 10px 0;
     }
+    .flag{
+        width: 30px;
+        margin-right: 5px;
+    }
+    .clima{
+        display: flex;
+        align-items: center;
+        margin: 0 !important;
+            height: 50px;
+    }
+        .time{
+        text-transform: capitalize;
+        font-weight: bold;
+        }
+        .temp-icon{
+            width: 60px;
+        }
