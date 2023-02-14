@@ -34,8 +34,8 @@ const weather = {
         city_name = city_name.trim()
         city_name = city_name.replace(/\s{2,}/, ' ')
         city_name = city_name.replace(' ','%20')
-        const url = `https:api.openweathermap.org/data/2.5/weather?q=${city_name}&appid=${apiKey}&lang=pt_br`
-        this.received = await fetch(url)
+        
+        this.received = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city_name}&appid=${apiKey}&lang=pt_br`)
         this.data = await this.received.json()
     },
     main:  async function(city_name){
