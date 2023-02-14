@@ -125,6 +125,14 @@
         border-color: rgb(0, 43, 68);
     }
 
+
+/*NOT FOUNDED*/
+.not-founded{
+    position: absolute;
+    top:40%;
+    font-weight: bold;
+    color: rgb(85, 85, 85);
+}
 /*CLOSE IT*/
 .close{
     display: none;

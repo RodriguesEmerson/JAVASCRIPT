@@ -12,11 +12,15 @@ const visibility = document.querySelector('.visibility')
 const temp_icon = document.querySelector('.temp-icon')
 const bar_loading = document.querySelector('.bar-loading')
 const cont_desc = document.querySelector('.cont-description')
+const not_founded = document.querySelector('.not-founded')
 
 
 btn_search.addEventListener('click', (e) => {
     e.preventDefault()
     weather.search()
+})
+inpSearch.addEventListener('keydown',(e) => {
+    e.key == 'Enter' ? weather.search() : ''
 })
 
 const weather = {
@@ -33,12 +37,12 @@ const weather = {
 
         this.received = await fetch(`https:api.openweathermap.org/data/2.5/weather?q=${city_name}&appid=${apiKey}&lang=pt_br`)
         this.data = await this.received.json()
-        console.log(this.data)
     },
     main:  async function(city_name){
         try{
             bar_loading.classList.remove('close')
             cont_desc.classList.add('close')
+            not_founded.classList.add('close')
             await this.getDatas(city_name)
             city.textContent = this.data.name
 
@@ -57,7 +61,9 @@ const weather = {
             bar_loading.classList.add('close')
             cont_desc.classList.remove('close')
         }catch{
-            console.log('Cidade não encontrada!')
+            bar_loading.classList.add('close')
+            cont_desc.classList.add('close')
+            not_founded.classList.remove('close')
         }
     }
 }
