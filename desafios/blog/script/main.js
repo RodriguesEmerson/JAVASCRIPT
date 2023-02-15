@@ -1,4 +1,3 @@
-const apikey = '7cb7dfae6219408d83c634bbb4d31e8a'
 const urlNews = 'https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=7cb7dfae6219408d83c634bbb4d31e8a'
 const emp_title = document.querySelector('.emphasis .title')
 const emp_img = document.querySelector('.emp-img')
@@ -30,7 +29,7 @@ const news = {
     createMore: function(){
         
         for(let i = 2; i <= 10; i++){
-            let newMore = document.createElement('div')
+            let newMore = document.createElement('a')
             newMore.setAttribute('class', 'more')
             let newTitle = document.createElement('h2')
             newTitle.setAttribute('class', 'title')
@@ -49,6 +48,7 @@ const news = {
                     newDesc.appendChild(newLtDes)
                     newDesc.appendChild(newFont)
 
+            newMore.setAttribute('href',`http://127.0.0.1:5500/desafios/blog/pagenews.html?id=${i}`)
             newTitle.innerHTML = this.data.articles[i].title
             newImg.setAttribute('src', this.data.articles[i].urlToImage)
             newLtDes.innerHTML = this.data.articles[i].description
