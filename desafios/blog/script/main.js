@@ -52,10 +52,8 @@ const news = {
             newTitle.innerHTML = this.data.articles[i].title
             newImg.setAttribute('src', this.data.articles[i].urlToImage)
             newLtDes.innerHTML = this.data.articles[i].description
-
-            const published = this.data.articles[i].publishedAt
             const reg = /\d{4}\-\d{2}\-\d{2}/
-            newFont.innerHTML = `Font: ${this.data.articles[i].source.name} - ${reg.exec(published)}`
+            newFont.innerHTML = `Font: ${this.data.articles[i].source.name} - ${reg.exec(this.data.articles[i].publishedAt)}`
         }   
     },
 }
