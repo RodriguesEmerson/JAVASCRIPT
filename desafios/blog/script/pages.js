@@ -23,7 +23,7 @@ const loadPages = {
         emp_title.textContent = this.data.articles[urlId].title
         emp_img.setAttribute('src', `${this.data.articles[urlId].urlToImage}`)
 
-        let reg =   /\…\s\[\+\w+\s\w+\]/gmi
+        let reg =   /\…\s\[\+\w+\s\w+\]/im
         
         emp_desc.innerHTML = this.data.articles[urlId].content
         emp_desc.innerHTML = emp_desc.innerHTML.replace(reg.exec(emp_desc.innerHTML), '.')

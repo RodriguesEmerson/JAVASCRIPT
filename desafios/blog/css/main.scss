@@ -43,6 +43,7 @@ header{
       }
 
       .description{
+         position: relative;
          line-height: 22px;
          margin-top: 10px;
          padding: 5px;
@@ -65,13 +66,20 @@ header{
 //CONT MORE======================================================
 .cont-more{
    @include center_display(auto, center, row);
+   position: relative;
    flex-wrap: wrap;
    gap: 10px;
    background-color: white;
    margin: auto;
-   padding-top: 15px;
+   padding: 65px 0 15px;
    margin-top: 20px;
       max-width: 1100px;
+
+   h3{
+      position: absolute;
+      top: 15px;
+      font-size: 30px;
+   }
 
    .more{
       position: relative;
@@ -119,9 +127,25 @@ header{
       }
    }
 }
+//FOOTER============================================================
+footer{
+   @include center_display(center, center, row);
+      height:50px;
+}
 
 //PAGES=============================================================
 .lorem{
    margin: 15px 0;
    text-indent: 30px;
+}
+.goback{
+   text-decoration: none;
+   background-color: $primaryColor;
+   color: $secundaryColor;
+   border-radius: 5px;
+      height: 40px;
+      width: 100px;
+   align-self: flex-end;
+   text-align: center;
+   margin: 10px 20px ;
 }

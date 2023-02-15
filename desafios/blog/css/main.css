@@ -80,6 +80,7 @@ header h1 {
 }
 
 .container .emphasis .description {
+  position: relative;
   line-height: 22px;
   margin-top: 10px;
   padding: 5px;
@@ -111,14 +112,21 @@ header h1 {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  position: relative;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   gap: 10px;
   background-color: white;
   margin: auto;
-  padding-top: 15px;
+  padding: 65px 0 15px;
   margin-top: 20px;
   max-width: 1100px;
+}
+
+.cont-more h3 {
+  position: absolute;
+  top: 15px;
+  font-size: 30px;
 }
 
 .cont-more .more {
@@ -169,8 +177,38 @@ header h1 {
   color: #686868;
 }
 
+footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  height: 50px;
+}
+
 .lorem {
   margin: 15px 0;
   text-indent: 30px;
+}
+
+.goback {
+  text-decoration: none;
+  background-color: #1b1b1b;
+  color: #f08204;
+  border-radius: 5px;
+  height: 40px;
+  width: 100px;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  text-align: center;
+  margin: 10px 20px;
 }
 /*# sourceMappingURL=main.css.map */

@@ -31,6 +31,9 @@ const news = {
         for(let i = 2; i <= 10; i++){
             let newMore = document.createElement('a')
             newMore.setAttribute('class', 'more')
+            newMore.setAttribute('rel', 'next')
+            newMore.setAttribute('target', '_self')
+            
             let newTitle = document.createElement('h2')
             newTitle.setAttribute('class', 'title')
             let newImg = document.createElement('img')
