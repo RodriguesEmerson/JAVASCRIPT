@@ -1,0 +1,114 @@
+@import './declaracoes';
+body{
+   background-color: $bgColor;
+   font-family: Arial, Helvetica, sans-serif;
+}
+header{
+   @include center_display(center, center,column);
+   background-color: $primaryColor;
+      height: 80px;
+   color: white;
+   h1{
+      color: $secundaryColor;
+   }
+}
+//EMPHASIS====================================================
+.container{
+   padding: 10px;
+   .emphasis{
+      @include center_display(center, center, column);
+      margin: auto;
+      position: relative;
+      background: white;
+         width: 900px;
+
+      .title{
+            width: 100%;
+            height: 35px;
+         text-align: center;
+         font-size: 16px;
+         padding-top: 10px;
+         margin:  0 0 10px 0;
+         border-radius: 5px 5px 0 0;
+         background-color: lighten($primaryColor, 60);
+      }
+
+      img{
+         border-radius: 10px;
+            width: 700px;
+      }
+
+      .description{
+         margin-top: 10px;
+         padding: 5px;
+            width: 700px;
+
+         .little-desc{
+            text-indent: 20px;
+            margin-bottom: 10px;
+         }
+
+         .author, .font{
+            text-align: end;
+            font-size: 13px;
+            color: lighten($primaryColor, 30)
+         }
+      }
+      
+   }
+}
+//CONT MORE======================================================
+.cont-more{
+   @include center_display(auto, center, row);
+   flex-wrap: wrap;
+   gap: 10px;
+   background-color: white;
+   margin: auto;
+   padding-top: 15px;
+   margin-top: 20px;
+      width: 1100px;
+
+   .more{
+      position: relative;
+      padding: 5px;
+      padding-bottom: 20px;
+         width: 300px;
+      background-color: lighten($primaryColor, 80);
+      border-radius: 5px;
+
+      .title{
+         position: absolute;
+         left: 50%;
+         top: 10px;
+            width: 95%;
+         padding: 5px;
+         font-size: 16px;
+         transform: translateX(-50%);
+         color: $titlesMoreColor;
+         background-color: rgba(0, 0, 0, 0.5);
+         text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.377);
+      }
+
+      img{
+         width: 290px;
+         height: 200px;
+         border-radius: 5px;
+         object-fit: cover;
+      }
+
+      .description{
+         padding: 10px;
+         text-indent: 20px;
+      }
+
+      .font{
+         position: absolute;
+         right: 10px;
+         bottom: 5px;
+         margin-top: 10px;
+         text-align: end;
+         font-size: 11px;
+         color: lighten($primaryColor, 30)
+      }
+   }
+}

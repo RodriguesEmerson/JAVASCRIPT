@@ -1,0 +1,21 @@
+//GENERAL==========================================
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+//MIXINS============================================
+@mixin center_display($_aling, $_justify,$_direction) {
+    display: flex;
+    align-items: $_aling;
+    justify-content: $_justify;
+    flex-direction: $_direction;
+}
+
+
+//VARIABLES==========================================
+$bgColor: rgb(221, 221, 221);
+$primaryColor: rgb(27, 27, 27);
+$secundaryColor: rgb(240, 130, 4);
+$titlesMoreColor: white;
