@@ -33,7 +33,7 @@ const news = {
             newMore.setAttribute('class', 'more')
             newMore.setAttribute('rel', 'next')
             newMore.setAttribute('target', '_self')
-            
+
             let newTitle = document.createElement('h2')
             newTitle.setAttribute('class', 'title')
             let newImg = document.createElement('img')
@@ -51,7 +51,8 @@ const news = {
                     newDesc.appendChild(newLtDes)
                     newDesc.appendChild(newFont)
 
-            newMore.setAttribute('href',`http://127.0.0.1:5500/desafios/blog/pagenews.html?id=${i}`)
+            //newMore.setAttribute('href',`http://127.0.0.1:5500/desafios/blog/pagenews.html?id=${i}`)
+            newMore.setAttribute('href',`https://rodriguesemerson.github.io/JAVASCRIPT/desafios/blog/pagenews.html?id=${i}`)
             newTitle.innerHTML = this.data.articles[i].title
             newImg.setAttribute('src', this.data.articles[i].urlToImage)
             newLtDes.innerHTML = this.data.articles[i].description
