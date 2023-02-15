@@ -6,6 +6,7 @@ const emp_font = document.querySelector('.emphasis .font')
 const emp_author = document.querySelector('.emphasis .author')
 const cont_more = document.querySelector('.cont-more')
 
+//https://mediastack.com/
 
 const news = {
     data: '',
