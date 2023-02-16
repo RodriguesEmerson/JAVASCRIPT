@@ -1,13 +1,18 @@
-
-function myFunction(a,b){
-    console.log(b.length)
-    let count = 0
-    for(let i = 0; i < b.length; i++){
-        if(b[i] == a){
-            count++ 
-        } 
-    } 
-    console.log(count)
+function hangman(hangmanString) {
+    let e = 1
+    hangmanString = hangmanString.split('')
+    for(let i = 0 ; i < hangmanString.length; i++){
+        if(e == 1){
+            console.log('foi')
+            hangmanString[i] = '_'
+            e = 2
+        }else{
+            e = 1
+        }
+    }
+    hangmanString = hangmanString.toString()
+    hangmanString = hangmanString.replace(/\,/g, '')
+    console.log(hangmanString)
     
 }
-myFunction('m', 'how many times does the character occur in this sentence?')
+hangman('TestString')
