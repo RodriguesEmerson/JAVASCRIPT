@@ -1,0 +1,26 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+$primaryColor: rgb(4, 194, 153);
+$thirdColor: rgb(219, 219, 219);
+$fourthColor: rgb(243, 133, 7);
+$bordersColor: lightgray;
+
+//Display
+@mixin display-sett($direction, $aling, $justify) {
+    display: flex;
+    flex-direction: $direction;
+    align-items: $aling;
+    justify-content: $justify;
+}
+//CONDITIONS COLORS
+@function change-text-Color($color){
+    @if lightness($primaryColor) > 60 {
+        @return black;
+    }@else{
+        @return white;
+    }
+}

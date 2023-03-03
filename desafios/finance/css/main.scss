@@ -1,0 +1,12 @@
+@charset "UTF-8";
+@import 'navBar';
+@import 'declarations';
+@import 'cont-GE';
+@import 'dashBoard';
+
+header{
+    @include display-sett(column, center, center);
+    background-color: $primaryColor;
+    color: change-text-Color(color);
+    height: 80px;
+}
