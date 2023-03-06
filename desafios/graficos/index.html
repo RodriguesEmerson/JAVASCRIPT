@@ -7,7 +7,7 @@
     <title>Gráficos</title>
 
     <style>
-        .container{
+        .cont-canvas{
             position: relative;
         }
         .point{
@@ -18,14 +18,31 @@
             background-color: white;
             border-radius: 50%;
         }
+        .hover-point{
+            position: absolute;
+            width: 70px;
+            height: 30px;
+            background-color: rgba(7, 7, 7, 0.89);
+            color: white;
+            text-align: center;
+            line-height:  30px;
+            border-radius: 10px;
+            border: 1px solid rgb(56, 56, 56);
+        }
+        .hide{
+            display: none;
+        }
     </style>
 </head>
 <body>
     <main class="container">
-        <canvas class="graphic-one" width="600" height="300" style="background: rgb(7, 125, 146)">
-            Navegador sem suporte para Canvas.
-
-        </canvas>
+        <div class="hover-point hide">325,60</div>
+        <div class="cont-canvas">
+        	<canvas class="graphic-one" width="600" height="300" style="background: rgb(7, 125, 146)">
+        	    Navegador sem suporte para Canvas.
+        
+        	</canvas>
+        </div>
     </main>
 
     <script src="js/script.js"></script>

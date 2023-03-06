@@ -1,5 +1,7 @@
 let cv = document.querySelector('.graphic-one')
-let container = document.querySelector('.container')
+let container = document.querySelector('.cont-canvas')
+let h_point = document.querySelector('.hover-point')
+let points;
 
 let cont = cv.getContext("2d");
 let arr =[  [30, 50], 
@@ -14,10 +16,10 @@ let arr =[  [30, 50],
             [300,70]
         ]
 
-let luc = [300, 231, 345, 435, 623, 123, 321]
-let days = 7
+let luc = [300, 231, 345, 435, 623, 123, 321, 238]
+let days = 8 /* array length */
 let larg = cv.width;
-let gap = larg / 7 - 2
+let gap = larg / days - 2
 let base = cv.height
 let start = gap;
 let alt, newBall;
@@ -34,7 +36,16 @@ for(let i = 0; i < days; i++){
     newBall.style.top = alt - 5 + 'px';
     container.appendChild(newBall)
     start += gap;
-    console.log(start, alt);
+   
+    points = document.querySelectorAll('.point')
+}
+
+for(let i = 0; i < points.length; i++){
+    points[i].addEventListener('mouseover', (e) =>{
+        h_point.classList.remove('hide')
+        let[x, y] = [e.clientX, e.clientY]
+        console.log(x, y)
+    })
 }
 
 /**
