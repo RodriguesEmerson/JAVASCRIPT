@@ -11,7 +11,6 @@ let list = document.querySelector('.list')
 
 
 
-
 openAddNew.addEventListener('click', function(){
     AddNewDatas.classList.toggle('open-datas')
     textAddNew.focus()
