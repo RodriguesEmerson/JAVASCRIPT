@@ -18,16 +18,17 @@
 // let a =(arr.reduce((acc, curr) => acc + curr, 0))
 // let b = ['emerson', 'erika']
 // console.log(b[arr[0]])
-let arr = [[11, 2, 4], [4, 5, 6], [10, 8, -12]]
+let arr =[  [11, 2,  4], 
+            [4,  5,  6], 
+            [10, 8, -12]
+         ]
 
-let acc = 2
-let som = 0; let som2 = 0;
-for(let i = 0; i < 3; i++){
-    som =  som + arr[i][i]
-
-    som2 = som2 + arr[i][acc]
-    acc--
-}
-
-
-console.log(som, som2)
+         let x1 = [0,1,2]; let x2 = [2,1,0]
+         let result
+         let b = 0; let c = 0;
+         for(let i = 0; i < 3; i++){
+           b = b + arr[x1[i]][i] 
+           c = c + arr[x2[i]][i] 
+         }
+          result = b - c;
+    console.log(Math.abs(result))
