@@ -8,9 +8,14 @@ let draw = canvas.getContext("2d");
 draw.fillStyle = "white";
 draw.fillRect(50,120,30,180); /**left, top, width, height */
 
+
+let font = getGraphics().getFont();
+let textWidth = font.stringWidth("ERIKAA")
+console.log(textWidth)
+
 /**Desenha a label */
 draw.font ="1em Arial";
-draw.fillText("Janeiro", 40, 110) /**Texto, left, top */
+draw.fillText("ERIKAA", 50 + 15 - 9.5, 110 ) /**Texto, left, top */
 
 /**Desenha a borda do Gráfico 
 *   draw.strokStyle = 'Black';
@@ -18,7 +23,7 @@ draw.fillText("Janeiro", 40, 110) /**Texto, left, top */
 */
 
 
-/** ========================LÓGICA =============================
+/** ======================== LÓGICA =============================
  * 
  * 1 - Calcular a width de cada barra com base na quantidade
  * de barras que serão criadas. 
@@ -37,8 +42,10 @@ draw.fillText("Janeiro", 40, 110) /**Texto, left, top */
  * 
  * 4 - o Texto deve ficar 15px acima de cada barra, sendo assim,
  * basta pegar a altura da barra e somar 15px. Já o left do texto,
- * como tem como dar um display-flex,
+ * como não tem como dar um display-flex,
  */
 
 
 // console.log(Math.max(...dados))
+
+
