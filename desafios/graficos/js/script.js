@@ -3,7 +3,7 @@ let container = document.querySelector('.cont-canvas')
 let h_point = document.querySelector('.hover-point')
 
 let line = canva.getContext("2d");
-let dados = [300, 231, 305, 435, 623, 800, 123, 321, 238, 234]
+let dados = [300, 231, 305, 435, 623, 720, 123, 321, 238, 234]
 let days = 10 /* array.length */
 let larg = canva.width;
 let gap = larg / days - 2 /**Distancia entre um ponto e outro */
@@ -48,6 +48,7 @@ for(let i = 0; i < days; i++){
     /**atualiza a vairável points */
     points = document.querySelectorAll('.point')
 }
+
 /**Dá cor a linha e a desenha */
 line.strokeStyle = "white";
 line.stroke();
@@ -60,9 +61,9 @@ for(let i = 0; i < points.length; i++){
         let[x, y] = [e.clientX, e.clientY];
         h_point.style.left = x + 'px';
         h_point.style.top = y + 'px';
-       h_point.textContent = (dados[i]);
+        h_point.textContent = (dados[i]);
     })
-    points[i].addEventListener('mouseout', (e) =>{
+    points[i].addEventListener('mouseout', () =>{
         h_point.classList.add('hide');
     })
 }
