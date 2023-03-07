@@ -1,16 +1,15 @@
 let canva = document.querySelector('.graphic-one')
 let container = document.querySelector('.cont-canvas')
 let h_point = document.querySelector('.hover-point')
-let points;
 
 let line = canva.getContext("2d");
-let dados = [300, 231, 305, 435, 623, 1000, 123, 321, 238, 234]
-let days = 10 /* array length */
+let dados = [300, 231, 305, 435, 623, 800, 123, 321, 238, 234]
+let days = 10 /* array.length */
 let larg = canva.width;
 let gap = larg / days - 2 /**Distancia entre um ponto e outro */
 let base = canva.height
 let start = gap;
-let alt, newBall,divisor, maiorValor = 0;
+let alt, newBall, divisor, maiorValor = 0, points;
 
 /**Procura o maior número do array */
 dados.forEach(element =>{
