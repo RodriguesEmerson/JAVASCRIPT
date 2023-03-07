@@ -12,11 +12,15 @@ let start = gap;
 let alt, newBall, divisor, maiorValor = 0, points;
 
 /**Procura o maior número do array */
-dados.forEach(element =>{
-    if(element > maiorValor){
-        maiorValor = element
-    }
-})
+maiorValor = Math.max(...dados)
+// dados.forEach(element =>{
+//     if(element > maiorValor){
+//         maiorValor = element
+//     }
+// })
+
+
+
 /**Pega 1,11% do maiorValor do array */
 divisor = (1,11/1000) * maiorValor;
 
