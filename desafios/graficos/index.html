@@ -4,47 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
     <title>Gráficos</title>
-
-    <style>
-        .cont-canvas{
-            position: relative;
-        }
-        .point{
-            position: absolute;
-            content: '';
-            width: 10px;
-            height:  10px;
-            background-color: white;
-            border-radius: 50%;
-        }
-        .hover-point{
-            position: absolute;
-            width: 70px;
-            height: 30px;
-            background-color: rgba(7, 7, 7, 0.89);
-            color: white;
-            text-align: center;
-            line-height:  30px;
-            border-radius: 10px;
-            border: 1px solid rgb(56, 56, 56);
-        }
-        .hide{
-            display: none;
-        }
-    </style>
 </head>
 <body>
     <main class="container">
-        <div class="hover-point hide">325,60</div>
+       
         <div class="cont-canvas">
+            <div class="hover-point hide">325,60</div>
         	<canvas class="graphic-one" width="600" height="300" style="background: rgb(7, 125, 146)">
         	    Navegador sem suporte para Canvas.
         
         	</canvas>
         </div>
     </main>
-
     <script src="js/script.js"></script>
 </body>
 </html>
