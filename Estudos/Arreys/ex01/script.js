@@ -2,8 +2,6 @@
 
 let numeros = [1,5,7,23,5,1,74]
 
-
-
 let newFilter = numeros.filter(function (v,i,arr){
     if(arr.indexOf(v) == i){
         return v
@@ -16,7 +14,7 @@ const newFilter2 = numeros.filter((v,i,arr) => {
 let newFilter3 = numeros.filter((v, i, a) => a.indexOf(v) != i)
 
 let newFilter4 = numeros.filter( v => v > 5)
-
+console.log('Emerson')
 
 
 function filtra(n){
