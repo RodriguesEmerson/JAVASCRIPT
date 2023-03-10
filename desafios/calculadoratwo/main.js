@@ -2,7 +2,7 @@
 let button = document.querySelectorAll('.btn');
 let display = document.querySelector('.display');
 
-let digitInDisplay = 0;
+let digitInDisplay = false;
 
 for(let i = 0; i < button.length; i++){
     button[i].addEventListener('click', () => {
@@ -33,33 +33,34 @@ for(let i = 0; i < button.length; i++){
 };
 
 function addNumber(digitedNumber){
-    if(digitInDisplay == 0){
-        display.value =  digitedNumber 
-        return digitInDisplay = 1
+    if(!digitInDisplay){
+        display.value =  digitedNumber;
+        return digitInDisplay = true;
     }
-    display.value += digitedNumber  
+    display.value += digitedNumber ; 
 }
 
 function addPonto(digitedNumber){
-    let hasComma = display.value.split(/\/|\-|\*|\+/)
-    if (hasComma[hasComma.length-1].includes('.')) return
-    display.value += digitedNumber
-    digitInDisplay = 1
+    let numbersGroup = display.value.split(/\/|\-|\*|\+/);
+    let lastNumber = numbersGroup[numbersGroup.length-1];
+
+    if (lastNumber.includes('.')) return;
+    display.value += digitedNumber;
+    digitInDisplay = true;
 }
 
 function addOperator(digitedNumber){
-
     /**Checks if the last digit is a number or an operator*/
     let regexLastDigit = /^\d/;
     let lastDigit = display.value.slice(-1);
     if (!regexLastDigit.test(lastDigit)){
-        bakcSpace()
+        bakcSpace();
     }
 
-    if(display.value.length == 0 ) return
-    
-    display.value += digitedNumber
-    digitInDisplay = 1
+    if(display.value.length == 0 ) return;
+
+    display.value += digitedNumber;
+    digitInDisplay = true;
 }
 
 function bakcSpace(){
@@ -67,25 +68,12 @@ function bakcSpace(){
 }
 
 function clearDisplay(){
-    display.value = '0'
-    display.style.color = 'black'
-    digitInDisplay = 0
+    display.value = '0';
+    display.style.color = 'black';
+    digitInDisplay = false; 
 }
 
-class Calculadora{
-    adicao(firstNumber, secondNumber){
-        return firstNumber + secondNumber
-    }
-    subtracao(firstNumber, secondNumber){
-        return firstNumber - secondNumber
-    }
-    divisao(firstNumber, secondNumber){
-        return firstNumber / secondNumber
-    }
-    multiplicacao(firstNumber, secondNumber){
-        return firstNumber * secondNumber
-    }
-}
+
 
 /**Codigo anterior ===================================================
 
