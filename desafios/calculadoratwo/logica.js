@@ -22,6 +22,7 @@ let rgAdiSub = /(\d*\.?\d+)(\+|\-)(\d*\.?\d+)/
 function calcula(){
     let result, operationString;
     while(regexOperadores.test(display.value) == true){
+        
         let operation = ''
         if(rgDiviMult.test(display.value)){
             operation = rgDiviMult.exec(display.value)
@@ -30,20 +31,24 @@ function calcula(){
         } 
 
         operationString = operation[0]
-        let typeOfOperation = operation[2];
+        let typeOfOperation = operation[2]; 
         let firstNumber = Number(operation[1]);
         let lastNumber = Number(operation[3]);
 
-        if(typeOfOperation == '/'){
-            result = calculation.divisao(firstNumber, lastNumber) 
-        }else if (typeOfOperation == '*'){
-            result = calculation.multiplicacao(firstNumber, lastNumber)
-        }else if (typeOfOperation == '+'){
-            result = calculation.adicao(firstNumber, lastNumber)
-        }else if(typeOfOperation == '-'){
-            result = calculation.subtracao(firstNumber, lastNumber)
-        }else{
-            break
+        switch (typeOfOperation){
+            case '/':
+                result = calculation.divisao(firstNumber, lastNumber);
+                break;
+            case '*':
+                result = calculation.multiplicacao(firstNumber, lastNumber);
+                break;
+            case '+':
+                result = calculation.adicao(firstNumber, lastNumber);
+                break;
+            case '-': result = calculation.subtracao(firstNumber, lastNumber);
+                break;
+            default:
+                break;
         }
         uptdateValue(operationString, result)
     }
