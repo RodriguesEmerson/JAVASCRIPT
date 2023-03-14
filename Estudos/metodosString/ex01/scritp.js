@@ -17,18 +17,3 @@
 
 // //str = str.slice(0, -1)//Tira o ultimo caractere da string
 
-
-let op  =[
-    {type: 'divisao',       operator: '/'}, 
-    {type: 'multiplicacao', operator: '*'}, 
-    {type: 'adicao',        operator: '+'}, 
-    {type: 'subtracao',     operator: '-'},
-]
-
-
-let b = op.find(objeto => {
-    if (objeto.operator === '/') return objeto.type
-})
-let operator = b.type
-
-console.log(b)

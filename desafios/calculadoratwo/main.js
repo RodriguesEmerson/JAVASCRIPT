@@ -75,6 +75,17 @@ function clearDisplay(){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 /**Codigo anterior ===================================================
 
 let button = document.querySelectorAll('.btn')
