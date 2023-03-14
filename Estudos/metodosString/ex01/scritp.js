@@ -1,18 +1,34 @@
-let str = 'Estudos de métodos de+Strings'
-let str2 = '               Estudos        '
+// let str = 'Estudos de métodos de+Strings'
+// let str2 = '               Estudos        '
 
-console.log("Esta string tem " + str.length + " caracteres") //length
+// console.log("Esta string tem " + str.length + " caracteres") //length
 
-console.log(str[0])//indexOf
+// console.log(str[0])//indexOf
 
-console.log(str.slice(8,10))//slice
+// console.log(str.slice(8,10))//slice
 
-console.log(str.replace('métodos', 'method()'))
+// console.log(str.replace('métodos', 'method()'))
 
-console.log(str2.trim())
+// console.log(str2.trim())
 
-//console.log(str.split("+"))
-let mais = "+"
-console.log(str.split(mais))
+// //console.log(str.split("+"))
+// let mais = "+"
+// console.log(str.split(mais))
 
-//str = str.slice(0, -1)//Tira o ultimo caractere da string
+// //str = str.slice(0, -1)//Tira o ultimo caractere da string
+
+
+let op  =[
+    {type: 'divisao',       operator: '/'}, 
+    {type: 'multiplicacao', operator: '*'}, 
+    {type: 'adicao',        operator: '+'}, 
+    {type: 'subtracao',     operator: '-'},
+]
+
+
+let b = op.find(objeto => {
+    if (objeto.operator === '/') return objeto.type
+})
+let operator = b.type
+
+console.log(b)

@@ -15,6 +15,13 @@ class Calculadora{
 
 let calculation = new Calculadora()
 
+let operators  = [
+    {type: 'divisao',       operator: '/'}, 
+    {type: 'multiplicacao', operator: '*'}, 
+    {type: 'adicao',        operator: '+'}, 
+    {type: 'subtracao',     operator: '-'},
+]
+
 let regexOperadores = /(\d*\.?\d+)(\-|\+|\/|\*)(\d*\.?\d+)/
 let rgDiviMult = /(\d*\.?\d+)(\/|\*)(\d*\.?\d+)/
 let rgAdiSub = /(\d*\.?\d+)(\+|\-)(\d*\.?\d+)/
@@ -31,25 +38,15 @@ function calcula(){
         } 
 
         operationString = operation[0]
-        let typeOfOperation = operation[2]; 
+        let findOperator = operators.find(objeto => objeto.operator === operation[2])
+        let typeOfOperation = findOperator.type
         let firstNumber = Number(operation[1]);
         let lastNumber = Number(operation[3]);
 
-        switch (typeOfOperation){
-            case '/':
-                result = calculation.divisao(firstNumber, lastNumber);
-                break;
-            case '*':
-                result = calculation.multiplicacao(firstNumber, lastNumber);
-                break;
-            case '+':
-                result = calculation.adicao(firstNumber, lastNumber);
-                break;
-            case '-': result = calculation.subtracao(firstNumber, lastNumber);
-                break;
-            default:
-                break;
-        }
+           
+        result = calculation[typeOfOperation](firstNumber, lastNumber);
+            
+        
         uptdateValue(operationString, result)
     }
     
@@ -57,6 +54,24 @@ function calcula(){
 function uptdateValue(oldValue, newValue){
     display.value = display.value.replace(oldValue, newValue)
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*
