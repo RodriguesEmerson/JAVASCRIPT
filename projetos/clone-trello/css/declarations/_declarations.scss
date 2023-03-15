@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: rgb(20, 111, 172);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.9em;
+    color: white;
+}
+
+/*==========Goole icons Settings==========*/
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 200,
+  'GRAD' 0,
+  'opsz' 48
+};
+
+
+/*===============Variables================*/
+$primaryColor: rgb(20, 111, 172);
+$secundaryColor:  rgba(135, 176, 200, 0.445);
+$hoverSecundaryColor:  rgba(135, 176, 200, 0.5);
+
+
+
+/*================Mixins===================*/
+@mixin flexSetting($flexAlign, $flexJustify) {
+    display: flex;
+    align-items: $flexAlign;
+    justify-content: $flexJustify;
+}
