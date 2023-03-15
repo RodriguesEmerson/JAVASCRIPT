@@ -74,6 +74,10 @@ body {
   /*-----Header end------*/
 }
 
+.header-alternation img {
+  width: 15px;
+}
+
 .header-logo {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -101,6 +105,7 @@ body {
   padding: 3px  2px;
   background-color: white;
   border-radius: 2px;
+  margin-right: 5px;
 }
 
 .header-logo-icon span {
@@ -190,5 +195,17 @@ body {
 
 .h-hover:hover {
   background-color: rgba(135, 176, 200, 0.5);
+}
+
+/*Header Cliked Box*/
+.header-clicked_box {
+  position: absolute;
+  top: 53px;
+  left: 153px;
+  background-color: white;
+  width: 300px;
+  min-height: 70px;
+  border-radius: 3px;
+  border: 1px solid #d3d2d1;
 }
 /*# sourceMappingURL=main.css.map */

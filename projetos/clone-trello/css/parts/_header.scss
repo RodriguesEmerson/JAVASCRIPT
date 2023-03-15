@@ -16,6 +16,12 @@
     height: 50px;
     border-bottom:1px solid rgba(135, 176, 200, 0.746);
 
+    &-alternation{
+        img{
+            width: 15px;
+        }
+    }
+
     &-logo{
         @include flexSetting(center, center);
 
@@ -26,6 +32,7 @@
             padding: 3px  2px;
             background-color: white;
             border-radius: 2px;
+            margin-right: 5px;
 
             span{
                 display: block;
@@ -127,4 +134,17 @@
 }
 .h-hover:hover{
     background-color: $hoverSecundaryColor;
+}
+
+
+/*Header Cliked Box*/
+.header-clicked_box{
+    position: absolute;
+    top: 53px;
+    left: 153px;
+    background-color: white;
+    width: 300px;
+    min-height: 70px;
+    border-radius: 3px;
+    border: 1px solid rgb(211, 210, 209);
 }
