@@ -131,7 +131,7 @@ body {
   margin-right: 15px;
 }
 
-.header-work_space, .header-recent, .header-starred, .header-model {
+.header_work_space, .header_recent, .header_starred, .header_model {
   height: 33px;
   padding: 0 5px;
   border-radius: 3px;
