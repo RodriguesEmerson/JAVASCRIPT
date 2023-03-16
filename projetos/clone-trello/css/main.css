@@ -19,27 +19,6 @@ body {
 
 /*===============Variables================*/
 /*================Mixins===================*/
-* {
-  margin: 0;
-  padding: 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-}
-
-body {
-  background-color: #146fac;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 0.9em;
-  color: white;
-}
-
-/*==========Goole icons Settings==========*/
-.material-symbols-outlined {
-  font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 48;
-}
-
-/*===============Variables================*/
-/*================Mixins===================*/
 .flex-center {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -207,5 +186,68 @@ body {
   min-height: 70px;
   border-radius: 3px;
   border: 1px solid #d3d2d1;
+}
+
+.hide {
+  display: none;
+}
+
+.container .board {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+}
+
+.container .board .list {
+  font-size: 0.9em;
+  min-height: 100px;
+  width: 280px;
+  color: #666666;
+  background-color: #f0efef;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+.container .board .list-title {
+  display: block;
+  font-weight: bold;
+  height: 30px;
+}
+
+.container .board .list-content .list-square {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  min-height: 33px;
+  padding: 5px;
+  background-color: white;
+  border-radius: 5px;
+  border-bottom: 1px solid rgba(57, 100, 125, 0.445);
+}
+
+.container .board .list-add-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.container .board .list-add-item .material-symbols-outlined {
+  font-variation-settings: 'wght' 300;
 }
 /*# sourceMappingURL=main.css.map */
