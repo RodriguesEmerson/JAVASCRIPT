@@ -216,6 +216,10 @@ body {
   height: 30px;
 }
 
+.container .board .list-content {
+  cursor: pointer;
+}
+
 .container .board .list-content .list-square {
   display: -webkit-box;
   display: -ms-flexbox;

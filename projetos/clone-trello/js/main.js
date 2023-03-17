@@ -1,5 +1,13 @@
+
+
 const hShowOptions = document.querySelector('.header-clicked_box');
 const h_btnOptions = document.querySelectorAll('.op-menu')
+
+
+
+import { dropAndDrad } from './modules/drag-drop.js';
+// const drop = dropAndDrad;
+
 
 for (let i = 0; i < h_btnOptions.length; i++){
     h_btnOptions[i].addEventListener('click', () => {
@@ -13,21 +21,46 @@ for (let i = 0; i < h_btnOptions.length; i++){
     })
 }
 
-const showMenuOptions = {
 
-    header_work_space(){
-        
-    },
 
-    header_recent(){
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const showMenuOptions = {
+
+//     header_work_space(){
+//         drop.alert()
+//     },
+
+//     header_recent(){
   
-    },
+//     },
 
-    header_starred(){
+//     header_starred(){
         
-    },
+//     },
 
-    header_model(){
+//     header_model(){
         
-    }
-}
+//     }
+// }
