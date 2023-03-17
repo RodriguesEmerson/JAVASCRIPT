@@ -5,7 +5,7 @@ const h_btnOptions = document.querySelectorAll('.op-menu')
 
 
 
-import { dropAndDrad } from './modules/drag-drop.js';
+import './modules/drag-drop.js';
 // const drop = dropAndDrad;
 
 

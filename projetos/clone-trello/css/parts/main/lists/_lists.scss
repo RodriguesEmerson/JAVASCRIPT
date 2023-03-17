@@ -1,6 +1,6 @@
 .container{
 .board{
-    display: flex;
+    @include flexSetting(start, start);
     gap: 10px;
     padding: 10px;
     
@@ -12,6 +12,7 @@
         background-color: rgb(240, 239, 239);
         padding: 10px;
         border-radius: 3px;
+
     }
     .list-title{
         display: block;
@@ -20,9 +21,11 @@
     }
     .list-content{
         cursor: pointer;
+        margin-bottom: 5px;
         .list-square{
             @include flexSetting(center, start);
             min-height: 33px;
+            width: 260px;
             padding: 5px;
 
             
@@ -39,5 +42,29 @@
             font-variation-settings: 'wght' 300;
         }
     }
+
+    /*======= TEMP =======*/
+    .tempBack{
+        background-color: $secundaryColor;
+        min-height: 33px;
+        border-radius: 5px;
+    }
+    .tempDiv{
+        @include flexSetting(center, start);
+        text-indent: 5px;
+        transform: rotate(3deg);
+        background-color: white;
+        border-radius: 5px;
+        width: 260px;
+        color: $thirdColor;
+    }
+
+     /*Drag*/
+    .dragging, .dragging .list-square{
+       transform: rotate(3deg);
+       opacity: 1;
+    }
+   
 }
 }
+
