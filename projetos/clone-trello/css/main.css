@@ -218,6 +218,10 @@ body {
   border-radius: 3px;
 }
 
+.container .board .list .drag-area {
+  min-height: 10px;
+}
+
 .container .board .list-title {
   display: block;
   font-weight: bold;
@@ -226,7 +230,7 @@ body {
 
 .container .board .list-content {
   cursor: pointer;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
 }
 
 .container .board .list-content .list-square {
@@ -265,34 +269,15 @@ body {
   font-variation-settings: 'wght' 300;
 }
 
-.container .board .tempBack {
+.container .board .tempDiv {
   background-color: rgba(135, 176, 200, 0.445);
   min-height: 33px;
   border-radius: 5px;
-}
-
-.container .board .tempDiv {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: start;
-  text-indent: 5px;
-  -webkit-transform: rotate(3deg);
-          transform: rotate(3deg);
-  background-color: white;
-  border-radius: 5px;
-  width: 260px;
-  color: #666666;
+  margin-bottom: 8px;
 }
 
 .container .board .dragging, .container .board .dragging .list-square {
-  -webkit-transform: rotate(3deg);
-          transform: rotate(3deg);
-  opacity: 1;
+  -webkit-transform: rotate(2deg);
+          transform: rotate(2deg);
 }
 /*# sourceMappingURL=main.css.map */

@@ -13,6 +13,10 @@
         padding: 10px;
         border-radius: 3px;
 
+        .drag-area{
+            min-height: 10px;
+        }
+
     }
     .list-title{
         display: block;
@@ -21,7 +25,7 @@
     }
     .list-content{
         cursor: pointer;
-        margin-bottom: 5px;
+        margin-bottom: 8px;
         .list-square{
             @include flexSetting(center, start);
             min-height: 33px;
@@ -44,27 +48,16 @@
     }
 
     /*======= TEMP =======*/
-    .tempBack{
+    .tempDiv{
         background-color: $secundaryColor;
         min-height: 33px;
         border-radius: 5px;
+        margin-bottom: 8px;
     }
-    .tempDiv{
-        @include flexSetting(center, start);
-        text-indent: 5px;
-        transform: rotate(3deg);
-        background-color: white;
-        border-radius: 5px;
-        width: 260px;
-        color: $thirdColor;
-    }
-
      /*Drag*/
     .dragging, .dragging .list-square{
-       transform: rotate(3deg);
-       opacity: 1;
+       transform: rotate(2deg);
     }
-   
 }
 }
 
