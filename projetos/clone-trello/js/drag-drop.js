@@ -1,8 +1,8 @@
-let [cards, columns, tempDiv, selectedCard] = [null];
-(function selector(){
-    cards = document.querySelectorAll('.list-content');
-    columns = document.querySelectorAll('.drag-area');
-})();
+
+let cards = document.querySelectorAll('.list-content');
+let columns = document.querySelectorAll('.drag-area');
+
+let [tempDiv, selectedCard] = [null];
 
 function dragStart(){
     tempDiv = document.createElement('div');
