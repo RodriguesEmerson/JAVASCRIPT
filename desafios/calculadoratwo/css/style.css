@@ -1,0 +1,128 @@
+body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: calc(100vh - 50px);
+  background-color: #e6e6e6;
+}
+
+html {
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+
+.calculadora {
+  background-color: white;
+  border: 10px solid gray;
+  border-radius: 5px;
+  -webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.192);
+          box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.192);
+}
+
+.calculadora .tela {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  position: relative;
+  height: 200px;
+  width: 320px;
+  border-bottom: 1px solid gray;
+  padding: 0 5px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.calculadora .tela #result {
+  text-align: end;
+  font-size: 25px;
+  width: 100%;
+  padding-right: 3px;
+  border: none;
+  background-color: white;
+  color: black !important;
+}
+
+.calculadora .tela .pont {
+  z-index: 10;
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  height: 30px;
+  width: 1.6px;
+  background-color: #353535;
+  -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+  -webkit-animation: pisc 900ms infinite;
+          animation: pisc 900ms infinite;
+}
+
+.buttons {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (80px)[4];
+      grid-template-columns: repeat(4, 80px);
+  grid-auto-rows: 80px;
+  gap: 3px;
+}
+
+.buttons .clear, .buttons .calcula {
+  grid-column: span 2;
+}
+
+.buttons button {
+  cursor: pointer;
+}
+
+.buttons .btn {
+  font-size: 25px;
+  border: none;
+  background-color: rgba(241, 241, 241, 0.644);
+  border-radius: 5px;
+  -webkit-transition: background-color 200ms;
+  transition: background-color 200ms;
+}
+
+.buttons .btn:active {
+  background-color: #a8a8a8;
+  font-size: 20px;
+}
+
+@-webkit-keyframes pisc {
+  0% {
+    visibility: hidden;
+  }
+  50% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: visible;
+  }
+}
+
+@keyframes pisc {
+  0% {
+    visibility: hidden;
+  }
+  50% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: visible;
+  }
+}
+/*# sourceMappingURL=style.css.map */

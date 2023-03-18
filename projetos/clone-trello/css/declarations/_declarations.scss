@@ -25,6 +25,7 @@ $primaryColor: rgb(20, 111, 172);
 $secundaryColor:  rgba(135, 176, 200, 0.445);
 $hoverSecundaryColor:  rgba(135, 176, 200, 0.5);
 $thirdColor: rgb(102, 102, 102);
+$buttonBGAddColor: rgb(4, 168, 100);
 
 
 
@@ -33,4 +34,14 @@ $thirdColor: rgb(102, 102, 102);
     display: flex;
     align-items: $flexAlign;
     justify-content: $flexJustify;
+}
+
+
+/*================Functions===================*/
+@function fncButtonColor($color){
+    @if lightness($buttonBGAddColor) > 70{
+        @return black;
+    }@else{
+        @return white;
+    }
 }

@@ -1,3 +1,214 @@
-{
-    "version": 3,
-    "mappings": "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
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  background-color: #dddddd;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: #1b1b1b;
+  height: 80px;
+  color: white;
+}
+
+header h1 {
+  color: #f08204;
+}
+
+.container {
+  padding: 10px;
+}
+
+.container .emphasis {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-decoration: none;
+  color: black;
+  margin: auto;
+  position: relative;
+  background: white;
+  max-width: 1100px;
+}
+
+.container .emphasis .title {
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  padding: 10px;
+  margin: 0 0 10px 0;
+  border-radius: 5px 5px 0 0;
+  background-color: #b4b4b4;
+}
+
+.container .emphasis a {
+  padding: 10px;
+}
+
+.container .emphasis .emp-img {
+  border-radius: 10px;
+  width: 100%;
+  max-width: 700px;
+}
+
+.container .emphasis .description {
+  position: relative;
+  line-height: 22px;
+  margin-top: 10px;
+  padding: 5px;
+  max-width: 700px;
+}
+
+.container .emphasis .description .little-desc {
+  text-indent: 20px;
+  margin-bottom: 10px;
+}
+
+.container .emphasis .description .author, .container .emphasis .description .font {
+  text-align: end;
+  font-size: 13px;
+  color: #686868;
+}
+
+.cont-more {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: auto;
+      -ms-flex-align: auto;
+          align-items: auto;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  position: relative;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 10px;
+  background-color: white;
+  margin: auto;
+  padding: 65px 0 15px;
+  margin-top: 20px;
+  max-width: 1100px;
+}
+
+.cont-more h3 {
+  position: absolute;
+  top: 15px;
+  font-size: 30px;
+}
+
+.cont-more .more {
+  position: relative;
+  padding: 5px;
+  padding-bottom: 20px;
+  width: 300px;
+  background-color: #e7e7e7;
+  color: #353535;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.cont-more .more .title {
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  width: 95%;
+  padding: 5px;
+  font-size: 16px;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.377);
+}
+
+.cont-more .more img {
+  width: 290px;
+  height: 200px;
+  border-radius: 5px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.cont-more .more .description {
+  padding: 10px;
+  text-indent: 20px;
+}
+
+.cont-more .more .font {
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+  margin-top: 10px;
+  text-align: end;
+  font-size: 11px;
+  color: #686868;
+}
+
+footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  height: 50px;
+}
+
+.lorem {
+  margin: 15px 0;
+  text-indent: 30px;
+}
+
+.goback {
+  text-decoration: none;
+  background-color: #1b1b1b;
+  color: #f08204;
+  border-radius: 5px;
+  height: 40px;
+  width: 100px;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  text-align: center;
+  margin: 10px 20px;
+}
+/*# sourceMappingURL=main.css.map */

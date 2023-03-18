@@ -4,10 +4,8 @@ const hShowOptions = document.querySelector('.header-clicked_box');
 const h_btnOptions = document.querySelectorAll('.op-menu')
 
 
-
 import './modules/drag-drop.js';
-// const drop = dropAndDrad;
-
+// import './modules/refatorando.js';
 
 for (let i = 0; i < h_btnOptions.length; i++){
     h_btnOptions[i].addEventListener('click', () => {
