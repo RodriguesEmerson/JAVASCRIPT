@@ -1,10 +1,5 @@
-
-
 const hShowOptions = document.querySelector('.header-clicked_box');
 const h_btnOptions = document.querySelectorAll('.op-menu')
-
-
-
 
 for (let i = 0; i < h_btnOptions.length; i++){
     h_btnOptions[i].addEventListener('click', () => {
@@ -22,10 +17,19 @@ for (let i = 0; i < h_btnOptions.length; i++){
 
 
 
+import dom from "./modules/DOM.js"
 
+function showAddCardDiv(){
+    const parentList = this.closest('.list').id;
+    const addCardDiv = document.querySelector(`#${parentList} .add-card`);
+    
+    addCardDiv.classList.remove('hiden')
+    this.classList.add('hiden')
+}
 
-
-
+dom.showAddCard.forEach(button =>{
+    button.addEventListener('click', showAddCardDiv);
+})
 
 
 
