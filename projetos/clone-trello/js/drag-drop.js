@@ -1,4 +1,6 @@
-import dom from "./modules/DOM.js"
+import { domList } from "./modules/DOM.js"
+domList();
+const dom = domList();
 
 let [tempDiv, selectedCard] = [null];
 

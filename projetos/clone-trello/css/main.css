@@ -215,7 +215,7 @@ body {
   min-height: 100px;
   width: 280px;
   color: #666666;
-  background-color: #f0efef;
+  background-color: #ebeaea;
   padding: 10px;
   border-radius: 3px;
 }
@@ -239,18 +239,46 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-height: 33px;
+  width: 260px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
+  border-bottom: 1px solid rgba(57, 100, 125, 0.445);
+}
+
+.container .board .list-content .list-square .tags {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: start;
-  min-height: 33px;
-  width: 260px;
-  padding: 5px;
-  background-color: white;
-  border-radius: 5px;
-  border-bottom: 1px solid rgba(57, 100, 125, 0.445);
+  height: 8px;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.container .board .list-content .list-square .tags .tag {
+  display: block;
+  height: 8px;
+  width: 40px;
+  background-color: #01b460;
+  border-radius: 10px;
+  margin-right: 5px;
 }
 
 .container .board .list-add-item {
@@ -268,7 +296,6 @@ body {
       -ms-flex-direction: column;
           flex-direction: column;
   margin-top: 10px;
-  cursor: pointer;
 }
 
 .container .board .list-add-item .material-symbols-outlined {
@@ -287,8 +314,12 @@ body {
           justify-content: start;
 }
 
+.container .board .list-add-item .show-add-card {
+  cursor: pointer;
+}
+
 .container .board .list-add-item .add-card .add-card-text {
-  border: 1px solid #b3b3b3;
+  border: none;
   border-radius: 3px;
   outline: none;
   padding: 5px;
@@ -296,12 +327,45 @@ body {
   min-width: 260px;
   min-height: 50px;
   height: 50px;
+  border-bottom: 1px solid rgba(57, 100, 125, 0.445);
+}
+
+.container .board .list-add-item .add-card .box-button-more {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.container .board .list-add-item .add-card .box-button-more .material-symbols-outlined {
+  cursor: pointer;
+  font-variation-settings: 'wght' 400;
+  font-size: 30px;
+  margin-left: 5px;
+}
+
+.container .board .list-add-item .add-card .box-button-more div:nth-child(1) {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 65%;
 }
 
 .container .board .list-add-item .add-card .add-card-button {
-  width: 100%;
+  width: 90%;
   height: 33px;
-  background-color: #04a864;
+  background-color: #146fac;
   color: white;
   border: none;
   border-radius: 3px;
@@ -311,7 +375,7 @@ body {
 }
 
 .container .board .list-add-item .add-card .add-card-button:hover {
-  background-color: #038f55;
+  background-color: #116095;
 }
 
 .container .board .tempDiv {
