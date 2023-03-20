@@ -1,10 +1,9 @@
-
-let cards = document.querySelectorAll('.list-content');
-let columns = document.querySelectorAll('.drag-area');
+import dom from "./modules/DOM.js"
 
 let [tempDiv, selectedCard] = [null];
 
 function dragStart(){
+
     tempDiv = document.createElement('div');
     tempDiv.setAttribute('class', 'tempDiv');
     tempDiv.style.height = `${this.offsetHeight}px`;
@@ -14,6 +13,7 @@ function dragStart(){
 }
 
 function dragOver(cardEvent){
+
     selectedCard.style.display = 'none'
     const CardNewPosition = getNewPosition(this, cardEvent.clientY);
 
@@ -46,13 +46,22 @@ function getNewPosition(column, selectedCardTop){
     return newPositon;
 }
 
-columns.forEach(column => {
+dom.columns.forEach(column => {
     column.addEventListener('dragover', dragOver);
 });
-cards.forEach(card => {
+dom.cards.forEach(card => {
     card.addEventListener('dragstart', dragStart);
     card.addEventListener('dragend', dragEnd);
 })
+
+
+
+
+
+
+
+
+
 
 
 
