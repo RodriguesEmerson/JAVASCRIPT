@@ -9,19 +9,16 @@ let dom = domList();
 //===========================================================================
 
 /**Isso seria mais fácil e mais seguro com React */
-function buildColums(column){
+function buildColums(objColumn){
 
     const newColumn = document.createElement('div');
     newColumn.setAttribute('class', 'list');
-    newColumn.setAttribute('id', `${column.id}`);
+    newColumn.setAttribute('id', `${objColumn.id}`);
 
-    newColumn.innerHTML = `<span class="list-title">${column.title}</span>
+    newColumn.innerHTML = `<span class="list-title">${objColumn.title}</span>
                             <div class="drag-area">
-                                <div class="list-content" draggable="true">
-                                    <div class="list-square">
-                                        <span>${column.text}</span>
-                                    </div>
-                                </div>
+                                
+
                             </div>
                             <div class="list-add-item">
                                 <div class="show-add-card">
@@ -48,7 +45,27 @@ function buildColums(column){
 
 
      dom.board.appendChild(newColumn);
+    buildCards(newColumn, objColumn)
+
+}
+function buildCards(column, objColumn){
+    let cardsArea = column.querySelector('.drag-area')
     
+    for (let i in objColumn.cards){
+        const card = objColumn.cards[i];
+
+
+        const newCard = document.createElement('div');
+        newCard.setAttribute('class', 'list-content');
+        newCard.setAttribute('draggable', true)
+        newCard.innerHTML = `<div class="list-square">
+                                <span>${card.text}</span>
+                            </div>`
+                            
+        cardsArea.appendChild(newCard);
+    }
+    
+
 
 }
 

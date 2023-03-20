@@ -1,8 +1,17 @@
 const data = {
     colum1: {
         title: 'A Fazer',
-        tags: ['green', 'blue', 'yellow', 'red'],
-        text: 'Algum Text',
+        
+        cards: [
+            {id: 'card1',
+            tags: ['green', 'blue', 'yellow', 'red'],
+            text: 'Algum Text'},
+
+            {id: 'card1',
+            tags: ['green', 'blue', 'yellow', 'red'],
+            text: 'Algum Text123',}
+        ],
+
         id: 'list1'
     },
     colum2: {
@@ -12,7 +21,7 @@ const data = {
         id: 'list2'
     },
     colum3: {
-        title: 'A Fazer',
+        title: 'Feito',
         tags: ['green', 'red'],
         text: 'Algum Text',
         id: 'list3'
