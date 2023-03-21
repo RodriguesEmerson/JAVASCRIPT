@@ -86,21 +86,30 @@ addEvents();
 
 
 function atualizaApi(listContent){
+    
     const cardId = listContent.querySelector('.list-square').id;
     let columnName = document.querySelector(`#${activeColumnID} .list-title`);
     columnName = columnName.textContent;
     columnName = columnName.replace(' ', '_');
-
+    
     //dados do card que está sendo arrastado
-    let dragCard, dragCardIndex = 0;
-    (function findDragCard(){
+    let dragCard, dragCardIndex;
+    (function findDragCard() {
+        
         api[columnName].cards.forEach(card => {
-            if(card.id === cardId) return;
-            dragCard = card;
-            dragCardIndex =api[columnName].cards.indexOf(card);
-        })
-    })();
+           if(card.id){
+            console.log(card.id)
+                if (card.id === cardId) {
+                    dragCard = card;
+                    dragCardIndex = api[columnName].cards.indexOf(card);
+                    return
+                }
+                console.log('================')
+            }
+        });
 
+    })();
+    
     //apaga o card da coluna de origem
     let  origimColum;
     (function findaOrigimColumn(){
@@ -110,9 +119,10 @@ function atualizaApi(listContent){
             };
         }
     })();
+    console.log('DragCardIndex: ' +  dragCardIndex)
     origimColum.cards.splice(dragCardIndex, 1);
 
-  //apaga o card da coluna de origem
+  //Encontra o objeto da respectiva coluna ativa
     let  activeColumn;
     (function findaOrigimColumn(){
         for (let column in api){ 
@@ -122,30 +132,28 @@ function atualizaApi(listContent){
         }
     })();
 
-    
-
+    console.log("index: " + newCardIndex)
+    activeColumn.cards.splice(newCardIndex, 0, dragCard)
+    console.log(origimColum)
+    console.log(activeColumn)
    origimColumSave = false;
    //console.log(activeColumn)
 }
 
 function saveIndexOfNewCard(){
-    
     const cardsInActiveColumn = document.querySelectorAll(`#${activeColumnID} .drag-area > div`);
-    console.log("Length: " + (cardsInActiveColumn.length - 1))
-
     for(let i = 0; i < cardsInActiveColumn.length; i++){
         if(cardsInActiveColumn[i].classList.contains('tempDiv')){
             newCardIndex =  i;
+            break;
         }
     }
-
     //se for o ultimo card, adiciona 1 ao índice
     if(origimColumID !== activeColumnID && newCardIndex === (cardsInActiveColumn.length - 1)){
-        newCardIndex++
+        newCardIndex++;
     }
-
     //qualquer índice de card maior que 1 é subtraído 1.
-    if(newCardIndex > 1) newCardIndex--
+    if(newCardIndex > 1) newCardIndex--;
 }
 
 
