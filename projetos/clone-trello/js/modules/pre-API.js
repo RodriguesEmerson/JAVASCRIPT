@@ -4,10 +4,10 @@ const data = {
         
         cards: [
             {id: 'card1',
-            tags: ['green', 'blue', 'yellow', 'red'],
+            tags: ['green', 'blue', 'red'],
             text: 'Algum Text'},
 
-            {id: 'card1',
+            {id: 'card2',
             tags: ['green', 'blue', 'yellow', 'red'],
             text: 'Algum Text123',}
         ],
@@ -16,16 +16,40 @@ const data = {
     },
     colum2: {
         title: 'Fazendo',
-        tags: ['blue', 'yellow'],
-        text: 'Algum Text',
+        
+        cards: [
+            {id: 'card1',
+            tags: ['green', 'blue', 'red'],
+            text: 'Algum Text'},
+
+            {id: 'card2',
+            tags: ['green', 'blue', 'yellow', 'red'],
+            text: 'Algum Text123',}
+        ],
+
         id: 'list2'
     },
     colum3: {
         title: 'Feito',
-        tags: ['green', 'red'],
-        text: 'Algum Text',
+        
+        cards: [
+            {id: 'card1',
+            tags: ['green', 'blue', 'red'],
+            text: 'Algum Text'},
+
+            {id: 'card2',
+            tags: ['green', 'blue', 'yellow', 'red'],
+            text: 'Algum Text123',}
+        ],
+
         id: 'list3'
     }
 }
 
 export default data;
+
+
+// <div class="tags">
+//     <span class="tag"></span>
+//     <span class="tag"></span>
+// </div>

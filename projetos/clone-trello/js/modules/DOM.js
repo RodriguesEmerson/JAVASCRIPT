@@ -1,8 +1,8 @@
 export function domList(){
     const board = document.querySelector('.board')
     let showAddCard = document.querySelectorAll('.show-add-card');
-    let addNewCardText = document.querySelectorAll('add-card-text');
-    let addNewCardBtn = document.querySelectorAll('.add-card-button');
+    let newCardText = document.querySelectorAll('.add-card-text');
+    let newCardBtn = document.querySelectorAll('.add-card-button');
     let closeAddCard = document.querySelectorAll('.close-add-card');
     let optionsAddCard = document.querySelectorAll('.options-add-card');
     let cards = document.querySelectorAll('.list-content');
@@ -11,8 +11,8 @@ export function domList(){
     return{
         board,
         showAddCard,
-        addNewCardText,
-        addNewCardBtn,
+        newCardText,
+        newCardBtn,
         closeAddCard,
         optionsAddCard,
         cards, 
