@@ -134,9 +134,9 @@ function createNewCard(){
         }
     }
     columnInsert = columnInsert();
+    
+    if(newCardText.value === "") return;
     console.log(newCardText.value);
-    // if(newCardText.value === "") return;
-
    
 
 
