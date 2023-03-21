@@ -3,15 +3,15 @@ import  api  from "./modules/pre-API.js"
 
 let dom = domList();
 
-//===========================================================================
+//===============================Build Columns and Cards=====================================
 /**Isso seria mais fácil e mais seguro com React */
-function buildColums(objColumn){
+function buildColums(apiColumn){
 
     const newColumn = document.createElement('div');
     newColumn.setAttribute('class', 'list');
-    newColumn.setAttribute('id', `${objColumn.id}`);
+    newColumn.setAttribute('id', `${apiColumn.id}`);
 
-    newColumn.innerHTML = `<span class="list-title">${objColumn.title}</span>
+    newColumn.innerHTML = `<span class="list-title">${apiColumn.title}</span>
                             <div class="drag-area">
                             </div>
                             <div class="list-add-item">
@@ -39,14 +39,15 @@ function buildColums(objColumn){
                             </div>`
 
      dom.board.appendChild(newColumn);
-    buildCards(newColumn, objColumn)
+    buildCards(newColumn, apiColumn)
 }
 
-function buildCards(column, objColumn){
+
+function buildCards(column, apiColumn){
 
     let cardsArea = column.querySelector('.drag-area')
 
-    objColumn.cards.forEach(card => {
+    apiColumn.cards.forEach(card => {
         const newCard = document.createElement('div');
         newCard.setAttribute('class', 'list-content');
         newCard.draggable = true;
@@ -76,50 +77,12 @@ function buildCards(column, objColumn){
     })
 }
 
-//===========================================================================
-for (const column in api){
-    buildColums(api[column])
-}
-
-domList();
-dom = domList();
-
-let openAddNewCard = false;
-let [activeColumn, columnItems] = [null];
-function showAddCardDiv(){
-    //Se houver outra AddCard aberto, o fecha.
-    if(openAddNewCard) closeAddCardDiv();
-
-    activeColumn = this.closest('.list').id;
-    columnItems = column(activeColumn);
-
-    columnItems.activeAddNewCardBox.classList.remove('hiden');
-    this.classList.add('hiden');
-
-    openAddNewCard = true;
-};
-
-function closeAddCardDiv(){
-    columnItems.activeAddNewCardBox.classList.add('hiden')
-    columnItems.hiddenButtonAddNewCard.classList.remove('hiden')
-    openAddNewCard = false;
-};
-
-dom.showAddCard.forEach(button =>{
-    button.addEventListener('click', showAddCardDiv);
-});
-dom.closeAddCard.forEach(button => {
-    button.addEventListener('click', closeAddCardDiv)
-});
-
-
-
+const observer = new MutationObserver(function(){ addEvents() })
+const setting = {childList: true}
+observer.observe(dom.board, setting)
 
 //=========================add new card functions ==============================
-dom.newCardBtn.forEach(button => {
-    button.addEventListener('click', createNewCard)
-})
-
+let tempTags =[ 'blue', 'red', 'green']
 function createNewCard(){
     const fatherColumn = this.closest('.list').id;
     const newCardText = document.querySelector(`#${fatherColumn} .add-card-text`);
@@ -130,23 +93,78 @@ function createNewCard(){
             if(api[column].id == fatherColumn){
                 return api[column]
             };
-            
         }
     }
-    columnInsert = columnInsert();
-    
+
+    columnInsert = columnInsert().cards;
     if(newCardText.value === "") return;
-    console.log(newCardText.value);
-   
 
+    //crete a new card object
+    const card = {
+        id: `ftr${fatherColumn}card${radomId()}`,
+        tags: tempTags,
+        text: newCardText.value,
+    }
+    columnInsert.push(card)
+    newCardText.value = "";
+    
+    //Atualiza a tela
+    dom.board.innerHTML = '';
+    for (const column in api){
+        buildColums(api[column])
+    }
+}
 
-
-
+function radomId(){
+    const min = Math.ceil(0);
+    const max = Math.floor(10000);
+    return Math.floor(Math.random() * (max - min) - min)
 }
 
 
 
-// function findFatherColumn(clickedButton){
-//      const fatherColumn = clickedButton.closest('.list').id;
-//      return fatherColumn;
-// }
+//===============================Events============================================
+//chama a função para criar cada coluna 
+for (const column in api){
+    buildColums(api[column])
+}
+
+
+
+let openAddNewCard = false;
+let [activeColumn, columnItems] = [null];
+function showAddCardDiv(){
+    //Se houver outra AddCard aberto, o fecha.
+    if(openAddNewCard) closeAddCardDiv();
+
+    activeColumn = this.closest('.list').id;
+    columnItems = column(activeColumn);
+    columnItems.activeAddNewCardBox.classList.remove('hiden');
+    this.classList.add('hiden');
+    openAddNewCard = true;
+};
+
+function closeAddCardDiv(){
+    columnItems.activeAddNewCardBox.classList.add('hiden')
+    columnItems.hiddenButtonAddNewCard.classList.remove('hiden')
+    openAddNewCard = false;
+};
+
+function addEvents(){
+    //Atualiza a seleção DOM
+    dom = domList();
+
+    dom.showAddCard.forEach(button =>{
+        button.addEventListener('click', showAddCardDiv);
+    });
+    
+    dom.closeAddCard.forEach(button => {
+        button.addEventListener('click', closeAddCardDiv)
+    });
+    
+    dom.newCardBtn.forEach(button => {
+        button.addEventListener('click', createNewCard)
+    })
+}
+
+addEvents();

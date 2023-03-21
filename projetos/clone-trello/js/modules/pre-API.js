@@ -3,11 +3,11 @@ const data = {
         title: 'A Fazer',
         
         cards: [
-            {id: 'card1',
+            {id: 'c1card1',
             tags: ['green', 'blue', 'red'],
             text: 'Algum Text'},
 
-            {id: 'card2',
+            {id: 'c1card2',
             tags: ['green', 'blue', 'yellow', 'red'],
             text: 'Algum Text123',}
         ],
@@ -18,11 +18,11 @@ const data = {
         title: 'Fazendo',
         
         cards: [
-            {id: 'card1',
+            {id: 'c2card1',
             tags: ['green', 'blue', 'red'],
             text: 'Algum Text'},
 
-            {id: 'card2',
+            {id: 'c2card2',
             tags: ['green', 'blue', 'yellow', 'red'],
             text: 'Algum Text123',}
         ],
@@ -33,11 +33,11 @@ const data = {
         title: 'Feito',
         
         cards: [
-            {id: 'card1',
+            {id: 'c3card1',
             tags: ['green', 'blue', 'red'],
             text: 'Algum Text'},
 
-            {id: 'card2',
+            {id: 'c3card2',
             tags: ['green', 'blue', 'yellow', 'red'],
             text: 'Algum Text123',}
         ],

@@ -1,6 +1,11 @@
 import { domList } from "./modules/DOM.js"
-domList();
-const dom = domList();
+
+let dom = domList();
+//Verifica se oube mudanças no DOM, se sim executa o codigo
+const observer = new MutationObserver(function(){ addEvents() })
+const setting = {childList: true}
+observer.observe(dom.board, setting)
+
 
 let [tempDiv, selectedCard] = [null];
 
@@ -48,18 +53,18 @@ function getNewPosition(column, selectedCardTop){
     return newPositon;
 }
 
-dom.columns.forEach(column => {
-    column.addEventListener('dragover', dragOver);
-});
-dom.cards.forEach(card => {
-    card.addEventListener('dragstart', dragStart);
-    card.addEventListener('dragend', dragEnd);
-})
-
-
-
-
-
+function addEvents(){
+    //Atualiza a seleção DOM
+    dom = domList();
+    dom.columns.forEach(column => {
+        column.addEventListener('dragover', dragOver);
+    });
+    dom.cards.forEach(card => {
+        card.addEventListener('dragstart', dragStart);
+        card.addEventListener('dragend', dragEnd);
+    })
+}
+addEvents();
 
 
 
