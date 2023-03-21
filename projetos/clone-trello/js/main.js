@@ -3,6 +3,10 @@ import  api  from "./modules/pre-API.js"
 
 let dom = domList();
 
+const observer = new MutationObserver(function(){ addEvents() });
+const setting = {childList: true};
+observer.observe(dom.board, setting);
+
 //===============================Build Columns and Cards=====================================
 /**Isso seria mais fácil e mais seguro com React */
 function buildColums(apiColumn){
@@ -58,11 +62,11 @@ function buildCards(column, apiColumn){
                             </div>`
                             
         const listSquare = newCard.querySelector('.list-square');
-        listSquare.prepend(cardTags);
+        if(cardTags.innerHTML){ listSquare.prepend(cardTags) };
         cardsArea.appendChild(newCard);
 
         function buildTags(tags){ 
-            if(!tags) return null;
+            if(!tags) return;
             const newTags = document.createElement('div');
             newTags.setAttribute('class', 'tags')
 
@@ -77,9 +81,6 @@ function buildCards(column, apiColumn){
     })
 }
 
-const observer = new MutationObserver(function(){ addEvents() })
-const setting = {childList: true}
-observer.observe(dom.board, setting)
 
 //=========================add new card functions ==============================
 let tempTags =[ 'blue', 'red', 'green']
@@ -166,5 +167,4 @@ function addEvents(){
         button.addEventListener('click', createNewCard)
     })
 }
-
 addEvents();

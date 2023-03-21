@@ -1,44 +1,44 @@
 const data = {
-    colum1: {
+    A_Fazer: {
         title: 'A Fazer',
         
         cards: [
             {id: 'c1card1',
-            tags: ['green', 'blue', 'red'],
+            tags: ['green'],
             text: 'Algum Text'},
 
             {id: 'c1card2',
-            tags: ['green', 'blue', 'yellow', 'red'],
+            tags: ['red'],
             text: 'Algum Text123',}
         ],
 
         id: 'list1'
     },
-    colum2: {
+    Fazendo: {
         title: 'Fazendo',
         
         cards: [
             {id: 'c2card1',
-            tags: ['green', 'blue', 'red'],
+            tags: [ 'blue', 'red'],
             text: 'Algum Text'},
 
             {id: 'c2card2',
-            tags: ['green', 'blue', 'yellow', 'red'],
+            tags: [ 'yellow'],
             text: 'Algum Text123',}
         ],
 
         id: 'list2'
     },
-    colum3: {
+    Feito: {
         title: 'Feito',
         
         cards: [
             {id: 'c3card1',
-            tags: ['green', 'blue', 'red'],
+            tags: [],
             text: 'Algum Text'},
 
             {id: 'c3card2',
-            tags: ['green', 'blue', 'yellow', 'red'],
+            tags: [ 'blue', 'red'],
             text: 'Algum Text123',}
         ],
 
@@ -48,8 +48,10 @@ const data = {
 
 export default data;
 
-
-// <div class="tags">
-//     <span class="tag"></span>
-//     <span class="tag"></span>
-// </div>
+{/* <div class="drag-area">
+    <div class="list-content" draggable="true">
+        <div class="list-square">
+            <span>O texto será inserido aqui 000</span>
+        </div>
+    </div>
+</div> */}

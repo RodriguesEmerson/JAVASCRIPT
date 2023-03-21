@@ -1,14 +1,21 @@
 import { domList } from "./modules/DOM.js"
+import  api  from "./modules/pre-API.js"
+
 
 let dom = domList();
 //Verifica se oube mudanças no DOM, se sim executa o codigo
-const observer = new MutationObserver(function(){ addEvents() })
-const setting = {childList: true}
-observer.observe(dom.board, setting)
+const observer = new MutationObserver(function(){ addEvents() });
+const setting = {childList: true};
+observer.observe(dom.board, setting);
 
 
-let [tempDiv, selectedCard] = [null];
-
+let [tempDiv, 
+    selectedCard, 
+    activeColumnID, 
+    origimColumID,
+    newCardIndex,
+] = [null];
+let origimColumSave = false;
 function dragStart(){
 
     tempDiv = document.createElement('div');
@@ -20,6 +27,12 @@ function dragStart(){
 }
 
 function dragOver(cardEvent){
+    //Atualiza a coluna ativada e salva coluna de origem
+    activeColumnID = this.closest('.list').id;
+    if(!origimColumSave){ 
+        origimColumID = activeColumnID; 
+        origimColumSave = true
+    } 
 
     selectedCard.style.display = 'none'
     const CardNewPosition = getNewPosition(this, cardEvent.clientY);
@@ -36,9 +49,13 @@ function dragEnd(){
     this.style.display = 'flex';
     const deleteTemDiv = document.querySelector('.tempDiv');
 
+    saveIndexOfNewCard();
+
     if(deleteTemDiv){
         deleteTemDiv.parentNode.replaceChild(this, deleteTemDiv);
     }
+
+    atualizaApi(this)
 }
 
 function getNewPosition(column, selectedCardTop){
@@ -68,8 +85,68 @@ addEvents();
 
 
 
+function atualizaApi(listContent){
+    const cardId = listContent.querySelector('.list-square').id;
+    let columnName = document.querySelector(`#${activeColumnID} .list-title`);
+    columnName = columnName.textContent;
+    columnName = columnName.replace(' ', '_');
 
+    //dados do card que está sendo arrastado
+    let dragCard, dragCardIndex = 0;
+    (function findDragCard(){
+        api[columnName].cards.forEach(card => {
+            if(card.id === cardId) return;
+            dragCard = card;
+            dragCardIndex =api[columnName].cards.indexOf(card);
+        })
+    })();
 
+    //apaga o card da coluna de origem
+    let  origimColum;
+    (function findaOrigimColumn(){
+        for (let column in api){ 
+            if(api[column].id == origimColumID){
+            return origimColum = (api[column]);
+            };
+        }
+    })();
+    origimColum.cards.splice(dragCardIndex, 1);
+
+  //apaga o card da coluna de origem
+    let  activeColumn;
+    (function findaOrigimColumn(){
+        for (let column in api){ 
+            if(api[column].id == activeColumnID){
+            return activeColumn = (api[column]);
+            };
+        }
+    })();
+
+    
+
+   origimColumSave = false;
+   //console.log(activeColumn)
+}
+
+function saveIndexOfNewCard(){
+    
+    const cardsInActiveColumn = document.querySelectorAll(`#${activeColumnID} .drag-area > div`);
+    console.log("Length: " + (cardsInActiveColumn.length - 1))
+
+    for(let i = 0; i < cardsInActiveColumn.length; i++){
+        if(cardsInActiveColumn[i].classList.contains('tempDiv')){
+            newCardIndex =  i;
+        }
+    }
+
+    //se for o ultimo card, adiciona 1 ao índice
+    if(origimColumID !== activeColumnID && newCardIndex === (cardsInActiveColumn.length - 1)){
+        newCardIndex++
+    }
+
+    //qualquer índice de card maior que 1 é subtraído 1.
+    if(newCardIndex > 1) newCardIndex--
+}
 
 
 /**==========Segunda Versão: Melhorando estrutura do código e nomes de variáveis ==============*/
