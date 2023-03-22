@@ -1,9 +1,8 @@
 import { domList } from "./modules/DOM.js"
 import  api  from "./modules/pre-API.js"
 
-
 let dom = domList();
-//Verifica se oube mudanças no DOM, se sim executa o codigo
+//Verifica se houve mudanças no DOM e, se sim, executa o codigo
 const observer = new MutationObserver(function(){ addEvents() });
 const setting = {childList: true};
 observer.observe(dom.board, setting);
@@ -12,10 +11,13 @@ observer.observe(dom.board, setting);
 let [tempDiv, 
     selectedCard, 
     activeColumnID, 
-    origimColumID,
-    newCardIndex,
+    sourceColumnID,
+    sourceColumn,
+    destinationIndex,
+    sourceCardID,
 ] = [null];
-let origimColumSave = false;
+
+let sourceColumnSaved = false;
 function dragStart(){
 
     tempDiv = document.createElement('div');
@@ -26,12 +28,14 @@ function dragStart(){
     selectedCard = this;
 }
 
+
 function dragOver(cardEvent){
     //Atualiza a coluna ativada e salva coluna de origem
     activeColumnID = this.closest('.list').id;
-    if(!origimColumSave){ 
-        origimColumID = activeColumnID; 
-        origimColumSave = true
+    if(!sourceColumnSaved){ 
+        sourceColumnID = activeColumnID; 
+        saveSelectedCardDatas(selectedCard);
+        sourceColumnSaved = true;
     } 
 
     selectedCard.style.display = 'none'
@@ -44,19 +48,19 @@ function dragOver(cardEvent){
     }
 }
 
+
 function dragEnd(){
     this.classList.remove('dragging');
     this.style.display = 'flex';
     const deleteTemDiv = document.querySelector('.tempDiv');
 
-    saveIndexOfNewCard();
-
+    saveDestinationIndex();
     if(deleteTemDiv){
         deleteTemDiv.parentNode.replaceChild(this, deleteTemDiv);
     }
+    atualizaApi()
+} 
 
-    atualizaApi(this)
-}
 
 function getNewPosition(column, selectedCardTop){
     const availablesCards = column.querySelectorAll('.list-content:not(.dragging)')
@@ -70,8 +74,8 @@ function getNewPosition(column, selectedCardTop){
     return newPositon;
 }
 
+
 function addEvents(){
-    //Atualiza a seleção DOM
     dom = domList();
     dom.columns.forEach(column => {
         column.addEventListener('dragover', dragOver);
@@ -84,187 +88,75 @@ function addEvents(){
 addEvents();
 
 
+function atualizaApi(){
 
-function atualizaApi(listContent){
-    
-    const cardId = listContent.querySelector('.list-square').id;
-    let columnName = document.querySelector(`#${activeColumnID} .list-title`);
-    columnName = columnName.textContent;
-    columnName = columnName.replace(' ', '_');
-    
-    //dados do card que está sendo arrastado
-    let dragCard, dragCardIndex;
-    (function findDragCard() {
-        
-        api[columnName].cards.forEach(card => {
-           if(card.id){
-            console.log(card.id)
-                if (card.id === cardId) {
+    try{
+        //dados do card que está sendo arrastado
+        let dragCard, originIndexCard;
+        (function findDragCardDatas() {
+            api[sourceColumn].cards.forEach(card => {
+                if(!sourceCardID) return;
+                if (card.id === sourceCardID) {                    
                     dragCard = card;
-                    dragCardIndex = api[columnName].cards.indexOf(card);
-                    return
+                    originIndexCard = api[sourceColumn].cards.indexOf(card);
+                    return;
                 }
-                console.log('================')
+            });
+        })();
+
+        //Encontra e apaga o card da coluna de origem
+        (function findOrigimColumn(){
+            for (let column in api){ 
+                if(api[column].id == sourceColumnID){
+                    return sourceColumn = (api[column]);
+                };
             }
-        });
+        })();
+        sourceColumn.cards.splice(originIndexCard, 1);
 
-    })();
-    
-    //apaga o card da coluna de origem
-    let  origimColum;
-    (function findaOrigimColumn(){
-        for (let column in api){ 
-            if(api[column].id == origimColumID){
-            return origimColum = (api[column]);
-            };
-        }
-    })();
-    console.log('DragCardIndex: ' +  dragCardIndex)
-    origimColum.cards.splice(dragCardIndex, 1);
+        //Encontra o objeto da coluna ativa na 'api'
+        let  activeColumn;
+        (function findActiveColumn(){
+            for (let column in api){ 
+                if(api[column].id == activeColumnID){
+                return activeColumn = (api[column]);
+                };
+            }
+        })();
 
-  //Encontra o objeto da respectiva coluna ativa
-    let  activeColumn;
-    (function findaOrigimColumn(){
-        for (let column in api){ 
-            if(api[column].id == activeColumnID){
-            return activeColumn = (api[column]);
-            };
-        }
-    })();
+        //Salva o card selecionado na coluna ativa
+        activeColumn.cards.splice(destinationIndex, 0, dragCard)
 
-    console.log("index: " + newCardIndex)
-    activeColumn.cards.splice(newCardIndex, 0, dragCard)
-    console.log(origimColum)
-    console.log(activeColumn)
-   origimColumSave = false;
-   //console.log(activeColumn)
+    }catch(err){
+        console.log('houve um erro')
+    }   
+
+    sourceColumnSaved = false;
+
 }
 
-function saveIndexOfNewCard(){
+
+function saveSelectedCardDatas(listContent){
+    const cardId = listContent.querySelector('.list-square').id;
+    sourceCardID = cardId;
+    let columnName = document.querySelector(`#${sourceColumnID} .list-title`);
+    columnName = columnName.textContent;
+    sourceColumn = columnName.replace(' ', '_');
+    
+}
+
+function saveDestinationIndex(){
     const cardsInActiveColumn = document.querySelectorAll(`#${activeColumnID} .drag-area > div`);
     for(let i = 0; i < cardsInActiveColumn.length; i++){
         if(cardsInActiveColumn[i].classList.contains('tempDiv')){
-            newCardIndex =  i;
+            destinationIndex =  i;
             break;
         }
     }
     //se for o ultimo card, adiciona 1 ao índice
-    if(origimColumID !== activeColumnID && newCardIndex === (cardsInActiveColumn.length - 1)){
-        newCardIndex++;
+    if(sourceColumnID !== activeColumnID && destinationIndex === (cardsInActiveColumn.length - 1)){
+        destinationIndex++;
     }
     //qualquer índice de card maior que 1 é subtraído 1.
-    if(newCardIndex > 1) newCardIndex--;
+    if(destinationIndex > 1) destinationIndex--;
 }
-
-
-/**==========Segunda Versão: Melhorando estrutura do código e nomes de variáveis ==============*/
-
-// let [listItems, columns, tempDiv, elementMoving] = [null];
-// (function selector(){
-//     listItems = document.querySelectorAll('.list-content');
-//     columns = document.querySelectorAll('.drag-area');
-// })();
-
-// function dragStart(){
-//     tempDiv = document.createElement('div');
-//     tempDiv.setAttribute('class', 'tempDiv');
-//     tempDiv.style.height = `${this.offsetHeight}px`;
-//     this.classList.add('dragging');
-//     elementMoving = this;
-// }
-
-// function dragEnd(){
-//     this.classList.remove('dragging');
-//     this.style.display = 'flex';
-//     const tempDivToDelete = document.querySelector('.tempDiv');
-//     tempDivToDelete.parentNode.replaceChild(elementMoving, tempDivToDelete);
-// }
-
-// function dragOver(card) {
-//     const draggingMoving = document.querySelector('.dragging');
-//     draggingMoving.style.display = 'none';
-//     const applayAfter = getNewPosition(this, card.clientY);
-
-//     if(applayAfter){
-//         applayAfter.insertAdjacentElement('afterend', tempDiv);
-//     }else{
-//         this.prepend(tempDiv);
-//     }
-// }
-
-// function getNewPosition(column, cardPositionY){
-//     const cards = column.querySelectorAll('.list-content:not(.dragging)')
-//     let newPosition = null;
-
-//     for (const card of cards){
-//         const cardSettings = card.getBoundingClientRect();
-//         const cardTophalf = cardSettings.y + (cardSettings.height / 2);
-
-//         if(cardPositionY >= cardTophalf) newPosition = card;
-//     }
-//     return newPosition;
-// }
-
-// columns.forEach(column => {
-//     column.addEventListener('dragover', dragOver)
-// });
-
-// listItems.forEach(listItem => {
-//     listItem.addEventListener('dragstart', dragStart);
-//     listItem.addEventListener('dragend', dragEnd)
-// })
-
-
-
-
-
-
-/**=====================Primeira Versão: Implemantando lógica==============================*/
-
-// let [listItem, column, tempDiv, elementMoving] = [null];
-// (function selector(){
-//     listItem = document.querySelectorAll('.list-content');
-//     column = document.querySelectorAll('.drag-area');
-// })();
-// for ( let i = 0; i < listItem.length; i++ ){
-//     /**=============DragStart================ */
-//     listItem[i].addEventListener('dragstart', () => {
-//         tempDiv = document.createElement('div')
-//         tempDiv.setAttribute('class', 'tempDiv')
-//         tempDiv.style.height = listItem[i].offsetHeight + 'px'
-//         listItem[i].classList.add('dragging')
-//     })
-//     /**=============DragStart================ */
-//     listItem[i].addEventListener('dragend', () => {
-//         listItem[i].classList.remove('dragging')
-//         listItem[i].style.display = 'flex'
-//         let tempDIV = document.querySelector('.tempDiv')
-//         tempDIV.parentNode.replaceChild(elementMoving, tempDIV) //substitui a div temporaria 'sombra' 
-//     })
-// }
-// column.forEach( item => {
-//     item.addEventListener('dragover', ( element => {
-//         let dragging = document.querySelector('.dragging');
-//         dragging.style.display = 'none';
-//         elementMoving = dragging;
-//         let applayAfter = getNewPosition(item, element.clientY);
-       
-//         if( applayAfter ){
-//             applayAfter.insertAdjacentElement('afterend', tempDiv);
-//         }else{
-//             item.prepend(tempDiv);
-//         }
-//     }));
-// })
-// function getNewPosition( column, positionY ){
-//     const cards = column.querySelectorAll('.list-content:not(.dragging');
-//     let result;
-
-//     for (let refer_card of cards){
-//         const box = refer_card.getBoundingClientRect();
-//         const boxCenterY = box.y + box.height / 2;
-        
-//         if( positionY >= boxCenterY ) result = refer_card;
-//     }
-//     return result;
-// }

@@ -114,6 +114,7 @@ function createNewCard(){
     for (const column in api){
         buildColums(api[column])
     }
+    
 }
 
 function radomId(){
