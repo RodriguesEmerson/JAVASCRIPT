@@ -1,7 +1,7 @@
-import { domList } from "./modules/DOM.js"
+import { domDynamicList } from "./modules/DOM.js"
 import  api  from "./modules/pre-API.js"
 
-let dom = domList();
+let dDom = domDynamicList();
 // //Verifica se houve mudanças no DOM e, se sim, executa o codigo
 // const observer = new MutationObserver(function(){ addEvents() });
 // const setting = {childList: true, subtree: true};
@@ -149,11 +149,11 @@ function saveDestinationIndex(){
 
 
 export function addEvents(){
-    dom = domList();
-    dom.columns.forEach(column => {
+    dDom = domDynamicList();
+    dDom.columns.forEach(column => {
         column.addEventListener('dragover', dragOver);
     });
-    dom.cards.forEach(card => {
+    dDom.cards.forEach(card => {
         card.addEventListener('dragstart', dragStart);
         card.addEventListener('dragend', dragEnd);
     })

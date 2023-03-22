@@ -1,5 +1,6 @@
 .container{
 .board{
+    position: relative;
     @include flexSetting(start, start);
     gap: 10px;
     padding: 10px;
@@ -9,7 +10,7 @@
         min-height: 100px;
         width: 280px;
         color: $thirdColor;
-        background-color: rgb(235, 234, 234);
+        background-color: rgb(224, 227, 233);
         padding: 10px;
         border-radius: 3px;
 
@@ -124,7 +125,7 @@
 
     /*======= TEMP =======*/
     .tempDiv{
-        background-color: lightgray;
+        background-color: rgba(204, 204, 204, 0.555);
         min-height: 33px;
         border-radius: 5px;
         margin-bottom: 8px;

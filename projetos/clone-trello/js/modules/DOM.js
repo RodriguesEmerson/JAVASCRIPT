@@ -1,4 +1,7 @@
-export function domList(){
+/**=================================================================================
+ *            Elementos que precisam ser selecionados mais de uma vez              *
+ ==================================================================================*/
+export function domDynamicList(){
     const board = document.querySelector('.board')
     let showAddCard = document.querySelectorAll('.show-add-card');
     let newCardText = document.querySelectorAll('.add-card-text');
@@ -21,9 +24,8 @@ export function domList(){
     
 }
 
-
+//Elementos da coluna ativa duranto o dragover
 export function column(parent){
-    
     const activeAddNewCardBox = document.querySelector(`#${parent} .add-card`);
     const hiddenButtonAddNewCard = document.querySelector(`#${parent} .show-add-card`);
     const activeTextArea = document.querySelector(`#${parent} add-card-text`);
@@ -36,63 +38,24 @@ export function column(parent){
 }
 
 
+/**=================================================================================
+ *                 Elementos que serão selecionados apenas uma vez                 *
+ ==================================================================================*/
+const boxCardOptions = document.querySelector('.box-cards-options');
+const btnCloseCardOptions = document.querySelector('.box-cards-options .close-options');
+const moreCardOptions = document.querySelector('.more-options');
+const boxTags = document.querySelector('.box-tags');
+const btnBackBoxCardOptions = document.querySelector('.back-to-options');
+const btnCloseBoxTags = document.querySelector('.box-tags .close-options');
+const searchTags = document.querySelector('.search-tags')
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const hShowOptions = document.querySelector('.header-clicked_box');
-// const h_btnOptions = document.querySelectorAll('.op-menu')
-
-// for (let i = 0; i < h_btnOptions.length; i++){
-//     h_btnOptions[i].addEventListener('click', () => {
-
-//         let clikedElement = h_btnOptions[i].id
-//         let elementPosition = h_btnOptions[i].offsetLeft
-        
-//         hShowOptions.style.left = `${elementPosition}px`
-//         showMenuOptions[clikedElement]();
-
-//     })
-// }
-
-// const showMenuOptions = {
-
-//     header_work_space(){
-//         drop.alert()
-//     },
-
-//     header_recent(){
-  
-//     },
-
-//     header_starred(){
-        
-//     },
-
-//     header_model(){
-        
-//     }
-// }
-
-
-
+export const domStaticList = {
+    boxCardOptions,
+    btnCloseCardOptions,
+    moreCardOptions,
+    boxTags,
+    btnBackBoxCardOptions,
+    btnCloseBoxTags,
+    searchTags
+}

@@ -11,8 +11,7 @@
     font-size: 0.9em;
 }
 .box-cards-options{
-
-
+    position: absolute;
     &-list{
         .option-item{
             @include flexSetting(center, space-between);
@@ -48,9 +47,11 @@
     }
 }
 }
+
 //===============================
 #cards-option-container{
 .box-tags{
+    position: absolute;
     font-size: 0.8em;
     margin-top: 10px;
     .box-header{
@@ -92,8 +93,8 @@
         .checkbox-label{
             cursor: pointer;
             position: relative;
-            width: 15px;
-            height: 15px;
+            width: 18px;
+            height: 18px;
             border: 1px solid lighten($cardsTextColor, 25);
             border-radius: 2px;
             transition: 500ms;
@@ -105,8 +106,8 @@
             height: 15px;
             width: 15px;
             position: absolute;
-            top: -1px;
-            left: 1px;
+            top: 0px;
+            left: 2.5px;
             color: white;
         }
         
@@ -151,9 +152,17 @@
         }
     }
     #btn-new-tag{
+        cursor: pointer;
         height: 35px;
         width: 100%;
         border: none;
+        border-radius: 3px;
+        background-color: white;
+        transition: 200ms;
+
+        &:hover{
+            background-color: lighten($thirdColor, 45);
+        }
     }
 }
 }
