@@ -2,10 +2,9 @@ import { domList, column } from "./modules/DOM.js"
 import  api  from "./modules/pre-API.js"
 
 let dom = domList();
-
-const observer = new MutationObserver(function(){ addEvents() });
-const setting = {childList: true};
-observer.observe(dom.board, setting);
+// const observer = new MutationObserver(function(){ addEvents() });
+// const setting = {childList: true, subtree: true};
+// observer.observe(dom.board, setting);
 
 //===============================Build Columns and Cards=====================================
 /**Isso seria mais fácil e mais seguro com React */
@@ -65,22 +64,22 @@ function buildCards(column, apiColumn){
         if(cardTags.innerHTML){ listSquare.prepend(cardTags) };
         cardsArea.appendChild(newCard);
 
-        function buildTags(tags){ 
-            if(!tags) return;
-            const newTags = document.createElement('div');
-            newTags.setAttribute('class', 'tags')
-
-            tags.forEach(tag => {
-                const newTag = document.createElement('span');
-                newTag.setAttribute('class', 'tag');
-                newTag.style.backgroundColor = tag;
-                newTags.appendChild(newTag);
-            })
-            return newTags;
-        }
     })
 }
 
+function buildTags(tags){ 
+    if(!tags) return;
+    const newTags = document.createElement('div');
+    newTags.setAttribute('class', 'tags')
+
+    tags.forEach(tag => {
+        const newTag = document.createElement('span');
+        newTag.setAttribute('class', 'tag');
+        newTag.style.backgroundColor = tag;
+        newTags.appendChild(newTag);
+    })
+    return newTags;
+}
 
 //=========================add new card functions ==============================
 let tempTags =[ 'blue', 'red', 'green']
@@ -97,24 +96,32 @@ function createNewCard(){
         }
     }
 
-    columnInsert = columnInsert().cards;
+    columnInsert = columnInsert();
     if(newCardText.value === "") return;
-
     //crete a new card object
     const card = {
         id: `ftr${fatherColumn}card${radomId()}`,
         tags: tempTags,
         text: newCardText.value,
     }
-    columnInsert.push(card)
+    columnInsert.cards.push(card);
+   
     newCardText.value = "";
-    
-    //Atualiza a tela
-    dom.board.innerHTML = '';
-    for (const column in api){
-        buildColums(api[column])
-    }
-    
+
+    const activeColumn = document.querySelector(`#${columnInsert.id} .drag-area`);
+    const newTags = buildTags(tempTags)
+
+    let newCard = document.createElement('div')
+    newCard.setAttribute('class', 'list-content');
+    newCard.draggable = true;
+    newCard.innerHTML = `<div class="list-square" id="${card.id}">
+                            <div class="tags">${newTags.innerHTML}</div>
+                            <span>${card.text}</span>
+                        </div>
+                    `
+
+    activeColumn.appendChild(newCard);
+    addEvents();
 }
 
 function radomId(){
@@ -124,14 +131,12 @@ function radomId(){
 }
 
 
-
 //===============================Events============================================
 //chama a função para criar cada coluna 
 for (const column in api){
     buildColums(api[column])
+    addEvents()
 }
-
-
 
 let openAddNewCard = false;
 let [activeColumn, columnItems] = [null];
@@ -152,9 +157,12 @@ function closeAddCardDiv(){
     openAddNewCard = false;
 };
 
+import { addEvents as ddAddEvents } from "./drag-drop.js";
 function addEvents(){
+    
     //Atualiza a seleção DOM
     dom = domList();
+    ddAddEvents(); //drag-drop.js
 
     dom.showAddCard.forEach(button =>{
         button.addEventListener('click', showAddCardDiv);
@@ -167,5 +175,7 @@ function addEvents(){
     dom.newCardBtn.forEach(button => {
         button.addEventListener('click', createNewCard)
     })
+
+    
 }
 addEvents();

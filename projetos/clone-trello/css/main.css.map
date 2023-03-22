@@ -5,7 +5,8 @@
         "main.scss",
         "declarations/_declarations.scss",
         "parts/header/_header.scss",
-        "parts/main/lists/_lists.scss"
+        "parts/main/lists/_lists.scss",
+        "parts/main/cards-options/_cards-options"
     ],
     "names": [],
     "file": "main.css"

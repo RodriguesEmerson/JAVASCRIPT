@@ -2,10 +2,10 @@ import { domList } from "./modules/DOM.js"
 import  api  from "./modules/pre-API.js"
 
 let dom = domList();
-//Verifica se houve mudanças no DOM e, se sim, executa o codigo
-const observer = new MutationObserver(function(){ addEvents() });
-const setting = {childList: true};
-observer.observe(dom.board, setting);
+// //Verifica se houve mudanças no DOM e, se sim, executa o codigo
+// const observer = new MutationObserver(function(){ addEvents() });
+// const setting = {childList: true, subtree: true};
+// observer.observe(dom.board, setting);
 
 
 let [tempDiv, 
@@ -19,7 +19,6 @@ let [tempDiv,
 
 let sourceColumnSaved = false;
 function dragStart(){
-
     tempDiv = document.createElement('div');
     tempDiv.setAttribute('class', 'tempDiv');
     tempDiv.style.height = `${this.offsetHeight}px`;
@@ -75,19 +74,6 @@ function getNewPosition(column, selectedCardTop){
 }
 
 
-function addEvents(){
-    dom = domList();
-    dom.columns.forEach(column => {
-        column.addEventListener('dragover', dragOver);
-    });
-    dom.cards.forEach(card => {
-        card.addEventListener('dragstart', dragStart);
-        card.addEventListener('dragend', dragEnd);
-    })
-}
-addEvents();
-
-
 function atualizaApi(){
 
     try{
@@ -128,7 +114,7 @@ function atualizaApi(){
         activeColumn.cards.splice(destinationIndex, 0, dragCard)
 
     }catch(err){
-        console.log('houve um erro')
+        console.log('Card não selecionado!')
     }   
 
     sourceColumnSaved = false;
@@ -159,4 +145,16 @@ function saveDestinationIndex(){
     }
     //qualquer índice de card maior que 1 é subtraído 1.
     if(destinationIndex > 1) destinationIndex--;
+}
+
+
+export function addEvents(){
+    dom = domList();
+    dom.columns.forEach(column => {
+        column.addEventListener('dragover', dragOver);
+    });
+    dom.cards.forEach(card => {
+        card.addEventListener('dragstart', dragStart);
+        card.addEventListener('dragend', dragEnd);
+    })
 }
