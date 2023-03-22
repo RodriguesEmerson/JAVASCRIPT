@@ -131,23 +131,78 @@
             </div>
             </div> -->
 
-            <div class="cads-options">
-                <div class="box-header">Opções</div>
-                <div>
-                    <ul class="cards-options-list">
-                        <li class="option-item">
-                            <span>Etiquetas</span> 
-                            <span class="material-symbols-outlined">
-                                chevron_right
-                            </span>
-                        </li>
-                        <li class="option-item">
-                            <span>Posição</span> 
-                            <span class="material-symbols-outlined">
-                                chevron_right
-                            </span>
-                        </li>
-                    </ul>
+            <div id="cards-option-container">
+
+                <!-- opçoes iniciais -->
+                <div class="box-cards-options box-layout">
+                    <div class="box-header">
+                        <span>Opções</span>
+                        <span class="material-symbols-outlined close-options">
+                            close
+                        </span>
+                    </div>
+                    <div>
+                        <ul class="box-cards-options-list">
+                            <li class="option-item">
+                                <span>Etiquetas</span>
+                                <span class="material-symbols-outlined">
+                                    chevron_right
+                                </span>
+                            </li>
+                            <li class="option-item">
+                                <span>Posição</span>
+                                <span class="material-symbols-outlined">
+                                    chevron_right
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Etiquetas -->
+                <div class="box-tags box-layout">
+                    <div class="box-header">
+                        <span class="material-symbols-outlined">
+                            chevron_left
+                        </span>
+                        <span>Etiquetas</span>
+                        <span class="material-symbols-outlined close-options">
+                            close
+                        </span>
+                    </div>
+                    <div class="box-body">
+                        <input type="text" id="search-tags" placeholder="Buscar etiquetas">
+                        <div>
+                            <span class="bold">Etiquetas</span>
+                            <div class="box-choose-tags">
+                                <ul class="tags-list">
+                                    <li class="tag">
+                                        <input type="checkbox" id="tag1" class="tag-checkbox">
+                                        <label for="tag1" class="checkbox-label"></label>
+                                        <div class="tag-color">
+                                            <span class="tag-color-ball"></span>
+                                        </div>
+                                        <span class="material-symbols-outlined edit-tag">
+                                            edit
+                                        </span>
+                                    </li>   
+                                    <li class="tag">
+                                        <input type="checkbox" id="tag2" class="tag-checkbox">
+                                        <label for="tag2" class="checkbox-label"></label>
+                                        <div class="tag-color">
+                                            <span class="tag-color-ball"></span>
+                                        </div>
+                                        <span class="material-symbols-outlined edit-tag">
+                                            edit
+                                        </span>
+                                    </li>   
+                                </ul>
+                                <button id="btn-new-tag">
+                                    Criar nova etiqueta
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
