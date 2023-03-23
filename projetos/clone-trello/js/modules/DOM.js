@@ -43,7 +43,7 @@ export function column(parent){
  ==================================================================================*/
 const boxCardOptions = document.querySelector('.box-cards-options');
 const btnCloseCardOptions = document.querySelector('.box-cards-options .close-options');
-const moreCardOptions = document.querySelector('.more-options');
+const moreCardOptions = document.querySelectorAll('.option-item');
 const boxTags = document.querySelector('.box-tags');
 const btnBackBoxCardOptions = document.querySelector('.back-to-options');
 const btnCloseBoxTags = document.querySelector('.box-tags .close-options');

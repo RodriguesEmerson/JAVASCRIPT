@@ -9,6 +9,7 @@
     color: $cardsTextColor;
     border-radius: 8px;
     font-size: 0.9em;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.349);
 }
 .box-cards-options{
     position: absolute;
@@ -54,11 +55,25 @@
     position: absolute;
     font-size: 0.8em;
     margin-top: 10px;
+
     .box-header{
         font-size: 1.1em;
         justify-content: space-between;
         .close-options{
             position: relative;
+        }
+
+        .back-to-options{
+            cursor: pointer;
+            width: 20px;
+            right: -5px;
+            font-size: 1.5em;
+            transition: 200ms;
+            font-variation-settings: 'wght' 400;
+
+            &:hover{
+                color: darken($cardsTextColor, 30);
+            }
         }
     }
 

@@ -145,21 +145,78 @@ function radomId(){
 /**=================================================================================
  *                     Funções que manipulam as opções dos cards                  *
  =================================================================================*/
-function closeCardOptions(element){
-    sDom[element].style.display = 'none';
+function closeCardOptions(element, closeOptionToo){
+    sDom[element].classList.add('hidden');
+
+    if(!closeOptionToo) return;
+    sDom.boxCardOptions.classList.add('hidden');
 }
 
+let boxOptiosX, boxOptiosY;
+function openCardOptions(event){
+
+    //Colca a caixa de opções na melhor posição
+    const mouseX = event.clientX;
+    const mouseY = event.clientY;
+    const elementInfos = getElementPosition(this);
+    let x = elementInfos.left - 5;
+    let y = elementInfos.top - 7;
+
+    if((x + 270) > window.innerWidth){ x = x - 230 };
+    if((y + 180) > window.innerHeight){ y = y - 155};
+
+    [boxOptiosX, boxOptiosY] = [x, y];
+
+    sDom.boxCardOptions.style.left = x + 'px';
+    sDom.boxCardOptions.style.top = y + 'px';
+
+    sDom.boxCardOptions.classList.remove('hidden');
+}
+
+function openBoxTags(){
+
+    if(this.classList.contains('open-tags')){
+        sDom.boxTags.classList.remove('hidden');
+    }
+
+    //Colca a caixa de tags na melhor posição
+    let x = boxOptiosX;
+    let y = boxOptiosY;
+    const boxTagsInfos = sDom.boxTags.getBoundingClientRect();
+    sDom.boxTags.style.left = `${x}px`;
+    sDom.boxTags.style.top = `${y - 10}px`;
+    if((y + boxTagsInfos.height + 80) > window.innerHeight){
+        sDom.boxTags.style.top = `${(window.innerHeight - boxTagsInfos.height - 60)}px`;
+    }
+}
+
+function getElementPosition(element){
+    const elementInfos = element.getBoundingClientRect();
+    return elementInfos;
+}
 
 /**=================================================================================
  *                                       Eventos                                  *
  =================================================================================*/
-sDom.btnCloseBoxTags.addEventListener('click', () => {
+ sDom.btnBackBoxCardOptions.addEventListener('click', () => {
     closeCardOptions('boxTags')
 })
+
+ sDom.btnCloseBoxTags.addEventListener('click', () => {
+    closeCardOptions('boxTags', true)
+})
+
 sDom.btnCloseCardOptions.addEventListener('click', () =>{
     closeCardOptions('boxCardOptions')
 })
 
+sDom.moreCardOptions.forEach(button => {
+    button.addEventListener('click', openBoxTags)
+})
+
+dDom.optionsAddCard.forEach(button => {
+    button.addEventListener('click', openCardOptions)
+})
 
 
 
