@@ -279,7 +279,7 @@ body {
   margin-bottom: 5px;
 }
 
-.container .board .list-content .list-square .tags .tag {
+.container .board .tag {
   display: block;
   height: 8px;
   width: 40px;
@@ -342,10 +342,24 @@ body {
   margin-bottom: 5px;
   border-radius: 3px;
   background-color: white;
+  max-width: 260px;
   overflow: hidden;
 }
 
 .container .board .list-add-item .add-card .previa-card .previa-tags {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   padding: 5px;
 }
 
@@ -547,7 +561,7 @@ body {
   padding-top: 10px;
 }
 
-#cards-option-container .box-tags .tags-list .tag {
+#cards-option-container .box-tags .tags-list .tag-cont {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

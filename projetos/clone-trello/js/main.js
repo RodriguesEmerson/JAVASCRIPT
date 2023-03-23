@@ -88,13 +88,14 @@ function buildTags(tags){
     if(!tags) return;
     const newTags = document.createElement('div');
     newTags.setAttribute('class', 'tags')
-
-    tags.forEach(tag => {
+   
+    for (let key in tags){
         const newTag = document.createElement('span');
         newTag.setAttribute('class', 'tag');
-        newTag.style.backgroundColor = tag;
+        newTag.style.backgroundColor = tags[key].color;
         newTags.appendChild(newTag);
-    })
+    }
+        
     return newTags;
 }
 
@@ -110,13 +111,14 @@ for (const column in api.columns){
  ===================================================================================================================================*/
  let haveAnOpenNewCardBox = false; 
  let [activeColumn, activeNewCardBox] = [null];
- let tempTags = null; //tags dos cards
+ let tempTags = []; //tags dos cards
 
 
  function showAddCardBox(){
      //Se houver outra AddCard ou boxOptions abertos, os fecha.
      if(haveAnOpenNewCardBox) closeAddCardBox();
      closeCardOptions('boxTags', true)
+     removePreviaTagsDiv();
  
      activeColumn = this.closest('.list').id;
      activeNewCardBox = acDom(activeColumn);
@@ -124,30 +126,49 @@ for (const column in api.columns){
      this.classList.add('hiden');
      haveAnOpenNewCardBox = true;
  };
-//<div class="previa-tags"><span class="tag"</span></div>
 
+//cria as tags quando um novo card está sendo criado.
 let divPrevTagCreated = false;
+let  previaTagsDiv;
 function addTags(clickedTag){
-    console.log( dDom.previaCard)
-    const tag = api.tagsOptions[clickedTag];
-    const previaTagsDiv = document.createElement('div');
-          previaTagsDiv.setAttribute('class', 'previa-tags');
     
+    
+    const tag = api.tagsOptions[clickedTag];
+    if(tbDom.checkboxTag[clickedTag].checked) return removeTags(tag);
+    
+    //cria a tag na tempTags
+    const newObjTag = {
+        color: tag.color,
+        id: tag.id
+    }
+    tempTags.push(newObjTag)
+
+    //cria a tag na tela
     if(!divPrevTagCreated){
-        dDom.previaCard.prepend(previaTagsDiv);
+        previaTagsDiv = document.createElement('div');
+        previaTagsDiv.setAttribute('class', 'previa-tags');
+        activeNewCardBox.previaCard.prepend(previaTagsDiv);
         divPrevTagCreated = true;
+    }else{
+        previaTagsDiv = activeNewCardBox.previaCard.querySelector('.previa-tags');
     }
 
     const previaTagSpan = document.createElement('span');
           previaTagSpan.setAttribute('class', 'tag');
+          previaTagSpan.id  = `${tag.id}`
           previaTagSpan.style.backgroundColor = tag.color;  
 
     previaTagsDiv.appendChild(previaTagSpan);
 }
 
 
-function createNewCard(){
+function removeTags(tag){
+    const tagSpanToRemove = previaTagsDiv.querySelector(`#${tag.id}`);
+    previaTagsDiv.removeChild(tagSpanToRemove)
+}
 
+
+function createNewCard(){
     //Cria o novo card na 'api'//
     //Seleciona a coluna da 'api' que será adicionada os dados
     let  columnInsert = function(){
@@ -160,8 +181,10 @@ function createNewCard(){
     columnInsert = columnInsert();
 
     if(activeNewCardBox.newCardText.value === "") return;
+
     //Cria um objeto com os dados do novo card
     //e o insere no objeto na 'api'
+    if(tempTags.length === 0) tempTags = null;
     const card = {
         id: `ftr${activeColumn}card${radomId()}`,
         tags: tempTags,
@@ -191,7 +214,26 @@ function createNewCard(){
     }
     
     activeDragArea.appendChild(newCard);
-    addEvents();
+
+    //atualiza as variaveis e eventos
+    removePreviaTagsDiv();
+    addEvents();    
+}
+
+
+function removePreviaTagsDiv(){
+
+    tempTags = [];
+    divPrevTagCreated = false;
+    tbDom.checkboxTag.forEach(checkbox => {
+        checkbox.checked = false;
+    })
+   
+    //remove a div previa-tags temporária, se tiver
+    try{
+        const  previaTagsDiv = activeNewCardBox.previaCard.querySelector('.previa-tags');
+        activeNewCardBox.previaCard.removeChild(previaTagsDiv);
+    }catch(err){}
 }
 
 
@@ -252,48 +294,38 @@ function openBoxTags(){
 }
 
 
-//Retorna as informações do objeto clicado
-function getElementPosition(element){
-
-    const elementInfos = element.getBoundingClientRect();
-    return elementInfos;
-}
-
-
 //Cria as tags na caixa de Etiquetas
 function buildTagsOptions(){
-
+    
     api.tagsOptions.forEach(tag => {
         const tagLi = document.createElement('li');
-        tagLi.setAttribute('class', 'tag');
-
+        tagLi.setAttribute('class', 'tag-cont');
+        
         tagLi.innerHTML = `<input type="checkbox" id="${tag.id}" class="tag-checkbox">
-                            <label for="${tag.id}" class="checkbox-label"></label>
-                            <div class="tag-color" style="background-color: ${tag.color}">
-                                <span class="tag-color-ball" 
-                                style="background-color: ${tag.color}">
-                                </span>
-                            </div>
-                            <span class="material-symbols-outlined edit-tag">
-                                edit
-                            </span>`;
-
+        <label for="${tag.id}" class="checkbox-label"></label>
+        <div class="tag-color" style="background-color: ${tag.color}">
+        <span class="tag-color-ball" 
+        style="background-color: ${tag.color}">
+        </span>
+        </div>
+        <span class="material-symbols-outlined edit-tag">
+        edit
+        </span>`;
+        
         sDom.tagsList.appendChild(tagLi);
     })
     boxTagsEvents();
 }
 buildTagsOptions()
 
-/* <li class="tag">
-        <input type="checkbox" id="tag1" class="tag-checkbox">
-        <label for="tag1" class="checkbox-label"></label>
-        <div class="tag-color">
-            <span class="tag-color-ball"></span>
-        </div>
-        <span class="material-symbols-outlined edit-tag">
-            edit
-        </span>
-    </li>    */
+
+//Retorna as informações do objeto clicado
+function getElementPosition(element){
+    const elementInfos = element.getBoundingClientRect();
+    return elementInfos;
+}
+
+
 /**==================================================================================================================================
  *                                                              Eventos                                                             *
  ===================================================================================================================================*/
@@ -344,8 +376,8 @@ addEvents();
 function boxTagsEvents(){
     tbDom = domTagsBox();
     
-    for (let i = 0; i < tbDom.tagCheckBox.length; i++){
-        tbDom.tagCheckBox[i].addEventListener('click', () => {
+    for (let i = 0; i < tbDom.fakeCheckboxTag.length; i++){
+        tbDom.fakeCheckboxTag[i].addEventListener('click', () => {
             addTags(i);
         })
     }

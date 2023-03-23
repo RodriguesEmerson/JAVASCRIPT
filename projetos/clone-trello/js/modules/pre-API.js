@@ -5,11 +5,17 @@ const data = {
             
             cards: [
                 {id: 'c1card1',
-                tags: ['green'],
+                tags: [
+                    {color:'lightcoral', id: 'tag2'},
+                    {color:'green', id: 'tag2'}
+                ],
                 text: 'Algum Text'},
     
                 {id: 'c1card2',
-                tags: ['red'],
+                tags: [
+                    {color:'lightcoral', id: 'tag2'},
+                    {color:'green', id: 'tag2'}
+                ],
                 text: 'Algum Text123',}
             ],
     
@@ -20,11 +26,17 @@ const data = {
             
             cards: [
                 {id: 'c2card1',
-                tags: [ 'blue', 'red'],
+                tags: [
+                    {color:'lightcoral', id: 'tag2'},
+                    {color:'green', id: 'tag2'}
+                ],
                 text: 'Algum Text'},
     
                 {id: 'c2card2',
-                tags: [ 'yellow'],
+                tags: [
+                    {color:'lightcoral', id: 'tag2'},
+                    {color:'green', id: 'tag2'}
+                ],
                 text: 'Algum Text123',}
             ],
     
@@ -35,11 +47,17 @@ const data = {
             
             cards: [
                 {id: 'c3card1',
-                tags: [],
+                tags: [
+                    {color:'lightcoral', id: 'tag2'},
+                    {color:'green', id: 'tag2'}
+                ],
                 text: 'Algum Text'},
     
                 {id: 'c3card2',
-                tags: [ 'blue', 'red'],
+                tags: [
+                    {color:'lightcoral', id: 'tag2'},
+                    {color:'green', id: 'tag2'}
+                ],
                 text: 'Algum Text123',}
             ],
     

@@ -5,6 +5,7 @@
     gap: 10px;
     padding: 10px;
     
+    //list = Coluna
     .list{
         font-size: 0.9em;
         min-height: 100px;
@@ -24,10 +25,13 @@
         font-weight: bold;
         height: 30px;
     }
+
+    //list-content = card-container
     .list-content{
         cursor: pointer;
         margin-bottom: 8px;
 
+        //list-square - card
         .list-square{
             @include flexSetting(start, start);
             flex-direction: column;
@@ -49,20 +53,20 @@
                 height: 8px;
                 width: 100%;
                 margin-bottom: 5px;
-                .tag{
-                    display: block;
-                    height: 8px;
-                    width: 40px;
-                    background-color: rgb(1, 180, 96);
-                    border-radius: 10px;
-                    margin-right: 5px;
-                }
+                
             }
         }
 
 
     }
-
+    .tag{
+        display: block;
+        height: 8px;
+        width: 40px;
+        background-color: rgb(1, 180, 96);
+        border-radius: 10px;
+        margin-right: 5px;
+    }
 
     /*======= Add New Card =======*/
     .list-add-item{
@@ -93,9 +97,12 @@
                 margin-bottom: 5px;
                 border-radius: 3px;
                 background-color: white;
+                max-width: 260px;
                 overflow: hidden;
 
                 .previa-tags{
+                    @include flexSetting(start, center);
+                    flex-direction: row;
                     padding: 5px;
 
                     .tag{

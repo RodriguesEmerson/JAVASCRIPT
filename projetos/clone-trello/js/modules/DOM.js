@@ -40,12 +40,14 @@ export function domActiveColumn(parent){
 
 //Elementos da box de Etiquetas
 export function domTagsBox(){
-    const tagCheckBox = document.querySelectorAll('.checkbox-label');
+    const fakeCheckboxTag = document.querySelectorAll('.checkbox-label');
+    const checkboxTag = document.querySelectorAll('.tag-checkbox')
     const tagPreColor = document.querySelectorAll('.tag-color');
     const btnTagEdit = document.querySelectorAll('.edit-tag');
 
     return {
-        tagCheckBox,
+        fakeCheckboxTag,
+        checkboxTag,
         tagPreColor,
         btnTagEdit,
     }

@@ -19,6 +19,7 @@ let [tempDiv,
 
 let sourceColumnSaved = false;
 function dragStart(){
+    
     tempDiv = document.createElement('div');
     tempDiv.setAttribute('class', 'tempDiv');
     tempDiv.style.height = `${this.offsetHeight}px`;
@@ -29,6 +30,7 @@ function dragStart(){
 
 
 function dragOver(cardEvent){
+
     //Atualiza a coluna ativada e salva coluna de origem
     activeColumnID = this.closest('.list').id;
     if(!sourceColumnSaved){ 
@@ -49,6 +51,7 @@ function dragOver(cardEvent){
 
 
 function dragEnd(){
+
     this.classList.remove('dragging');
     this.style.display = 'flex';
     const deleteTemDiv = document.querySelector('.tempDiv');
@@ -62,6 +65,7 @@ function dragEnd(){
 
 
 function getNewPosition(column, selectedCardTop){
+
     const availablesCards = column.querySelectorAll('.list-content:not(.dragging)')
     let newPositon = null;
 
@@ -77,7 +81,7 @@ function getNewPosition(column, selectedCardTop){
 function atualizaApi(){
 
     try{
-        //dados do card que está sendo arrastado
+        //Todos os dados do card que está sendo arrastado
         let dragCard, originIndexCard;
         (function findDragCardDatas() {
             api.columns[sourceColumn].cards.forEach(card => {
@@ -110,7 +114,7 @@ function atualizaApi(){
             }
         })();
 
-        //Salva o card selecionado na coluna ativa
+        //Salva o card arratado na coluna da 'api' da respectiva coluna ativa
         activeColumn.cards.splice(destinationIndex, 0, dragCard)
 
     }catch(err){
@@ -118,20 +122,21 @@ function atualizaApi(){
     }   
 
     sourceColumnSaved = false;
-
 }
 
 
 function saveSelectedCardDatas(listContent){
+
     const cardId = listContent.querySelector('.list-square').id;
     sourceCardID = cardId;
     let columnName = document.querySelector(`#${sourceColumnID} .list-title`);
     columnName = columnName.textContent;
     sourceColumn = columnName.replace(' ', '_');
-    
 }
 
+
 function saveDestinationIndex(){
+
     const cardsInActiveColumn = document.querySelectorAll(`#${activeColumnID} .drag-area > div`);
     for(let i = 0; i < cardsInActiveColumn.length; i++){
         if(cardsInActiveColumn[i].classList.contains('tempDiv')){
@@ -149,6 +154,7 @@ function saveDestinationIndex(){
 
 
 export function addEvents(){
+    
     dDom = domDynamicList();
     dDom.columns.forEach(column => {
         column.addEventListener('dragover', dragOver);

@@ -92,7 +92,7 @@
 
     .tags-list{
         padding-top: 10px;
-        .tag{
+        .tag-cont{
             @include flexSetting(center, center);
             cursor: pointer;
             height: 30px;
