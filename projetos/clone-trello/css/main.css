@@ -254,9 +254,14 @@ body {
   min-height: 33px;
   width: 260px;
   padding: 10px;
+  overflow: hidden;
   background-color: white;
   border-radius: 5px;
   border-bottom: 1px solid rgba(57, 100, 125, 0.445);
+}
+
+.container .board .list-content .list-square .span {
+  word-wrap: break-word;
 }
 
 .container .board .list-content .list-square .tags {
@@ -318,6 +323,34 @@ body {
 
 .container .board .list-add-item .show-add-card {
   cursor: pointer;
+}
+
+.container .board .list-add-item .add-card .previa-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-bottom: 5px;
+  border-radius: 3px;
+  background-color: white;
+  overflow: hidden;
+}
+
+.container .board .list-add-item .add-card .previa-card .previa-tags {
+  padding: 5px;
+}
+
+.container .board .list-add-item .add-card .previa-card .previa-tags .tag {
+  margin: 5px 5px 5px 0;
 }
 
 .container .board .list-add-item .add-card .add-card-text {
@@ -431,7 +464,7 @@ body {
 }
 
 #cards-option-container .box-cards-options-list .option-item:hover {
-  background-color: #f2f2f2;
+  background-color: #e0e0e0;
 }
 
 #cards-option-container .box-header {

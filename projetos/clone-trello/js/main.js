@@ -1,11 +1,16 @@
-import { domDynamicList, domStaticList, column } from "./modules/DOM.js"
+import { domDynamicList, domStaticList, domActiveColumn } from "./modules/DOM.js"
 import  api  from "./modules/pre-API.js"
 
 let dDom = domDynamicList();
+let acDom = domActiveColumn;
 const sDom = domStaticList;
-// const observer = new MutationObserver(function(){ addEvents() });
-// const setting = {childList: true, subtree: true};
-// observer.observe(dom.board, setting);
+
+
+function radomId(){
+    const min = Math.ceil(0);
+    const max = Math.floor(10000);
+    return Math.floor(Math.random() * (max - min) - min)
+}
 
 /**=================================================================================
  *                        Funções que criam os cards na tela                       *
@@ -28,8 +33,11 @@ function buildColums(apiColumn){
                                     <span>Adicionar um cartão</span>
                                 </div>
                                 <div class="add-card hiden">
-                                    <textarea class="add-card-text" cols="32" 
-                                    rows="5" placeholder="Insira um texto"></textarea>
+                                    <div class="previa-card">
+                                        <!--previa das tags-->
+                                        <textarea class="add-card-text" cols="32" 
+                                        rows="5" placeholder="Insira um texto"></textarea>
+                                    </div>
                                     <div class="box-button-more">
                                         <div>
                                             <button class="add-card-button">Adicionar</button>
@@ -47,6 +55,8 @@ function buildColums(apiColumn){
      dDom.board.appendChild(newColumn);
     buildCards(newColumn, apiColumn);
 }
+
+//<div class="previa-tags"><span class="tag"</span></div>
 
 function buildCards(column, apiColumn){
 
@@ -68,7 +78,7 @@ function buildCards(column, apiColumn){
 }
 
 function buildTags(tags){ 
-
+    //cria as tags para serem mostradas na tela
     if(!tags) return;
     const newTags = document.createElement('div');
     newTags.setAttribute('class', 'tags')
@@ -81,6 +91,7 @@ function buildTags(tags){
     })
     return newTags;
 }
+
 //chama a função para criar cada coluna 
 for (const column in api){
     buildColums(api[column])
@@ -91,11 +102,28 @@ for (const column in api){
 /**=================================================================================
  *                        Funções para criar um novo card                         *
  =================================================================================*/
-let tempTags =[ 'blue', 'red', 'green']
+ let haveAnOpenNewCardBox = false; 
+ let [activeColumn, activeNewCardBox] = [null];
+ let tempTags = null; //tags dos cards
+
+
+ function showAddCardBox(){
+     //Se houver outra AddCard ou boxOptions abertos, os fecha.
+     if(haveAnOpenNewCardBox) closeAddCardBox();
+     closeCardOptions('boxTags', true)
+ 
+     activeColumn = this.closest('.list').id;
+     activeNewCardBox = acDom(activeColumn);
+     activeNewCardBox.newCardBox.classList.remove('hiden');
+     this.classList.add('hiden');
+     haveAnOpenNewCardBox = true;
+ };
+
+
 function createNewCard(){
 
     const fatherColumn = this.closest('.list').id;
-    const newCardText = document.querySelector(`#${fatherColumn} .add-card-text`);
+    //const newCardText = document.querySelector(`#${fatherColumn} .add-card-text`);
 
     //Seleciona a coluna da 'api' que será adicionada os dados
     let  columnInsert = function(){
@@ -107,39 +135,48 @@ function createNewCard(){
     }
     columnInsert = columnInsert();
 
-    if(newCardText.value === "") return;//condição
+    if(activeNewCardBox.newCardText.value === "") return;//condição
 
     //Cria um objeto com os dados do novo card
     //e o insere no objeto api
     const card = {
         id: `ftr${fatherColumn}card${radomId()}`,
         tags: tempTags,
-        text: newCardText.value,
+        text: activeNewCardBox.newCardText.value,
     }
     columnInsert.cards.push(card);
-    newCardText.value = "";
+    activeNewCardBox.newCardText.value = "";
 
     //Cria o novo card na tela
     const activeColumn = document.querySelector(`#${columnInsert.id} .drag-area`);
     const newTags = buildTags(tempTags)
-
     let newCard = document.createElement('div')
     newCard.setAttribute('class', 'list-content');
     newCard.draggable = true;
-    newCard.innerHTML = `<div class="list-square" id="${card.id}">
-                            <div class="tags">${newTags.innerHTML}</div>
-                            <span>${card.text}</span>
-                        </div>`
+
+    //InnerHTML do card quando há tags e quando não há.
+    if(tempTags){
+        newCard.innerHTML = `<div class="list-square" id="${card.id}">
+                                 <div class="tags">${newTags.innerHTML}</div>
+                                 <span>${card.text}</span>
+                             </div>`
+    }else{
+        newCard.innerHTML = `<div class="list-square" id="${card.id}">
+                                 <span>${card.text}</span>
+                             </div>`
+    }
+    
     activeColumn.appendChild(newCard);
 
     addEvents();
 }
 
-function radomId(){
-    const min = Math.ceil(0);
-    const max = Math.floor(10000);
-    return Math.floor(Math.random() * (max - min) - min)
-}
+function closeAddCardBox(){
+    activeNewCardBox.newCardBox.classList.add('hiden')
+    activeNewCardBox.btnShowNewCardBox.classList.remove('hiden')
+    haveAnOpenNewCardBox = false;
+};
+
 
 
 /**=================================================================================
@@ -155,6 +192,9 @@ function closeCardOptions(element, closeOptionToo){
 let boxOptiosX, boxOptiosY;
 function openCardOptions(event){
 
+    //active column
+    console.log(activeNewCardBox)
+
     //Colca a caixa de opções na melhor posição
     const mouseX = event.clientX;
     const mouseY = event.clientY;
@@ -169,6 +209,7 @@ function openCardOptions(event){
 
     sDom.boxCardOptions.style.left = x + 'px';
     sDom.boxCardOptions.style.top = y + 'px';
+
 
     sDom.boxCardOptions.classList.remove('hidden');
 }
@@ -214,32 +255,15 @@ sDom.moreCardOptions.forEach(button => {
     button.addEventListener('click', openBoxTags)
 })
 
+
 dDom.optionsAddCard.forEach(button => {
     button.addEventListener('click', openCardOptions)
 })
 
 
 
-let openAddNewCard = false;
-let [activeColumn, columnItems] = [null];
-function showAddCardDiv(){
-    //Se houver outra AddCard aberto, a fecha.
-    if(openAddNewCard) closeAddCardDiv();
 
-    activeColumn = this.closest('.list').id;
-    columnItems = column(activeColumn);
-    columnItems.activeAddNewCardBox.classList.remove('hiden');
-    this.classList.add('hiden');
-    openAddNewCard = true;
-};
-
-function closeAddCardDiv(){
-    columnItems.activeAddNewCardBox.classList.add('hiden')
-    columnItems.hiddenButtonAddNewCard.classList.remove('hiden')
-    openAddNewCard = false;
-};
-
-//Atualiza a seleção dom dom e eventos
+//Atualiza a seleção domDynamicList e seus eventos
 import { addEvents as ddAddEvents } from "./drag-drop.js";
 function addEvents(){
 
@@ -247,11 +271,11 @@ function addEvents(){
     ddAddEvents(); //drag-drop.js
 
     dDom.showAddCard.forEach(button =>{
-        button.addEventListener('click', showAddCardDiv);
+        button.addEventListener('click', showAddCardBox);
     });
     
     dDom.closeAddCard.forEach(button => {
-        button.addEventListener('click', closeAddCardDiv)
+        button.addEventListener('click', closeAddCardBox)
     });
     
     dDom.newCardBtn.forEach(button => {

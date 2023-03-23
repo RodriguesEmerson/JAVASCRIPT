@@ -47,11 +47,3 @@ const data = {
 }
 
 export default data;
-
-{/* <div class="drag-area">
-    <div class="list-content" draggable="true">
-        <div class="list-square">
-            <span>O texto será inserido aqui 000</span>
-        </div>
-    </div>
-</div> */}

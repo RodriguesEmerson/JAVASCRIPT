@@ -34,10 +34,15 @@
             min-height: 33px;
             width: 260px;
             padding: 10px;
-            
+            overflow: hidden;
+
             background-color: white;
             border-radius: 5px;
             border-bottom: 1px solid darken($secundaryColor, 30);
+
+            .span{
+                word-wrap: break-word;
+            }
 
             .tags{
                 @include flexSetting(center, start);
@@ -79,6 +84,26 @@
         }
         
         .add-card{
+
+            //previa card é uma div que engloba 
+            //a text area e a previa de tags.
+            .previa-card{
+               @include flexSetting(start, center);
+                flex-direction: column;
+                margin-bottom: 5px;
+                border-radius: 3px;
+                background-color: white;
+                overflow: hidden;
+
+                .previa-tags{
+                    padding: 5px;
+
+                    .tag{
+                        margin: 5px 5px 5px 0;
+                    }
+                }
+                
+            }
             .add-card-text{
                 border: none;
                 border-radius: 3px;
@@ -91,6 +116,7 @@
                 border-bottom: 1px solid darken($secundaryColor, 30);
             }
                 
+
             .box-button-more{
                 @include flexSetting(center, space-between);
 

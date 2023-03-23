@@ -25,14 +25,16 @@ export function domDynamicList(){
 }
 
 //Elementos da coluna ativa duranto o dragover
-export function column(parent){
-    const activeAddNewCardBox = document.querySelector(`#${parent} .add-card`);
-    const hiddenButtonAddNewCard = document.querySelector(`#${parent} .show-add-card`);
-    const activeTextArea = document.querySelector(`#${parent} add-card-text`);
+export function domActiveColumn(parent){
+    const newCardBox = document.querySelector(`#${parent} .add-card`);
+    const previaCard = document.querySelector(`#${parent} .previa-card`)
+    const btnShowNewCardBox = document.querySelector(`#${parent} .show-add-card`);
+    const newCardText = document.querySelector(`#${parent} .add-card-text`);
 
-    return { activeAddNewCardBox, 
-             hiddenButtonAddNewCard, 
-             activeTextArea 
+    return { newCardBox, 
+             previaCard,
+             btnShowNewCardBox, 
+             newCardText 
            }
 
 }

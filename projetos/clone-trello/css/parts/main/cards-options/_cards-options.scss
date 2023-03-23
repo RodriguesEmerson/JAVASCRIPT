@@ -21,7 +21,7 @@
             padding-left: 3px;
 
             &:hover{
-                background-color: lighten($cardsTextColor, 55)
+                background-color: lighten($cardsTextColor, 48)
             }
         }
     }
@@ -97,7 +97,6 @@
             cursor: pointer;
             height: 30px;
             margin-bottom: 8px;
-           
         }
 
         .tag-checkbox{
