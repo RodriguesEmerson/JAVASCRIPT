@@ -80,11 +80,11 @@ function atualizaApi(){
         //dados do card que está sendo arrastado
         let dragCard, originIndexCard;
         (function findDragCardDatas() {
-            api[sourceColumn].cards.forEach(card => {
+            api.columns[sourceColumn].cards.forEach(card => {
                 if(!sourceCardID) return;
                 if (card.id === sourceCardID) {                    
                     dragCard = card;
-                    originIndexCard = api[sourceColumn].cards.indexOf(card);
+                    originIndexCard = api.columns[sourceColumn].cards.indexOf(card);
                     return;
                 }
             });
@@ -92,9 +92,9 @@ function atualizaApi(){
 
         //Encontra e apaga o card da coluna de origem
         (function findOrigimColumn(){
-            for (let column in api){ 
-                if(api[column].id == sourceColumnID){
-                    return sourceColumn = (api[column]);
+            for (let column in api.columns){ 
+                if(api.columns[column].id == sourceColumnID){
+                    return sourceColumn = (api.columns[column]);
                 };
             }
         })();
@@ -103,9 +103,9 @@ function atualizaApi(){
         //Encontra o objeto da coluna ativa na 'api'
         let  activeColumn;
         (function findActiveColumn(){
-            for (let column in api){ 
-                if(api[column].id == activeColumnID){
-                return activeColumn = (api[column]);
+            for (let column in api.columns){ 
+                if(api.columns[column].id == activeColumnID){
+                return activeColumn = (api.columns[column]);
                 };
             }
         })();

@@ -1,7 +1,13 @@
-import { domDynamicList, domStaticList, domActiveColumn } from "./modules/DOM.js"
-import  api  from "./modules/pre-API.js"
+import { domDynamicList, 
+         domStaticList, 
+         domActiveColumn,
+         domTagsBox
+} from "./modules/DOM.js";
+
+import  api  from "./modules/pre-API.js";
 
 let dDom = domDynamicList();
+let tbDom = domTagsBox();
 let acDom = domActiveColumn;
 const sDom = domStaticList;
 
@@ -12,9 +18,9 @@ function radomId(){
     return Math.floor(Math.random() * (max - min) - min)
 }
 
-/**=================================================================================
- *                        Funções que criam os cards na tela                       *
- ==================================================================================*/
+/**==================================================================================================================================
+ *                                               Funções que carregam os cards na tela                                              *
+ ===================================================================================================================================*/
 /**Isso seria mais fácil e mais seguro com React */
 function buildColums(apiColumn){
 
@@ -52,11 +58,10 @@ function buildColums(apiColumn){
                                 </div>
                             </div>`
 
-     dDom.board.appendChild(newColumn);
+     sDom.board.appendChild(newColumn);
     buildCards(newColumn, apiColumn);
 }
 
-//<div class="previa-tags"><span class="tag"</span></div>
 
 function buildCards(column, apiColumn){
 
@@ -77,6 +82,7 @@ function buildCards(column, apiColumn){
     })
 }
 
+
 function buildTags(tags){ 
     //cria as tags para serem mostradas na tela
     if(!tags) return;
@@ -93,15 +99,15 @@ function buildTags(tags){
 }
 
 //chama a função para criar cada coluna 
-for (const column in api){
-    buildColums(api[column])
+for (const column in api.columns){
+    buildColums(api.columns[column])
     addEvents()
 }
 
 
-/**=================================================================================
- *                        Funções para criar um novo card                         *
- =================================================================================*/
+/**==================================================================================================================================
+ *                                                    Funções para criar um novo card                                               *
+ ===================================================================================================================================*/
  let haveAnOpenNewCardBox = false; 
  let [activeColumn, activeNewCardBox] = [null];
  let tempTags = null; //tags dos cards
@@ -118,37 +124,55 @@ for (const column in api){
      this.classList.add('hiden');
      haveAnOpenNewCardBox = true;
  };
+//<div class="previa-tags"><span class="tag"</span></div>
+
+let divPrevTagCreated = false;
+function addTags(clickedTag){
+    console.log( dDom.previaCard)
+    const tag = api.tagsOptions[clickedTag];
+    const previaTagsDiv = document.createElement('div');
+          previaTagsDiv.setAttribute('class', 'previa-tags');
+    
+    if(!divPrevTagCreated){
+        dDom.previaCard.prepend(previaTagsDiv);
+        divPrevTagCreated = true;
+    }
+
+    const previaTagSpan = document.createElement('span');
+          previaTagSpan.setAttribute('class', 'tag');
+          previaTagSpan.style.backgroundColor = tag.color;  
+
+    previaTagsDiv.appendChild(previaTagSpan);
+}
 
 
 function createNewCard(){
 
-    const fatherColumn = this.closest('.list').id;
-    //const newCardText = document.querySelector(`#${fatherColumn} .add-card-text`);
-
+    //Cria o novo card na 'api'//
     //Seleciona a coluna da 'api' que será adicionada os dados
     let  columnInsert = function(){
-        for (let column in api){
-            if(api[column].id == fatherColumn){
-                return api[column]
+        for (let column in api.columns){
+            if(api.columns[column].id == activeColumn){
+                return api.columns[column]
             };
         }
     }
     columnInsert = columnInsert();
 
-    if(activeNewCardBox.newCardText.value === "") return;//condição
-
+    if(activeNewCardBox.newCardText.value === "") return;
     //Cria um objeto com os dados do novo card
-    //e o insere no objeto api
+    //e o insere no objeto na 'api'
     const card = {
-        id: `ftr${fatherColumn}card${radomId()}`,
+        id: `ftr${activeColumn}card${radomId()}`,
         tags: tempTags,
         text: activeNewCardBox.newCardText.value,
     }
     columnInsert.cards.push(card);
     activeNewCardBox.newCardText.value = "";
 
-    //Cria o novo card na tela
-    const activeColumn = document.querySelector(`#${columnInsert.id} .drag-area`);
+
+    //Cria o novo card na tela//
+    const activeDragArea = document.querySelector(`#${columnInsert.id} .drag-area`);
     const newTags = buildTags(tempTags)
     let newCard = document.createElement('div')
     newCard.setAttribute('class', 'list-content');
@@ -166,10 +190,10 @@ function createNewCard(){
                              </div>`
     }
     
-    activeColumn.appendChild(newCard);
-
+    activeDragArea.appendChild(newCard);
     addEvents();
 }
+
 
 function closeAddCardBox(){
     activeNewCardBox.newCardBox.classList.add('hiden')
@@ -179,9 +203,9 @@ function closeAddCardBox(){
 
 
 
-/**=================================================================================
- *                     Funções que manipulam as opções dos cards                  *
- =================================================================================*/
+/**==================================================================================================================================
+ *                                              Funções que manipulam as opções dos cards                                           *
+  ===================================================================================================================================*/
 function closeCardOptions(element, closeOptionToo){
     sDom[element].classList.add('hidden');
 
@@ -189,15 +213,13 @@ function closeCardOptions(element, closeOptionToo){
     sDom.boxCardOptions.classList.add('hidden');
 }
 
+
 let boxOptiosX, boxOptiosY;
 function openCardOptions(event){
-
     //active column
-    console.log(activeNewCardBox)
+    //console.log(activeNewCardBox)
 
     //Colca a caixa de opções na melhor posição
-    const mouseX = event.clientX;
-    const mouseY = event.clientY;
     const elementInfos = getElementPosition(this);
     let x = elementInfos.left - 5;
     let y = elementInfos.top - 7;
@@ -206,20 +228,18 @@ function openCardOptions(event){
     if((y + 180) > window.innerHeight){ y = y - 155};
 
     [boxOptiosX, boxOptiosY] = [x, y];
-
     sDom.boxCardOptions.style.left = x + 'px';
     sDom.boxCardOptions.style.top = y + 'px';
 
-
     sDom.boxCardOptions.classList.remove('hidden');
 }
+
 
 function openBoxTags(){
 
     if(this.classList.contains('open-tags')){
         sDom.boxTags.classList.remove('hidden');
     }
-
     //Colca a caixa de tags na melhor posição
     let x = boxOptiosX;
     let y = boxOptiosY;
@@ -231,14 +251,52 @@ function openBoxTags(){
     }
 }
 
+
+//Retorna as informações do objeto clicado
 function getElementPosition(element){
+
     const elementInfos = element.getBoundingClientRect();
     return elementInfos;
 }
 
-/**=================================================================================
- *                                       Eventos                                  *
- =================================================================================*/
+
+//Cria as tags na caixa de Etiquetas
+function buildTagsOptions(){
+
+    api.tagsOptions.forEach(tag => {
+        const tagLi = document.createElement('li');
+        tagLi.setAttribute('class', 'tag');
+
+        tagLi.innerHTML = `<input type="checkbox" id="${tag.id}" class="tag-checkbox">
+                            <label for="${tag.id}" class="checkbox-label"></label>
+                            <div class="tag-color" style="background-color: ${tag.color}">
+                                <span class="tag-color-ball" 
+                                style="background-color: ${tag.color}">
+                                </span>
+                            </div>
+                            <span class="material-symbols-outlined edit-tag">
+                                edit
+                            </span>`;
+
+        sDom.tagsList.appendChild(tagLi);
+    })
+    boxTagsEvents();
+}
+buildTagsOptions()
+
+/* <li class="tag">
+        <input type="checkbox" id="tag1" class="tag-checkbox">
+        <label for="tag1" class="checkbox-label"></label>
+        <div class="tag-color">
+            <span class="tag-color-ball"></span>
+        </div>
+        <span class="material-symbols-outlined edit-tag">
+            edit
+        </span>
+    </li>    */
+/**==================================================================================================================================
+ *                                                              Eventos                                                             *
+ ===================================================================================================================================*/
  sDom.btnBackBoxCardOptions.addEventListener('click', () => {
     closeCardOptions('boxTags')
 })
@@ -261,8 +319,6 @@ dDom.optionsAddCard.forEach(button => {
 })
 
 
-
-
 //Atualiza a seleção domDynamicList e seus eventos
 import { addEvents as ddAddEvents } from "./drag-drop.js";
 function addEvents(){
@@ -281,5 +337,16 @@ function addEvents(){
     dDom.newCardBtn.forEach(button => {
         button.addEventListener('click', createNewCard)
     })
+
 }
 addEvents();
+
+function boxTagsEvents(){
+    tbDom = domTagsBox();
+    
+    for (let i = 0; i < tbDom.tagCheckBox.length; i++){
+        tbDom.tagCheckBox[i].addEventListener('click', () => {
+            addTags(i);
+        })
+    }
+}   

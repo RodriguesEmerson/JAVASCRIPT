@@ -1,8 +1,8 @@
-/**=================================================================================
- *            Elementos que precisam ser selecionados mais de uma vez              *
- ==================================================================================*/
+/**==================================================================================================================================
+ *                                     Elementos que precisam ser selecionados mais de uma vez                                      *
+ ===================================================================================================================================*/
+ //Elementos das colunas e cards
 export function domDynamicList(){
-    const board = document.querySelector('.board')
     let showAddCard = document.querySelectorAll('.show-add-card');
     let newCardText = document.querySelectorAll('.add-card-text');
     let newCardBtn = document.querySelectorAll('.add-card-button');
@@ -12,7 +12,6 @@ export function domDynamicList(){
     let columns = document.querySelectorAll('.drag-area');
 
     return{
-        board,
         showAddCard,
         newCardText,
         newCardBtn,
@@ -39,24 +38,41 @@ export function domActiveColumn(parent){
 
 }
 
+//Elementos da box de Etiquetas
+export function domTagsBox(){
+    const tagCheckBox = document.querySelectorAll('.checkbox-label');
+    const tagPreColor = document.querySelectorAll('.tag-color');
+    const btnTagEdit = document.querySelectorAll('.edit-tag');
 
-/**=================================================================================
- *                 Elementos que serão selecionados apenas uma vez                 *
- ==================================================================================*/
+    return {
+        tagCheckBox,
+        tagPreColor,
+        btnTagEdit,
+    }
+}
+
+
+/**==================================================================================================================================
+ *                                           Elementos que serão selecionados apenas uma vez                                        *
+ ===================================================================================================================================*/
+const board = document.querySelector('.board');
 const boxCardOptions = document.querySelector('.box-cards-options');
 const btnCloseCardOptions = document.querySelector('.box-cards-options .close-options');
 const moreCardOptions = document.querySelectorAll('.option-item');
 const boxTags = document.querySelector('.box-tags');
+const tagsList = document.querySelector('.tags-list')
 const btnBackBoxCardOptions = document.querySelector('.back-to-options');
 const btnCloseBoxTags = document.querySelector('.box-tags .close-options');
 const searchTags = document.querySelector('.search-tags')
 
 
 export const domStaticList = {
+    board,
     boxCardOptions,
     btnCloseCardOptions,
     moreCardOptions,
     boxTags,
+    tagsList,
     btnBackBoxCardOptions,
     btnCloseBoxTags,
     searchTags
