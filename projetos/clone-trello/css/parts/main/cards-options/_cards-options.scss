@@ -94,10 +94,13 @@
         padding-top: 10px;
         .tag-cont{
             @include flexSetting(center, center);
+            position: relative;
             cursor: pointer;
             height: 30px;
             margin-bottom: 8px;
         }
+
+        
 
         .tag-checkbox{
             display: none;
@@ -142,14 +145,21 @@
             padding-left: 5px;
             background-color: rgba(0, 128, 0, 0.274);
             border-radius: 3px;
+            opacity: 0.3;
 
-            &-ball{
-                display: block;
-                width: 15px;
-                height: 15px;
-                border-radius: 50%;
-                background-color: green;
-            }
+            
+        }
+
+        .tag-color-ball{
+            position: absolute;
+            display: block;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: green;
+
+            left: 34px;
+            top: 8px;
         }
 
         .edit-tag{

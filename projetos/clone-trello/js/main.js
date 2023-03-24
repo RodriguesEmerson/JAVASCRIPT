@@ -1,9 +1,10 @@
+/**Este projeto seria mais fácil e mais seguro com React */
+
 import { domDynamicList, 
          domStaticList, 
          domActiveColumn,
          domTagsBox
 } from "./modules/DOM.js";
-
 import  api  from "./modules/pre-API.js";
 
 let dDom = domDynamicList();
@@ -17,11 +18,11 @@ function radomId(){
     const max = Math.floor(10000);
     return Math.floor(Math.random() * (max - min) - min)
 }
-
 /**==================================================================================================================================
  *                                               Funções que carregam os cards na tela                                              *
  ===================================================================================================================================*/
-/**Isso seria mais fácil e mais seguro com React */
+                //estre grupo de funões são chamados apenas quando o browser é recarreado. Elas
+                //pegam os dados do obj 'api' e os carregam na tela.
 function buildColums(apiColumn){
 
     const newColumn = document.createElement('div');
@@ -62,7 +63,10 @@ function buildColums(apiColumn){
     buildCards(newColumn, apiColumn);
 }
 
-
+//================================================================================
+//================================================================================
+                //Quando uma coluna é gerada, esta função é chamada
+                //e cria todos os cards da respectiva coluna
 function buildCards(column, apiColumn){
 
     let cardsArea = column.querySelector('.drag-area')
@@ -82,9 +86,12 @@ function buildCards(column, apiColumn){
     })
 }
 
-
+//================================================================================
+//================================================================================
+                //Quando cada card é criado, esta função é chamada
+                //e cria todas as tags do repctivo card            
 function buildTags(tags){ 
-    //cria as tags para serem mostradas na tela
+    //carrega as tags para serem mostradas na tela
     if(!tags) return;
     const newTags = document.createElement('div');
     newTags.setAttribute('class', 'tags')
@@ -99,7 +106,9 @@ function buildTags(tags){
     return newTags;
 }
 
-//chama a função para criar cada coluna 
+//================================================================================
+//================================================================================
+//chama a função para carregar os dados na tela 
 for (const column in api.columns){
     buildColums(api.columns[column])
     addEvents()
@@ -113,7 +122,9 @@ for (const column in api.columns){
  let [activeColumn, activeNewCardBox] = [null];
  let tempTags = []; //tags dos cards
 
-
+ //================================================================================
+//================================================================================
+                //Abre a caixa para adicionar um novo card
  function showAddCardBox(){
      //Se houver outra AddCard ou boxOptions abertos, os fecha.
      if(haveAnOpenNewCardBox) closeAddCardBox();
@@ -126,12 +137,13 @@ for (const column in api.columns){
      this.classList.add('hiden');
      haveAnOpenNewCardBox = true;
  };
-
-//cria as tags quando um novo card está sendo criado.
+ 
+//================================================================================
+//================================================================================
+                //cria a tag quando uma nova tag é clicada
 let divPrevTagCreated = false;
 let  previaTagsDiv;
 function addTags(clickedTag){
-    
     
     const tag = api.tagsOptions[clickedTag];
     if(tbDom.checkboxTag[clickedTag].checked) return removeTags(tag);
@@ -161,7 +173,9 @@ function addTags(clickedTag){
     previaTagsDiv.appendChild(previaTagSpan);
 }
 
-
+//================================================================================
+//================================================================================
+            //Remove tags tanto do card na tela quanto da tempTags
 function removeTags(tag){
     
     const tagTempToRemove = tempTags.findIndex(obj => obj.id == tag.id);
@@ -172,7 +186,9 @@ function removeTags(tag){
 
 }
 
-
+//================================================================================
+//================================================================================
+            //Função que cria o card tanto na tela quanto no obj 'api'
 function createNewCard(){
     //Cria o novo card na 'api'//
     //Seleciona a coluna da 'api' que será adicionada os dados
@@ -221,15 +237,20 @@ function createNewCard(){
     activeDragArea.appendChild(newCard);
 
     //atualiza as variaveis e eventos
+    closeCardOptions('boxTags', true)
     removePreviaTagsDiv();
+    closeAddCardBox();
     addEvents();    
 }
 
-
+//================================================================================
+//================================================================================
 function removePreviaTagsDiv(){
 
     tempTags = [];
     divPrevTagCreated = false;
+
+    //limpas as checkboxs
     tbDom.checkboxTag.forEach(checkbox => {
         checkbox.checked = false;
     })
@@ -241,13 +262,13 @@ function removePreviaTagsDiv(){
     }catch(err){}
 }
 
-
+//================================================================================
+//================================================================================
 function closeAddCardBox(){
     activeNewCardBox.newCardBox.classList.add('hiden')
     activeNewCardBox.btnShowNewCardBox.classList.remove('hiden')
     haveAnOpenNewCardBox = false;
 };
-
 
 
 /**==================================================================================================================================
@@ -260,11 +281,10 @@ function closeCardOptions(element, closeOptionToo){
     sDom.boxCardOptions.classList.add('hidden');
 }
 
-
+//================================================================================
+//================================================================================
 let boxOptiosX, boxOptiosY;
-function openCardOptions(event){
-    //active column
-    //console.log(activeNewCardBox)
+function openCardOptions(){
 
     //Colca a caixa de opções na melhor posição
     const elementInfos = getElementPosition(this);
@@ -281,7 +301,8 @@ function openCardOptions(event){
     sDom.boxCardOptions.classList.remove('hidden');
 }
 
-
+//================================================================================
+//================================================================================
 function openBoxTags(){
 
     if(this.classList.contains('open-tags')){
@@ -298,7 +319,8 @@ function openBoxTags(){
     }
 }
 
-
+//================================================================================
+//================================================================================
 //Cria as tags na caixa de Etiquetas
 function buildTagsOptions(){
     
@@ -307,15 +329,15 @@ function buildTagsOptions(){
         tagLi.setAttribute('class', 'tag-cont');
         
         tagLi.innerHTML = `<input type="checkbox" id="${tag.id}" class="tag-checkbox">
-        <label for="${tag.id}" class="checkbox-label"></label>
-        <div class="tag-color" style="background-color: ${tag.color}">
-        <span class="tag-color-ball" 
-        style="background-color: ${tag.color}">
-        </span>
-        </div>
-        <span class="material-symbols-outlined edit-tag">
-        edit
-        </span>`;
+                            <label for="${tag.id}" class="checkbox-label"></label>
+                            <span class="tag-color-ball" 
+                            style="background-color: ${tag.color}">
+                            </span>
+                            <div class="tag-color" style="background-color: ${tag.color}">
+                            </div>
+                            <span class="material-symbols-outlined edit-tag">
+                            edit
+                            </span>`;
         
         sDom.tagsList.appendChild(tagLi);
     })
@@ -323,7 +345,8 @@ function buildTagsOptions(){
 }
 buildTagsOptions()
 
-
+//================================================================================
+//================================================================================
 //Retorna as informações do objeto clicado
 function getElementPosition(element){
     const elementInfos = element.getBoundingClientRect();

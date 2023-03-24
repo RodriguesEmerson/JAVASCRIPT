@@ -360,11 +360,11 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  padding: 5px;
+  padding: 5px 5px 0px 5px;
 }
 
 .container .board .list-add-item .add-card .previa-card .previa-tags .tag {
-  margin: 5px 5px 5px 0;
+  margin: 5px 5px 0px 0;
 }
 
 .container .board .list-add-item .add-card .add-card-text {
@@ -571,6 +571,7 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  position: relative;
   cursor: pointer;
   height: 30px;
   margin-bottom: 8px;
@@ -627,14 +628,18 @@ body {
   padding-left: 5px;
   background-color: rgba(0, 128, 0, 0.274);
   border-radius: 3px;
+  opacity: 0.3;
 }
 
 #cards-option-container .box-tags .tags-list .tag-color-ball {
+  position: absolute;
   display: block;
   width: 15px;
   height: 15px;
   border-radius: 50%;
   background-color: green;
+  left: 34px;
+  top: 8px;
 }
 
 #cards-option-container .box-tags .tags-list .edit-tag {
