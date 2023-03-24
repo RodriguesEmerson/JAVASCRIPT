@@ -164,12 +164,8 @@ function addTags(clickedTag){
 
 function removeTags(tag){
     
-    const tagTempToRemove = tempTags.find(obj => obj.id == tag.id);
-    const tagIndex = tempTags.indexOf(tagTempToRemove);
-    tempTags.splice(tagIndex, 0);
-
-    console.log(tagIndex)
-    console.log(tempTags)
+    const tagTempToRemove = tempTags.findIndex(obj => obj.id == tag.id);
+    tempTags.splice(tagTempToRemove, 1)
 
     const tagSpanToRemove = previaTagsDiv.querySelector(`#${tag.id}`);
     previaTagsDiv.removeChild(tagSpanToRemove)
