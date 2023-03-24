@@ -14,10 +14,9 @@ let dDom = domDynamicList();
 let [tempDiv, 
     selectedCard, 
     activeColumnID, 
-    sourceColumnID,
     sourceColumn,
     destinationIndex,
-    sourceCardID,
+    dragCardID,
 ] = [null];
 let sourceColumnSaved = false;
 
@@ -30,22 +29,21 @@ function dragStart(){
     tempDiv.setAttribute('class', 'tempDiv');
     tempDiv.style.height = `${this.offsetHeight}px`;
 
-    //salva o card arratado na variável selectedCard
     this.classList.add('dragging');
     selectedCard = this;
+
+    getCardInformations(this);
 }
 
 //================================================================================
 //================================================================================
 function dragOver(cardEvent){
 
-    selectedCard.style.display = 'none';
+    selectedCard.classList.add('hidden');
 
     //Atualiza a coluna ativada e salva a coluna de origem
     activeColumnID = this.closest('.list').id;
     if(!sourceColumnSaved){ 
-        sourceColumnID = activeColumnID; 
-        saveCardInformations(selectedCard);
         sourceColumnSaved = true;
     } 
 
@@ -64,18 +62,18 @@ function dragOver(cardEvent){
 //================================================================================
 function dragEnd(){
 
+    destinationDragCardIndex();
+
     //Atualiza os atributos do card arrastado
     this.classList.remove('dragging');
-    this.style.display = 'flex';
-    const deleteTemDiv = document.querySelector('.tempDiv');
-
-    saveDestinationIndex();
+    this.classList.remove('hidden');
 
     //Substitui a div temporária pelo card arrastado
+    const deleteTemDiv = document.querySelector('.tempDiv');
     if(deleteTemDiv){
         deleteTemDiv.parentNode.replaceChild(this, deleteTemDiv);
     }
-    atualizaApi();
+    updateAPI();
 } 
 
 //================================================================================
@@ -99,30 +97,30 @@ function getNewPosition(column, selectedCardTop){
 
 //================================================================================
 //================================================================================
-function atualizaApi(){
+function updateAPI(){
     try{
-        //Salva todos os dados do card que está sendo arrastado
-        let dragCard, originIndexCard;
-        api.columns[sourceColumn].cards.forEach((card, index) => {
-            if (card.id === sourceCardID) {                    
-                dragCard = card;
-                originIndexCard = index;
-            }
-        });
-
-        //Apaga o card da coluna de origem
-        api.columns[sourceColumn].cards.splice(originIndexCard, 1);
-   
-        //Encontra a coluna ativa na 'api'
-        let  activeColumn;
-        for (let column in api.columns){ 
-            if(api.columns[column].id == activeColumnID){
-            activeColumn = (api.columns[column]);
-            };
+    //Guarda todos os dados do card que está sendo arrastado
+    let dragCard, dragCardOriginIdex;
+    api.columns[sourceColumn].cards.forEach((card, index) => {
+        if (card.id === dragCardID) {                    
+            dragCard = card;
+            dragCardOriginIdex = index;
         }
+    });
 
-        //Salva o card arrastado na coluna da 'api' respectiva a coluna ativa
-        activeColumn.cards.splice(destinationIndex, 0, dragCard)
+    //Apaga o card da coluna de origem
+    api.columns[sourceColumn].cards.splice(dragCardOriginIdex, 1);
+
+    //Encontra a coluna ativa na 'api'
+    let  activeColumn;
+    for (let column in api.columns){ 
+        if(api.columns[column].id == activeColumnID){
+        activeColumn = (api.columns[column]);
+        };
+    }
+
+    //Salva o card arrastado na coluna da 'api' respectiva a coluna ativa
+    activeColumn.cards.splice(destinationIndex, 0, dragCard)
 
     }catch(err){
         console.log(err)
@@ -134,14 +132,21 @@ function atualizaApi(){
 
 //================================================================================
 //================================================================================
-function saveCardInformations(dragCard){
+export function getCardInformations(card){
 
     //Guarda o id e o nome da coluna de origem do card arratado
-    const cardId = dragCard.querySelector('.list-square').id;
-        sourceCardID = cardId;
+    const sourceColumnID = card.closest('.list').id;
+    const cardId = card.querySelector('.list-square').id;
+        dragCardID = cardId;
     let columnName = document.querySelector(`#${sourceColumnID} .list-title`);
         columnName = columnName.textContent;
     sourceColumn = columnName.replace(' ', '_');
+
+    return {
+        cardId,
+        sourceColumn,
+        sourceColumnID
+    }
 }
 
 //================================================================================
@@ -149,10 +154,10 @@ function saveCardInformations(dragCard){
         //Esta funão salva o índice em que o card é solto
         //para inserir o objt com os dados do card na mesta ordem
         //na 'api'.
-function saveDestinationIndex(){
+function destinationDragCardIndex(){
 
     //seleciona todos os cards da coluna ativa, inclusive a tempDiv.
-    const cardsInActiveColumn = document.querySelectorAll(`#${activeColumnID} .drag-area > div`);
+    const cardsInActiveColumn = document.querySelectorAll(`#${activeColumnID} .drag-area > div:not(.dragging)`);
 
     //Encontra o índice da tempDiv.
     for(let i = 0; i < cardsInActiveColumn.length; i++){
@@ -161,13 +166,6 @@ function saveDestinationIndex(){
             break;
         }
     }
-
-    //se for o ultimo card, adiciona 1 ao índice
-    if(sourceColumnID !== activeColumnID && destinationIndex === (cardsInActiveColumn.length - 1)){
-        destinationIndex++;
-    }
-    //qualquer índice de card maior que 1 é subtraído 1.
-    if(destinationIndex > 1) destinationIndex--;
 }
 
 //================================================================================

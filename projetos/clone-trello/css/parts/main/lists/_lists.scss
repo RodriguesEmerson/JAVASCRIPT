@@ -28,15 +28,40 @@
 
     //list-content = card-container
     .list-content{
+        position: relative;
         cursor: pointer;
         margin-bottom: 8px;
+
+        .edit-card{
+            background-color: rgba(219, 219, 219, 0.644);
+            display: none;
+            position: absolute;
+            top: 3px;
+            right: 3px;
+            border-radius: 3px;
+            padding: 5px;
+            cursor: pointer;
+            font-size: 1.5em;
+            font-variation-settings: 'wght' 400,;
+
+            &:hover{
+                background-color: rgba(196, 196, 196, 0.548);
+            }
+        }
+
+        //hover o card nao do botao edit
+        &:hover > .edit-card{
+            display: block;
+        }   
+
 
         //list-square - card
         .list-square{
             @include flexSetting(start, start);
             flex-direction: column;
+            min-width: 260px;
             min-height: 33px;
-            width: 260px;
+            max-width: 260px !important;
             padding: 10px;
             overflow: hidden;
 
@@ -44,7 +69,8 @@
             border-radius: 5px;
             border-bottom: 1px solid darken($secundaryColor, 30);
 
-            .span{
+            span{
+                max-width: 240px;
                 word-wrap: break-word;
             }
 

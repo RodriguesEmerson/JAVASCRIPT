@@ -233,8 +233,30 @@ body {
 }
 
 .container .board .list-content {
+  position: relative;
   cursor: pointer;
   margin-bottom: 8px;
+}
+
+.container .board .list-content .edit-card {
+  background-color: rgba(219, 219, 219, 0.644);
+  display: none;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  border-radius: 3px;
+  padding: 5px;
+  cursor: pointer;
+  font-size: 1.5em;
+  font-variation-settings: "wght" 400;
+}
+
+.container .board .list-content .edit-card:hover {
+  background-color: rgba(196, 196, 196, 0.548);
+}
+
+.container .board .list-content:hover > .edit-card {
+  display: block;
 }
 
 .container .board .list-content .list-square {
@@ -251,8 +273,9 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  min-width: 260px;
   min-height: 33px;
-  width: 260px;
+  max-width: 260px !important;
   padding: 10px;
   overflow: hidden;
   background-color: white;
@@ -260,7 +283,8 @@ body {
   border-bottom: 1px solid rgba(57, 100, 125, 0.445);
 }
 
-.container .board .list-content .list-square .span {
+.container .board .list-content .list-square span {
+  max-width: 240px;
   word-wrap: break-word;
 }
 
@@ -670,6 +694,10 @@ body {
 }
 
 .hidden {
+  display: none;
+}
+
+.teste {
   display: none;
 }
 /*# sourceMappingURL=main.css.map */

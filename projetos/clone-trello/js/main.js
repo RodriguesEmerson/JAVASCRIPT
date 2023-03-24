@@ -1,15 +1,23 @@
 /**Este projeto seria mais fácil com React */
-import { domDynamicList, 
-         domStaticList, 
-         domActiveColumn,
-         domTagsBox
+import { 
+    domDynamicList, 
+    domStaticList, 
+    domActiveColumn,
+    domTagsBox
 } from "./modules/DOM.js";
+
 let dDom = domDynamicList();
 let tbDom = domTagsBox();
 let acDom = domActiveColumn;
 const sDom = domStaticList;
 
-//  localStorage.clear()
+// localStorage.clear()
+import { 
+    addEvents as dragEvents, 
+    getCardInformations 
+} from "./drag-drop.js";
+
+
 import  preAPI  from "./modules/pre-API.js";
 let api = preAPI
 if(localStorage.getItem('api') !== null){
@@ -32,6 +40,7 @@ function buildColums(apiColumn){
 
     newColumn.innerHTML = `<span class="list-title">${apiColumn.title}</span>
                             <div class="drag-area">
+                            <!--Card aqui-->
                             </div>
                             <div class="list-add-item">
                                 <div class="show-add-card">
@@ -76,16 +85,18 @@ function buildCards(column, apiColumn){
         newCard.setAttribute('class', 'list-content');
         newCard.draggable = true;
         const cardTags = buildTags(card.tags);
-        newCard.innerHTML = `<div class="list-square" id="${card.id}">
-                                <span>${card.text}</span>
-                            </div>`
+        newCard.innerHTML = `<span class="material-symbols-outlined 
+                             edit-card"> edit </span>
+                             <div class="list-square" id="${card.id}">
+                                 <span>${card.text}</span>
+                             </div>`
                             
         const listSquare = newCard.querySelector('.list-square');
         if(cardTags.innerHTML){ listSquare.prepend(cardTags) };
         cardsArea.appendChild(newCard);
     })
 }
-
+//<span class="material-symbols-outlined edit-card"> edit </span>
 //================================================================================
 //================================================================================
                 //Quando cada card é criado, esta função é chamada
@@ -225,12 +236,16 @@ function createNewCard(){
     //InnerHTML do card quando há tags e quando não há.
     if(tempTags.length === 0) tempTags = null;
     if(tempTags){
-        newCard.innerHTML = `<div class="list-square" id="${card.id}">
+        newCard.innerHTML = `<span class="material-symbols-outlined 
+                             edit-card"> edit </span>
+                             <div class="list-square" id="${card.id}">
                                  <div class="tags">${newTags.innerHTML}</div>
                                  <span>${card.text}</span>
                              </div>`
     }else{
-        newCard.innerHTML = `<div class="list-square" id="${card.id}">
+        newCard.innerHTML = `<span class="material-symbols-outlined 
+                            edit-card"> edit </span>
+                             <div class="list-square" id="${card.id}">
                                  <span>${card.text}</span>
                              </div>`
     }
@@ -363,6 +378,29 @@ function getElementPosition(element){
     return elementInfos;
 }
 
+
+
+/**==================================================================================================================================
+ *                                              Funções para editar e excluir os cards                                              *
+====================================================================================================================================*/
+function deleteCard(){
+    
+    const card = getCardInformations(this)
+    const cards = api.columns[ card.sourceColumn].cards;
+
+    //remove o card do obj 'api'
+    const indexOfCard = cards.findIndex(objCard => objCard.id === card.cardId);
+    cards.splice(indexOfCard, 1);
+   
+    //remove o card da tela.
+    const cardToDele = document.querySelector(`#${card.sourceColumnID} #${card.cardId}`)
+    cardToDele.remove();
+
+
+    saveApiInLocalStorange();
+}
+
+
 //================================================================================
 //================================================================================
 export function saveApiInLocalStorange(){
@@ -400,11 +438,10 @@ dDom.optionsAddCard.forEach(button => {
 
 
 //Atualiza a seleção domDynamicList e seus eventos
-import { addEvents as ddAddEvents } from "./drag-drop.js";
 function addEvents(){
 
     dDom = domDynamicList();
-    ddAddEvents(); //drag-drop.js
+    dragEvents(); //drag-drop.js
 
     dDom.showAddCard.forEach(button =>{
         button.addEventListener('click', showAddCardBox);
@@ -416,6 +453,10 @@ function addEvents(){
     
     dDom.newCardBtn.forEach(button => {
         button.addEventListener('click', createNewCard)
+    })
+
+    dDom.cards.forEach(card => {
+        card.addEventListener('click', deleteCard)
     })
 
 }
