@@ -7,7 +7,9 @@ let dDom = domDynamicList();
 // const setting = {childList: true, subtree: true};
 // observer.observe(dom.board, setting);
 
-
+/**==================================================================================================================================
+ *                                                              Drang and Drop                                                      *
+ ===================================================================================================================================*/
 let [tempDiv, 
     selectedCard, 
     activeColumnID, 
@@ -16,32 +18,40 @@ let [tempDiv,
     destinationIndex,
     sourceCardID,
 ] = [null];
-
 let sourceColumnSaved = false;
+
+//================================================================================
+//================================================================================
 function dragStart(){
     
+    //cria a div temporária
     tempDiv = document.createElement('div');
     tempDiv.setAttribute('class', 'tempDiv');
     tempDiv.style.height = `${this.offsetHeight}px`;
 
+    //salva o card arratado na variável selectedCard
     this.classList.add('dragging');
     selectedCard = this;
 }
 
-
+//================================================================================
+//================================================================================
 function dragOver(cardEvent){
 
-    //Atualiza a coluna ativada e salva coluna de origem
+    selectedCard.style.display = 'none';
+
+    //Atualiza a coluna ativada e salva a coluna de origem
     activeColumnID = this.closest('.list').id;
     if(!sourceColumnSaved){ 
         sourceColumnID = activeColumnID; 
-        saveSelectedCardDatas(selectedCard);
+        saveCardInformations(selectedCard);
         sourceColumnSaved = true;
     } 
 
-    selectedCard.style.display = 'none'
+    //pega a posição do card que esta abaixo do card arratado
     const CardNewPosition = getNewPosition(this, cardEvent.clientY);
 
+    //Coloca a tempDiv no luga do card que está abaixo dele.
     if(CardNewPosition){
         CardNewPosition.insertAdjacentElement('afterend', tempDiv);
     }else{
@@ -49,21 +59,30 @@ function dragOver(cardEvent){
     }
 }
 
-
+//================================================================================
+//================================================================================
 function dragEnd(){
 
+    //Atualiza os atributos do card arrastado
     this.classList.remove('dragging');
     this.style.display = 'flex';
     const deleteTemDiv = document.querySelector('.tempDiv');
 
     saveDestinationIndex();
+
+    //Substitui a div temporária pelo card arrastado
     if(deleteTemDiv){
         deleteTemDiv.parentNode.replaceChild(this, deleteTemDiv);
     }
     atualizaApi()
 } 
 
-
+//================================================================================
+//================================================================================
+                //Durante todo o processo do dragover esta função é chamada.
+                //Ela verifica se o card arrastado esta acima de algum card.
+                //Se estiver acima da metade do card, essa posição é retornada
+                //para a variável 'CardNewPosition'.
 function getNewPosition(column, selectedCardTop){
 
     const availablesCards = column.querySelectorAll('.list-content:not(.dragging)')
@@ -77,73 +96,71 @@ function getNewPosition(column, selectedCardTop){
     return newPositon;
 }
 
-
+//================================================================================
+//================================================================================
 function atualizaApi(){
 
     try{
-        //Todos os dados do card que está sendo arrastado
+        //Salva todos os dados do card que está sendo arrastado
         let dragCard, originIndexCard;
-        (function findDragCardDatas() {
-            api.columns[sourceColumn].cards.forEach(card => {
-                if(!sourceCardID) return;
-                if (card.id === sourceCardID) {                    
-                    dragCard = card;
-                    originIndexCard = api.columns[sourceColumn].cards.indexOf(card);
-                    return;
-                }
-            });
-        })();
-
-        //Encontra e apaga o card da coluna de origem
-        (function findOrigimColumn(){
-            for (let column in api.columns){ 
-                if(api.columns[column].id == sourceColumnID){
-                    return sourceColumn = (api.columns[column]);
-                };
+        api.columns[sourceColumn].cards.forEach((card, index) => {
+            if (card.id === sourceCardID) {                    
+                dragCard = card;
+                originIndexCard = index;
             }
-        })();
-        sourceColumn.cards.splice(originIndexCard, 1);
+        });
 
-        //Encontra o objeto da coluna ativa na 'api'
+        //Apaga o card da coluna de origem
+        api.columns[sourceColumn].cards.splice(originIndexCard, 1);
+   
+        //Encontra a coluna ativa na 'api'
         let  activeColumn;
-        (function findActiveColumn(){
-            for (let column in api.columns){ 
-                if(api.columns[column].id == activeColumnID){
-                return activeColumn = (api.columns[column]);
-                };
-            }
-        })();
+        for (let column in api.columns){ 
+            if(api.columns[column].id == activeColumnID){
+            activeColumn = (api.columns[column]);
+            };
+        }
 
-        //Salva o card arratado na coluna da 'api' da respectiva coluna ativa
+        //Salva o card arrastado na coluna da 'api' respectiva a coluna ativa
         activeColumn.cards.splice(destinationIndex, 0, dragCard)
 
     }catch(err){
-        console.log('Card não selecionado!')
+        console.log('Nenhum card selecionado.')
     }   
 
     sourceColumnSaved = false;
 }
 
+//================================================================================
+//================================================================================
+function saveCardInformations(dragCard){
 
-function saveSelectedCardDatas(listContent){
-
-    const cardId = listContent.querySelector('.list-square').id;
-    sourceCardID = cardId;
+    //Guarda o id e o nome da coluna de origem do card arratado
+    const cardId = dragCard.querySelector('.list-square').id;
+        sourceCardID = cardId;
     let columnName = document.querySelector(`#${sourceColumnID} .list-title`);
-    columnName = columnName.textContent;
+        columnName = columnName.textContent;
     sourceColumn = columnName.replace(' ', '_');
 }
 
-
+//================================================================================
+//================================================================================
+        //Esta funão salva o índice em que o card é solto
+        //para inserir o objt com os dados do card na mesta ordem
+        //na 'api'.
 function saveDestinationIndex(){
 
+    //seleciona todos os cards da coluna ativa, inclusive a tempDiv.
     const cardsInActiveColumn = document.querySelectorAll(`#${activeColumnID} .drag-area > div`);
+
+    //Encontra o índice da tempDiv.
     for(let i = 0; i < cardsInActiveColumn.length; i++){
         if(cardsInActiveColumn[i].classList.contains('tempDiv')){
             destinationIndex =  i;
             break;
         }
     }
+
     //se for o ultimo card, adiciona 1 ao índice
     if(sourceColumnID !== activeColumnID && destinationIndex === (cardsInActiveColumn.length - 1)){
         destinationIndex++;
@@ -152,7 +169,8 @@ function saveDestinationIndex(){
     if(destinationIndex > 1) destinationIndex--;
 }
 
-
+//================================================================================
+//================================================================================
 export function addEvents(){
     
     dDom = domDynamicList();
