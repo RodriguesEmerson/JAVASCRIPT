@@ -1,5 +1,6 @@
-import { domDynamicList } from "./modules/DOM.js"
-import  api  from "./modules/pre-API.js"
+import { domDynamicList } from "./modules/DOM.js";
+import { api, saveApiInLocalStorange } from "./main.js";
+
 
 let dDom = domDynamicList();
 // //Verifica se houve mudanças no DOM e, se sim, executa o codigo
@@ -74,7 +75,7 @@ function dragEnd(){
     if(deleteTemDiv){
         deleteTemDiv.parentNode.replaceChild(this, deleteTemDiv);
     }
-    atualizaApi()
+    atualizaApi();
 } 
 
 //================================================================================
@@ -99,7 +100,6 @@ function getNewPosition(column, selectedCardTop){
 //================================================================================
 //================================================================================
 function atualizaApi(){
-
     try{
         //Salva todos os dados do card que está sendo arrastado
         let dragCard, originIndexCard;
@@ -125,10 +125,11 @@ function atualizaApi(){
         activeColumn.cards.splice(destinationIndex, 0, dragCard)
 
     }catch(err){
-        console.log('Nenhum card selecionado.')
+        console.log(err)
     }   
 
     sourceColumnSaved = false;
+    saveApiInLocalStorange();
 }
 
 //================================================================================

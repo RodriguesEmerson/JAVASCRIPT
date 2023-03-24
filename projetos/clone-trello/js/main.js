@@ -1,23 +1,24 @@
-/**Este projeto seria mais fácil e mais seguro com React */
-
+/**Este projeto seria mais fácil com React */
 import { domDynamicList, 
          domStaticList, 
          domActiveColumn,
          domTagsBox
 } from "./modules/DOM.js";
-import  api  from "./modules/pre-API.js";
-
 let dDom = domDynamicList();
 let tbDom = domTagsBox();
 let acDom = domActiveColumn;
 const sDom = domStaticList;
 
-
-function radomId(){
-    const min = Math.ceil(0);
-    const max = Math.floor(10000);
-    return Math.floor(Math.random() * (max - min) - min)
+//  localStorage.clear()
+import  preAPI  from "./modules/pre-API.js";
+let api = preAPI
+if(localStorage.getItem('api') !== null){
+    api = JSON.parse(localStorage.getItem('api'));
 }
+export { api };
+
+
+
 /**==================================================================================================================================
  *                                               Funções que carregam os cards na tela                                              *
  ===================================================================================================================================*/
@@ -74,7 +75,6 @@ function buildCards(column, apiColumn){
         const newCard = document.createElement('div');
         newCard.setAttribute('class', 'list-content');
         newCard.draggable = true;
-
         const cardTags = buildTags(card.tags);
         newCard.innerHTML = `<div class="list-square" id="${card.id}">
                                 <span>${card.text}</span>
@@ -205,7 +205,7 @@ function createNewCard(){
 
     //Cria um objeto com os dados do novo card
     //e o insere no objeto na 'api'
-    if(tempTags.length === 0) tempTags = null;
+  
     const card = {
         id: `ftr${activeColumn}card${radomId()}`,
         tags: tempTags,
@@ -223,6 +223,7 @@ function createNewCard(){
     newCard.draggable = true;
 
     //InnerHTML do card quando há tags e quando não há.
+    if(tempTags.length === 0) tempTags = null;
     if(tempTags){
         newCard.innerHTML = `<div class="list-square" id="${card.id}">
                                  <div class="tags">${newTags.innerHTML}</div>
@@ -237,6 +238,7 @@ function createNewCard(){
     activeDragArea.appendChild(newCard);
 
     //atualiza as variaveis e eventos
+    saveApiInLocalStorange();
     closeCardOptions('boxTags', true)
     removePreviaTagsDiv();
     closeAddCardBox();
@@ -269,6 +271,14 @@ function closeAddCardBox(){
     activeNewCardBox.btnShowNewCardBox.classList.remove('hiden')
     haveAnOpenNewCardBox = false;
 };
+
+//================================================================================
+//================================================================================
+function radomId(){
+    const min = Math.ceil(0);
+    const max = Math.floor(10000);
+    return Math.floor(Math.random() * (max - min) - min)
+}
 
 
 /**==================================================================================================================================
@@ -351,6 +361,16 @@ buildTagsOptions()
 function getElementPosition(element){
     const elementInfos = element.getBoundingClientRect();
     return elementInfos;
+}
+
+//================================================================================
+//================================================================================
+export function saveApiInLocalStorange(){
+
+    localStorage.clear();
+    const apiSting = JSON.stringify(api)
+    localStorage.setItem('api', apiSting);
+
 }
 
 
