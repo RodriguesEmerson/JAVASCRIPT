@@ -1,10 +1,15 @@
 #box-edit-card{
     z-index: 10;
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100vh ;
     margin: -60px -10px ;
     background-color: rgba(0, 0, 0, 0.61);
+
+    #box-edit-card_container{
+        position: absolute;
+        height: fit-content;
+    }
 
     #box-edit-card_thumb{
         min-height: 25px;
@@ -12,7 +17,7 @@
         margin: -10px -10px 10px -10px;
     }
 
-    &_card-container{
+    &_preview{
         background-color: white;
         width: 280px;
         min-height: 33px;
@@ -34,11 +39,61 @@
     }
 
     &_card-content_text{
-        display: block;
-        word-wrap: break-word;
-        color: $cardsTextColor;
+        border: none;
+        outline: none;
+        margin-top: 5px;
         padding-top: 3px;
+        min-width: 100%;
+        max-width: 100%;
+        min-height: 50px;
+        color: $cardsTextColor;        
     }
 
 
+
+    #save-edited-card{
+        cursor: pointer;
+        height: 30px;
+        width: 80px;
+        margin-top: 10px;
+        border: none;
+        border-radius: 3px;
+        color: white;
+        background-color: $primaryColor;
+        transition: 150ms;
+
+        &:hover{
+            background-color: darken($primaryColor, 10);
+        }
+    }
+
+
+    &_options{
+        position: absolute;
+        width: 140px;
+        .option-item{
+            @include flexSetting(center, start);
+            cursor: pointer;
+            font-size: 0.9em;
+            padding: 6px 8px 6px 5px;
+            margin-bottom: 3px;
+            border-radius: 3px;
+            color: rgb(216, 216, 216);
+            background-color: rgba(0, 0, 0, 0.616);
+            width: fit-content;
+            transition: 150ms;
+
+            &:hover{
+                margin-left: 5px;
+                background-color: rgba(0, 0, 0, 0.863);
+            }
+        
+            .material-symbols-outlined{
+                font-variation-settings: 'wght' 300;
+                font-size: 20px;
+                margin-right: 3px;
+            }
+        
+        }
+    }
 }

@@ -69,6 +69,15 @@ const btnBackBoxCardOptions = document.querySelector('.back-to-options');
 const btnCloseBoxTags = document.querySelector('.box-tags .close-options');
 const searchTags = document.querySelector('.search-tags')
 
+const boxEditCard = document.querySelector('#box-edit-card')
+const editCardContainer = document.querySelector('#box-edit-card_container');
+const editCardThumb = document.querySelector('#box-edit-card_thumb');
+const editCardPreTags = document.querySelector('#box-edit-card_previa-tags');
+const editCardText = document.querySelector('#box-edit-card_card-content_text');
+const btnSaveEditedCard = document.querySelector('#save-edited-card');
+const editBoxCardOptions = document.querySelector('#box-edit-card_options');
+const editCardOptions = document.querySelectorAll('.option-edit');
+
 
 export const domStaticList = {
     board,
@@ -79,5 +88,14 @@ export const domStaticList = {
     tagsList,
     btnBackBoxCardOptions,
     btnCloseBoxTags,
-    searchTags
+    searchTags,
+
+    boxEditCard,
+    editCardContainer,
+    editCardThumb,
+    editCardPreTags,
+    editCardText,
+    btnSaveEditedCard,
+    editBoxCardOptions,
+    editCardOptions
 }

@@ -405,10 +405,21 @@ function deleteCard(){
 //================================================================================
 function editCard(){
 
-    const card = getCardInformations(this)
-    const cards = api.columns[card.sourceColumn].cards;
+    //pega todas as informações do card clicado, desde a posião ate o objeto na 'api'
+    const cardPosition = getElementPosition(this.closest('.list-content')); 
+    const cardInfo = getCardInformations(this);
+    const cards = api.columns[cardInfo.sourceColumn].cards;
+    const card = cards.find(obj => obj.id === cardInfo.cardId);
 
-    console.log(card)
+    //coloca o modal de edição do card na melhor posição
+    sDom.boxEditCard.classList.remove('hidden');
+    sDom.editCardContainer.style.top = `${cardPosition.top}px`;
+    sDom.editCardContainer.style.left = `${cardPosition.left}px`;
+
+    sDom.editBoxCardOptions.style.top = `${cardPosition.top}px`;
+    sDom.editBoxCardOptions.style.left = `${cardPosition.left + 285}px`
+
+    console.log(cardPosition.top)
 }
 
 

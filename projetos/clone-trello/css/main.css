@@ -695,11 +695,18 @@ body {
 
 #box-edit-card {
   z-index: 10;
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100vh;
   margin: -60px -10px;
   background-color: rgba(0, 0, 0, 0.61);
+}
+
+#box-edit-card #box-edit-card_container {
+  position: absolute;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 #box-edit-card #box-edit-card_thumb {
@@ -708,7 +715,7 @@ body {
   margin: -10px -10px 10px -10px;
 }
 
-#box-edit-card_card-container {
+#box-edit-card_preview {
   background-color: white;
   width: 280px;
   min-height: 33px;
@@ -727,13 +734,74 @@ body {
 }
 
 #box-edit-card_card-content_text {
-  display: block;
-  word-wrap: break-word;
-  color: #666666;
+  border: none;
+  outline: none;
+  margin-top: 5px;
   padding-top: 3px;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 50px;
+  color: #666666;
+}
+
+#box-edit-card #save-edited-card {
+  cursor: pointer;
+  height: 30px;
+  width: 80px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  background-color: #146fac;
+  -webkit-transition: 150ms;
+  transition: 150ms;
+}
+
+#box-edit-card #save-edited-card:hover {
+  background-color: #0f527e;
+}
+
+#box-edit-card_options {
+  position: absolute;
+  width: 140px;
+}
+
+#box-edit-card_options .option-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  cursor: pointer;
+  font-size: 0.9em;
+  padding: 6px 8px 6px 5px;
+  margin-bottom: 3px;
+  border-radius: 3px;
+  color: #d8d8d8;
+  background-color: rgba(0, 0, 0, 0.616);
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  -webkit-transition: 150ms;
+  transition: 150ms;
+}
+
+#box-edit-card_options .option-item:hover {
+  margin-left: 5px;
+  background-color: rgba(0, 0, 0, 0.863);
+}
+
+#box-edit-card_options .option-item .material-symbols-outlined {
+  font-variation-settings: 'wght' 300;
+  font-size: 20px;
+  margin-right: 3px;
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 /*# sourceMappingURL=main.css.map */
