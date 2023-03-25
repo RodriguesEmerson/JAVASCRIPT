@@ -8,6 +8,7 @@ export function domDynamicList(){
     let newCardBtn = document.querySelectorAll('.add-card-button');
     let closeAddCard = document.querySelectorAll('.close-add-card');
     let optionsAddCard = document.querySelectorAll('.options-add-card');
+    let btnEditCards = document.querySelectorAll('.edit-card')
     let cards = document.querySelectorAll('.list-content');
     let columns = document.querySelectorAll('.drag-area');
 
@@ -17,6 +18,7 @@ export function domDynamicList(){
         newCardBtn,
         closeAddCard,
         optionsAddCard,
+        btnEditCards,
         cards, 
         columns,
     }

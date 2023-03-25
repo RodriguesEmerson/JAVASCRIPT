@@ -78,7 +78,7 @@ function buildColums(apiColumn){
                 //Quando uma coluna é gerada, esta função é chamada
                 //e cria todos os cards da respectiva coluna
 function buildCards(column, apiColumn){
-
+console.log(api)
     let cardsArea = column.querySelector('.drag-area')
     apiColumn.cards.forEach(card => {
         const newCard = document.createElement('div');
@@ -96,7 +96,8 @@ function buildCards(column, apiColumn){
         cardsArea.appendChild(newCard);
     })
 }
-//<span class="material-symbols-outlined edit-card"> edit </span>
+
+
 //================================================================================
 //================================================================================
                 //Quando cada card é criado, esta função é chamada
@@ -386,7 +387,7 @@ function getElementPosition(element){
 function deleteCard(){
     
     const card = getCardInformations(this)
-    const cards = api.columns[ card.sourceColumn].cards;
+    const cards = api.columns[card.sourceColumn].cards;
 
     //remove o card do obj 'api'
     const indexOfCard = cards.findIndex(objCard => objCard.id === card.cardId);
@@ -399,6 +400,19 @@ function deleteCard(){
 
     saveApiInLocalStorange();
 }
+
+
+
+//================================================================================
+//================================================================================
+function editCard(){
+
+    const card = getCardInformations(this)
+    const cards = api.columns[card.sourceColumn].cards;
+
+    console.log(card)
+}
+
 
 
 //================================================================================
@@ -456,7 +470,11 @@ function addEvents(){
     })
 
     dDom.cards.forEach(card => {
-        card.addEventListener('click', deleteCard)
+       // card.addEventListener('click', deleteCard)
+    })
+
+    dDom.btnEditCards.forEach(button => {
+        button.addEventListener('click', editCard)
     })
 
 }
