@@ -4,7 +4,7 @@ const data = {
             title: 'A Fazer',
             
             cards: [
-                {id: 'c1card1',
+                {id: 'ccccccccc1',
                 tags: [
                     {color:'lightcoral', id: 'tag2'},
                     {color:'green', id: 'tag2'}

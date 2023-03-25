@@ -693,11 +693,47 @@ body {
   background-color: #d9d9d9;
 }
 
-.hidden {
-  display: none;
+#box-edit-card {
+  z-index: 10;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  margin: -60px -10px;
+  background-color: rgba(0, 0, 0, 0.61);
 }
 
-.teste {
+#box-edit-card #box-edit-card_thumb {
+  min-height: 25px;
+  background-color: lightcoral;
+  margin: -10px -10px 10px -10px;
+}
+
+#box-edit-card_card-container {
+  background-color: white;
+  width: 280px;
+  min-height: 33px;
+  border-radius: 3px;
+  padding: 10px;
+  overflow: hidden;
+}
+
+#box-edit-card_previa-tags .editing-tag {
+  display: block;
+  height: 8px;
+  width: 40px;
+  background-color: #01b460;
+  border-radius: 10px;
+  margin-right: 5px;
+}
+
+#box-edit-card_card-content_text {
+  display: block;
+  word-wrap: break-word;
+  color: #666666;
+  padding-top: 3px;
+}
+
+.hidden {
   display: none;
 }
 /*# sourceMappingURL=main.css.map */

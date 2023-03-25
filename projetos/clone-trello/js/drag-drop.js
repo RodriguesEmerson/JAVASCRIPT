@@ -134,10 +134,11 @@ function updateAPI(){
 //================================================================================
 export function getCardInformations(element){
 
-   const card = element.closest('.list');
+   const column = element.closest('.list');
+   const card = element.closest('.list-content')
    
-    //Guarda o id e o nome da coluna de origem do card arratado
-    const sourceColumnID = card.id;
+    //Guarda o nome e id da coluna de origem e o id  docard arratado
+    const sourceColumnID = column.id;
     const cardId = card.querySelector('.list-square').id;
         dragCardID = cardId;
     let columnName = document.querySelector(`#${sourceColumnID} .list-title`);

@@ -78,7 +78,7 @@ function buildColums(apiColumn){
                 //Quando uma coluna é gerada, esta função é chamada
                 //e cria todos os cards da respectiva coluna
 function buildCards(column, apiColumn){
-console.log(api)
+// console.log(api)
     let cardsArea = column.querySelector('.drag-area')
     apiColumn.cards.forEach(card => {
         const newCard = document.createElement('div');
@@ -217,7 +217,6 @@ function createNewCard(){
 
     //Cria um objeto com os dados do novo card
     //e o insere no objeto na 'api'
-  
     const card = {
         id: `ftr${activeColumn}card${radomId()}`,
         tags: tempTags,
@@ -225,7 +224,6 @@ function createNewCard(){
     }
     columnInsert.cards.push(card);
     activeNewCardBox.newCardText.value = "";
-
 
     //Cria o novo card na tela//
     const activeDragArea = document.querySelector(`#${columnInsert.id} .drag-area`);
@@ -420,8 +418,8 @@ function editCard(){
 export function saveApiInLocalStorange(){
 
     localStorage.clear();
-    const apiSting = JSON.stringify(api)
-    localStorage.setItem('api', apiSting);
+    const apiString = JSON.stringify(api)
+    localStorage.setItem('api', apiString);
 
 }
 
