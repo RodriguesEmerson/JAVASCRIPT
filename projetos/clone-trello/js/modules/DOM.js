@@ -76,7 +76,7 @@ const editCardPreTags = document.querySelector('#box-edit-card_previa-tags');
 const editCardText = document.querySelector('#box-edit-card_card-content_text');
 const btnSaveEditedCard = document.querySelector('#save-edited-card');
 const editBoxCardOptions = document.querySelector('#box-edit-card_options');
-const editCardOptions = document.querySelectorAll('.option-edit');
+const boxEditCardOptions = document.querySelectorAll('.option-item');
 
 
 export const domStaticList = {
@@ -97,5 +97,5 @@ export const domStaticList = {
     editCardText,
     btnSaveEditedCard,
     editBoxCardOptions,
-    editCardOptions
+    boxEditCardOptions
 }

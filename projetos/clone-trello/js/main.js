@@ -1,10 +1,14 @@
 /**Este projeto seria mais fácil com React */
-import { 
-    domDynamicList, 
-    domStaticList, 
-    domActiveColumn,
-    domTagsBox
-} from "./modules/DOM.js";
+import  preAPI  from "./modules/pre-API.js";
+let api = preAPI;
+if(localStorage.getItem('api') !== null){
+    api = JSON.parse(localStorage.getItem('api'));
+}
+export { api };
+import { loadCards, buildTags } from "./modules/load-cards.js"
+import { addEvents as dragEvents, getCardInformations } from "./drag-drop.js";
+import { domDynamicList, domStaticList, domActiveColumn, domTagsBox } from "./modules/DOM.js";
+import { addTags, removeTags } from "./modules/functions-all-uses.js";
 
 let dDom = domDynamicList();
 let tbDom = domTagsBox();
@@ -12,128 +16,20 @@ let acDom = domActiveColumn;
 const sDom = domStaticList;
 
 // localStorage.clear()
-import { 
-    addEvents as dragEvents, 
-    getCardInformations 
-} from "./drag-drop.js";
-
-
-import  preAPI  from "./modules/pre-API.js";
-let api = preAPI
-if(localStorage.getItem('api') !== null){
-    api = JSON.parse(localStorage.getItem('api'));
-}
-export { api };
-
-
-
-/**==================================================================================================================================
- *                                               Funções que carregam os cards na tela                                              *
- ===================================================================================================================================*/
-                //estre grupo de funões são chamados apenas quando o browser é recarreado. Elas
-                //pegam os dados do obj 'api' e os carregam na tela.
-function buildColums(apiColumn){
-
-    const newColumn = document.createElement('div');
-    newColumn.setAttribute('class', 'list');
-    newColumn.setAttribute('id', `${apiColumn.id}`);
-
-    newColumn.innerHTML = `<span class="list-title">${apiColumn.title}</span>
-                            <div class="drag-area">
-                            <!--Card aqui-->
-                            </div>
-                            <div class="list-add-item">
-                                <div class="show-add-card">
-                                    <span class="material-symbols-outlined">
-                                        add
-                                    </span>
-                                    <span>Adicionar um cartão</span>
-                                </div>
-                                <div class="add-card hiden">
-                                    <div class="previa-card">
-                                        <!--previa das tags-->
-                                        <textarea class="add-card-text" cols="32" 
-                                        rows="5" placeholder="Insira um texto"></textarea>
-                                    </div>
-                                    <div class="box-button-more">
-                                        <div>
-                                            <button class="add-card-button">Adicionar</button>
-                                            <span class="material-symbols-outlined close-add-card">
-                                                close
-                                            </span>
-                                        </div>
-                                        <span class="material-symbols-outlined options-add-card">
-                                            more_horiz
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>`
-
-     sDom.board.appendChild(newColumn);
-    buildCards(newColumn, apiColumn);
-}
-
-//================================================================================
-//================================================================================
-                //Quando uma coluna é gerada, esta função é chamada
-                //e cria todos os cards da respectiva coluna
-function buildCards(column, apiColumn){
-// console.log(api)
-    let cardsArea = column.querySelector('.drag-area')
-    apiColumn.cards.forEach(card => {
-        const newCard = document.createElement('div');
-        newCard.setAttribute('class', 'list-content');
-        newCard.draggable = true;
-        const cardTags = buildTags(card.tags);
-        newCard.innerHTML = `<span class="material-symbols-outlined 
-                             edit-card"> edit </span>
-                             <div class="list-square" id="${card.id}">
-                                 <span>${card.text}</span>
-                             </div>`
-                            
-        const listSquare = newCard.querySelector('.list-square');
-        if(cardTags.innerHTML){ listSquare.prepend(cardTags) };
-        cardsArea.appendChild(newCard);
-    })
-}
-
-
-//================================================================================
-//================================================================================
-                //Quando cada card é criado, esta função é chamada
-                //e cria todas as tags do repctivo card            
-function buildTags(tags){ 
-    //carrega as tags para serem mostradas na tela
-    if(!tags) return;
-    const newTags = document.createElement('div');
-    newTags.setAttribute('class', 'tags')
-   
-    for (let key in tags){
-        const newTag = document.createElement('span');
-        newTag.setAttribute('class', 'tag');
-        newTag.style.backgroundColor = tags[key].color;
-        newTags.appendChild(newTag);
-    }
-        
-    return newTags;
-}
-
-//================================================================================
-//================================================================================
-//chama a função para carregar os dados na tela 
-for (const column in api.columns){
-    buildColums(api.columns[column])
-    addEvents()
-}
-
+loadCards();
 
 /**==================================================================================================================================
  *                                                    Funções para criar um novo card                                               *
  ===================================================================================================================================*/
- let haveAnOpenNewCardBox = false; 
+ let [haveAnOpenNewCardBox , editingMode] = [false]; 
  let [activeColumn, activeNewCardBox] = [null];
  let tempTags = []; //tags dos cards
-
+ export {
+         activeNewCardBox,
+         tempTags,
+         editingMode
+     }
+ 
  //================================================================================
 //================================================================================
                 //Abre a caixa para adicionar um novo card
@@ -150,53 +46,7 @@ for (const column in api.columns){
      haveAnOpenNewCardBox = true;
  };
  
-//================================================================================
-//================================================================================
-                //cria a tag quando uma nova tag é clicada
-let divPrevTagCreated = false;
-let  previaTagsDiv;
-function addTags(clickedTag){
-    
-    const tag = api.tagsOptions[clickedTag];
-    if(tbDom.checkboxTag[clickedTag].checked) return removeTags(tag);
-    
-    //cria a tag na tempTags
-    const newObjTag = {
-        color: tag.color,
-        id: tag.id
-    }
-    tempTags.push(newObjTag)
 
-    //cria a tag na tela
-    if(!divPrevTagCreated){
-        previaTagsDiv = document.createElement('div');
-        previaTagsDiv.setAttribute('class', 'previa-tags');
-        activeNewCardBox.previaCard.prepend(previaTagsDiv);
-        divPrevTagCreated = true;
-    }else{
-        previaTagsDiv = activeNewCardBox.previaCard.querySelector('.previa-tags');
-    }
-
-    const previaTagSpan = document.createElement('span');
-          previaTagSpan.setAttribute('class', 'tag');
-          previaTagSpan.id  = `${tag.id}`
-          previaTagSpan.style.backgroundColor = tag.color;  
-
-    previaTagsDiv.appendChild(previaTagSpan);
-}
-
-//================================================================================
-//================================================================================
-            //Remove tags tanto do card na tela quanto da tempTags
-function removeTags(tag){
-    
-    const tagTempToRemove = tempTags.findIndex(obj => obj.id == tag.id);
-    tempTags.splice(tagTempToRemove, 1)
-
-    const tagSpanToRemove = previaTagsDiv.querySelector(`#${tag.id}`);
-    previaTagsDiv.removeChild(tagSpanToRemove)
-
-}
 
 //================================================================================
 //================================================================================
@@ -264,7 +114,6 @@ function createNewCard(){
 function removePreviaTagsDiv(){
 
     tempTags = [];
-    divPrevTagCreated = false;
 
     //limpas as checkboxs
     tbDom.checkboxTag.forEach(checkbox => {
@@ -327,14 +176,22 @@ function openCardOptions(){
 
 //================================================================================
 //================================================================================
-function openBoxTags(){
+function openBoxTags(event){
 
-    if(this.classList.contains('open-tags')){
-        sDom.boxTags.classList.remove('hidden');
-    }
+    sDom.boxTags.classList.remove('hidden');
+
     //Colca a caixa de tags na melhor posição
     let x = boxOptiosX;
     let y = boxOptiosY;
+
+    //verifica se quem está chamando a função é o botão de editar tags
+    //ou o botar de criar tags na caixa de criar um novo card.
+    if(event.target.closest('.option-item').classList.contains('edit')){
+        const btnIfons = sDom.boxEditCardOptions[1].getBoundingClientRect();
+        x = btnIfons.left;
+        y = btnIfons.top - 17;
+    }
+    
     const boxTagsInfos = sDom.boxTags.getBoundingClientRect();
     sDom.boxTags.style.left = `${x}px`;
     sDom.boxTags.style.top = `${y - 10}px`;
@@ -382,6 +239,54 @@ function getElementPosition(element){
 /**==================================================================================================================================
  *                                              Funções para editar e excluir os cards                                              *
 ====================================================================================================================================*/
+let cardInEdition, tempEditingTags, tempEditingThumb;
+function openModalCardEdit(){
+
+    editingMode = true;
+    //pega todas as informações do card clicado
+    const clickedCard = getCardInformations(this);
+    const cards = api.columns[clickedCard.sourceColumn].cards;
+    const card = cards.find(obj => obj.id === clickedCard.cardId);
+    cardInEdition = card;
+    tempEditingTags = [...card.tags];
+    tempEditingThumb = card.thumb;
+
+    //coloca o modal de edição do card na melhor posição
+    const cardPosition = getElementPosition(this.closest('.list-content')); 
+    sDom.boxEditCard.classList.remove('hidden');
+    sDom.editCardContainer.style.top = `${cardPosition.top}px`;
+    sDom.editCardContainer.style.left = `${cardPosition.left}px`;
+
+    sDom.editBoxCardOptions.style.top = `${cardPosition.top}px`;
+    sDom.editBoxCardOptions.style.left = `${cardPosition.left + 285}px`
+
+    //Carrega os dados do card no modal de edição
+    sDom.editCardText.value = card.text;
+    if(card.tags.length > 0){
+        sDom.editCardPreTags.innerHTML = "";
+        card.tags.forEach(tag => {
+            sDom.editCardPreTags.innerHTML += 
+                    `<span class="editing-tag"                       
+                    style="background-color: ${tag.color};"                           
+                    id="${tag.id}"></span>`;
+        })
+    }
+
+    if(card.thumb !== ''){
+        sDom.editCardThumb.style.backgroundColor = card.thumb;
+    }
+}
+
+//================================================================================
+//================================================================================
+function saveCardEdition(){
+
+
+}
+
+
+//================================================================================
+//================================================================================
 function deleteCard(){
     
     const card = getCardInformations(this)
@@ -395,34 +300,16 @@ function deleteCard(){
     const cardToDele = document.querySelector(`#${card.sourceColumnID} #${card.cardId}`)
     cardToDele.remove();
 
-
     saveApiInLocalStorange();
 }
 
-
-
 //================================================================================
 //================================================================================
-function editCard(){
-
-    //pega todas as informações do card clicado, desde a posião ate o objeto na 'api'
-    const cardPosition = getElementPosition(this.closest('.list-content')); 
-    const cardInfo = getCardInformations(this);
-    const cards = api.columns[cardInfo.sourceColumn].cards;
-    const card = cards.find(obj => obj.id === cardInfo.cardId);
-
-    //coloca o modal de edição do card na melhor posição
-    sDom.boxEditCard.classList.remove('hidden');
-    sDom.editCardContainer.style.top = `${cardPosition.top}px`;
-    sDom.editCardContainer.style.left = `${cardPosition.left}px`;
-
-    sDom.editBoxCardOptions.style.top = `${cardPosition.top}px`;
-    sDom.editBoxCardOptions.style.left = `${cardPosition.left + 285}px`
-
-    console.log(cardPosition.top)
+function txtAreaAutoResize(event){
+    this.style.height = 'auto';
+    const sHeight = event.target.scrollHeight
+    this.style.height = `${sHeight}px`;
 }
-
-
 
 //================================================================================
 //================================================================================
@@ -439,11 +326,11 @@ export function saveApiInLocalStorange(){
  *                                                              Eventos                                                             *
  ===================================================================================================================================*/
  sDom.btnBackBoxCardOptions.addEventListener('click', () => {
-    closeCardOptions('boxTags')
+    closeCardOptions('boxTags');
 })
 
  sDom.btnCloseBoxTags.addEventListener('click', () => {
-    closeCardOptions('boxTags', true)
+    closeCardOptions('boxTags', true);
 })
 
 sDom.btnCloseCardOptions.addEventListener('click', () =>{
@@ -451,17 +338,28 @@ sDom.btnCloseCardOptions.addEventListener('click', () =>{
 })
 
 sDom.moreCardOptions.forEach(button => {
-    button.addEventListener('click', openBoxTags)
+    button.addEventListener('click', openBoxTags);
 })
 
+sDom.editCardText.addEventListener('input', txtAreaAutoResize);
 
-dDom.optionsAddCard.forEach(button => {
-    button.addEventListener('click', openCardOptions)
-})
-
+for (let i = 0; i < sDom.boxEditCardOptions.length; i++){
+    sDom.boxEditCardOptions[i].addEventListener('click', (event) => {
+        switch (i) {
+            case 0:
+                
+                break;
+            case 1:
+                openBoxTags(event);
+                break;
+            default:
+                break;
+        }
+    })
+}
 
 //Atualiza a seleção domDynamicList e seus eventos
-function addEvents(){
+export function addEvents(){
 
     dDom = domDynamicList();
     dragEvents(); //drag-drop.js
@@ -471,20 +369,32 @@ function addEvents(){
     });
     
     dDom.closeAddCard.forEach(button => {
-        button.addEventListener('click', closeAddCardBox)
+        button.addEventListener('click', closeAddCardBox);
     });
     
     dDom.newCardBtn.forEach(button => {
-        button.addEventListener('click', createNewCard)
-    })
+        button.addEventListener('click', createNewCard);
+    });
 
     dDom.cards.forEach(card => {
-       // card.addEventListener('click', deleteCard)
-    })
+    //    card.addEventListener('click', deleteCard);
+    });
 
     dDom.btnEditCards.forEach(button => {
-        button.addEventListener('click', editCard)
-    })
+        button.addEventListener('click', openModalCardEdit);
+    });
+
+    dDom.optionsAddCard.forEach(button => {
+        button.addEventListener('click', openCardOptions);
+    });
+
+    dDom.newCardText.forEach(textArea => {
+        textArea.addEventListener('input', txtAreaAutoResize);
+        textArea.addEventListener('keydown', tecla => {
+            if (tecla.key === 'Enter') return createNewCard();
+        });
+        
+    });
 
 }
 addEvents();

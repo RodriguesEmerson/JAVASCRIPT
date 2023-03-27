@@ -28,6 +28,7 @@
     }
 
     &_previa-tags{
+        @include flexSetting(center, start);
     .editing-tag{
         display: block;
         height: 8px;
@@ -43,10 +44,14 @@
         outline: none;
         margin-top: 5px;
         padding-top: 3px;
-        min-width: 100%;
-        max-width: 100%;
+        width: 100%;
         min-height: 50px;
-        color: $cardsTextColor;        
+        color: $cardsTextColor;
+        resize: none;
+        
+        &::-webkit-scrollbar{
+            display: none;
+        }
     }
 
 

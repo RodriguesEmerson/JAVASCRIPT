@@ -7,15 +7,17 @@ const data = {
                 {id: 'ccccccccc1',
                 tags: [
                     {color:'lightcoral', id: 'tag2'},
-                    {color:'green', id: 'tag2'}
+                    {color:'green', id: 'tag3'}
                 ],
+                thumb: 'black',
                 text: 'Algum Text'},
     
                 {id: 'c1card2',
                 tags: [
-                    {color:'lightcoral', id: 'tag2'},
-                    {color:'green', id: 'tag2'}
+                    {color:'lightcoral', id: 'tag4'},
+                    {color:'green', id: 'tag5'}
                 ],
+                thumb: 'red',
                 text: 'Algum Text123',}
             ],
     
@@ -27,16 +29,18 @@ const data = {
             cards: [
                 {id: 'c2card1',
                 tags: [
-                    {color:'lightcoral', id: 'tag2'},
-                    {color:'green', id: 'tag2'}
+                    {color:'lightcoral', id: 'tag6'},
+                    {color:'green', id: 'tag7'}
                 ],
+                thumb: 'lightblue',
                 text: 'Algum Text'},
     
                 {id: 'c2card2',
                 tags: [
-                    {color:'lightcoral', id: 'tag2'},
-                    {color:'green', id: 'tag2'}
+                    {color:'lightcoral', id: 'tag8'},
+                    {color:'green', id: 'tag9'}
                 ],
+                thumb: 'orange',
                 text: 'Algum Text123',}
             ],
     
@@ -48,16 +52,18 @@ const data = {
             cards: [
                 {id: 'c3card1',
                 tags: [
-                    {color:'lightcoral', id: 'tag2'},
-                    {color:'green', id: 'tag2'}
+                    {color:'lightcoral', id: 'tag10'},
+                    {color:'green', id: 'tag11'}
                 ],
+                thumb: 'orange',
                 text: 'Algum Text'},
     
                 {id: 'c3card2',
                 tags: [
-                    {color:'lightcoral', id: 'tag2'},
-                    {color:'green', id: 'tag2'}
+                    {color:'lightcoral', id: 'tag12'},
+                    {color:'green', id: 'tag13'}
                 ],
+                thumb: 'green',
                 text: 'Algum Text123',}
             ],
     
