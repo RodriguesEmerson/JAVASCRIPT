@@ -86,6 +86,7 @@ export function buildTags(tags){
     for (let key in tags){
         const newTag = document.createElement('span');
         newTag.setAttribute('class', 'tag');
+        newTag.classList.add(`${tags[key].id}`);
         newTag.style.backgroundColor = tags[key].color;
         newTags.appendChild(newTag);
     }

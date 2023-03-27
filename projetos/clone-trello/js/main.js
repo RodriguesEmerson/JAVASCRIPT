@@ -239,7 +239,7 @@ function getElementPosition(element){
 /**==================================================================================================================================
  *                                              Funções para editar e excluir os cards                                              *
 ====================================================================================================================================*/
-let cardInEdition, tempEditingTags, tempEditingThumb;
+let cardInEdition, tempEditingThumb;
 function openModalCardEdit(){
 
     editingMode = true;
@@ -248,7 +248,7 @@ function openModalCardEdit(){
     const cards = api.columns[clickedCard.sourceColumn].cards;
     const card = cards.find(obj => obj.id === clickedCard.cardId);
     cardInEdition = card;
-    tempEditingTags = [...card.tags];
+    tempTags = [...card.tags];
     tempEditingThumb = card.thumb;
 
     //coloca o modal de edição do card na melhor posição
@@ -266,10 +266,16 @@ function openModalCardEdit(){
         sDom.editCardPreTags.innerHTML = "";
         card.tags.forEach(tag => {
             sDom.editCardPreTags.innerHTML += 
-                    `<span class="editing-tag"                       
-                    style="background-color: ${tag.color};"                           
-                    id="${tag.id}"></span>`;
-        })
+                    `<span class="editing-tag ${tag.id}"                       
+                    style="background-color: ${tag.color};"">
+                    </span>`;
+
+            const indexTag = api.tagsOptions.findIndex(obj => obj.id === tag.id);
+            console.log(indexTag)
+
+        });
+
+        
     }
 
     if(card.thumb !== ''){
