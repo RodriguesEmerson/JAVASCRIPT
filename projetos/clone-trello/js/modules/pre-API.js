@@ -9,7 +9,6 @@ const data = {
                     {color:'lightcoral', id: 'tag5'},
                     {color:'green', id: 'tag2'}
                 ],
-                thumb: 'black',
                 text: 'Algum Text'},
     
                 {id: 'c1card2',
@@ -17,7 +16,6 @@ const data = {
                     {color:'lightcoral', id: 'tag5'},
                     {color:'green', id: 'tag2'}
                 ],
-                thumb: 'red',
                 text: 'Algum Text123',}
             ],
     
@@ -32,7 +30,6 @@ const data = {
                     {color:'lightcoral', id: 'tag5'},
                     {color:'green', id: 'tag2'}
                 ],
-                thumb: 'lightblue',
                 text: 'Algum Text'},
     
                 {id: 'c2card2',
@@ -40,7 +37,6 @@ const data = {
                     {color:'lightcoral', id: 'tag5'},
                     {color:'green', id: 'tag2'}
                 ],
-                thumb: 'orange',
                 text: 'Algum Text123',}
             ],
     
@@ -55,7 +51,6 @@ const data = {
                     {color:'lightcoral', id: 'tag5'},
                     {color:'green', id: 'tag2'}
                 ],
-                thumb: 'orange',
                 text: 'Algum Text'},
     
                 {id: 'c3card2',
@@ -63,7 +58,6 @@ const data = {
                     {color:'lightcoral', id: 'tag5'},
                     {color:'green', id: 'tag2'}
                 ],
-                thumb: 'green',
                 text: 'Algum Text123',}
             ],
     

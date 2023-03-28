@@ -25,6 +25,7 @@ body {
   padding: 0 10px;
   width: 100%;
   height: 50px;
+  background-color: #03535e;
   border-bottom: 1px solid rgba(135, 176, 200, 0.746);
 }
 

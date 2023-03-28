@@ -34,14 +34,6 @@ let [haveAnOpenNewCardBox,
 //elas são colocadas no lugar das tags do objeto do card.
 let tempTags = []; 
 
-
-export {
-        activeNewCardBox,
-        tempTags,
-        divPrevTagCreated,
-        editingMode
-    }
- 
  //================================================================================
 //================================================================================
                 //Abre a caixa para adicionar um novo card
@@ -120,15 +112,14 @@ function createNewCard(){
     closeCreationCardsOptions('boxTags', true);
     closeCreationCardBox();
     addEvents();
-    activeNewCardBox.newCardText.value = "";
-    tempTags = [];    
+    activeNewCardBox.newCardText.value = ""; 
 }
 
 //================================================================================
 //================================================================================
 function closeCreationCardBox(){
-    activeNewCardBox.newCardBox.classList.add('hiden')
-    activeNewCardBox.btnShowNewCardBox.classList.remove('hiden')
+    activeNewCardBox.newCardBox.classList.add('hidden');
+    activeNewCardBox.btnShowNewCardBox.classList.remove('hidden');
     haveAnOpenNewCardBox = false;
 };
 
@@ -170,6 +161,7 @@ function closeCreationCardsOptions(box, boxOptionsToo){
     //Atualiza as variáveis
     editingMode = false;
     tempTags = [];
+    divPrevTagCreated = false;
 }
 
 
@@ -243,7 +235,6 @@ function getElementPosition(element){
 ====================================================================================================================================*/
 
 let [cardInEdition,          //Objeto do card em edição na 'api'
-    tempEditingThumb,        //Thumb do card
     activeEditingCardDiv,    //Div do card no DOM
     cardsGroup               //Grup de cards em que o card está.
 ] = [null];
@@ -261,7 +252,6 @@ function openModalCardEdit(){
     cardsGroup = cards;
     cardInEdition = card;
     tempTags = [...card.tags];
-    tempEditingThumb = card.thumb;
     activeEditingCardDiv = this.closest('.list-content');
 
     //coloca o modal de edição do card na melhor posição
@@ -290,16 +280,16 @@ function openModalCardEdit(){
             });
         }
             
-    if(card.thumb !== ''){
-        sDom.editCardThumb.style.backgroundColor = card.thumb;
-    }
+        sDom.editCardThumb.style.backgroundColor = 'rgb(3, 83, 94)';
+
 }
 
 //================================================================================
 //================================================================================
-let  activeTagsDiv = sDom.editCardPreTags;
+let  activeTagsDiv;
 function addTags(clickedTag){
 
+    activeTagsDiv = sDom.editCardPreTags;
     const tag = api.tagsOptions[clickedTag];
     
     let classe = 'tag';
@@ -349,17 +339,24 @@ function removeTags(tag){
     tempTags.splice(tagTempToRemove, 1)
 
     const tagSpanToRemove = cardCont.querySelector(`.${tag.id}`);
+    console.log(tagSpanToRemove)
     cardCont.removeChild(tagSpanToRemove)
+    console.log(cardCont)
+}
+
+//================================================================================
+//================================================================================
+function closeModalCardEdit(){
+    sDom.boxEditCard.classList.add('hidden');
+    closeCreationCardsOptions('boxTags', true);
+    sDom.editCardPreTags.innerHTML = '';
 }
 
 
 /**==================================================================================================================================
- *                                              Funções para editar e excluir os cards                                              *
+ *                                           Funções para editar, mover e excluir os cards                                          *
 ====================================================================================================================================*/
 
-        
-//================================================================================
-//================================================================================
 function saveCardEdition(){
             
     //constroi a div de tags
@@ -367,7 +364,7 @@ function saveCardEdition(){
 
     const oldTags = activeEditingCardDiv.querySelector('.tags');
     const oldText = activeEditingCardDiv.querySelector('.card-text');
-    console.log( activeEditingCardDiv)
+
     //salva as edições do card no obj 'api' e atualiza a tela;
     cardInEdition.tags = tempTags;
     if (sDom.editCardText.value !== ''){
@@ -375,23 +372,39 @@ function saveCardEdition(){
         oldText.textContent = sDom.editCardText.value;
     };
 
-    //Se tiver uma div de tags com tags, a subtitui pela nova div de tags
+    //Se tiver a div .tags, a subtitui pela nova div de .tags
     if(oldTags){
         oldTags.parentNode.replaceChild(tags, oldTags);
+
     }else{
-        //se não tiver, cria a div .tags
-        if(tags.innerHTML.length != 0){ 
-            activeEditingCardDiv.querySelector('.list-square').prepend(tags)
+        //se não tiver a div .tags e haver novas tags, cria a div .tags
+        if(tags.innerHTML.length != 0){
+        activeEditingCardDiv.querySelector('.list-square').prepend(tags);
+        console.log('aqui')
+        }
+    }
+
+    //Se não tiver nenhuma nova tag, remove a div .tags
+    if(tags.innerHTML.length == 0){
+        
+        if(oldTags){
+            const emptyDiv = activeEditingCardDiv.querySelector('.tags');
+            emptyDiv. remove();
+            console.log('foi')
         }
     }
     
-    sDom.boxEditCard.classList.add('hidden');
-    sDom.editCardPreTags.innerHTML = '';
-    saveApiInLocalStorange();
-    closeCreationCardsOptions('boxTags', true);
     
+    closeModalCardEdit();
+    saveApiInLocalStorange();
+
 }
 
+//================================================================================
+//================================================================================
+function moveCard(){
+
+}
 
 //================================================================================
 //================================================================================
@@ -404,19 +417,22 @@ function deleteCard(){
     //remove o card da tela.
     activeEditingCardDiv.remove();
     
-    sDom.boxEditCard.classList.add('hidden');
+    closeModalCardEdit();
     saveApiInLocalStorange();
-    closeCreationCardsOptions('boxTags', true);
+
 }
 
 //================================================================================
 //================================================================================
 function txtAreaAutoResize(event){
+    //auto-redimenciona a textarea
     this.style.height = 'auto';
     const sHeight = event.target.scrollHeight
     this.style.height = `${sHeight}px`;
 }
 
+
+//funções extras
 //================================================================================
 //================================================================================
 export function saveApiInLocalStorange(){
@@ -460,9 +476,11 @@ sDom.boxEditCardOptions[0].addEventListener('click', openBoxTags);
 
 sDom.boxEditCardOptions[2].addEventListener('click', deleteCard);
 
+sDom.btnSaveEditedCard.addEventListener('click', saveCardEdition);
 
-
-sDom.btnSaveEditedCard.addEventListener('click', saveCardEdition)
+sDom.boxEditCard.addEventListener('click', (event) => {
+    if(event.target.id) closeModalCardEdit();
+})
 
 
 //Atualiza a seleção domDynamicList e seus eventos
