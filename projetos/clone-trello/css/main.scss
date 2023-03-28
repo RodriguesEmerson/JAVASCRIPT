@@ -1,10 +1,15 @@
 @charset "UTF-8";
 @import 'declarations/declarations';
 @import 'parts/header/header';
-@import 'parts/main/lists/lists';
+@import 'parts/main/board/board';
 @import 'parts/main/cards-options/_cards-options';
 @import 'parts/main/cards-options/cad-edit';
 
+
+
+.flex-center{
+    @include flexSetting(center, center);
+}
 .hidden{
     display: none !important;
 }

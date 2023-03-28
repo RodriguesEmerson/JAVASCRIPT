@@ -1,3 +1,4 @@
+
 #cards-option-container{
 .bold{
     font-weight: bold;
@@ -24,7 +25,7 @@
             &:hover{
                 background-color: lighten($cardsTextColor, 48)
             }
-        }
+        } 
     }
 }
 .box-header{
@@ -48,10 +49,10 @@
         }
     }
 }
-}
+
 
 //===============================
-#cards-option-container{
+
 .box-tags{
     position: absolute;
     font-size: 0.8em;
@@ -101,8 +102,6 @@
             height: 30px;
             margin-bottom: 8px;
         }
-
-        
 
         .tag-checkbox{
             display: none;

@@ -1,7 +1,7 @@
 .container{
 .board{
     position: relative;
-    @include flexSetting(start, start);
+    @include flexSetting(start, center);
     gap: 10px;
     padding: 10px;
     
@@ -58,6 +58,9 @@
         //list-square - card
         .list-square{
             @include flexSetting(start, start);
+            font-family: 'Quicksand';
+            font-weight: 500;
+            font-size: 1.1em;
             flex-direction: column;
             min-width: 260px;
             min-height: 33px;
@@ -114,7 +117,6 @@
         }
         
         .add-card{
-
             //previa card é uma div que engloba 
             //a text area e a previa de tags.
             .previa-card{
@@ -138,6 +140,9 @@
                 
             }
             .add-card-text{
+                font-family: 'Quicksand';
+                font-weight: 500;
+                font-size: 1.1em;
                 border: none;
                 border-radius: 3px;
                 outline: none;
@@ -198,8 +203,4 @@
        transform: rotate(2deg);
     }
 }
-}
-
-.hiden{
-    display: none !important;
 }

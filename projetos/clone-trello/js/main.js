@@ -190,10 +190,12 @@ function openBoxTags(event){
         if(event.target.closest('.type-option').classList.contains('edit')){
             const btnIfons = sDom.boxEditCardOptions[1].getBoundingClientRect();
             x = btnIfons.left;
-            y = btnIfons.top - 17;
+            y = btnIfons.top - 50;
         }}catch(err){}
         
         const boxTagsInfos = sDom.boxTags.getBoundingClientRect();
+        const boadWidth = sDom.board.offsetWidth;
+  
         sDom.boxTags.style.left = `${x}px`;
         sDom.boxTags.style.top = `${y - 10}px`;
         if((y + boxTagsInfos.height + 80) > window.innerHeight){
@@ -267,6 +269,7 @@ function openModalCardEdit(){
     
     sDom.editCardContainer.style.top = `${cardPosition.top}px`;
     sDom.editCardContainer.style.left = `${cardPosition.left}px`;
+
     sDom.editBoxCardOptions.style.top = `${cardPosition.top}px`;
     sDom.editBoxCardOptions.style.left = `${cardPosition.left + 285}px`
     

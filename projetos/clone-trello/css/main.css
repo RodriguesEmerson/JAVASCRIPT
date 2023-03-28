@@ -21,54 +21,23 @@ body {
 /*===============Variables================*/
 /*================Mixins===================*/
 /*================Functions===================*/
-.flex-center {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-.circle {
-  border-radius: 50%;
-}
-
 .header {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
   padding: 0 10px;
   width: 100%;
   height: 50px;
   border-bottom: 1px solid rgba(135, 176, 200, 0.746);
-  /*-----Header Mid------*/
-  /*-----Header end------*/
-}
-
-.header-alternation img {
-  width: 15px;
 }
 
 .header-logo {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-transition: 100ms;
+  transition: 100ms;
+}
+
+.header-logo:hover {
+  background-color: rgba(135, 176, 200, 0.5);
 }
 
 .header-logo-icon {
@@ -108,92 +77,6 @@ body {
   font-size: 1.3em;
 }
 
-.header-mid div:not(last-child) {
-  margin-right: 15px;
-}
-
-.header_work_space, .header_recent, .header_starred, .header_model {
-  height: 33px;
-  padding: 0 5px;
-  border-radius: 3px;
-}
-
-.header-create_button {
-  height: 33px;
-  width: 53px;
-  border: none;
-  border-radius: 3px;
-  background-color: rgba(135, 176, 200, 0.445);
-  color: white;
-}
-
-.header-white_space {
-  width: 25%;
-  height: 30px;
-}
-
-.header-end div:not(last-child) {
-  margin-right: 5px;
-}
-
-.header .header-search {
-  height: 33px;
-  width: 250px;
-  background-color: rgba(135, 176, 200, 0.445);
-  border-radius: 5px;
-  border: 1px solid rgba(187, 211, 224, 0.445);
-}
-
-.header .header-search #search {
-  text-indent: 3px;
-  width: 90%;
-  outline: none;
-  border: none;
-  background-color: rgba(255, 255, 255, 0);
-  color: white;
-}
-
-.header .header-search .material-symbols-outlined {
-  font-size: 18px;
-  font-variation-settings: 'wght' 400;
-}
-
-.header-bell, .header-help, .header-user {
-  height: 33px;
-  width: 33px;
-}
-
-.header-user .material-symbols-outlined {
-  font-variation-settings: 'FILL' 1, 'wght' 300;
-  color: black;
-}
-
-.h-hover {
-  cursor: pointer;
-  -webkit-transition: 100ms;
-  transition: 100ms;
-}
-
-.h-hover:hover {
-  background-color: rgba(135, 176, 200, 0.5);
-}
-
-/*Header Cliked Box*/
-.header-clicked_box {
-  position: absolute;
-  top: 53px;
-  left: 153px;
-  background-color: white;
-  width: 300px;
-  min-height: 70px;
-  border-radius: 3px;
-  border: 1px solid #d3d2d1;
-}
-
-.hide {
-  display: none;
-}
-
 .container .board {
   position: relative;
   display: -webkit-box;
@@ -202,9 +85,9 @@ body {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: start;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   gap: 10px;
   padding: 10px;
   /*======= Add New Card =======*/
@@ -269,6 +152,9 @@ body {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: start;
+  font-family: 'Quicksand';
+  font-weight: 500;
+  font-size: 1.1em;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -392,6 +278,9 @@ body {
 }
 
 .container .board .list-add-item .add-card .add-card-text {
+  font-family: 'Quicksand';
+  font-weight: 500;
+  font-size: 1.1em;
   border: none;
   border-radius: 3px;
   outline: none;
@@ -465,10 +354,6 @@ body {
 .container .board .dragging, .container .board .dragging .list-square {
   -webkit-transform: rotate(2deg);
           transform: rotate(2deg);
-}
-
-.hiden {
-  display: none !important;
 }
 
 #cards-option-container .bold {
@@ -704,7 +589,8 @@ body {
   position: fixed;
   width: 100%;
   height: 100vh;
-  margin: -60px -10px;
+  margin: -60px 0;
+  left: 0;
   background-color: rgba(0, 0, 0, 0.61);
 }
 
@@ -821,6 +707,18 @@ body {
   font-variation-settings: 'wght' 300;
   font-size: 20px;
   margin-right: 3px;
+}
+
+.flex-center {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .hidden {
