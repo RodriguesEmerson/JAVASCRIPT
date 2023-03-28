@@ -77,7 +77,7 @@ const data = {
         {title: 'nenhum', colorName: 'orange',      color: 'orange',       id: 'tag4'},
         {title: 'nenhum', colorName: 'lightcoral',  color: 'lightcoral',   id: 'tag5'},
         {title: 'nenhum', colorName: 'lightpink',   color: 'lightpink',    id: 'tag6'},
-        {title: 'nenhum', colorName: 'lightskyblue',color: 'lightskyblue', id: 'tag6'},
+        {title: 'nenhum', colorName: 'lightskyblue',color: 'lightskyblue', id: 'tag7'},
     ]
   
 }

@@ -788,7 +788,7 @@ body {
   width: 140px;
 }
 
-#box-edit-card_options .option-item {
+#box-edit-card_options .type-option {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -812,12 +812,12 @@ body {
   transition: 150ms;
 }
 
-#box-edit-card_options .option-item:hover {
+#box-edit-card_options .type-option:hover {
   margin-left: 5px;
   background-color: rgba(0, 0, 0, 0.863);
 }
 
-#box-edit-card_options .option-item .material-symbols-outlined {
+#box-edit-card_options .type-option .material-symbols-outlined {
   font-variation-settings: 'wght' 300;
   font-size: 20px;
   margin-right: 3px;

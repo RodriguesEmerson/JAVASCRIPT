@@ -24,7 +24,7 @@ function buildColums(apiColumn){
                                     </span>
                                     <span>Adicionar um cartão</span>
                                 </div>
-                                <div class="add-card hiden">
+                                <div class="add-card hidden">
                                     <div class="previa-card">
                                         <!--previa das tags-->
                                         <textarea class="add-card-text" cols="32" 
@@ -63,7 +63,7 @@ function buildCards(column, apiColumn){
         newCard.innerHTML = `<span class="material-symbols-outlined 
                                 edit-card"> edit </span>
                                 <div class="list-square" id="${card.id}">
-                                    <span>${card.text}</span>
+                                    <span class="card-text">${card.text}</span>
                                 </div>`
                             
         const listSquare = newCard.querySelector('.list-square');

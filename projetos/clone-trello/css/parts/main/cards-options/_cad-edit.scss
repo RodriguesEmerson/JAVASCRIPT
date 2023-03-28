@@ -76,7 +76,7 @@
     &_options{
         position: absolute;
         width: 140px;
-        .option-item{
+        .type-option{
             @include flexSetting(center, start);
             cursor: pointer;
             font-size: 0.9em;
