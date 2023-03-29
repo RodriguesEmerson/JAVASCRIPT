@@ -50,7 +50,7 @@ function dragOver(cardEvent){
     //pega a posição do card que esta abaixo do card arratado
     const CardNewPosition = getNewPosition(this, cardEvent.clientY);
 
-    //Coloca a tempDiv no luga do card que está abaixo dele.
+    //Coloca a tempDiv no lugar do card que está abaixo dele.
     if(CardNewPosition){
         CardNewPosition.insertAdjacentElement('afterend', tempDiv);
     }else{
