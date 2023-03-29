@@ -1,3 +1,13 @@
+/**Ainda faltam algumas funcionalidades neste projeto,
+ * mas ele já me custou 9 dias, e preciso estudar outras
+ * coisas. Obtive muito conhecimento neste projeto, e mais pra
+ * frente quero terminá-lo completamente.
+ * Hoje é dia 29/03/2023, e no próximo dia 14, faz 5 meses
+ * que estou estudano desenvolvimento web.
+ */
+
+
+
 /**Este projeto seria mais fácil com React */
 import  preAPI  from "./modules/pre-API.js";
 let api = preAPI;
@@ -289,10 +299,16 @@ function openModalCardEdit(){
 let  activeTagsDiv;
 function addTags(clickedTag){
 
-    activeTagsDiv = sDom.editCardPreTags;
     const tag = api.tagsOptions[clickedTag];
     
     let classe = 'tag';
+
+    //Se o card estiver sendo editado, seleciona a div de edição de tags
+    if(editingMode){
+        activeTagsDiv = sDom.editCardPreTags;
+        classe = 'editing-tag';
+    }
+
     if(tbDom.checkboxTag[clickedTag].checked) return removeTags(tag);
 
     //Cria ou seleciona a div de tags do card que está sendo criado
@@ -305,12 +321,6 @@ function addTags(clickedTag){
         }else{
             activeTagsDiv = activeNewCardBox.previaCard.querySelector('.previa-tags');
         }
-    }
-    
-    //Se o card estiver sendo editado, seleciona a div de edição de tags
-    if(editingMode){
-        activeTagsDiv = sDom.editCardPreTags;
-        classe = 'editing-tag';
     }
     
     //cria a tag na tempTags
@@ -339,9 +349,9 @@ function removeTags(tag){
     tempTags.splice(tagTempToRemove, 1)
 
     const tagSpanToRemove = cardCont.querySelector(`.${tag.id}`);
-    console.log(tagSpanToRemove)
-    cardCont.removeChild(tagSpanToRemove)
     console.log(cardCont)
+    cardCont.removeChild(tagSpanToRemove)
+
 }
 
 //================================================================================
