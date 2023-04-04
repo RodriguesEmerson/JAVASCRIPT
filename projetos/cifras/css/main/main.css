@@ -80,5 +80,13 @@ header {
 }
 
 .modal-login {
-  display: none;
+  position: absolute;
+  right: 12.5%;
+  flex-direction: column;
+  background-color: white;
+  padding: 10px;
+}
+
+.form-login {
+  flex-direction: column;
 }/*# sourceMappingURL=main.css.map */
