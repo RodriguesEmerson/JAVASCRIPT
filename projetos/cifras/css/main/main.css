@@ -1,1 +1,84 @@
-/*# sourceMappingURL=main.css.map */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+}
+
+header {
+  justify-content: space-between !important;
+  padding: 0 20px;
+  background-color: rgb(2, 156, 149);
+  color: white;
+  padding: 0 10%;
+}
+
+#logo {
+  width: 60px;
+}
+
+.search-box {
+  gap: 10px;
+  flex: 1 0 300px;
+  margin: 0 10px 0 30px;
+}
+.search-box #search-input {
+  height: 40px;
+  width: 80%;
+  text-indent: 10px;
+  border-radius: 3px;
+  border: 1px solid lightgray;
+  outline: none;
+}
+.search-box #search-btn {
+  height: 40px;
+  width: 80px;
+}
+
+.menu {
+  display: flex;
+  justify-content: end;
+  flex: 2 0 400px;
+}
+.menu ul {
+  list-style-type: none;
+}
+.menu .nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 5px;
+  color: white;
+  margin-left: 15px;
+  text-decoration: none;
+  border-radius: 3px;
+}
+.menu .nav-link:hover {
+  background-color: #016a65;
+}
+.menu .nav-link:nth-child(4) {
+  cursor: pointer;
+  width: 80px;
+  justify-content: space-between;
+}
+
+#user {
+  margin-left: 40px;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.modal-login {
+  display: none;
+}/*# sourceMappingURL=main.css.map */

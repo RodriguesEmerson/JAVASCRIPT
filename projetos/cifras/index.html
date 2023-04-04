@@ -4,27 +4,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/main/main.css">
     <title>Projeto Cifras </title>
 </head>
 <body>
-    <header>
-        <img src="imagens/logo.png" alt="logo Cifras">
-        <div class="search-box">
-            <input type="search" id="search-input">
+    <header class="flexCenter">
+        <img id="logo" src="imagens/white-logo.png" alt="logo Cifras">
+        
+        <div class="search-box flexCenter">
+            <input type="search" id="search-input" placeholder="Nome da música">
             <button id="search-btn">Buscar</button>
         </div>
-        <nav>
-            <ul>
-                <li><a href="#">Início</a></li>
-                <li><a href="#">Mais Acessados</a></li>
-                <li><a href="#">Favoritos</a></li>
+        <nav class="menu">
+            <ul class="flexCenter">
+                <li><a class="nav-link" href="#">Início</a></li>
+                <li><a class="nav-link" href="#">Mais Acessados</a></li>
+                <li><a class="nav-link" href="#">Favoritos</a></li>
+                <li class="nav-link flexCenter">
+                    <span class="material-symbols-outlined">
+                    account_circle
+                    </span>
+                    <span>Entrar</span>
+                </li>
             </ul>
         </nav>
         <section id="user">
-            <img src="" alt="user photo">
-            <span>Login</span>
             <div class="modal-login">
                 <img src="" alt="logo cifras">
                 <span>Login</span>
