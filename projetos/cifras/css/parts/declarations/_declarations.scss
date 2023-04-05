@@ -2,7 +2,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Poppins' ,Arial, Helvetica, sans-serif;
+    font-weight: 300;
 }
 
 .flexCenter{
@@ -13,7 +14,9 @@
 
 
 //-------------Variaveis--------------
-$primaryColor: rgb(2, 156, 149);
+$primaryColor:rgb(111, 2, 138);
+$secundaryColor: rgb(50, 7, 61);
+$thirdColor: rgb(18, 156, 108); 
 
 
 

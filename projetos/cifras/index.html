@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,500;0,600;1,200;1,400&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/main/main.css">
     <title>Projeto Cifras </title>
@@ -32,17 +35,18 @@
         </nav>
         <section id="user">
             <div class="modal-login flexCenter">
-                <div>
+                <div class="flexCenter">
                     <img src="imagens/iconlogo.png" alt="logo cifras">
                     <span>Login</span>
                 </div>
-                <form action="" autocomplete="on" class="fomr-login flexCenter">
-                    <input type="text" name="" id="user-name" autocomplete="username" placeholder="Nome de Usuário" required>
-                    <input type="password" name="" id="password" autocomplete="current-password" placeholder="Senha" required>
+                <form action="" autocomplete="on" class="form-login flexCenter">
+                    <input type="text" name="" id="user-name" autocomplete="username" required>
+                    <label for="user-name">Nome de Usuário</label>
+                    <input type="password" name="" id="password" autocomplete="current-password" required>
+                    <label for="password">Senha</label>
                     <button type="submit" id="login-btn">Entrar</button>
-                    <span>Ainda não tem uma conta?</span>
+                    <a href="#" id="forgot-password">Esqueceu a senha? Click aqui.</a>
                     <button id="new-account-btn">Criar uma nova conta</button>
-                    <span id="forgot-password">Esqueceu a senha? Click aqui.</span>
 
                 </form>
             </div>
