@@ -20,20 +20,29 @@
             <input type="search" id="search-input" placeholder="Nome da música">
             <button id="search-btn">Buscar</button>
         </div>
+        <input type="checkbox" class="hidden" id="open-modal-login" checked>
+        <input type="checkbox" class="hidden" id="open-menu-mobile" checked>
+        <label for="open-menu-mobile" class="icon-menu-mobile flexCenter">
+            <span class="icon-menu-mobile-trass"></span>
+            <span class="icon-menu-mobile-trass"></span>
+            <span class="icon-menu-mobile-trass"></span>
+        </label>
         <nav class="menu">
             <ul class="flexCenter">
                 <li><a class="nav-link" href="#">Início</a></li>
                 <li><a class="nav-link" href="#">Mais Acessados</a></li>
                 <li><a class="nav-link" href="#">Favoritos</a></li>
-                <li class="nav-link flexCenter">
-                    <span class="material-symbols-outlined">
-                    account_circle
-                    </span>
-                    <span>Entrar</span>
+                <li class="nav-link open-login-btn">
+                    <label for="open-modal-login" class="flexCenter">
+                        <span class="material-symbols-outlined">
+                        account_circle
+                        </span>
+                        <span>Entrar</span>
+                    </label>
                 </li>
             </ul>
         </nav>
-        <section id="user">
+        <section id="user" class=" flexCenter">
             <div class="modal-login flexCenter">
                 <div class="flexCenter">
                     <img src="imagens/iconlogo.png" alt="logo cifras">

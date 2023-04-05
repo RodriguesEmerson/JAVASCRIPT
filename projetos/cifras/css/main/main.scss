@@ -3,5 +3,11 @@
 @import '../parts/header/header';
 @import '../parts/header/modal-login';
 
+//Media-Screens
+@import '../parts/header/media-screen/header-media';
 
+
+.hidden{
+    display: none;
+}
 

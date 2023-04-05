@@ -1,4 +1,5 @@
 header{
+    font-size: .9em;
     justify-content: space-between !important;
     padding: 0 20px;
     background-color: $primaryColor;
@@ -18,14 +19,27 @@ header{
         height: 40px;
         width: 80%;
         text-indent: 10px;
-        border-radius: 3px;
+        border-radius: 5px;
         border: 1px solid lightgray;
         outline: none;
+
+        &:focus-within{
+            border: 1px solid darken($primaryColor, 10);
+        }
     }
     #search-btn{
+        cursor: pointer;
         height: 40px;
         width: 80px;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        background-color: $thirdColor;
     }
+}
+
+.icon-menu-mobile{
+    position: absolute;
 }
 
 .menu{
@@ -45,20 +59,15 @@ header{
         color: white;
         margin-left: 15px;
         text-decoration: none;
-        border-radius: 3px;
+        border-radius: 5px;
 
         &:hover{
             background-color: darken($primaryColor, 10);
         }
     }
-    .nav-link:nth-child(4){
+    .nav-link:nth-child(4) > label{
         cursor: pointer;
-        width: 80px;
+        width: 70px;
         justify-content: space-between;
     }
-}
-
-#user{
-    margin-left: 40px;
-    width: fit-content;
 }

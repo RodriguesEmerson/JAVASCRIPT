@@ -1,10 +1,12 @@
+#user{
+    position: absolute;
+    right: 10%;
+    top: 60px;
+}
 .modal-login{
     border-radius: 5px;
     overflow: hidden;
     color: rgb(68, 68, 68);
-    position: absolute;
-    right: 12.5%;
-    top: 60px;
     width: 300px;
     flex-direction: column;
     background-color: white;
@@ -58,7 +60,7 @@
             top: 11px;
             left: 3px;
             font-size: .8em;
-            transition: 300ms;
+            transition: 200ms;
             background-color: white;
         }
 
@@ -78,7 +80,7 @@
             top: 60px;
             left: 3px;
             font-size: .8em;
-            transition: 300ms;
+            transition: 200ms;
             background-color: white;
         }
 
@@ -98,7 +100,7 @@
             border-radius: 5px;
             color: white;
             background-color: $thirdColor;
-            transition: 300ms;
+            transition: 200ms;
 
             &:hover{
                 background-color: darken($thirdColor, 10);
@@ -106,11 +108,18 @@
         }
 
         #new-account-btn{
-
+           color: blue;
+           border: none;
+           background-color: white;
+           text-decoration: underline;
         }
         #forgot-password{
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             font-size: .8em;
         }
     }
+}
+
+#open-modal-login:checked ~ #user {
+    display: none;
 }
