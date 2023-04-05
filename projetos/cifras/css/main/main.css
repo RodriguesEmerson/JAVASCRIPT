@@ -6,6 +6,10 @@
   font-weight: 300;
 }
 
+body {
+  background-color: rgb(238, 238, 238);
+}
+
 .flexCenter {
   display: flex;
   justify-content: center;
@@ -199,6 +203,50 @@ header {
 
 #open-modal-login:checked ~ #user {
   display: none;
+}
+
+.container {
+  flex-direction: column;
+}
+
+.main-banner {
+  margin: 15px;
+  width: 70%;
+  height: auto;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.main-banner picture {
+  display: flex;
+}
+.main-banner img {
+  width: 100%;
+}
+
+.highlight-box {
+  width: 70%;
+  overflow: hidden;
+}
+
+.inicial-highlight {
+  width: 100%;
+}
+.inicial-highlight ul {
+  list-style-type: none;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.inicial-highlight ul li {
+  display: flex;
+  flex: 1 0 250px;
+  overflow: hidden;
+  border-radius: 3px;
+}
+.inicial-highlight ul li a {
+  display: flex;
+}
+.inicial-highlight ul img {
+  width: 100%;
 }
 
 @media screen and (max-width: 1030px) {

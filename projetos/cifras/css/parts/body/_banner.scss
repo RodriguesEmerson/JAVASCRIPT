@@ -1,3 +1,47 @@
+.container{
+    flex-direction: column;
+}
 .main-banner{
+    margin: 15px;
+    width: 70%;
+    height: auto;
+    overflow: hidden;
+    border-radius: 10px;
+
+    picture{
+        display: flex;
+    }
+
+    img{
+        width: 100%;
+    }
+}
+
+.highlight-box{
+    width: 70%;
+    overflow: hidden;
+}
+.inicial-highlight{
+    width: 100%;
+
+    ul{
+        list-style-type: none;
+        gap: 10px;
+        flex-wrap: wrap;
+
+        li{
+            display: flex;
+            flex: 1 0 250px;
+            overflow: hidden;
+            border-radius: 3px;
+            
+            a{
+                display: flex;
+            }
+        }
+        img{
+            width: 100%;
+        }
+    }
 
 }
