@@ -12,7 +12,6 @@
         padding-right: 60px;
     }
    
-
     .menu{
         position: absolute;
         display: none;
@@ -91,5 +90,27 @@
         transform-origin: right;
         transform: rotate(42deg);
         margin-right: 10px;
+    }
+}
+
+@media screen and (max-width: 500px){
+    header{
+        
+    }
+    .search-box{
+        position: relative;
+        margin-left: 5%;
+        justify-content: start;
+        flex: 1 0 230px;
+        width: 100% !important;
+    }
+    // #search-input{
+    //     width: 100% !important;
+    // }
+    #search-btn{
+        font-size: .6em;
+        position: absolute;
+        width: 40px !important;
+        right: 18%;
     }
 }
