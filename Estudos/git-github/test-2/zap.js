@@ -7,3 +7,4 @@ const etest2 = {
     nome: '',
     sobrenome: ''
 }
+const miasUmaAlteracao = 'ateraçaõ'
