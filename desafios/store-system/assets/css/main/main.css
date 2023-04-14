@@ -1,1 +1,89 @@
-/*# sourceMappingURL=main.css.map */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+}
+
+.container {
+  display: flex;
+  align-items: start;
+  height: 100vh;
+  background-color: rgb(228, 227, 227);
+}
+.container nav {
+  width: 280px;
+  background-color: white;
+  height: 100%;
+  padding: 0 10px;
+}
+.container nav h1 {
+  color: rgb(61, 61, 61);
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  border-bottom: 1px solid rgb(212, 212, 212);
+  margin-bottom: 20px;
+}
+.container nav ul {
+  position: relative;
+  height: 100%;
+}
+.container nav ul li {
+  font-size: 15px;
+  position: relative;
+}
+.container nav ul li a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  justify-content: start;
+  text-decoration: none;
+  color: rgb(59, 59, 59);
+  height: 30px;
+  width: 100%;
+  transition: 200ms;
+  border-bottom: 1px solid rgb(231, 231, 231);
+}
+.container nav ul li a .icon-nav {
+  font-size: 17px;
+  margin-right: 5px;
+}
+.container nav ul li a .row-link {
+  position: absolute;
+  right: 5px;
+  font-size: 10px;
+}
+.container nav ul li a:hover {
+  color: rgb(233, 58, 5);
+}
+.container nav ul .nav-datas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  color: gray;
+  font-size: 12px;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.container header {
+  background-color: rgb(233, 58, 5);
+  height: 50px;
+  width: 100%;
+  padding: 10px;
+  line-height: 30px;
+  text-align: center;
+  color: white;
+}
+
+.hidden {
+  display: none;
+}/*# sourceMappingURL=main.css.map */

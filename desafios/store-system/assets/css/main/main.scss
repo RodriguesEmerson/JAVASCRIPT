@@ -1,6 +1,84 @@
 @charset "UTF-8";
-@import '../parts/vendas/vendas'
+@import '../parts/declarations/declarations';
+@import '../parts/vendas/vendas';
 
+.container{
+   display: flex;
+   align-items: start;
+   height: 100vh;
+   background-color: rgb(228, 227, 227);
+   
+   nav{
+      width: 280px;
+      background-color: white;
+      height: 100%;
+      padding: 0 10px;
 
+      h1{
+         color: rgb(61, 61, 61);;
+         height: 50px;
+         line-height: 50px;
+         text-align: center;
+         border-bottom: 1px solid rgb(212, 212, 212);
+         margin-bottom: 20px
+      }
 
+      ul{
+         position: relative;
+         height: 100%;
+         li{
+            font-size: 15px;
+            position: relative;
+            
+            a{
+               @include displayFlex(row);
+               justify-content: start;
+               text-decoration: none;
+               color: rgb(59, 59, 59);
+               height: 30px;
+               width: 100%;
+               transition: 200ms;
+               border-bottom: 1px solid rgb(231, 231, 231);
+               .icon-nav{
+                  font-size: 17px;
+                  margin-right: 5px;
+               }
 
+               .row-link{
+                  position: absolute;
+                  right: 5px;
+                  font-size: 10px;
+               }
+
+               &:hover{
+                  color: $primaryColor;
+               }
+            }
+         }
+
+         .nav-datas{
+            @include displayFlex(column);
+            position: absolute;
+            color: gray;
+            font-size: 12px;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+         }
+      }
+   }
+
+   header{
+      background-color: $primaryColor;
+      height: 50px;
+      width: 100%;
+      padding: 10px;
+      line-height: 30px;
+      text-align: center;
+      color: white;
+   }
+}
+
+.hidden{
+   display: none;
+}
