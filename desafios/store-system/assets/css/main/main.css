@@ -10,13 +10,169 @@
 }
 
 .container {
+  position: relative;
+  overflow: hidden;
+}
+.container nav ul li:nth-child(1) a {
+  color: rgb(231, 58, 5);
+}
+
+.sell-area {
+  font-size: 15px;
+  position: absolute;
+  left: 250px;
+  top: 50px;
+  padding: 10px;
+  height: calc(100vh - 50px);
+  width: calc(100vw - 250px);
+}
+.sell-area .add-new-produtc-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  justify-content: start;
+  align-items: start;
+  flex-wrap: wrap;
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.137);
+}
+
+.field-sells {
+  width: 500px;
+  padding: 10px;
+  padding-right: 50px;
+  margin-right: 50px;
+  border-right: 1px solid lightgray;
+}
+.field-sells div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.field-sells input[type=text] {
+  height: 40px;
+  width: 70%;
+  margin: 3px 0;
+  padding: 0 5px;
+  outline: none;
+  text-align: end;
+  border-radius: 3px;
+  border: 1px solid gray;
+}
+.field-sells input[type=text]:focus-within {
+  border: 2px solid gray;
+}
+.field-sells .sell-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin-top: 10px;
+  justify-content: end;
+}
+.field-sells .sell-buttons #sell-add-product-btn {
+  height: 40px;
+  width: 70%;
+  border-radius: 5px;
+  color: white;
+  border: 1px solid white;
+  background-color: rgb(2, 89, 129);
+  transition: 200ms;
+  opacity: 0.8;
+}
+.field-sells .sell-buttons #sell-add-product-btn:hover {
+  opacity: 1;
+}
+
+.sell-list table {
+  width: 500px;
+  border-collapse: collapse;
+  border-radius: 3px 3px 0;
+  overflow: hidden;
+}
+.sell-list table tr {
+  height: 30px;
+}
+.sell-list table tr:nth-child(odd) {
+  background-color: lightgray;
+}
+.sell-list table tr:nth-child(1) {
+  height: 40px;
+  color: white;
+  background-color: rgb(63, 62, 62);
+}
+.sell-list table tr td {
+  text-align: center;
+}
+.sell-list table tr td:nth-child(1) {
+  width: 50px;
+}
+.sell-list table tr td:nth-child(2) {
+  width: 250px;
+}
+.sell-list table tr .del-item {
+  font-size: 19px !important;
+}
+.sell-list .finish-sell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.sell-list .finish-sell .total-sell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 50px;
+  width: 500px;
+  padding: 0 10px;
+  margin-top: 20px;
+  font-size: 30px;
+  color: white;
+  background-color: rgb(63, 62, 62);
+}
+.sell-list .finish-sell .buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+.sell-list .finish-sell .buttons button {
+  height: 40px;
+  width: 100px;
+  margin-top: 10px;
+  color: white;
+  background-color: rgb(190, 58, 49);
+  border: 1px solid white;
+  border-radius: 3px;
+  opacity: 0.8;
+  transition: 200ms;
+}
+.sell-list .finish-sell .buttons button:hover {
+  opacity: 1;
+}
+.sell-list .finish-sell .buttons #finish-sell-btn {
+  background-color: rgb(2, 129, 66);
+  width: 77%;
+}
+
+.container {
   display: flex;
   align-items: start;
   height: 100vh;
   background-color: rgb(228, 227, 227);
 }
 .container nav {
-  width: 280px;
+  min-width: 250px;
   background-color: white;
   height: 100%;
   padding: 0 10px;
@@ -60,7 +216,7 @@
   font-size: 10px;
 }
 .container nav ul li a:hover {
-  color: rgb(233, 58, 5);
+  color: rgb(231, 58, 5);
 }
 .container nav ul .nav-datas {
   display: flex;
@@ -75,7 +231,7 @@
   transform: translateX(-50%);
 }
 .container header {
-  background-color: rgb(233, 58, 5);
+  background-color: rgb(231, 58, 5);
   height: 50px;
   width: 100%;
   padding: 10px;

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+   <link rel="stylesheet" href="../assets/css/main/main.css">
+   <link rel="stylesheet" href="../assets/css/parts/vendas/_vendas.scss">
+   <title>Área de Vendas</title>
+</head>
+
+<body>
+   <main class="container">
+      <nav>
+         <h1>Store System</h1>
+         <ul>
+            <li class="nav-link">
+               <a href="#">
+                  <span class="material-symbols-outlined icon-nav">storefront</span>
+                  Área de Vendas
+                  <span class="material-symbols-outlined row-link">arrow_forward_ios</span>
+               </a>
+            </li>
+            <li class="nav-link">
+               <a href="#">
+                  <span class="material-symbols-outlined icon-nav">real_estate_agent</span>
+                  Podutos
+                  <span class="material-symbols-outlined row-link">arrow_forward_ios</span>
+               </a>
+            </li>
+            <li class="nav-link">
+               <a href="#">
+               <span class="material-symbols-outlined icon-nav">monitoring</span>
+               Relatórios
+               <span class="material-symbols-outlined row-link">arrow_forward_ios</span>
+            </a>
+            </li>
+            <li class="nav-datas">
+               <span>14/04/2023</span>
+               <span>Versão 1.0.0</span>
+            </li>
+         </ul>
+      </nav>
+      <header>
+         <h3>Área de Vendas</h3>
+      </header>
+
+      <section class="sell-area">
+         <div class="add-new-produtc-box">
+            <form class="field-sells" autocomplete="off">
+                  <div>
+                     <input type="text" id="sell-product-search" placeholder="Codigo do produto">
+                     <div>
+                        <input type="checkbox" id="sell-product-search-type">
+                        <label for="sell-product-search-type">Nome</label>
+                     </div>
+                  </div>
+   
+                  <div>
+                     <label for="sell-product-name">PRODUTO</label>
+                     <input type="text" id="sell-product-name">
+                  </div>
+   
+                  <div>
+                     <label for="sell-product-amount">QUANTIDADE</label>
+                     <input type="text" id="sell-product-amount" value="1">
+                  </div>
+   
+                  <div>
+                     <label for="sell-product-value">VAL UNITARIO</label>
+                     <input type="text" id="sell-product-value">
+                  </div>
+   
+                  <div>
+                     <label for="sell-product-total-value">TOTAL</label>
+                     <input type="text" id="sell-product-total-value">
+                  </div>
+   
+                  <div class="sell-buttons">
+                     <input type="button" id="sell-add-product-btn" value="ADICIONAR">
+                  </div>
+            </form>
+            <div class="sell-list">
+               <table>
+                  <tr>
+                     <th scope="col">Quant</th>
+                     <th scope="col">Produto</th>
+                     <th scope="col">Val-Un</th>
+                     <th scope="col">Subtotal</th>
+                     <th></th>
+                  </tr>
+                  <tr>
+                     <td>3</td>
+                     <td>Produto 1</td>
+                     <td>R$ 10,00</td>
+                     <td>R$ 30,00</td>
+                     <td><span class="material-symbols-outlined del-item">delete</span></td>
+                  </tr>
+                  <tr>
+                     <td>2</td>
+                     <td>Produto 2</td>
+                     <td>R$ 20,00</td>
+                     <td>R$ 40,00</td>
+                     <td><span class="material-symbols-outlined del-item">delete</span></td>
+                  </tr>
+                  <tr>
+                     <td>3</td>
+                     <td>Produto 3</td>
+                     <td>R$ 20,00</td>
+                     <td>R$ 60,00</td>
+                     <td><span class="material-symbols-outlined del-item">delete</span></td>
+                  </tr>
+               </table>
+
+               <div class="finish-sell">
+                 
+                  <div class="total-sell">
+                     <span>Total</span> R$ 130,00
+                  </div>
+                  <div class="buttons">
+                     <button id="cancel-sell-btn">Cancelar</button>
+                     <button id="finish-sell-btn">FINALIZAR</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+   </main>
+</body>
+
+</html>

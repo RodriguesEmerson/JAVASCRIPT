@@ -1,0 +1,161 @@
+.container {
+   position: relative;
+   overflow: hidden;
+   nav ul li:nth-child(1) {
+      a {
+         color: $primaryColor;
+      }
+   }
+}
+
+.sell-area{
+   font-size: 15px;
+   position: absolute;
+   left: 250px;
+   top: 50px;
+   padding: 10px;
+   height: calc(100vh - 50px);
+   width: calc(100vw - 250px);
+
+   .add-new-produtc-box{
+      @include displayFlex(row);
+      justify-content: start;
+      align-items: start;
+      flex-wrap: wrap;
+      padding: 10px;
+      background-color: rgb(255, 255, 255);
+      border-radius: 5px;
+      box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.137);
+      
+   }
+}
+
+
+.field-sells{
+   width: 500px;
+   padding: 10px;
+   padding-right: 50px;
+   margin-right: 50px;
+   border-right: 1px solid lightgray;
+
+   div{
+      @include displayFlex(row);
+      justify-content: space-between;
+   }
+
+   input[type="text"]{
+      height: 40px;
+      width: 70%;
+      margin: 3px 0;
+      padding: 0 5px;
+      outline: none;
+      text-align: end;
+      border-radius: 3px;
+      border: 1px solid gray;
+
+      &:focus-within{
+         border: 2px solid gray;
+      }
+   }
+
+   .sell-buttons{
+      @include displayFlex(row);
+      margin-top: 10px;
+      justify-content: end;  
+
+      #sell-add-product-btn{
+         height: 40px;
+         width: 70%;
+         border-radius: 5px;
+         color: white;
+         border: 1px solid white;
+         background-color: rgb(2, 89, 129);
+         transition: 200ms;
+         opacity: .8;
+
+         &:hover{
+            opacity: 1;
+         }
+      }
+   }
+}
+
+.sell-list{
+   table{
+      width: 500px;
+      border-collapse: collapse;
+      border-radius: 3px 3px 0;
+      overflow: hidden;
+      tr{
+         height: 30px;
+
+         
+         &:nth-child(odd){
+            background-color: lightgray;
+         }
+         &:nth-child(1){
+            height: 40px;
+            color: white;
+            background-color: rgb(63, 62, 62);
+         }
+
+         td{
+            text-align: center;
+         }
+         td:nth-child(1){
+            width: 50px;
+         }
+         td:nth-child(2){
+            width: 250px;
+         }
+         .del-item{
+            font-size: 19px !important;
+         }
+      }
+   }
+
+   .finish-sell{
+      @include displayFlex(column);
+      .total-sell{
+         @include displayFlex(row);
+         justify-content: space-between;
+         height: 50px;
+         width: 500px;
+         padding: 0 10px;
+         margin-top: 20px;
+         font-size: 30px;
+         color: white;
+         background-color: rgb(63, 62, 62);
+
+      }
+
+      .buttons{
+         @include displayFlex(row);
+         justify-content: space-between;
+         width: 100%;
+
+         button{
+            height: 40px;
+            width: 100px;
+            margin-top: 10px;
+            color: white;
+            background-color: rgb(190, 58, 49);
+            border: 1px solid white;
+            border-radius: 3px;
+            
+            opacity: .8;
+            transition: 200ms;
+   
+            &:hover{
+               opacity: 1;
+            }
+         }
+   
+         #finish-sell-btn{
+            background-color: rgb(2, 129, 66);
+            width: 77%;
+         }
+
+      }
+      }
+}
