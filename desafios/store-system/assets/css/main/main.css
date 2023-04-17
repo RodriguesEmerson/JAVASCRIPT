@@ -54,7 +54,7 @@
   flex-direction: row;
   justify-content: space-between;
 }
-.field-sells input[type=text] {
+.field-sells input[type=text], .field-sells input[type=number] {
   height: 40px;
   width: 70%;
   margin: 3px 0;
@@ -64,7 +64,7 @@
   border-radius: 3px;
   border: 1px solid gray;
 }
-.field-sells input[type=text]:focus-within {
+.field-sells input[type=text]:focus-within, .field-sells input[type=number]:focus-within {
   border: 2px solid gray;
 }
 .field-sells .sell-buttons {
@@ -84,6 +84,7 @@
   background-color: rgb(2, 89, 129);
   transition: 200ms;
   opacity: 0.8;
+  cursor: pointer;
 }
 .field-sells .sell-buttons #sell-add-product-btn:hover {
   opacity: 1;
@@ -117,6 +118,11 @@
 }
 .sell-list table tr .del-item {
   font-size: 19px !important;
+  cursor: pointer;
+  transition: 200ms;
+}
+.sell-list table tr .del-item:hover {
+  color: red;
 }
 .sell-list .finish-sell {
   display: flex;
@@ -154,6 +160,7 @@
   background-color: rgb(190, 58, 49);
   border: 1px solid white;
   border-radius: 3px;
+  cursor: pointer;
   opacity: 0.8;
   transition: 200ms;
 }
