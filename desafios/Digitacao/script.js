@@ -1,5 +1,6 @@
 let textBase = document.querySelector('.text-model p');
 let btnStart = document.querySelector('#btn-start-again')
+let btnCancel = document.getElementById('btn-cancel-text')
 let textoDigitado = document.getElementById('text-input')
 let minute = document.querySelector('.minute')
 let second = document.querySelector('.second')
@@ -15,14 +16,21 @@ let caracteresValidos = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
 ]
 
 textoDigitado.addEventListener('keydown', keyValida)
-
 btnStart.addEventListener('click', startTest)
+btnCancel.addEventListener('click', cancelDigitacao)
 
 function startTest(){
     start = true;
-    cronometro = setInterval(() => {
-        timer()
-    }, 1000);
+    textoDigitado.focus()
+    if(btnStart.value == 'Começar'){
+        btnStart.value = 'Pausar'
+        cronometro = setInterval(() => {
+            timer()
+        }, 1000);
+    }else{
+        btnStart.value = 'Começar'
+        clearInterval(cronometro)
+    }
 }
 function timer(){
     if (second.innerHTML > 0){
@@ -79,4 +87,13 @@ function verificaMatch(e) {
 
     if(textoDigitado.value.length + 1 == textBase.textContent.length) clearInterval(cronometro)
 
+}
+
+function cancelDigitacao(){
+    clearInterval(cronometro);
+    btnStart.value = 'Começar'
+    textoDigitado.value = '';
+    minute.innerHTML = '01';
+    second.innerHTML ='00';
+    start = false;
 }
