@@ -74,7 +74,7 @@ header{
 
 /*Textos*/
 .text-model{
-    border: 2px solid rgb(6, 142, 254); ;
+    border: 2px solid rgb(6, 142, 254);
     padding: 10px;
     margin: 10px 0px;
     border-radius: 3px;
@@ -95,4 +95,90 @@ header{
     padding-bottom: 30px;
     margin: -12px;
     font: 18px Arial, Helvetica, sans-serif;
+}
+
+/******MODAL NPM*****/
+.modal-box{
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.496);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal-npm{
+    width: 400px;
+    height: 200px;
+    overflow: hidden;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.212);
+}
+.close-modal{
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    line-height: 40px;
+    font-weight: 500;
+    font-size: 25px;
+    color: white;
+    right: calc(50% - 200px);
+    background-color: rgb(201, 4, 4);
+    border-radius: 0 5px 0 0;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.close-modal:hover{
+    background-color: rgb(145, 3, 3);
+}
+.modal-text{
+    display: block;
+    width: 100%;
+    height: 40px;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 40px;
+    background-color:  rgb(6, 142, 254);
+    color: white;
+}
+.modal-npm-note{
+    text-align: center;
+    padding: 20px 0 10px 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+.npm-note{
+    font-size: 35px;
+    color:rgb(6, 142, 254) ;
+}
+.modal-npm-note span:last-child{
+    position: relative;
+    top: -12px;
+}
+.teclas-erradas{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.teclas-erradas div{
+    display: flex;
+    padding: 3px;
+}
+.tecla-errada{
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid black;
+}
+
+.blur{
+    filter: blur(2px);
+}
+.hiden{
+    display: none;
 }
