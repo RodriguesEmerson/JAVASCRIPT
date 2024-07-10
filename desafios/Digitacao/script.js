@@ -15,7 +15,7 @@ let teclasErradas = document.querySelector('.teclas-erradas')
 let start;
 let errou = false;
 let cronometro;
-let minutosDigitados = 0;
+let segundosDigitados = 0;
 let arrErros = [];
 let caracteresValidos = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
     'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
@@ -43,7 +43,7 @@ function startTest() {
     }
 }
 function timer() {
-    minutosDigitados++
+    segundosDigitados++
     if (second.innerHTML > 0) {
         second.innerHTML = second.innerHTML - 1;
         if (second.innerHTML < 10) second.innerHTML = `0${second.innerHTML}`
@@ -123,8 +123,12 @@ function contaErros(e){
 
 function calculaNpm(){
     openCloseModal();
-    let npm = textoDigitado.value.length / minutosDigitados
-    npmNote.innerHTML = npm
+    let minutos = segundosDigitados / 60;
+    let npm = textoDigitado.value.length / minutos;
+    let Dnpm = npm.toString().split('.');
+    console.log(Dnpm)
+    npm = Dnpm[0];
+    npmNote.innerHTML = npm;
 }
 
 function cancelDigitacao() {
@@ -134,7 +138,7 @@ function cancelDigitacao() {
     minute.innerHTML = '01';
     second.innerHTML = '00';
     start = false;
-    minutosDigitados = 0;
+    segundosDigitados = 0;
 }
 btnCloseModal.addEventListener('click', openCloseModal);
 btnTrocaTexto.addEventListener('click', openCloseModal);
