@@ -11,7 +11,7 @@ let second = document.querySelector('.second')
 let modal = document.querySelector('.modal-box')
 let btnCloseModal = document.querySelector('.close-modal')
 let npmNote = document.querySelector('.npm-note')
-let teclasErradas = document.querySelector('.teclas-erradas')
+let teclasErradas = document.querySelector('.teclas-erradas-box')
 let start;
 let errou = false;
 let cronometro;
@@ -30,6 +30,7 @@ btnStart.addEventListener('click', startTest)
 btnCancel.addEventListener('click', cancelDigitacao)
 
 function startTest() {
+    textoDigitado.closest('textarea').removeAttribute('disabled')
     start = true;
     textoDigitado.focus()
     if (btnStart.value == 'Começar') {
@@ -47,7 +48,6 @@ function timer() {
     if (second.innerHTML > 0) {
         second.innerHTML = second.innerHTML - 1;
         if (second.innerHTML < 10) second.innerHTML = `0${second.innerHTML}`
-        console.log(second.innerHTML);
     }
     if (minute.innerHTML > 0 && second.innerHTML == 0 && start) {
         minute.innerHTML = `0${minute.innerHTML - 1}`;
@@ -99,36 +99,50 @@ function verificaMatch(e) {
         contaErros(caracterAtual)
     }
 
-    if (textoDigitado.value.length + 1 == textBase.textContent.length){
+    if (textoDigitado.value.length + 1 == textBase.textContent.length) {
         clearInterval(cronometro);
         calculaNpm()
     }
 }
-function contaErros(e){
-    if(arrErros.length == 0){
-        arrErros.push([e,1]);
-    }else{
-        for (let ind = 0; ind < arrErros.length; ind++){
+function contaErros(e) {
+    if (arrErros.length == 0) {
+        arrErros.push([e, 1]);
+    } else {
+        if (e == ' ') e = 'espç'
+        for (let ind = 0; ind < arrErros.length; ind++) {
             let element = arrErros[ind];
-            if(element[0] == e){
+            if (element[0] == e) {
                 element[1]++
-                console.log(arrErros)
                 return
             }
         }
-        arrErros.push([e,1]);
+        arrErros.push([e, 1]);
     }
-    console.log(arrErros)
 }
 
-function calculaNpm(){
+function calculaNpm() {
     openCloseModal();
     let minutos = segundosDigitados / 60;
     let npm = textoDigitado.value.length / minutos;
     let Dnpm = npm.toString().split('.');
-    console.log(Dnpm)
     npm = Dnpm[0];
     npmNote.innerHTML = npm;
+
+    carregaCaracteresErrados()
+}
+function carregaCaracteresErrados() {
+    let boxFather = teclasErradas.closest('div')
+    arrErros.forEach(element => {
+        let novaDiv = document.createElement('div');
+        let span1 = document.createElement('span');
+        let span2 = document.createElement('span');
+        novaDiv.setAttribute('class', 'tecla-errada')
+        boxFather.appendChild(novaDiv);
+        span1.innerHTML = element[0];
+        span2.innerHTML = element[1];
+        novaDiv.appendChild(span1);
+        novaDiv.appendChild(span2);
+    });
 }
 
 function cancelDigitacao() {
@@ -139,19 +153,20 @@ function cancelDigitacao() {
     second.innerHTML = '00';
     start = false;
     segundosDigitados = 0;
+    textoDigitado.closest('textarea').setAttribute('disabled', '');
 }
 btnCloseModal.addEventListener('click', openCloseModal);
 btnTrocaTexto.addEventListener('click', openCloseModal);
 //****FUNCIONALIDADES DO MODAL****/
-function openCloseModal(){
+function openCloseModal() {
     let modalClass = modal.closest('section');
 
-    if(modalClass.classList.contains('hiden')){
+    if (modalClass.classList.contains('hiden')) {
         modalClass.classList.remove('hiden');
         infosBox.closest('div').classList.add('blur');
         textBaseBox.closest('div').classList.add('blur');
         textoDigitadoBox.closest('form').classList.add('blur');
-    }else{
+    } else {
         modalClass.classList.add('hiden');
         infosBox.closest('div').classList.remove('blur');
         textBaseBox.closest('div').classList.remove('blur');

@@ -16,7 +16,7 @@
         <div class="infos">
             <div class="buttons">
                 <input type="button" id="btn-start-again" class="btn-infos" value="Começar">
-                <input type="button" id="btn-other-text" class="btn-infos" value="Trocar Texto">
+                <input type="button" id="btn-other-text" class="btn-infos hiden" value="Trocar Texto">
                 <input type="button" id="btn-cancel-text" class="btn-infos" value="Cancelar">
             </div>
             <div class="timer-view">
@@ -32,7 +32,7 @@
             <p>Centenas de anos atrás, no dia 29 de outubro de 1810, o Brasil comemorava o estabelecimento da primeira biblioteca do país, a Real Biblioteca. Foi a partir desse acontecimento que nasceu o Dia Nacional do Livro.</p>
         </div>
         <form class="text-area">
-            <textarea name="texto" id="text-input"></textarea>
+            <textarea name="texto" id="text-input" disabled></textarea>
         </form>
         <section class="modal-box hiden">
             <div class="modal-npm">
@@ -45,8 +45,8 @@
                 </div>
                 <div class="teclas-erradas">
                     <span>As teclas que você errou são:</span>
-                    <div>
-                        <div class="tecla-errada">
+                    <div class="teclas-erradas-box">
+                    <!--<div class="tecla-errada">
                             <span>a</span>
                             <span>2</span>
                         </div>
@@ -58,6 +58,7 @@
                             <span>c</span>
                             <span>3</span>
                         </div>
+                    -->
                     </div>
                 </div>
             </div>
