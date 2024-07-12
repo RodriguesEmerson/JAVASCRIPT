@@ -3,6 +3,8 @@ let tunel = document.querySelector('.tunel');
 let marioImg = document.querySelector('.mario-r').closest('img');
 let jumpTime;
 let jumping = false;
+let imgOk = false;
+let descendoTunel = false;
 
 document.body.addEventListener('keypress', marioJump)
 
@@ -10,6 +12,7 @@ function marioJump() {
   if (jumping) return
   marioImg.removeAttribute('src')
   marioImg.setAttribute('src', 'imagens/2d-mario-jumping.png');
+  marioImg.classList.remove('descendo');
   marioImg.classList.add('jump');
   jumping = true
 
@@ -23,7 +26,6 @@ function marioJump() {
   }, 800);
 
 }
-let imgOk = false;
 function checkBump() {
   let tunelPosition = tunel.offsetLeft;
   let marioPostion = mario.offsetTop;
@@ -32,7 +34,8 @@ function checkBump() {
     console.log('Bateu')
     return
   }
-  if (tunelPosition < 100 && tunelPosition > 30 && marioPostion >= 175 && jumping) {
+  if (tunelPosition < 100 && tunelPosition > 30 && marioPostion <= 175 && marioPostion > 172) {   
+    console.log('descendo');
 
     mario.style.top = '175px';
     marioImg.classList.remove('jump');
@@ -42,10 +45,12 @@ function checkBump() {
       imgOk = true;
     }
   }
-  if (imgOk && tunelPosition < 30) {
-    mario.style.top = '220px';
-    // marioImg.classList.add('descendo');
+  if (imgOk && tunelPosition < 30 && !descendoTunel) {
+    // mario.style.top = '220px'; 
+    mario.classList.add('descendo');
+    marioImg.removeAttribute('style')
     imgOk = false;
+    descendoTunel = false;
   }
 }
 setInterval(() => {
