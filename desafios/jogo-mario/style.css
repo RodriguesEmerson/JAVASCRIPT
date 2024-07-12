@@ -13,16 +13,16 @@
     overflow: hidden;
 }
 .tunel{
-    height: 50px;
+    height: 50px;   
     position: absolute;
     bottom: -2px;
-    right: -70px;
-    /* animation: tunel-animation 3s infinite linear; */
+    /* left: 100px; */
+    animation: tunel-animation 3s infinite linear;
 }
 .mario-r{
     height: 80px;
     position: absolute;
-    bottom: 0;
+    top: 220px;
     left: 30px;
 }
 .jump{
@@ -39,18 +39,18 @@
 }
 @keyframes jump{
     0%{
-        bottom: 0;
+        top: 220px;
     }
     40%{
-        bottom: 80px;
+        top: 140px;
     }
     50%{
-        bottom: 80px;
+        top: 140px;
     }
     60%{
-        bottom: 80px;
+        top: 140px;
     }
     100%{
-        bottom: 0;
+        top: 220px;
     }
 }
