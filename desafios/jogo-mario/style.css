@@ -1,0 +1,56 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.tela{
+    width: 500px;
+    height: 300px;
+    border: 1px solid black;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+}
+.tunel{
+    height: 50px;
+    position: absolute;
+    bottom: -2px;
+    right: -70px;
+    /* animation: tunel-animation 3s infinite linear; */
+}
+.mario-r{
+    height: 80px;
+    position: absolute;
+    bottom: 0;
+    left: 30px;
+}
+.jump{
+    animation: jump 0.8s linear;
+}
+ 
+@keyframes tunel-animation{
+    from{
+        right: -70px;
+    }
+    to{
+        right: 500px;
+    }
+}
+@keyframes jump{
+    0%{
+        bottom: 0;
+    }
+    40%{
+        bottom: 80px;
+    }
+    50%{
+        bottom: 80px;
+    }
+    60%{
+        bottom: 80px;
+    }
+    100%{
+        bottom: 0;
+    }
+}
