@@ -1,0 +1,37 @@
+
+
+.despesas{
+    grid-area: despesasTable;
+    background-color: aqua;
+    height: 100%;
+}
+.despesas-tabela{
+    width: 100%;
+}
+.receitas{
+    grid-area: receitasTable;
+    background-color: aqua;
+}
+.receitas-tabela{
+    width: 100%;
+}
+.gastos-fixos{
+    grid-area: fixosTable;
+    background-color: aqua;
+}
+.fixos-tabela{
+    width: 100%;
+}
+.tabelas{
+    width: 50vw;
+    height: 100vh;
+    background-color: white;
+    display: grid;
+    grid-template-areas: 
+        'despesasTable receitasTable'
+        'despesasTable receitasTable'
+        'despesasTable receitasTable'
+        'despesasTable fixosTable'
+        'despesasTable fixosTable';
+    gap: 10px;
+}

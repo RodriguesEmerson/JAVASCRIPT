@@ -1,0 +1,20 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: antiquewhite;
+}
+.container{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+.navigation{
+    position: absolute;
+    margin-left: -200px;
+    width: 200px;
+    height: 100vh;
+    background-color: rgb(35, 35, 35);
+}
