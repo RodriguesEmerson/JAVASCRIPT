@@ -1,0 +1,106 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background-color: antiquewhite;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+
+.navigation {
+  width: 200px;
+  height: 100vh;
+  background-color: rgb(35, 35, 35);
+}
+
+.despesas {
+  grid-area: despesasTable;
+  background-color: rgb(255, 255, 255);
+  height: 100%;
+}
+
+.despesas-tabela, .receitas-tabela, .fixos-tabela {
+  border-collapse: collapse;
+  font-size: 14px;
+  width: 100%;
+}
+.despesas-tabela th, .despesas-tabela td, .receitas-tabela th, .receitas-tabela td, .fixos-tabela th, .fixos-tabela td {
+  padding: 3px 5px;
+}
+.despesas-tabela tr:nth-child(odd), .receitas-tabela tr:nth-child(odd), .fixos-tabela tr:nth-child(odd) {
+  background-color: rgba(255, 0, 0, 0.319);
+}
+.despesas-tabela tr:nth-child(odd) td:first-child, .receitas-tabela tr:nth-child(odd) td:first-child, .fixos-tabela tr:nth-child(odd) td:first-child {
+  border-radius: 15px 0 0 15px !important;
+}
+.despesas-tabela tr:nth-child(odd) td:last-child, .receitas-tabela tr:nth-child(odd) td:last-child, .fixos-tabela tr:nth-child(odd) td:last-child {
+  border-radius: 0 15px 15px 0 !important;
+}
+.despesas-tabela tr:first-child, .receitas-tabela tr:first-child, .fixos-tabela tr:first-child {
+  background-color: rgba(173, 0, 0, 0.934);
+  color: white;
+}
+.despesas-tabela tr td:not(:first-child), .receitas-tabela tr td:not(:first-child), .fixos-tabela tr td:not(:first-child) {
+  text-align: center;
+}
+.despesas-tabela tr td:last-child, .receitas-tabela tr td:last-child, .fixos-tabela tr td:last-child {
+  text-align: end;
+}
+.despesas-tabela tr:nth-child(even) td, .receitas-tabela tr:nth-child(even) td, .fixos-tabela tr:nth-child(even) td {
+  border-left: 1px solid rgba(0, 0, 0, 0.211);
+}
+
+.receitas {
+  grid-area: receitasTable;
+}
+.receitas .receitas-tabela tr:nth-child(odd) {
+  background-color: rgba(0, 128, 0, 0.221);
+}
+.receitas .receitas-tabela tr:nth-child(odd) td:first-child {
+  border-radius: 15px 0 0 15px !important;
+}
+.receitas .receitas-tabela tr:nth-child(odd) td:last-child {
+  border-radius: 0 15px 15px 0 !important;
+}
+.receitas .receitas-tabela tr:first-child {
+  background-color: green;
+  color: white;
+}
+.receitas .receitas-tabela tr:nth-child(even) td:first-child {
+  border-left: none;
+}
+
+.gastos-fixos {
+  grid-area: fixosTable;
+}
+.gastos-fixos .fixos-tabela {
+  width: 100%;
+}
+.gastos-fixos tr:nth-child(odd) {
+  background-color: rgba(255, 200, 0, 0.221);
+}
+.gastos-fixos tr:first-child {
+  background-color: rgb(255, 200, 0);
+}
+.gastos-fixos tr:nth-child(even) td:first-child {
+  border-left: none;
+}
+
+.tabelas {
+  width: 50vw;
+  height: 100vh;
+  background-color: white;
+  display: grid;
+  grid-template-areas: "despesasTable despesasTable receitasTable" "despesasTable despesasTable receitasTable" "despesasTable despesasTable receitasTable" "despesasTable despesasTable fixosTable" "despesasTable despesasTable fixosTable";
+  gap: 10px;
+}
+
+/*# sourceMappingURL=main.css.map */

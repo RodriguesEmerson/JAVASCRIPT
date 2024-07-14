@@ -1,26 +1,81 @@
-
-
 .despesas{
     grid-area: despesasTable;
-    background-color: aqua;
+    background-color: rgb(255, 255, 255);
     height: 100%;
 }
-.despesas-tabela{
+
+.despesas-tabela, .receitas-tabela, .fixos-tabela{
+    border-collapse: collapse;
+    font-size: 14px;
     width: 100%;
+    th, td{
+     padding: 3px 5px;   
+    }
+    tr:nth-child(odd){
+        background-color: rgba(255, 0, 0, 0.319);
+        td:first-child{
+            border-radius: 15px 0 0 15px !important;
+        }
+        td:last-child{
+            border-radius: 0 15px  15px 0 !important;
+        }
+    }
+    tr:first-child{
+        background-color: rgba(173, 0, 0, 0.934);
+        color: white;
+    }
+    tr td:not(:first-child){
+        text-align: center;
+    }
+    tr td:last-child{
+        text-align: end;
+    }
+    tr:nth-child(even){
+        td{
+            border-left: 1px  solid rgba(0, 0, 0, 0.211);
+        }
+    }
 }
+
 .receitas{
     grid-area: receitasTable;
-    background-color: aqua;
-}
-.receitas-tabela{
-    width: 100%;
+    .receitas-tabela{
+        tr:nth-child(odd){
+            background-color: rgba(0, 128, 0, 0.221);
+            td:first-child{
+                border-radius: 15px 0 0 15px !important;
+            }
+            td:last-child{
+                border-radius: 0 15px  15px 0 !important;
+            }
+        }
+        tr:first-child{
+            background-color: green;
+            color: white;
+        }
+        tr:nth-child(even){
+            td:first-child{
+                border-left: none;
+            }
+        }
+    }
 }
 .gastos-fixos{
     grid-area: fixosTable;
-    background-color: aqua;
-}
-.fixos-tabela{
-    width: 100%;
+    .fixos-tabela{
+        width: 100%;
+    }
+    tr:nth-child(odd){
+        background-color: rgba(255, 200, 0, 0.221) ;
+    }
+    tr:first-child{
+        background-color: rgb(255, 200, 0);
+    }
+    tr:nth-child(even){
+        td:first-child{
+            border-left: none;
+        }
+    }
 }
 .tabelas{
     width: 50vw;
@@ -28,10 +83,10 @@
     background-color: white;
     display: grid;
     grid-template-areas: 
-        'despesasTable receitasTable'
-        'despesasTable receitasTable'
-        'despesasTable receitasTable'
-        'despesasTable fixosTable'
-        'despesasTable fixosTable';
+        'despesasTable despesasTable receitasTable'
+        'despesasTable despesasTable receitasTable'
+        'despesasTable despesasTable receitasTable'
+        'despesasTable despesasTable fixosTable'
+        'despesasTable despesasTable fixosTable';
     gap: 10px;
 }
