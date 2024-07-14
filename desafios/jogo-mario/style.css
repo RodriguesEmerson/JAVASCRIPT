@@ -28,9 +28,13 @@
 .jump{
     animation: jump 0.8s linear;
 }
+.jumpSecond{
+    animation: jumpSecond 0.8s linear;
+}
 .descendo{
     animation: descendo 0.4s forwards;
 }
+
  
 @keyframes tunel-animation{
     from{
@@ -52,6 +56,23 @@
     }
     60%{
         top: 140px;
+    }
+    100%{
+        top: 220px;
+    }
+}
+@keyframes jumpSecond{
+    0%{
+        top: 175px;
+    }
+    40%{
+        top: 100px;
+    }
+    50%{
+        top: 100px;
+    }
+    60%{
+        top: 100px;
     }
     100%{
         top: 220px;
