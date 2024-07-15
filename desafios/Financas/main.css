@@ -29,7 +29,7 @@ body {
 
 .despesas-tabela, .receitas-tabela, .fixos-tabela {
   border-collapse: collapse;
-  font-size: 14px;
+  font-size: 13px;
   width: 100%;
 }
 .despesas-tabela th, .despesas-tabela td, .receitas-tabela th, .receitas-tabela td, .fixos-tabela th, .fixos-tabela td {

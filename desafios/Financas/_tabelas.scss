@@ -6,7 +6,7 @@
 
 .despesas-tabela, .receitas-tabela, .fixos-tabela{
     border-collapse: collapse;
-    font-size: 14px;
+    font-size: 13px;
     width: 100%;
     th, td{
      padding: 3px 5px;   
@@ -73,7 +73,7 @@
     }
     tr:nth-child(even){
         td:first-child{
-            border-left: none;
+            border-left: none; 
         }
     }
 }
