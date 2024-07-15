@@ -36,6 +36,12 @@
         }
     }
 }
+.despesas-tabela{
+    width: 400px;
+    tr td:first-child{
+        width: 150px;
+    }
+}
 
 .receitas{
     grid-area: receitasTable;

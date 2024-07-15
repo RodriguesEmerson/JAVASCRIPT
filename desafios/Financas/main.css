@@ -58,6 +58,13 @@ body {
   border-left: 1px solid rgba(0, 0, 0, 0.211);
 }
 
+.despesas-tabela {
+  width: 400px;
+}
+.despesas-tabela tr td:first-child {
+  width: 150px;
+}
+
 .receitas {
   grid-area: receitasTable;
 }
