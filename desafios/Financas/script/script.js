@@ -1,6 +1,7 @@
-const tabelaDespesas = document.querySelector('.despesas-tabela')
+const tabelaDespesas = document.querySelector('.despesas-tabela');
 const tabelaReceitas = document.querySelector('.receitas-tabela');
 const tabelaFixos = document.querySelector('.fixos-tabela');
+
 import  {dadosDespesas, dadosReceitas, dadosFixos} from "./modules/dados.js"
 
 function carregaDespesas(){

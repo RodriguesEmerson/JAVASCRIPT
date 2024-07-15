@@ -18,9 +18,29 @@
 
             </div>
             <nav class="nav-bar">
+                <input type="button" value="Lançar" id="abir-lancar">
 
             </nav>
         </aside>
+        <section class="lancar-container">
+            <div class="lancar-dado">
+                <div class="radios">
+                    <input type="radio" name="tipo" id="despesas-radio">
+                    <label for="despesas-radio">Despesa</label>
+                    <input type="radio" name="tipo" id="receitas-radio">
+                    <label for="receitas-radio">Receita</label>
+                    <input type="radio" name="tipo" id="fixos-radio">
+                    <label for="fixos-radio">Gasto Fixo</label>
+                </div>
+                <div class="dados-box">
+                    <input type="text" class="lancar-txt" id="lancar-descricao">
+                    <input type="text" class="lancar-txt" id="lancar-data">
+                    <input type="text" class="lancar-txt" id="lancar-categoria">
+                    <input type="text" class="lancar-txt" id="lancar-valor">
+                    <input type="button" value="Lançar" id="lancar">
+                </div>
+            </div>
+        </section>
         <section class="dash-board">
             <div class="tabelas">
                 <div class="despesas">

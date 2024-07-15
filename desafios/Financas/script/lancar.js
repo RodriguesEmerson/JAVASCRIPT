@@ -1,0 +1,1 @@
+const btnAbrirLancar = document.getElementById('abrir-lancar');
