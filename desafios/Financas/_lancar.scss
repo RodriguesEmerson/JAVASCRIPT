@@ -32,4 +32,53 @@
         border-radius: 3px;
         padding: 0 10px;
     }
+    #lancar-descricao{
+        width: 98%;
+    }
+    #lancar-valor{
+        margin-left: 188px;
+    }
+}
+.dados-box{
+    position: relative;
+    .titulos-txt{
+        position: absolute;
+        font-size: 14px;
+        color: gray;
+    }
+    #titulos-txt-1{
+         top: 5px;
+         left: 10px;
+    }
+    #titulos-txt-2{
+         top: 42px;
+         left: 10px;
+    }
+    #titulos-txt-3{
+         top: 43px;
+         left: 198px;
+    }
+    #titulos-txt-4{
+         top: 77px;
+         left: 198px;
+    }
+    #lancar{
+        width: 200px;
+        height: 35px;
+        display: block;
+        margin: auto;
+        background-color: rgb(2, 101, 194);
+        color: white;
+        font-size: 16px;
+        border-style: none;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: 0.4s;
+        &:hover{
+            background-color: rgb(2, 73, 139); 
+        }
+    }
+
+
+
 }

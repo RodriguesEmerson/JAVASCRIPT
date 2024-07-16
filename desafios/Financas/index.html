@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finanças</title>
     <link rel="stylesheet" href="main.css">
-</head>
+</head> 
 
 <body>
     <header>
 
     </header>
     <main class="container">
-        <aside class="navigation">
+        <aside class="navigation"> 
             <div class="logo">
 
             </div>
@@ -32,13 +32,13 @@
                     <input type="radio" name="tipo" id="fixos-radio">
                     <label for="fixos-radio">Gasto Fixo</label>
                 </div>
-                <div class="dados-box">
-                    <input type="text" class="lancar-txt" id="lancar-descricao">
-                    <input type="text" class="lancar-txt" id="lancar-data">
-                    <input type="text" class="lancar-txt" id="lancar-categoria">
-                    <input type="text" class="lancar-txt" id="lancar-valor">
-                    <input type="button" value="Lançar" id="lancar">
-                </div>
+                <form class="dados-box" autocomplete="on"  action="" method="post">
+                    <input type="text" class="lancar-txt" id="lancar-descricao" placeholder="Descrição" name="descricao" required>
+                    <input type="text" class="lancar-txt" id="lancar-data" placeholder="Data" name="data" required>
+                    <input type="text" class="lancar-txt" id="lancar-categoria" placeholder="Categoria" name="categoria" required>
+                    <input type="text" class="lancar-txt" id="lancar-valor" placeholder="Valor" name="valor" required>
+                    <input type="submit" value="Lançar" id="lancar">
+                </form>
             </div>
         </section>
         <section class="dash-board">

@@ -145,5 +145,52 @@ body {
   border-radius: 3px;
   padding: 0 10px;
 }
+.lancar-dado #lancar-descricao {
+  width: 98%;
+}
+.lancar-dado #lancar-valor {
+  margin-left: 188px;
+}
+
+.dados-box {
+  position: relative;
+}
+.dados-box .titulos-txt {
+  position: absolute;
+  font-size: 14px;
+  color: gray;
+}
+.dados-box #titulos-txt-1 {
+  top: 5px;
+  left: 10px;
+}
+.dados-box #titulos-txt-2 {
+  top: 42px;
+  left: 10px;
+}
+.dados-box #titulos-txt-3 {
+  top: 43px;
+  left: 198px;
+}
+.dados-box #titulos-txt-4 {
+  top: 77px;
+  left: 198px;
+}
+.dados-box #lancar {
+  width: 200px;
+  height: 35px;
+  display: block;
+  margin: auto;
+  background-color: rgb(2, 101, 194);
+  color: white;
+  font-size: 16px;
+  border-style: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+.dados-box #lancar:hover {
+  background-color: rgb(2, 73, 139);
+}
 
 /*# sourceMappingURL=main.css.map */

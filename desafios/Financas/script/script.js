@@ -1,6 +1,14 @@
 const tabelaDespesas = document.querySelector('.despesas-tabela');
 const tabelaReceitas = document.querySelector('.receitas-tabela');
 const tabelaFixos = document.querySelector('.fixos-tabela');
+const form = document.querySelector('.dados-box');
+
+form.addEventListener('submit', event => {
+    event.preventDefault();
+    const formData = new FormData(form)
+    console.log(formData.entries)
+});
+
 
 import  {dadosDespesas, dadosReceitas, dadosFixos} from "./modules/dados.js"
 
