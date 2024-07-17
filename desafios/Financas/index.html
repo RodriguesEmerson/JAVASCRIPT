@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finanças</title>
     <link rel="stylesheet" href="main.css">
-</head> 
+</head>
 
 <body>
     <header>
 
     </header>
     <main class="container">
-        <aside class="navigation"> 
+        <aside class="navigation">
             <div class="logo">
 
             </div>
@@ -24,15 +24,15 @@
         </aside>
         <section class="lancar-container">
             <div class="lancar-dado">
-                <div class="radios">
-                    <input type="radio" name="tipo" id="despesas-radio">
-                    <label for="despesas-radio">Despesa</label>
-                    <input type="radio" name="tipo" id="receitas-radio">
-                    <label for="receitas-radio">Receita</label>
-                    <input type="radio" name="tipo" id="fixos-radio">
-                    <label for="fixos-radio">Gasto Fixo</label>
-                </div>
-                <form class="dados-box" autocomplete="on"  action="" method="post">
+                <form class="dados-box" autocomplete="on" action="" method="post">
+                    <fieldset class="radios">
+                        <input type="radio" name="tipo" id="despesas-radio" value="despesa">
+                        <label for="despesas-radio">Despesa</label>
+                        <input type="radio" name="tipo" id="receitas-radio" value="receita">
+                        <label for="receitas-radio">Receita</label>
+                        <input type="radio" name="tipo" id="fixos-radio" value="fixo">
+                        <label for="fixos-radio">Gasto Fixo</label>
+                    </fieldset>
                     <input type="text" class="lancar-txt" id="lancar-descricao" placeholder="Descrição" name="descricao" required>
                     <input type="text" class="lancar-txt" id="lancar-data" placeholder="Data" name="data" required>
                     <input type="text" class="lancar-txt" id="lancar-categoria" placeholder="Categoria" name="categoria" required>
@@ -121,6 +121,7 @@
 
     </footer>
     <script src="script/script.js" type="module"></script>
+    <script src="script/lancar.js" type="module"></script>
 </body>
 
 </html>
