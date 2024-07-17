@@ -21,3 +21,6 @@ export let dadosFixos = [
     ['Gasto2','15/07/2024','200'],
     ['Gasto3','15/07/2024','300'],
 ]
+export let categorias =[
+    ['Alimentação','Pessoal','Casa','Saúde']
+]

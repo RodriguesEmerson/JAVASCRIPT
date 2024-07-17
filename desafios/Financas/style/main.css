@@ -127,10 +127,31 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
   padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.268);
+}
+.lancar-dado #fechar-form {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 30px;
+  padding: 5px;
+  border-style: none;
+  background-color: rgb(156, 6, 6);
+  color: white;
+  border-radius: 0 5px 0 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.lancar-dado #fechar-form:hover {
+  background-color: rgb(117, 2, 2);
 }
 .lancar-dado .radios {
   margin-bottom: 3px;
+  border-style: none;
+  margin-bottom: 10px;
 }
 .lancar-dado .radios input, .lancar-dado .radios label {
   cursor: pointer;
@@ -144,6 +165,9 @@ body {
   border: 1px solid rgb(207, 207, 207);
   border-radius: 3px;
   padding: 0 10px;
+}
+.lancar-dado select {
+  width: 184px;
 }
 .lancar-dado #lancar-descricao {
   width: 98%;
@@ -177,9 +201,8 @@ body {
   left: 198px;
 }
 .dados-box #lancar {
-  width: 200px;
+  width: 372px;
   height: 35px;
-  display: block;
   margin: auto;
   background-color: rgb(2, 101, 194);
   color: white;
@@ -191,6 +214,10 @@ body {
 }
 .dados-box #lancar:hover {
   background-color: rgb(2, 73, 139);
+}
+
+.hidden {
+  display: none;
 }
 
 /*# sourceMappingURL=main.css.map */

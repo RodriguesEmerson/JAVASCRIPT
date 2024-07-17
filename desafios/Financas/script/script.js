@@ -30,7 +30,7 @@ function carregaTabelas(tabela, colunas, dados){
     });
 }
 
-function criar(tipo){
+export function criar(tipo){
     return document.createElement(`${tipo}`)
 }
 carregaDespesas()

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finanças</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="style/main.css">
 </head>
 
 <body>
@@ -22,8 +22,9 @@
 
             </nav>
         </aside>
-        <section class="lancar-container">
+        <section class="lancar-container hidden">
             <div class="lancar-dado">
+                <input type="button" value="Fechar" id="fechar-form">
                 <form class="dados-box" autocomplete="on" action="" method="post">
                     <fieldset class="radios">
                         <input type="radio" name="tipo" id="despesas-radio" value="despesa">
@@ -35,7 +36,7 @@
                     </fieldset>
                     <input type="text" class="lancar-txt" id="lancar-descricao" placeholder="Descrição" name="descricao" required>
                     <input type="text" class="lancar-txt" id="lancar-data" placeholder="Data" name="data" required>
-                    <input type="text" class="lancar-txt" id="lancar-categoria" placeholder="Categoria" name="categoria" required>
+                    <select class="lancar-txt" id="lancar-categoria" placeholder="Categoria" name="categoria" required></select>
                     <input type="text" class="lancar-txt" id="lancar-valor" placeholder="Valor" name="valor" required>
                     <input type="submit" value="Lançar" id="lancar">
                 </form>
