@@ -2,7 +2,7 @@ const tabelaDespesas = document.querySelector('.despesas-tabela');
 const tabelaReceitas = document.querySelector('.receitas-tabela');
 const tabelaFixos = document.querySelector('.fixos-tabela');
 
-import  {dadosDespesas, dadosReceitas, dadosFixos} from "./modules/dados.js"
+import  {dadosDespesas, dadosReceitas, dadosFixos, todosOsDados} from "./modules/dados.js"
 
 function carregaDespesas(){
     carregaTabelas(tabelaDespesas, 4, dadosDespesas)
@@ -29,6 +29,11 @@ function carregaTabelas(tabela, colunas, dados){
         tabela.appendChild(tr)
     });
 }
+
+function carregaTabelas2(tabela, ano, mes, dados){
+    
+}
+
 
 export function criar(tipo){
     return document.createElement(`${tipo}`)
