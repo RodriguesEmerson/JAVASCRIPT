@@ -24,49 +24,49 @@ export let dadosFixos = [
 export let categorias = [
    ['Alimentação', 'Pessoal', 'Casa', 'Saúde']
 ]
-export let todosOsDados = [
-   {  despesas: {
+export let todosOsDados = {
+   despesas: {
+      2024: {
+         JAN: [
+            { desc: 'Despesas', data: 'Data',categoria:'Categoria', valor: 'Valor', id: '1' },
+            { desc: 'Desp1', data: 'Data', categoria:'Ctgr', valor: '0,00', id: '2' },
+            { desc: 'Desp2', data: 'Data', categoria:'Ctgr', valor: '0,00', id: '3' },
+            { desc: 'Desp3', data: 'Data', categoria:'Ctgr', valor: '0,00', id: '4' },
+         ],
+         FEV: [
+            
+         ]
+      }
+   },
+   Receitas: {
+      ano: {
          2024: {
             JAN: [
-               { desc: 'Despesas', data: 'Data',categoria:'Categoria', valor: 'Valor', id: '1' },
-               { desc: 'Desp1', data: 'Data', categoria:'Ctgr', valor: '0,00', id: '2' },
-               { desc: 'Desp2', data: 'Data', categoria:'Ctgr', valor: '0,00', id: '3' },
-               { desc: 'Desp3', data: 'Data', categoria:'Ctgr', valor: '0,00', id: '4' },
+               { desc: 'Receitas', data: 'Data', categoria:'Categoria', valor: 'Valor', id: '1' },
+               { desc: 'Rece1', data: 'Data', categoria:'Ctgr', valor: '0,00', id: '2' },
+               { desc: 'Rece2', data: 'Data', categoria:'Ctgr', valor: '0,00', id: '3' },
+               { desc: 'Rece3', data: 'Data', categoria:'Ctgr', valor: '0,00', id: '4' },
             ],
             FEV: {
 
             }
          }
-      },
-      Receitas: {
-         ano: {
-            2024: {
-               JAN: [
-                  { desc: 'Receitas', data: 'Data', categoria:'Categoria', valor: 'Valor', id: '1' },
-                  { desc: 'Rece1', data: 'Data', categoria:'Ctgr', valor: '0,00', id: '2' },
-                  { desc: 'Rece2', data: 'Data', categoria:'Ctgr', valor: '0,00', id: '3' },
-                  { desc: 'Rece3', data: 'Data', categoria:'Ctgr', valor: '0,00', id: '4' },
-               ],
-               FEV: {
+      }
+   },
+   Fixos: {
+      ano: {
+         2024: {
+            JAN: [
+               { desc: 'Fixos', data: 'Data' ,categoria:'Categoria', valor: 'Valor', id: '1' },
+               { desc: 'Fixo1', data: 'Data', categoria:'Ctgr', valor: '0,00', id: '2' },
+               { desc: 'Fixo2', data: 'Data', categoria:'Ctgr', valor: '0,00', id: '3' },
+               { desc: 'Fixo3', data: 'Data', categoria:'Ctgr', valor: '0,00', id: '4' },
+            ],
+            FEV: {
 
-               }
-            }
-         }
-      },
-      Fixos: {
-         ano: {
-            2024: {
-               JAN: [
-                  { desc: 'Fixos', data: 'Data' ,categoria:'Categoria', valor: 'Valor', id: '1' },
-                  { desc: 'Fixo1', data: 'Data', categoria:'Ctgr', valor: '0,00', id: '2' },
-                  { desc: 'Fixo2', data: 'Data', categoria:'Ctgr', valor: '0,00', id: '3' },
-                  { desc: 'Fixo3', data: 'Data', categoria:'Ctgr', valor: '0,00', id: '4' },
-               ],
-               FEV: {
-
-               }
             }
          }
       }
    }
-]
+   
+}
