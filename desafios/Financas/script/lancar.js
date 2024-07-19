@@ -23,7 +23,7 @@ form.addEventListener('submit', event => {
     const novoLancamento = novoDado(dados)
 
     todosOsDados[dados.tipo][2024]['JAN'].push(novoLancamento);
-    console.log(todosOsDados[dados.tipo][2024]['JAN']);
+    // console.log(todosOsDados[dados.tipo][2024]['JAN']);
 });
 
 function carregaCategorias() {

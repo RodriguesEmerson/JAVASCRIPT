@@ -5,9 +5,9 @@ export let todosOsDados = {
    despesas: {
       2024: {
          JAN: [
-            { desc: 'Desp1', data: 'Data', categoria:'Ctgr', valor: '0,00', id: '2' },
-            { desc: 'Desp2', data: 'Data', categoria:'Ctgr', valor: '0,00', id: '3' },
-            { desc: 'Desp3', data: 'Data', categoria:'Ctgr', valor: '0,00', id: '4' },
+            { desc: 'Desp1', data: 'Data', categoria:'Ctgr', valor: '1', id: '2' },
+            { desc: 'Desp2', data: 'Data', categoria:'Ctgr', valor: '2', id: '3' },
+            { desc: 'Desp3', data: 'Data', categoria:'Ctgr', valor: '3', id: '4' },
          ],
          FEV: [
             
@@ -17,9 +17,9 @@ export let todosOsDados = {
    receitas: {
       2024: {
          JAN: [
-            { desc: 'Rece1', data: 'Data', valor: '0,00', id: '2' },
-            { desc: 'Rece2', data: 'Data', valor: '0,00', id: '3' },
-            { desc: 'Rece3', data: 'Data', valor: '0,00', id: '4' },
+            { desc: 'Rece1', data: 'Data', valor: '4', id: '2' },
+            { desc: 'Rece2', data: 'Data', valor: '5', id: '3' },
+            { desc: 'Rece3', data: 'Data', valor: '6', id: '4' },
          ],
          FEV: {
 
@@ -27,16 +27,14 @@ export let todosOsDados = {
       }
    },
    fixos: {
-      ano: {
-         2024: {
-            JAN: [
-               { desc: 'Fixo1', data: 'Data', valor: '0,00', id: '2' },
-               { desc: 'Fixo2', data: 'Data', valor: '0,00', id: '3' },
-               { desc: 'Fixo3', data: 'Data', valor: '0,00', id: '4' },
-            ],
-            FEV: {
+      2024: {
+         JAN: [
+            { desc: 'Fixo1', data: 'Data', valor: '7', id: '2' },
+            { desc: 'Fixo2', data: 'Data', valor: '8', id: '3' },
+            { desc: 'Fixo3', data: 'Data', valor: '09', id: '4' },
+         ],
+         FEV: {
 
-            }
          }
       }
    }
