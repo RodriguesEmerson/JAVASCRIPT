@@ -5,7 +5,7 @@ export let todosOsDados = {
    despesas: {
       2024: {
          JAN: [
-            { desc: 'Desp1', data: 'Data', categoria:'Ctgr', valor: '1', id: '2' },
+            { desc: 'Desp1', data: 'Data', categoria:'Ctgr', valor: '151', id: '2' },
             { desc: 'Desp2', data: 'Data', categoria:'Ctgr', valor: '2', id: '3' },
             { desc: 'Desp3', data: 'Data', categoria:'Ctgr', valor: '3', id: '4' },
          ],

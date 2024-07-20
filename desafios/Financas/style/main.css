@@ -6,7 +6,7 @@
 }
 
 body {
-  background-color: rgb(255, 250, 244);
+  background-color: rgb(255, 244, 230);
 }
 
 header {
@@ -90,8 +90,8 @@ header {
 .despesas {
   position: relative;
   border: 1px solid rgb(207, 207, 207);
-  border-radius: 5px;
   background-color: rgb(255, 255, 255);
+  border-radius: 5px;
   height: 100%;
   margin-right: 3px;
 }
@@ -171,11 +171,12 @@ header {
 .lancar-container {
   position: absolute;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 50px);
   background-color: rgba(0, 0, 0, 0.215);
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 10;
 }
 
 .lancar-dado {

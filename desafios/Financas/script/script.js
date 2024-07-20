@@ -11,6 +11,7 @@ export function criar(tipo) {
 carregaTabelas2('despesas', 2024, 'JAN', todosOsDados, tabelaDespesas)
 carregaTabelas2('receitas', 2024, 'JAN', todosOsDados, tabelaReceitas)
 carregaTabelas2('fixos', 2024, 'JAN', todosOsDados, tabelaFixos)
+
 function carregaTabelas2(tabela, ano, mes, dados, tabelaHTML) {
     dados[tabela][ano][mes].forEach(element => {
         const tr = criar('tr')
@@ -20,6 +21,9 @@ function carregaTabelas2(tabela, ano, mes, dados, tabelaHTML) {
             }else{
                 let td = criar('td');
                 td.textContent = element[chave]
+                if(chave == 'valor'){
+                    td.textContent = formataMoeda(element[chave])
+                }
                 tr.appendChild(td)
             }
         }
@@ -33,5 +37,11 @@ function somaValores(tabela, ano, mes,dados){
     dados[tabela][ano][mes].forEach(element => {
         total = total + Number(element.valor)
     })
-    console.log(`${tabela}: ` + total)
+    const totalTabela = document.getElementById(`total-${tabela}`);
+    total = formataMoeda(total);
+    totalTabela.textContent = total;
+}
+
+function formataMoeda(valor){
+    return Number(valor).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
 }

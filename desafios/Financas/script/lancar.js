@@ -5,6 +5,7 @@ const selectCategorias = document.querySelector('#lancar-categoria');
 const formBox = document.querySelector('.lancar-container');
 const abirForm = document.querySelector('#abir-lancar');
 const fecharForm = document.querySelector('#fechar-form');
+let categoriasCarregadas = false;
 
 abirForm.addEventListener('click', () => {
     formBox.classList.remove('hidden')
@@ -27,12 +28,15 @@ form.addEventListener('submit', event => {
 });
 
 function carregaCategorias() {
-    categorias[0].forEach(element => {
-        const option = criar('option');
-        option.setAttribute('value', element);
-        option.innerText = element;
-        selectCategorias.appendChild(option);
-    })
+    if(!categoriasCarregadas){
+        categorias[0].forEach(element => {
+            const option = criar('option');
+            option.setAttribute('value', element);
+            option.innerText = element;
+            selectCategorias.appendChild(option);
+            categoriasCarregadas = true;
+        })
+    }
 }
 
 function novoDado(dados) {
