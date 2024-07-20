@@ -6,7 +6,15 @@
 }
 
 body {
-  background-color: antiquewhite;
+  background-color: rgb(255, 250, 244);
+}
+
+header {
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  background-color: rgb(28, 28, 28);
+  color: white;
 }
 
 .container {
@@ -17,13 +25,13 @@ body {
 
 .navigation {
   width: 200px;
-  height: 100vh;
+  height: calc(100vh - 50px);
   background-color: rgb(35, 35, 35);
 }
 
-.despesas {
-  grid-area: despesasTable;
-  background-color: rgb(255, 255, 255);
+.tabelas {
+  display: flex;
+  flex-wrap: wrap;
   height: 100%;
 }
 
@@ -44,10 +52,6 @@ body {
 .despesas-tabela tr:nth-child(odd) td:last-child, .receitas-tabela tr:nth-child(odd) td:last-child, .fixos-tabela tr:nth-child(odd) td:last-child {
   border-radius: 0 15px 15px 0 !important;
 }
-.despesas-tabela tr:first-child, .receitas-tabela tr:first-child, .fixos-tabela tr:first-child {
-  background-color: rgba(173, 0, 0, 0.934);
-  color: white;
-}
 .despesas-tabela tr td:not(:first-child), .receitas-tabela tr td:not(:first-child), .fixos-tabela tr td:not(:first-child) {
   text-align: center;
 }
@@ -58,15 +62,47 @@ body {
   border-left: 1px solid rgba(0, 0, 0, 0.211);
 }
 
-.despesas-tabela {
-  width: 400px;
+.cabecalho-tabela {
+  height: 30PX;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  background-color: rgba(173, 0, 0, 0.934);
+  color: white;
 }
-.despesas-tabela tr td:first-child {
-  width: 150px;
+
+.despesas {
+  border: 1px solid rgb(207, 207, 207);
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
+  height: 100%;
+  margin-right: 3px;
+}
+.despesas .despesas-tabela {
+  width: 100%;
+}
+.despesas .despesas-tabela tr:first-child {
+  background-color: rgba(137, 0, 0, 0.934);
+  color: white;
+}
+.despesas .despesas-tabela tr td:first-child {
+  width: 202px;
+}
+.despesas .despesas-tabela tr td:nth-child(2) {
+  width: 100px;
 }
 
 .receitas {
-  grid-area: receitasTable;
+  border: 1px solid rgb(207, 207, 207);
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
+  width: 300px;
+  height: 400px;
+  margin-bottom: 3px;
+}
+.receitas .cabecalho-tabela {
+  background-color: green;
 }
 .receitas .receitas-tabela tr:nth-child(odd) {
   background-color: rgba(0, 128, 0, 0.221);
@@ -78,7 +114,7 @@ body {
   border-radius: 0 15px 15px 0 !important;
 }
 .receitas .receitas-tabela tr:first-child {
-  background-color: green;
+  background-color: #005c00;
   color: white;
 }
 .receitas .receitas-tabela tr:nth-child(even) td:first-child {
@@ -86,7 +122,13 @@ body {
 }
 
 .gastos-fixos {
-  grid-area: fixosTable;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(207, 207, 207);
+  border-radius: 5px;
+  height: 242px;
+}
+.gastos-fixos .cabecalho-tabela {
+  background-color: rgb(255, 200, 0);
 }
 .gastos-fixos .fixos-tabela {
   width: 100%;
@@ -95,19 +137,11 @@ body {
   background-color: rgba(255, 200, 0, 0.221);
 }
 .gastos-fixos tr:first-child {
-  background-color: rgb(255, 200, 0);
+  background-color: #dbac00;
+  color: white;
 }
 .gastos-fixos tr:nth-child(even) td:first-child {
   border-left: none;
-}
-
-.tabelas {
-  width: 50vw;
-  height: 100vh;
-  background-color: white;
-  display: grid;
-  grid-template-areas: "despesasTable despesasTable receitasTable" "despesasTable despesasTable receitasTable" "despesasTable despesasTable receitasTable" "despesasTable despesasTable fixosTable" "despesasTable despesasTable fixosTable";
-  gap: 10px;
 }
 
 .lancar-container {

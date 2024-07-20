@@ -1,15 +1,18 @@
-.despesas{
-    grid-area: despesasTable;
-    background-color: rgb(255, 255, 255);
+$cor-despesas:  rgba(173, 0, 0, 0.934);
+$cor-receitas:green;
+$cor-fixos:rgb(255, 200, 0);
+
+.tabelas{
+    display: flex;
+    flex-wrap: wrap;
     height: 100%;
 }
-
 .despesas-tabela, .receitas-tabela, .fixos-tabela{
     border-collapse: collapse;
     font-size: 13px;
     width: 100%;
     th, td{
-     padding: 3px 5px;   
+        padding: 3px 5px;   
     }
     tr:nth-child(odd){
         background-color: rgba(255, 0, 0, 0.319);
@@ -19,10 +22,6 @@
         td:last-child{
             border-radius: 0 15px  15px 0 !important;
         }
-    }
-    tr:first-child{
-        background-color: rgba(173, 0, 0, 0.934);
-        color: white;
     }
     tr td:not(:first-child){
         text-align: center;
@@ -36,15 +35,49 @@
         }
     }
 }
-.despesas-tabela{
-    width: 400px;
-    tr td:first-child{
-        width: 150px;
+
+.cabecalho-tabela{
+    height: 30PX;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    background-color: $cor-despesas;
+    color: white;
+}
+
+
+.despesas{
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    height: 100%;
+    margin-right: 3px;
+    .despesas-tabela{
+        width: 100%;
+        tr:first-child{
+            background-color: darken($cor-despesas, 7);
+            color: white;
+        }
+        tr td:first-child{
+            width: 202px;
+        }
+        tr td:nth-child(2){
+            width: 100px;
+        }
     }
 }
 
 .receitas{
-    grid-area: receitasTable;
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    width: 300px;
+    height: 400px;
+    margin-bottom: 3px;
+    .cabecalho-tabela{
+        background-color: $cor-receitas;
+    }
     .receitas-tabela{
         tr:nth-child(odd){
             background-color: rgba(0, 128, 0, 0.221);
@@ -56,7 +89,7 @@
             }
         }
         tr:first-child{
-            background-color: green;
+            background-color: darken($cor-receitas, 7);
             color: white;
         }
         tr:nth-child(even){
@@ -67,7 +100,13 @@
     }
 }
 .gastos-fixos{
-    grid-area: fixosTable;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 5px;
+    height: 242px;
+    .cabecalho-tabela{
+        background-color: $cor-fixos;
+    }
     .fixos-tabela{
         width: 100%;
     }
@@ -75,7 +114,8 @@
         background-color: rgba(255, 200, 0, 0.221) ;
     }
     tr:first-child{
-        background-color: rgb(255, 200, 0);
+        background-color: darken($cor-fixos, 7);
+        color: white;
     }
     tr:nth-child(even){
         td:first-child{
@@ -83,16 +123,5 @@
         }
     }
 }
-.tabelas{
-    width: 50vw;
-    height: 100vh;
-    background-color: white;
-    display: grid;
-    grid-template-areas: 
-        'despesasTable despesasTable receitasTable'
-        'despesasTable despesasTable receitasTable'
-        'despesasTable despesasTable receitasTable'
-        'despesasTable despesasTable fixosTable'
-        'despesasTable despesasTable fixosTable';
-    gap: 10px;
-}
+
+
