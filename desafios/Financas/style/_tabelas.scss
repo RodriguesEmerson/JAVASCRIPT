@@ -1,6 +1,6 @@
 $cor-despesas:  rgba(173, 0, 0, 0.934);
 $cor-receitas:green;
-$cor-fixos:rgb(255, 200, 0);
+$cor-fixos:rgb(255, 115, 0);
 
 .tabelas{
     display: flex;
@@ -45,9 +45,24 @@ $cor-fixos:rgb(255, 200, 0);
     background-color: $cor-despesas;
     color: white;
 }
+.soma-total{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    border-radius: 3px;
+    font-weight: 600;
+    padding: 10px;
+    bottom: 0;
+    height: 30px;
+    width: 100%;
+    background-color: $cor-despesas;
+}
 
 
 .despesas{
+    position: relative;
     border: 1px solid rgb(207, 207, 207);
     border-radius: 5px;
     background-color: rgb(255, 255, 255);
@@ -69,6 +84,7 @@ $cor-fixos:rgb(255, 200, 0);
 }
 
 .receitas{
+    position: relative;
     border: 1px solid rgb(207, 207, 207);
     border-radius: 5px;
     background-color: rgb(255, 255, 255);
@@ -76,6 +92,9 @@ $cor-fixos:rgb(255, 200, 0);
     height: 400px;
     margin-bottom: 3px;
     .cabecalho-tabela{
+        background-color: $cor-receitas;
+    }
+    .soma-total{
         background-color: $cor-receitas;
     }
     .receitas-tabela{
@@ -100,6 +119,7 @@ $cor-fixos:rgb(255, 200, 0);
     }
 }
 .gastos-fixos{
+    position: relative;
     background-color: rgb(255, 255, 255);
     border: 1px solid rgb(207, 207, 207);
     border-radius: 5px;
@@ -107,11 +127,14 @@ $cor-fixos:rgb(255, 200, 0);
     .cabecalho-tabela{
         background-color: $cor-fixos;
     }
+    .soma-total{
+        background-color: $cor-fixos;
+    }
     .fixos-tabela{
         width: 100%;
     }
     tr:nth-child(odd){
-        background-color: rgba(255, 200, 0, 0.221) ;
+        background-color: rgba(255, 115, 0, 0.221) ;
     }
     tr:first-child{
         background-color: darken($cor-fixos, 7);
