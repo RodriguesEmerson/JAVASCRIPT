@@ -3,94 +3,127 @@ const tabelaReceitas = document.querySelector('.receitas-tabela');
 const tabelaFixos = document.querySelector('.fixos-tabela');
 const deleteBox = document.querySelector('#deleteBox');
 const btnApagar = document.querySelector('#deletar-btn');
+const btnApagarNao = document.querySelector('#deletar-nao');
+const btnApagarSim = document.querySelector('#deletar-sim');
 let deleteBoxSlide;
 let ano = 2024;
 let mes = 'JAN';
 
 import { todosOsDados } from "./modules/dados.js";
 
-carregaTabelas2('despesas', 2024, 'JAN', todosOsDados, tabelaDespesas)
-carregaTabelas2('receitas', 2024, 'JAN', todosOsDados, tabelaReceitas)
-carregaTabelas2('fixos', 2024, 'JAN', todosOsDados, tabelaFixos)
-
-function carregaTabelas2(tabela, ano, mes, dados, tabelaHTML) {
-    dados[tabela][ano][mes].forEach(element => {
-        const tr = criar('tr')
-        for (const chave in element) {
-            if(chave == 'id'){
-                tr.setAttribute('id',`${element[chave]}`)
-            }else{
-                let td = criar('td');
-                td.textContent = element[chave]
-                if(chave == 'valor'){
-                    td.textContent = formataMoeda(element[chave])
+const carregaTabelas = {
+    insereDados: function(tabela, ano, mes, dados, tabelaHTML){
+        dados[tabela][ano][mes].forEach(element => {
+            const tr = criar('tr')
+            for (const chave in element) {
+                if(chave == 'id'){
+                    tr.setAttribute('id',`${element[chave]}`)
+                }else{
+                    let td = criar('td');
+                    td.textContent = element[chave]
+                    if(chave == 'valor'){
+                        td.textContent = this.formataMoeda(element[chave])
+                    }
+                    tr.appendChild(td)
                 }
-                tr.appendChild(td)
             }
-        }
-        tabelaHTML.appendChild(tr)
-    })
-    somaValores(tabela, ano, mes, dados)
-}
+            tabelaHTML.appendChild(tr)
+        })
+        this.somaValores(tabela, ano, mes, dados)
+    },
 
-function somaValores(tabela, ano, mes,dados){
-    let total= 0;
-    dados[tabela][ano][mes].forEach(element => {
-        total = total + Number(element.valor)
-    })
-    const totalTabela = document.getElementById(`total-${tabela}`);
-    total = formataMoeda(total);
-    totalTabela.textContent = total;
+    somaValores: function(tabela, ano, mes, dados){
+        let total= 0;
+        dados[tabela][ano][mes].forEach(element => {
+            total = total + Number(element.valor)
+        })
+        const totalTabela = document.getElementById(`total-${tabela}`);
+        total = this.formataMoeda(total);
+        totalTabela.textContent = total;
+    },
+
+    formataMoeda: function(valor){
+        return Number(valor).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    }
 }
 
 export function criar(tipo) {
     return document.createElement(`${tipo}`)
 }
 
-function formataMoeda(valor){
-    return Number(valor).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
-}
-
 //*****************APAGAR DADOS*******************/
-tabelaDespesas.addEventListener('contextmenu', (event) => {
-    event.preventDefault();
-    apagarDado(event, 'despesas')
-})
-tabelaReceitas.addEventListener('contextmenu', (event) => {
-    event.preventDefault();
-    apagarDado(event, 'receitas')
-})
-tabelaFixos.addEventListener('contextmenu', (event) => {
-    event.preventDefault();
-    apagarDado(event, 'fixos');
-})
 btnApagar.addEventListener('click', (event) => {
     deleteBoxSlide = event.target.closest('div');
     deleteBoxSlide.style.marginLeft = '-205px'
 })
-document.querySelector('#deletar-nao').addEventListener('click', () => {
+
+btnApagarNao.addEventListener('click', () => {
     deleteBox.classList.add('hidden');
-    deleteBoxSlide.style.marginLeft = '0px'
+    deleteBoxSlide.style.marginLeft = '0px';
+})
+btnApagarSim.addEventListener('click', () => {
+    apagarDado.apagar();
+    deleteBox.classList.add('hidden');
+    deleteBoxSlide.style.marginLeft = '0px';
 })
 
-function apagarDado(event, tabela) {
-    deleteBox.classList.remove('hidden');
+const apagarDado = {
+    tabelasDOM: [tabelaDespesas, tabelaReceitas, tabelaFixos],
+    dadosClicados:{},
+    addEvents: function(){
+        this.tabelasDOM.forEach(element =>{
+            element.addEventListener('contextmenu', (event) =>{
+                event.preventDefault();
+                deleteBox.classList.remove('hidden');
+                let left = event.clientX;
+                let top = event.clientY;
+                deleteBox.style.left = `${left + 3}px`;
+                deleteBox.style.top = `${top - 45}px`;
+                this.selecionarDadosClicados(event);
+            });
+        });
+    },
+    selecionarDadosClicados: function (event){
+        //*****Busca Elementos do DOM******/
+        let tabela;
+        const tabelaClicada = event.target.closest('table');
+        const classeDaTabela = tabelaClicada.classList[1];
+        const trClicada = event.target.closest('tr');
+        const trClicadaID = trClicada.closest('tr').getAttribute('id');
 
-    let left = event.clientX;
-    let top = event.clientY;
-    deleteBox.style.left = `${left + 3}px`;
-    deleteBox.style.top = `${top - 45}px`;
+        switch (classeDaTabela) {
+            case 'despesas-tabela':
+                tabela = 'despesas';
+                break;
+            case 'receitas-tabela':
+                tabela = 'receitas';
+                break;
+            default: tabela = 'fixos';
+                break;
+        };
 
-    let tr = event.target.closest('tr');
-    let trID = event.target.closest('tr').getAttribute('id');
-    let tabelaPai = tr.closest('table');
-    let objNaBaseDeDados;
-    todosOsDados[tabela][ano][mes].forEach(element => {
-        if (element.id == trID) objNaBaseDeDados = element;
-    });
-    console.log(objNaBaseDeDados);
+        //*****Busca Objeto da Base de Dados******/
+        let objNaBaseDeDados;
+        todosOsDados[tabela][ano][mes].forEach(element => {
+            if (element.id == trClicadaID) objNaBaseDeDados = element;
+        });
+        
+        this.dadosClicados.tabelaClicada = tabelaClicada;
+        this.dadosClicados.trClicada = trClicada;
+        this.dadosClicados.tabela = tabela;
+        this.dadosClicados.obj = objNaBaseDeDados;
 
-    console.log(event)
-    console.log(tr)
-    console.log('left: ' + left, 'Top: ' + top)
+    },
+    apagar: function(){
+        this.dadosClicados.tabelaClicada.removeChild(this.dadosClicados.trClicada)
+        let index = todosOsDados[this.dadosClicados.tabela][ano][mes].indexOf(this.dadosClicados.obj);
+        todosOsDados[this.dadosClicados.tabela][ano][mes].splice(index, 1)
+        console.log(todosOsDados[this.dadosClicados.tabela][ano][mes])
+        console.log(index)
+    }
 }
+apagarDado.addEvents();
+
+carregaTabelas.insereDados('despesas', 2024, 'JAN', todosOsDados, tabelaDespesas);
+carregaTabelas.insereDados('receitas', 2024, 'JAN', todosOsDados, tabelaReceitas);
+carregaTabelas.insereDados('fixos', 2024, 'JAN', todosOsDados, tabelaFixos);

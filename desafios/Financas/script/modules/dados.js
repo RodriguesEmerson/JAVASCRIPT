@@ -68,3 +68,32 @@ export let todosOsDados = {
 //         tabela.appendChild(tr)
 //     });
 // }
+// tabelaDespesas.addEventListener('contextmenu', (event) => {
+//     event.preventDefault();
+//     apagarDado(event, 'despesas')
+// })
+// tabelaReceitas.addEventListener('contextmenu', (event) => {
+//     event.preventDefault();
+//     apagarDado(event, 'receitas')
+// })
+// tabelaFixos.addEventListener('contextmenu', (event) => {
+//     event.preventDefault();
+//     apagarDado(event, 'fixos');
+// })
+// function apagarDado(event, tabela) {
+//     deleteBox.classList.remove('hidden');
+
+//     let left = event.clientX;
+//     let top = event.clientY;
+//     deleteBox.style.left = `${left + 3}px`;
+//     deleteBox.style.top = `${top - 45}px`;
+
+//     let tr = event.target.closest('tr');
+//     let trID = event.target.closest('tr').getAttribute('id');
+//     let tabelaPai = tr.closest('table');
+//     let objNaBaseDeDados;
+//     todosOsDados[tabela][ano][mes].forEach(element => {
+//         if (element.id == trID) objNaBaseDeDados = element;
+//     });
+
+// }
