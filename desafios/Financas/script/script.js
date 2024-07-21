@@ -1,7 +1,9 @@
 const tabelaDespesas = document.querySelector('.despesas-tabela');
 const tabelaReceitas = document.querySelector('.receitas-tabela');
 const tabelaFixos = document.querySelector('.fixos-tabela');
+const deleteBox = document.querySelector('#deleteBox');
 const btnApagar = document.querySelector('#deletar-btn');
+let btnBox;
 let ano = 2024;
 let mes = 'JAN';
 
@@ -61,13 +63,23 @@ tabelaFixos.addEventListener('contextmenu', (event) =>{
         event.preventDefault();
         apagarDado(event, 'fixos');
 })
-
 btnApagar.addEventListener('click', (event) =>{
-    let btnBox = event.target.closest('div');
+    btnBox = event.target.closest('div');
     btnBox.style.marginLeft = '-205px'
+})
+document.querySelector('#deletar-nao').addEventListener('click', () =>{
+    deleteBox.classList.add('hidden');
+    btnBox.style.marginLeft = '0px'
 })
 
 function apagarDado(event, tabela){
+    deleteBox.classList.remove('hidden');
+    
+    let left = event.clientX;
+    let top = event.clientY;
+    deleteBox.style.left = `${left + 3}px`;
+    deleteBox.style.top = `${top - 45}px`;
+
     let tr = event.target.closest('tr');
     let trID = event.target.closest('tr').getAttribute('id');
     let tabelaPai = tr.closest('table');
@@ -77,7 +89,7 @@ function apagarDado(event, tabela){
     });
     console.log(objNaBaseDeDados);
 
-    console.log(trID)
+    console.log(event)
     console.log(tr)
-    console.log(tabelaPai)
+    console.log('left: ' + left, 'Top: ' + top)
 }
