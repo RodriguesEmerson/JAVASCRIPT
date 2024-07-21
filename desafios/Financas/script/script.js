@@ -1,6 +1,9 @@
 const tabelaDespesas = document.querySelector('.despesas-tabela');
 const tabelaReceitas = document.querySelector('.receitas-tabela');
 const tabelaFixos = document.querySelector('.fixos-tabela');
+const btnApagar = document.querySelector('#deletar-btn');
+let ano = 2024;
+let mes = 'JAN';
 
 import { todosOsDados } from "./modules/dados.js"
 
@@ -44,4 +47,37 @@ function somaValores(tabela, ano, mes,dados){
 
 function formataMoeda(valor){
     return Number(valor).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+}
+
+tabelaDespesas.addEventListener('contextmenu', (event) =>{
+        event.preventDefault();
+        apagarDado(event, 'despesas') 
+})
+tabelaReceitas.addEventListener('contextmenu', (event) =>{
+        event.preventDefault();
+        apagarDado(event, 'receitas') 
+})
+tabelaFixos.addEventListener('contextmenu', (event) =>{
+        event.preventDefault();
+        apagarDado(event, 'fixos');
+})
+
+btnApagar.addEventListener('click', (event) =>{
+    let btnBox = event.target.closest('div');
+    btnBox.style.marginLeft = '-205px'
+})
+
+function apagarDado(event, tabela){
+    let tr = event.target.closest('tr');
+    let trID = event.target.closest('tr').getAttribute('id');
+    let tabelaPai = tr.closest('table');
+    let objNaBaseDeDados;
+    todosOsDados[tabela][ano][mes].forEach(element =>{
+        if(element.id == trID) objNaBaseDeDados = element;
+    });
+    console.log(objNaBaseDeDados);
+
+    console.log(trID)
+    console.log(tr)
+    console.log(tabelaPai)
 }
