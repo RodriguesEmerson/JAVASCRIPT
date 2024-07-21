@@ -3,15 +3,11 @@ const tabelaReceitas = document.querySelector('.receitas-tabela');
 const tabelaFixos = document.querySelector('.fixos-tabela');
 const deleteBox = document.querySelector('#deleteBox');
 const btnApagar = document.querySelector('#deletar-btn');
-let btnBox;
+let deleteBoxSlide;
 let ano = 2024;
 let mes = 'JAN';
 
-import { todosOsDados } from "./modules/dados.js"
-
-export function criar(tipo) {
-    return document.createElement(`${tipo}`)
-}
+import { todosOsDados } from "./modules/dados.js";
 
 carregaTabelas2('despesas', 2024, 'JAN', todosOsDados, tabelaDespesas)
 carregaTabelas2('receitas', 2024, 'JAN', todosOsDados, tabelaReceitas)
@@ -47,34 +43,39 @@ function somaValores(tabela, ano, mes,dados){
     totalTabela.textContent = total;
 }
 
+export function criar(tipo) {
+    return document.createElement(`${tipo}`)
+}
+
 function formataMoeda(valor){
     return Number(valor).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
 }
 
-tabelaDespesas.addEventListener('contextmenu', (event) =>{
-        event.preventDefault();
-        apagarDado(event, 'despesas') 
+//*****************APAGAR DADOS*******************/
+tabelaDespesas.addEventListener('contextmenu', (event) => {
+    event.preventDefault();
+    apagarDado(event, 'despesas')
 })
-tabelaReceitas.addEventListener('contextmenu', (event) =>{
-        event.preventDefault();
-        apagarDado(event, 'receitas') 
+tabelaReceitas.addEventListener('contextmenu', (event) => {
+    event.preventDefault();
+    apagarDado(event, 'receitas')
 })
-tabelaFixos.addEventListener('contextmenu', (event) =>{
-        event.preventDefault();
-        apagarDado(event, 'fixos');
+tabelaFixos.addEventListener('contextmenu', (event) => {
+    event.preventDefault();
+    apagarDado(event, 'fixos');
 })
-btnApagar.addEventListener('click', (event) =>{
-    btnBox = event.target.closest('div');
-    btnBox.style.marginLeft = '-205px'
+btnApagar.addEventListener('click', (event) => {
+    deleteBoxSlide = event.target.closest('div');
+    deleteBoxSlide.style.marginLeft = '-205px'
 })
-document.querySelector('#deletar-nao').addEventListener('click', () =>{
+document.querySelector('#deletar-nao').addEventListener('click', () => {
     deleteBox.classList.add('hidden');
-    btnBox.style.marginLeft = '0px'
+    deleteBoxSlide.style.marginLeft = '0px'
 })
 
-function apagarDado(event, tabela){
+function apagarDado(event, tabela) {
     deleteBox.classList.remove('hidden');
-    
+
     let left = event.clientX;
     let top = event.clientY;
     deleteBox.style.left = `${left + 3}px`;
@@ -84,8 +85,8 @@ function apagarDado(event, tabela){
     let trID = event.target.closest('tr').getAttribute('id');
     let tabelaPai = tr.closest('table');
     let objNaBaseDeDados;
-    todosOsDados[tabela][ano][mes].forEach(element =>{
-        if(element.id == trID) objNaBaseDeDados = element;
+    todosOsDados[tabela][ano][mes].forEach(element => {
+        if (element.id == trID) objNaBaseDeDados = element;
     });
     console.log(objNaBaseDeDados);
 
