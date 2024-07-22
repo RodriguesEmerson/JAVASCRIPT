@@ -16,8 +16,6 @@
     }
     ul{
         list-style-type: none;
-        padding-top: 5px;
-        
     }
     li{
         color: rgb(165, 165, 165);
@@ -29,15 +27,31 @@
         }
     }
     .nav-link-ano{
+        padding-top: 5px;
+        overflow: hidden;
+        transition: 0.3s;
+        margin-bottom: 5px;
+        height: 20px;
         .link-ano{
             display: flex;
             align-items: center;
             label{
                 display: flex;
                 align-items: center;
+                cursor: pointer;
+            }
+            label span:nth-child(2){
+                background-color: gray;
+                width: 150px;
+                height: 1px;
+                margin-left: 5px;
+            }
+            label span:first-child{
+                display: flex;
+                align-items: center;
                 justify-content: center;
                 width: 14px;
-                height: 12px;
+                height: 14px;
                 border: 2px solid gray;
                 margin-right: 5px;
                 transition: 0.3s;
@@ -48,16 +62,12 @@
             }
             input{
                 display: none;
-                & ~ label{
-                    border-color: white;
+                &:checked ~ label span:first-child{
+                    border-color: white; 
+                    color: white;
                 }
             }
-            span{
-                background-color: gray;
-                width: 150px;
-                height: 1px;
-                margin-left: 5px;
-            }
+            
         }
     }
     .nav-link-mes{

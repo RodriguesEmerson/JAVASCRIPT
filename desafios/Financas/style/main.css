@@ -335,7 +335,6 @@ header {
 }
 .nav-bar ul {
   list-style-type: none;
-  padding-top: 5px;
 }
 .nav-bar li {
   color: rgb(165, 165, 165);
@@ -346,6 +345,13 @@ header {
 .nav-bar li:hover {
   color: white;
 }
+.nav-bar .nav-link-ano {
+  padding-top: 5px;
+  overflow: hidden;
+  transition: 0.3s;
+  margin-bottom: 5px;
+  height: 20px;
+}
 .nav-bar .nav-link-ano .link-ano {
   display: flex;
   align-items: center;
@@ -353,28 +359,34 @@ header {
 .nav-bar .nav-link-ano .link-ano label {
   display: flex;
   align-items: center;
+  cursor: pointer;
+}
+.nav-bar .nav-link-ano .link-ano label span:nth-child(2) {
+  background-color: gray;
+  width: 150px;
+  height: 1px;
+  margin-left: 5px;
+}
+.nav-bar .nav-link-ano .link-ano label span:first-child {
+  display: flex;
+  align-items: center;
   justify-content: center;
   width: 14px;
-  height: 12px;
+  height: 14px;
   border: 2px solid gray;
   margin-right: 5px;
   transition: 0.3s;
   cursor: pointer;
 }
-.nav-bar .nav-link-ano .link-ano label:hover {
+.nav-bar .nav-link-ano .link-ano label span:first-child:hover {
   border-color: white;
 }
 .nav-bar .nav-link-ano .link-ano input {
   display: none;
 }
-.nav-bar .nav-link-ano .link-ano input ~ label {
+.nav-bar .nav-link-ano .link-ano input:checked ~ label span:first-child {
   border-color: white;
-}
-.nav-bar .nav-link-ano .link-ano span {
-  background-color: gray;
-  width: 150px;
-  height: 1px;
-  margin-left: 5px;
+  color: white;
 }
 .nav-bar .nav-link-mes {
   border-left: 1px solid rgb(71, 71, 71);

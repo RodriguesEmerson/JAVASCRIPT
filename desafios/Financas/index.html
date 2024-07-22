@@ -21,16 +21,42 @@
                 <input type="button" value="Lançar" id="abir-lancar">
                 <div class="nav-links">
                     <h2>Minhas Finanças</h2>
-                    <ul class="nav-link-ano">
+                    <ul class="nav-link-ano" id="A2024">
                         <li class="link-ano">
-                            <label for="ano2024">-</label>
-                            2024
-                            <span></span>
-                            <input type="radio" name="ano" id="ano2024">
+                            <input type="checkbox" name="ano" id="ano2024">
+                            <label for="ano2024">
+                                <span class="sinal-abir-fechar">-</span> 
+                                2024
+                                <span></span>
+                            </label>
                         </li>
                         <ul class="nav-link-mes">
-                            <li>Janeiro</li>
-                            <li>Fevereiro</li>
+                            <li value="JAN" class="link-mes">Janeiro</li>
+                            <li value="FEV" class="link-mes">Fevereiro</li>
+                            <li value="MAR" class="link-mes">Março</li>
+                            <li value="ABR" class="link-mes">Abril</li>
+                            <li value="MAI" class="link-mes">Maio</li>
+                            <li value="JUN" class="link-mes">Junho</li>
+                            <li value="JUL" class="link-mes">Julho</li>
+                        </ul>
+                    </ul>
+                    <ul class="nav-link-ano" id="A2025">
+                        <li class="link-ano">
+                            <input type="checkbox" name="ano" id="ano2025">
+                            <label for="ano2025">
+                                <span class="sinal-abir-fechar">-</span> 
+                                2025
+                                <span></span>
+                            </label>
+                        </li>
+                        <ul class="nav-link-mes">
+                            <li value="JAN" class="link-mes">Janeiro</li>
+                            <li value="FEV" class="link-mes">Fevereiro</li>
+                            <li value="MAR" class="link-mes">Março</li>
+                            <li value="ABR" class="link-mes">Abril</li>
+                            <li value="MAI" class="link-mes">Maio</li>
+                            <li value="JUN" class="link-mes">Junho</li>
+                            <li value="JUL" class="link-mes">Julho</li>
                         </ul>
                     </ul>
                 </div>
@@ -140,6 +166,7 @@
     </footer>
     <script src="script/script.js" type="module"></script>
     <script src="script/lancar.js" type="module"></script>
+    <script src="script/modules/navigation.js" type="module"></script>
 </body>
 
 </html>
