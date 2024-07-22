@@ -1,15 +1,18 @@
 const checboxAno = document.querySelectorAll('input[type=checkbox]');
 const liMeses = document.querySelectorAll('.link-mes');
+let anoClicado = 1;
+let mesClicado;
 
 const MudarMesTabela = {
-    mesClicado: '' ,
-    selecionaMesClicado: function(){
-        this.mesClicado = this.getAttribute('value')
-        console.log(this.mesClicado);
-    },
-    selecionaAnoClicado: function(){
-
-    }
+    anoClicado: '',
+    mesClicado: '',
+    selecionaAnoMesClicado: function(){
+        this.mesClicado = this.getAttribute('value');
+        this.anoClicado = this.closest('ul')
+            .getAttribute('id')
+            .substring(1);
+     },
+     
 }
 function openCloseYearNav(){
     const ulPai = this.closest('ul');
@@ -31,6 +34,6 @@ function openCloseYearNav(){
         checboxAno[ind].addEventListener('change', openCloseYearNav);
     }
     for(let ind = 0; ind < liMeses.length; ind++){
-        liMeses[ind].addEventListener('click', MudarMesTabela.selecionaMesClicado)
+        liMeses[ind].addEventListener('click', MudarMesTabela.selecionaAnoMesClicado)
     }
 }());
