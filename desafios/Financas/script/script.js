@@ -5,37 +5,63 @@ const deleteBox = document.querySelector('#deleteBox');
 const btnApagar = document.querySelector('#deletar-btn');
 const btnApagarNao = document.querySelector('#deletar-nao');
 const btnApagarSim = document.querySelector('#deletar-sim');
+const container = document.querySelector('.container');
 let deleteBoxSlide;
 let ano = 2024;
 let mes = 'JAN';
 
-import { todosOsDados } from "./modules/dados.js";
+import { baseDeDados } from "./modules/dados.js";
 
-const carregaTabelas = {
-    insereDados: function(tabela, ano, mes, dados, tabelaHTML){
-        dados[tabela][ano][mes].forEach(element => {
-            const tr = criar('tr')
+export const carregaTabelas = {
+    insereDados: function(tabela){
+        let tabelaHTML;
+        switch (tabela) {
+            case 'despesas':
+                tabelaHTML = tabelaDespesas;
+                break;
+            case 'receitas':
+                tabelaHTML = tabelaReceitas;
+                break;
+        
+            default: tabelaHTML = tabelaFixos;
+                break;
+        };
+        this.limpaTabelaHTML(tabela, tabelaHTML);
+        baseDeDados[tabela][ano][mes].forEach(element => {
+            const tr = criar('tr');
             for (const chave in element) {
                 if(chave == 'id'){
-                    tr.setAttribute('id',`${element[chave]}`)
+                    tr.setAttribute('id',`${element[chave]}`);
                 }else{
                     let td = criar('td');
-                    td.textContent = element[chave]
+                    td.textContent = element[chave];
                     if(chave == 'valor'){
-                        td.textContent = this.formataMoeda(element[chave])
+                        td.textContent = this.formataMoeda(element[chave]);
                     }
-                    tr.appendChild(td)
-                }
-            }
-            tabelaHTML.appendChild(tr)
+                    tr.appendChild(td);
+                };
+            };
+            tabelaHTML.appendChild(tr);
         })
-        this.somaValores(tabela, ano, mes, dados)
+        this.somaValores(tabela, ano, mes);
+    },
+    limpaTabelaHTML: function (tabela, tabelaHTML){
+        let cabecalhos = ['DESCRIÇÃO', 'DATA', 'CATEGORIA', 'VALOR'];
+        if(tabela != 'despesas') cabecalhos = ['DESCRIÇÃO', 'DATA', 'VALOR'];
+        const tr = criar('tr');
+        cabecalhos.forEach(element =>{
+            const th = criar('th');
+            th.textContent = element;
+            tr.appendChild(th);
+        });
+        tabelaHTML.innerHTML = '';
+        tabelaHTML.appendChild(tr);
     },
 
-    somaValores: function(tabela, ano, mes, dados){
+    somaValores: function(tabela, ano, mes){
         let total= 0;
-        dados[tabela][ano][mes].forEach(element => {
-            total = total + Number(element.valor)
+        baseDeDados[tabela][ano][mes].forEach(element => {
+            total = total + Number(element.valor);
         })
         const totalTabela = document.getElementById(`total-${tabela}`);
         total = this.formataMoeda(total);
@@ -75,10 +101,15 @@ const apagarDado = {
             element.addEventListener('contextmenu', (event) =>{
                 event.preventDefault();
                 deleteBox.classList.remove('hidden');
-                let left = event.clientX;
-                let top = event.clientY;
+                let telaWidth = window.innerWidth;
+                let telaHeight = window.innerHeight;
+                let left = event.x; //"x e y": refenrente ao browser;  
+                let top = event.pageY; //referente ao scroll;
+                if(left + 220 > telaWidth) { left = left - 205 }
+                if(event.y + 105 > telaHeight) { top = top - 105; console.log('foi')};
                 deleteBox.style.left = `${left + 3}px`;
                 deleteBox.style.top = `${top - 45}px`;
+
                 this.selecionarDadosClicados(event);
             });
         });
@@ -104,7 +135,7 @@ const apagarDado = {
 
         //*****Busca Objeto da Base de Dados******/
         let objNaBaseDeDados;
-        todosOsDados[tabela][ano][mes].forEach(element => {
+        baseDeDados[tabela][ano][mes].forEach(element => {
             if (element.id == trClicadaID) objNaBaseDeDados = element;
         });
         
@@ -116,14 +147,12 @@ const apagarDado = {
     },
     apagar: function(){
         this.dadosClicados.tabelaClicada.removeChild(this.dadosClicados.trClicada)
-        let index = todosOsDados[this.dadosClicados.tabela][ano][mes].indexOf(this.dadosClicados.obj);
-        todosOsDados[this.dadosClicados.tabela][ano][mes].splice(index, 1)
-        console.log(todosOsDados[this.dadosClicados.tabela][ano][mes])
-        console.log(index)
+        let index = baseDeDados[this.dadosClicados.tabela][ano][mes].indexOf(this.dadosClicados.obj);
+        baseDeDados[this.dadosClicados.tabela][ano][mes].splice(index, 1);
+        carregaTabelas.somaValores(this.dadosClicados.tabela, ano, mes, baseDeDados)
     }
 }
 apagarDado.addEvents();
-
-carregaTabelas.insereDados('despesas', 2024, 'JAN', todosOsDados, tabelaDespesas);
-carregaTabelas.insereDados('receitas', 2024, 'JAN', todosOsDados, tabelaReceitas);
-carregaTabelas.insereDados('fixos', 2024, 'JAN', todosOsDados, tabelaFixos);
+carregaTabelas.insereDados('despesas');
+carregaTabelas.insereDados('receitas');
+carregaTabelas.insereDados('fixos');

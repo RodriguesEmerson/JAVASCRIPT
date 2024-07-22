@@ -1,7 +1,7 @@
 export let categorias = [
    ['Alimentação', 'Pessoal', 'Casa', 'Saúde']
 ]
-export let todosOsDados = {
+export let baseDeDados = {
    despesas: {
       2024: {
          JAN: [
