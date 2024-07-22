@@ -23,12 +23,6 @@ header {
   flex-direction: row;
 }
 
-.navigation {
-  width: 200px;
-  height: calc(100vh - 50px);
-  background-color: rgb(35, 35, 35);
-}
-
 .tabelas {
   display: flex;
   flex-wrap: wrap;
@@ -321,6 +315,74 @@ header {
   width: 90px;
   height: 30px;
   cursor: pointer;
+}
+
+.navigation {
+  width: 200px;
+  height: calc(100vh - 50px);
+  background-color: rgb(35, 35, 35);
+  padding: 10px;
+}
+
+.nav-bar {
+  color: white;
+  font-size: 14px;
+}
+.nav-bar h2 {
+  font-size: 18px;
+  border-bottom: 1px solid gray;
+  margin-bottom: 10px;
+}
+.nav-bar ul {
+  list-style-type: none;
+  padding-top: 5px;
+}
+.nav-bar li {
+  color: rgb(165, 165, 165);
+  margin-bottom: 3px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.nav-bar li:hover {
+  color: white;
+}
+.nav-bar .nav-link-ano .link-ano {
+  display: flex;
+  align-items: center;
+}
+.nav-bar .nav-link-ano .link-ano label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 12px;
+  border: 2px solid gray;
+  margin-right: 5px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.nav-bar .nav-link-ano .link-ano label:hover {
+  border-color: white;
+}
+.nav-bar .nav-link-ano .link-ano input {
+  display: none;
+}
+.nav-bar .nav-link-ano .link-ano input ~ label {
+  border-color: white;
+}
+.nav-bar .nav-link-ano .link-ano span {
+  background-color: gray;
+  width: 150px;
+  height: 1px;
+  margin-left: 5px;
+}
+.nav-bar .nav-link-mes {
+  border-left: 1px solid rgb(71, 71, 71);
+  margin-left: 6px;
+  padding-left: 20px;
+}
+.nav-bar .nav-link-mes li {
+  border-bottom: none;
 }
 
 .hidden {

@@ -1,5 +1,6 @@
 export let categorias = [
-   ['Alimentação', 'Pessoal', 'Casa', 'Saúde']
+   ['Alimentação', 'Pessoal', 'Casa', 'Saúde'],
+   ['Receitas'],
 ]
 export let baseDeDados = {
    despesas: {
