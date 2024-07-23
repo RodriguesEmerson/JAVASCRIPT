@@ -1,28 +1,41 @@
 const checboxAno = document.querySelectorAll('input[type=checkbox]');
 const liMeses = document.querySelectorAll('.link-mes');
-let liAnteriorClicada;
+let anoAnteriorSelecionado;
+let anoAtivo;
 
-const MudarMesTabela = {
-    ulDoAnoClicado: '',
-    liDoMesClicado:'',
-    anoClicado: '',
-    mesClicado: '',
+const mudarMesTabela = {
+    mesAnteriorSelecionado: '',
+    mesAtualSelecionado: '',
+    anoClicadoID: '',
+    mesClicadoValue: '',
     selecionaAnoMesClicado: function(li){
-        this.liDoMesClicado = li;
-        this.ulDoAnoClicado = li.closest('ul');
-        this.mesClicado = li.getAttribute('value');
-        this.anoClicado = li.closest('ul')
+        this.mesAtualSelecionado = li;
+        this.mesClicadoValue = li.getAttribute('value');
+        this.anoClicadoID = li.closest('ul')
             .getAttribute('id')
             .substring(1);
         this.mudaCores();
         },
+
+        //mudar a cor do mês e do ano através do mês clicado.
         mudaCores: function(){
-            this.liDoMesClicado.style.color = 'white';
+            const anoAtualSelecionado = document.querySelector(`#A${this.anoClicadoID} .link-ano`);
+            this.mesAtualSelecionado.style.color = 'white';
+            if(this.mesAnteriorSelecionado){
+                if(this.mesAnteriorSelecionado == this.mesAtualSelecionado) return
+                this.mesAnteriorSelecionado.style.color = 'gray';
+            }
+            anoAnteriorSelecionado.style.color = 'gray';
+            anoAtualSelecionado.style.color = 'white';
+
+            this.mesAnteriorSelecionado = this.mesAtualSelecionado;
+            anoAnteriorSelecionado = anoAtualSelecionado;
+            anoAtivo = anoAtualSelecionado;
         },
      
 }
 
-function openCloseYearNav(){
+function abirFecharNavAno(){
     const ulPai = this.closest('ul');
     const ulPaiID = this.closest('ul').getAttribute('id');
     const sinalAbrirFechar = document.querySelector(`#${ulPaiID} .sinal-abir-fechar`);
@@ -36,24 +49,30 @@ function openCloseYearNav(){
     }
     
     //Mudar cor do ano clicado;
-    const liDoAnoClicado = document.querySelector(`#${ulPaiID} .link-ano`);
+    const anoAtualSelecionado = document.querySelector(`#${ulPaiID} .link-ano`);
     if(sinalAbrirFechar.textContent == '-'){
-        liDoAnoClicado.style.color = 'white';
+        anoAtualSelecionado.style.color = 'white';
     }
-    if(liAnteriorClicada){
-        liAnteriorClicada.style.color = 'gray';
+    if(anoAnteriorSelecionado){
+        anoAnteriorSelecionado.style.color = 'gray';
+        if(anoAnteriorSelecionado == anoAtualSelecionado){
+            anoAnteriorSelecionado.style.color = 'white';
+            if(sinalAbrirFechar.textContent == '+'){
+                anoAnteriorSelecionado.style.color = 'gray';
+                if(anoAtivo){
+                    anoAtivo.style.color = 'white';
+                }
+            }
+        } 
     }
-    liAnteriorClicada = liDoAnoClicado;
-    
-    
-
+    anoAnteriorSelecionado = anoAtualSelecionado;
 };
 
 (function(){
     for(let ind = 0; ind < checboxAno.length; ind++){
-        checboxAno[ind].addEventListener('change', openCloseYearNav);
+        checboxAno[ind].addEventListener('change', abirFecharNavAno);
     }
     for(let ind = 0; ind < liMeses.length; ind++){
-        liMeses[ind].addEventListener('click', MudarMesTabela.selecionaAnoMesClicado.bind(MudarMesTabela, liMeses[ind]))
+        liMeses[ind].addEventListener('click', mudarMesTabela.selecionaAnoMesClicado.bind(mudarMesTabela, liMeses[ind]))
     }
 }());
