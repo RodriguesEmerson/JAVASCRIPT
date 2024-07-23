@@ -336,6 +336,9 @@ header {
 .nav-bar ul {
   list-style-type: none;
 }
+.nav-bar ul ol {
+  list-style: none;
+}
 .nav-bar li {
   color: rgb(165, 165, 165);
   margin-bottom: 3px;

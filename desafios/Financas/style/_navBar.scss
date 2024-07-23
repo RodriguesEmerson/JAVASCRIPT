@@ -16,6 +16,9 @@
     }
     ul{
         list-style-type: none;
+        ol{
+            list-style: none;           
+        }
     }
     li{
         color: rgb(165, 165, 165);
