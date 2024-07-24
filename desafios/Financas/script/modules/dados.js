@@ -11,7 +11,9 @@ export let baseDeDados = {
             { desc: 'Desp3', data: 'Data', categoria:'Ctgr', valor: '3', id: '4' },
          ],
          FEV: [
-            
+            { desc: 'Desp1', data: 'FEVER', categoria:'Ctgr', valor: '15', id: '2' },
+            { desc: 'Desp2', data: 'FEVER', categoria:'Ctgr', valor: '20', id: '3' },
+            { desc: 'Desp3', data: 'FEVER', categoria:'Ctgr', valor: '30', id: '4' },
          ]
       }
    },
@@ -22,9 +24,11 @@ export let baseDeDados = {
             { desc: 'Rece2', data: 'Data', valor: '5', id: '3' },
             { desc: 'Rece3', data: 'Data', valor: '6', id: '4' },
          ],
-         FEV: {
-
-         }
+         FEV: [
+            { desc: 'Rece1', data: 'FEVER', valor: '40', id: '2' },
+            { desc: 'Rece2', data: 'FEVER', valor: '50', id: '3' },
+            { desc: 'Rece3', data: 'FEVER', valor: '60', id: '4' },
+         ]
       }
    },
    fixos: {
@@ -34,9 +38,11 @@ export let baseDeDados = {
             { desc: 'Fixo2', data: 'Data', valor: '8', id: '3' },
             { desc: 'Fixo3', data: 'Data', valor: '09', id: '4' },
          ],
-         FEV: {
-
-         }
+         FEV: [
+            { desc: 'Rece1', data: 'FEVER', valor: '10', id: '2' },
+            { desc: 'Rece2', data: 'FEVER', valor: '20', id: '3' },
+            { desc: 'Rece3', data: 'FEVER', valor: '30', id: '4' },
+         ]
       }
    }
    

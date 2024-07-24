@@ -6,11 +6,11 @@ const btnApagar = document.querySelector('#deletar-btn');
 const btnApagarNao = document.querySelector('#deletar-nao');
 const btnApagarSim = document.querySelector('#deletar-sim');
 const container = document.querySelector('.container');
-let deleteBoxSlide;
-let ano = 2024;
-let mes = 'JAN';
+let deleteBoxSlide; //será a div dentro da caixa 'pop up' deletar;
+
 
 import { baseDeDados } from "./modules/dados.js";
+import { ano, mes } from "./modules/navigation.js";
 
 export const carregaTabelas = {
     insereDados: function(tabela){
