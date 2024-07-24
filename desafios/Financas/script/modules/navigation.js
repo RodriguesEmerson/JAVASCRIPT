@@ -59,9 +59,6 @@ function abirFecharNavAno(){
             anoAnteriorSelecionado.style.color = 'white';
             if(sinalAbrirFechar.textContent == '+'){
                 anoAnteriorSelecionado.style.color = 'gray';
-                if(anoAtivo){
-                    anoAtivo.style.color = 'white';
-                }
             }
         } 
     }
