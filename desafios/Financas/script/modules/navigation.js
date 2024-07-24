@@ -23,6 +23,7 @@ const carregaLinksNav = {
         }
         this.carregaLinksNavNoDOM()
     },
+
     carregaLinksNavNoDOM: function(){
         navLinks.innerHTML = '';
         //Cria <ul> com os anos encontrados;
@@ -56,6 +57,19 @@ const carregaLinksNav = {
         });
         this.addEventsNosLinks();
     },
+
+    addEventsNosLinks: function(){
+        const checboxAno = document.querySelectorAll('input[type=checkbox]');
+        const liMeses = document.querySelectorAll('.link-mes');
+        
+        for(let ind = 0; ind < checboxAno.length; ind++){
+            checboxAno[ind].addEventListener('change', abirFecharLinkAno);
+        }
+        for(let ind = 0; ind < liMeses.length; ind++){
+            liMeses[ind].addEventListener('click', mudarMesTabelas.selecionaAnoMesClicado.bind(mudarMesTabelas, liMeses[ind]))
+        }
+    },
+
     mesSemAbrev: function (mes){
         const meses = {
             JAN: 'Janeiro', FEV: 'Fevereiro', MAR: 'Março', ABR: 'Abril',
@@ -69,21 +83,10 @@ const carregaLinksNav = {
             }
         }
     },
-    addEventsNosLinks: function(){
-        const checboxAno = document.querySelectorAll('input[type=checkbox]');
-        const liMeses = document.querySelectorAll('.link-mes');
-
-        for(let ind = 0; ind < checboxAno.length; ind++){
-            checboxAno[ind].addEventListener('change', abirFecharLinkAno);
-        }
-        for(let ind = 0; ind < liMeses.length; ind++){
-            liMeses[ind].addEventListener('click', navClick.selecionaAnoMesClicado.bind(navClick, liMeses[ind]))
-        }
-    }
 }
 
 
-const navClick = {
+const mudarMesTabelas = {
     mesAnteriorSelecionado: '',
     mesAtualSelecionado: '',
     anoClicadoID: '',
@@ -110,10 +113,10 @@ const navClick = {
 
         this.mesAnteriorSelecionado = this.mesAtualSelecionado;
         anoAnteriorSelecionado = anoAtualSelecionado;
-        this.mudarMesTabelas();
+        this.mudarParaMesSelecionado();
     },
 
-    mudarMesTabelas: function(){
+    mudarParaMesSelecionado: function(){
         const tabelas = ['despesas', 'receitas', 'fixos']
         ano = this.anoClicadoID;
         mes = this.mesClicadoValue;

@@ -14,7 +14,9 @@ import { ano, mes } from "./modules/navigation.js";
 
 
 export const carregaTabelas = {
+    
     insereDados: function(tabela){
+        if(baseDeDados == '') return;
         let tabelaHTML;
         switch (tabela) {
             case 'despesas':
