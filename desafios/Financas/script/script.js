@@ -12,6 +12,7 @@ let deleteBoxSlide; //será a div dentro da caixa 'pop up' deletar;
 import { baseDeDados } from "./modules/dados.js";
 import { ano, mes } from "./modules/navigation.js";
 
+
 export const carregaTabelas = {
     insereDados: function(tabela){
         let tabelaHTML;
@@ -93,9 +94,11 @@ btnApagarSim.addEventListener('click', () => {
     deleteBoxSlide.style.marginLeft = '0px';
 })
 
+
 const apagarDado = {
     tabelasDOM: [tabelaDespesas, tabelaReceitas, tabelaFixos],
     dadosClicados:{},
+    //Adiciona eventos em cada td das tabelas;
     addEvents: function(){
         this.tabelasDOM.forEach(element =>{
             element.addEventListener('contextmenu', (event) =>{
