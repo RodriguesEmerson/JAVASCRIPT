@@ -130,7 +130,7 @@ const mudarMesTabelas = {
         ano = this.anoClicadoID;
         mes = this.mesClicadoValue;
         tabelas.forEach(element =>{
-            carregaTabelas.insereDados(element);
+            carregaTabelas.insereDados(element); //../script
         });
     }
      

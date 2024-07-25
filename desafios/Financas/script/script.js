@@ -15,22 +15,14 @@ import { ano, mes } from "./modules/navigation.js";
 
 export const carregaTabelas = {
     
-    insereDados: function(tabela){
+    insereDados: function(tabelaBD){
         if(baseDeDados == '') return;
-        let tabelaHTML;
-        switch (tabela) {
-            case 'despesas':
-                tabelaHTML = tabelaDespesas;
-                break;
-            case 'receitas':
-                tabelaHTML = tabelaReceitas;
-                break;
+        let tabelaDOM = this.selecionaTabelaNoDOM(tabelaBD);
         
-            default: tabelaHTML = tabelaFixos;
-                break;
-        };
-        this.limpaTabelaHTML(tabela, tabelaHTML);
-        baseDeDados[tabela][ano][mes].forEach(element => {
+        this.formataTabelaDOM(tabelaBD, tabelaDOM);
+
+        //Cria so elementos <tr> e <td> nas tabelas do DOM
+        baseDeDados[tabelaBD][ano][mes].forEach(element => {
             const tr = criar('tr');
             for (const chave in element) {
                 if(chave == 'id'){
@@ -44,31 +36,64 @@ export const carregaTabelas = {
                     tr.appendChild(td);
                 };
             };
-            tabelaHTML.appendChild(tr);
+            tabelaDOM.appendChild(tr);
         })
-        this.somaValores(tabela, ano, mes);
+        this.somaTotalDaTabela(tabelaBD, ano, mes);
+        this.addEventClickDireito();
     },
-    limpaTabelaHTML: function (tabela, tabelaHTML){
+
+    selecionaTabelaNoDOM: function(tabelaBD){
+        switch (tabelaBD) {
+            case 'despesas':
+                return tabelaDespesas;
+            case 'receitas':
+                return tabelaReceitas;
+            default: return tabelaFixos;
+        };
+    },
+
+    formataTabelaDOM: function (tabelaBD, tabelaDOM){
         let cabecalhos = ['DESCRIÇÃO', 'DATA', 'CATEGORIA', 'VALOR'];
-        if(tabela != 'despesas') cabecalhos = ['DESCRIÇÃO', 'DATA', 'VALOR'];
+        if(tabelaBD != 'despesas') cabecalhos = ['DESCRIÇÃO', 'DATA', 'VALOR'];
         const tr = criar('tr');
         cabecalhos.forEach(element =>{
             const th = criar('th');
+            th.setAttribute('scope', 'col')
             th.textContent = element;
             tr.appendChild(th);
         });
-        tabelaHTML.innerHTML = '';
-        tabelaHTML.appendChild(tr);
+        tabelaDOM.innerHTML = '';
+        tabelaDOM.appendChild(tr);
     },
 
-    somaValores: function(tabela, ano, mes){
+    somaTotalDaTabela: function(tabelaBD, ano, mes){
         let total= 0;
-        baseDeDados[tabela][ano][mes].forEach(element => {
+        baseDeDados[tabelaBD][ano][mes].forEach(element => {
             total = total + Number(element.valor);
         })
-        const totalTabela = document.getElementById(`total-${tabela}`);
+        const totalTabela = document.getElementById(`total-${tabelaBD}`);
         total = this.formataMoeda(total);
         totalTabela.textContent = total;
+    },
+     //Adiciona eventos em cada td das tabelas;
+     addEventClickDireito: function(){
+        let tabelasDOM = [tabelaDespesas, tabelaReceitas, tabelaFixos];
+        tabelasDOM.forEach(element =>{
+            element.addEventListener('contextmenu', (event) =>{
+                event.preventDefault();
+                deleteBox.classList.remove('hidden');
+                let telaWidth = window.innerWidth;
+                let telaHeight = window.innerHeight;
+                let left = event.x; //"x e y": se refenre ao browser;  
+                let top = event.pageY; //se refere ao scroll;
+                if(left + 220 > telaWidth) { left = left - 205 }
+                if(event.y + 105 > telaHeight) { top = top - 105; console.log('foi')};
+                deleteBox.style.left = `${left + 3}px`;
+                deleteBox.style.top = `${top - 45}px`;
+
+                apagarDado.selecionarDadosClicados(event)
+            });
+        });
     },
 
     formataMoeda: function(valor){
@@ -98,66 +123,52 @@ btnApagarSim.addEventListener('click', () => {
 
 
 const apagarDado = {
-    tabelasDOM: [tabelaDespesas, tabelaReceitas, tabelaFixos],
-    dadosClicados:{},
-    //Adiciona eventos em cada td das tabelas;
-    addEvents: function(){
-        this.tabelasDOM.forEach(element =>{
-            element.addEventListener('contextmenu', (event) =>{
-                event.preventDefault();
-                deleteBox.classList.remove('hidden');
-                let telaWidth = window.innerWidth;
-                let telaHeight = window.innerHeight;
-                let left = event.x; //"x e y": refenrente ao browser;  
-                let top = event.pageY; //referente ao scroll;
-                if(left + 220 > telaWidth) { left = left - 205 }
-                if(event.y + 105 > telaHeight) { top = top - 105; console.log('foi')};
-                deleteBox.style.left = `${left + 3}px`;
-                deleteBox.style.top = `${top - 45}px`;
-
-                this.selecionarDadosClicados(event);
-            });
-        });
-    },
+    elementosDOMClicados:{},
     selecionarDadosClicados: function (event){
         //*****Busca Elementos do DOM******/
-        let tabela;
-        const tabelaClicada = event.target.closest('table');
-        const classeDaTabela = tabelaClicada.classList[1];
+        let tabelaDB;
+        const tabelaDOMClicada = event.target.closest('table');
+        const classeDaTabela = tabelaDOMClicada.classList[1];
         const trClicada = event.target.closest('tr');
         const trClicadaID = trClicada.closest('tr').getAttribute('id');
 
+        //Nome da tabela na BaseDeDados
         switch (classeDaTabela) {
             case 'despesas-tabela':
-                tabela = 'despesas';
+                tabelaDB = 'despesas';
                 break;
             case 'receitas-tabela':
-                tabela = 'receitas';
+                tabelaDB = 'receitas';
                 break;
-            default: tabela = 'fixos';
+            default: tabelaDB = 'fixos';
                 break;
         };
 
         //*****Busca Objeto da Base de Dados******/
         let objNaBaseDeDados;
-        baseDeDados[tabela][ano][mes].forEach(element => {
+        baseDeDados[tabelaDB][ano][mes].forEach(element => {
             if (element.id == trClicadaID) objNaBaseDeDados = element;
         });
         
-        this.dadosClicados.tabelaClicada = tabelaClicada;
-        this.dadosClicados.trClicada = trClicada;
-        this.dadosClicados.tabela = tabela;
-        this.dadosClicados.obj = objNaBaseDeDados;
+        this.elementosDOMClicados.tabelaDOMClicada = tabelaDOMClicada;
+        this.elementosDOMClicados.trClicada = trClicada;
+        this.elementosDOMClicados.tabelaDB = tabelaDB;
+        this.elementosDOMClicados.obj = objNaBaseDeDados;
 
     },
     apagar: function(){
-        this.dadosClicados.tabelaClicada.removeChild(this.dadosClicados.trClicada)
-        let index = baseDeDados[this.dadosClicados.tabela][ano][mes].indexOf(this.dadosClicados.obj);
-        baseDeDados[this.dadosClicados.tabela][ano][mes].splice(index, 1);
-        carregaTabelas.somaValores(this.dadosClicados.tabela, ano, mes, baseDeDados)
+        let index = baseDeDados[this.elementosDOMClicados.tabelaDB][ano][mes]
+            .indexOf(this.elementosDOMClicados.obj);
+
+        this.elementosDOMClicados.tabelaDOMClicada
+            .removeChild(this.elementosDOMClicados.trClicada);
+
+        baseDeDados[this.elementosDOMClicados.tabelaDB][ano][mes]
+            .splice(index, 1);
+
+        carregaTabelas.somaTotalDaTabela(this.elementosDOMClicados.tabelaDB, ano, mes, baseDeDados)
     }
 }
-apagarDado.addEvents();
 carregaTabelas.insereDados('despesas');
 carregaTabelas.insereDados('receitas');
 carregaTabelas.insereDados('fixos');
