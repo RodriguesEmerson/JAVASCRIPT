@@ -49,7 +49,7 @@ const carregaLinksNav = {
                 const liMes = criar('li')
                 liMes.setAttribute('value', `${element}`);
                 liMes.setAttribute('class', 'link-mes');
-                liMes.textContent = `${this.mesSemAbrev(element )}`
+                liMes.textContent = `${this.mesSemAbrev(element, false )}` //(mes, abriviado)
                 olMes.appendChild(liMes)
             });
 
@@ -70,17 +70,26 @@ const carregaLinksNav = {
         }
     },
 
-    mesSemAbrev: function (mes){
+    mesSemAbrev: function (mes, abreviado){
         const meses = {
             JAN: 'Janeiro', FEV: 'Fevereiro', MAR: 'Março', ABR: 'Abril',
             MAI: 'Maio', JUN: 'Junho', JUL: 'Julho', AGO: 'Agosto',
             SET: 'Setembro', OUT: 'Outubro', NOV: 'Novembro', DEZ: 'Dezemto'
         }
+
         //Retorna o mes sem abreviatura;
-        for(const key in meses){
-            if(`${key}` == mes){
-                return meses[key];
+        if(!abreviado){
+            for(const key in meses){
+                if(`${key}` == mes){
+                    return meses[key];
+                }
             }
+        }else{
+            for(const key in meses){
+                if(`${meses[key]}` == mes){
+                    return `${key}`;
+                }
+            } 
         }
     },
 }
