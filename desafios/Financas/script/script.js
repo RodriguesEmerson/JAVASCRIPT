@@ -40,6 +40,7 @@ export const carregaTabelas = {
         })
         this.somaTotalDaTabela(tabelaBD, ano, mes);
         this.addEventClickDireito();
+        console.log(baseDeDados)
     },
 
     selecionaTabelaNoDOM: function(tabelaBD){
