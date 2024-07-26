@@ -1,5 +1,7 @@
-import { criar, carregaTabelas } from './script.js';
 import { baseDeDados, categorias } from './modules/dados.js';
+import { carregaLinksNav } from './modules/navigation.js';
+import { criar, carregaTabelas } from './main.js';
+
 const form = document.querySelector('.dados-box');
 const selectCategorias = document.querySelector('#lancar-categoria');
 const formBox = document.querySelector('.lancar-container');
@@ -14,7 +16,7 @@ let categoriasCarregadas = false;
 
 form.addEventListener('submit', event => {
     event.preventDefault();
-    novoLancamento.pegarDadosForm();
+    novoLancamento.lancarNovoDadoCriado();
 });
 const abirForm = {
     tornarFormVisivel: function(){
@@ -38,42 +40,59 @@ const novoLancamento = {
     dadosDoFormulario: '',
     ano: '',
     mes: '',
+    lancarNovoDadoCriado: function(){
+        this.pegarDadosForm();
+        this.pegarMesEAnoData(this.dadosDoFormulario.data);
+        this.checaSeExisteNaBD();
+        const novoDado = this.criarNovoDado()
+
+        baseDeDados[this.ano][this.mes][this.dadosDoFormulario.tipo]
+        .push(novoDado);
+        carregaTabelas.insereDados(this.dadosDoFormulario.tipo)//DOM 
+
+        //Atualiza Navigation
+        carregaLinksNav.carregaLinksNavNoDOM(); //navigation.js
+    },
+
     pegarDadosForm: function(){
         const formData = new FormData(form);
         this.dadosDoFormulario = Object.fromEntries(formData);
-        this.lancarNovoDadoCriado();
     },
     
+
     criarNovoDado: function(){
         let ordemDasChaves = ['desc', 'data', 'categoria', 'valor'];
-        if (this.dadosDoFormulario.tipo != 'despesas') ordemDasChaves.splice('', 2);
+        if (this.dadosDoFormulario.tipo != 'despesas') ordemDasChaves = ['desc', 'data', 'valor'];;
         let novoDado = {};
         ordemDasChaves.forEach(element => {
             novoDado[element] = this.dadosDoFormulario[element];
         });
         novoDado.id = this.radomID(2024, novoDado.data);
-        console.log(novoDado)
         return novoDado;
     },
     
-    lancarNovoDadoCriado: function(){
-        this.pegarMesEAnoData(this.dadosDoFormulario.data);
-
-        baseDeDados[this.dadosDoFormulario.tipo][this.ano][this.mes]
-        .push(this.criarNovoDado());
-        carregaTabelas.insereDados(this.dadosDoFormulario.tipo)//DOM
+    checaSeExisteNaBD: function(){
+        if(!baseDeDados[this.ano]){ //checa se existe o ano na 'badeDeDados'.
+            baseDeDados[this.ano] = {}; //Se não existir, cria o objeto do novo ano inserido.
+        }
+         //checa se existe o mês na 'badeDeDados'.
+        if(!baseDeDados[this.ano][this.mes]){ 
+            //Se não existir, cria o objeto do novo mês inserido.
+            baseDeDados[this.ano][this.mes] = {
+                despesas:[],
+                receitas:[],
+                fixos:[]
+            }; 
+        }
     },
 
     pegarMesEAnoData: function(data){
-
-        let dataArray = data.split('/')
-        let dataReverse = `${dataArray[2]}/${dataArray[1]}/${dataArray[0]}`
+        let dataArray = data.split('/')//input dd/mm/aaaa 
+        let dataReverse = `${dataArray[2]}/${dataArray[1]}/${dataArray[0]}` //==> autput aaaa/mm/dd
 
         this.ano = new Date(dataReverse).toLocaleDateString('pt-br', {year: 'numeric'});
         let mes = new Date(dataReverse).toLocaleDateString('pt-br', {month: 'short'});
         this.mes = mes.slice(0, 3).toUpperCase();
-
-        console.log('Mes:' + this.mes, 'Ano: ' + this.ano)
     },
     
     radomID: function(ano, data){
@@ -84,6 +103,7 @@ const novoLancamento = {
         return newId;
     }
 }
+
 
 //Se não for colocado o '.bind', o this em tonarFormVisil irá se referir ao
 //próprio método tonarFormVisil e não ao abrirForm;
@@ -97,20 +117,20 @@ btnFecharForm.addEventListener('click', () => {
 /******PROXIMO PASSOS*********
 / /Validar os dados lançados;
 / /Mudar categorias de acordo o tipo de lançamento selecionado;     [x]
-/ /Tamanho máximo e mínimo das td's das tables;              
-/ /Pegar mês da data para lancar na base de dados de acordo o mês;
+/ /Tamanho máximo e mínimo das td's das tables;                 
+/ /Pegar mês da data para lancar na base de dados de acordo o mês;  [x]
 / /Trasformar essas funções em objetos e métodos;                   [x]
 */
 
 
-*(function  pegarMesEAno(){
-    let data = '2024/10/25'
-    let dataArray = data.split('/')
-    let dataReverse = `${dataArray[2]}/${dataArray[1]}/${dataArray[0]}`
-    let dataMes = new Date(data).toLocaleDateString('pt-br',{month: 'short'});
-    console.log(dataMes.slice(0, 3).toUpperCase())
-    console.log(dataReverse)
-}())
+// *(function  pegarMesEAno(){
+//     let data = '2024/10/25'
+//     let dataArray = data.split('/')
+//     let dataReverse = `${dataArray[2]}/${dataArray[1]}/${dataArray[0]}`
+//     let dataMes = new Date(data).toLocaleDateString('pt-br',{month: 'short'});
+//     console.log(dataMes.slice(0, 3).toUpperCase())
+//     console.log(dataReverse)
+// }())
 
 // new Date().toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
 // "Friday, Jul 2, 2021"

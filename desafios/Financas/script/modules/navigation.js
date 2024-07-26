@@ -1,4 +1,4 @@
-import { carregaTabelas, criar } from "../script.js";
+import { carregaTabelas, criar } from "../main.js";
 import { baseDeDados } from "./dados.js";
 const navLinks = document.querySelector('.nav-links')
 
@@ -8,24 +8,13 @@ let ano = 2024;
 let mes = 'JAN';
 export {ano, mes}
 
-const carregaLinksNav = {
+export const carregaLinksNav = {
     anosEncontrados: [],
     mesesEncontrados: [],
-    buscaAnosMeses: function(){
-        for (const key in baseDeDados.despesas) {
-            //nesse caso não preciso checar se o objeto tem alguma proriedade.
-            // if (Object.hasOwnProperty.call(object, key)) { 
-                this.anosEncontrados.push(`${key}`);
-                for (const chave in baseDeDados.despesas[key]){
-                    this.mesesEncontrados.push(`${chave}`)
-                }
-            // }
-        }
-        this.carregaLinksNavNoDOM()
-    },
-
     carregaLinksNavNoDOM: function(){
         navLinks.innerHTML = '';
+        
+        this.buscaAnosMeses();
         //Cria <ul> com os anos encontrados;
         this.anosEncontrados.forEach(element => {
             const ulAno = criar('ul');
@@ -55,15 +44,29 @@ const carregaLinksNav = {
 
             navLinks.appendChild(ulAno);
         });
-        this.addEventsNosLinks();
+        this.addEventsNosMeses();
     },
 
-    addEventsNosLinks: function(){
+    buscaAnosMeses: function(){
+        this.anosEncontrados = []; //Limpa os antes encontrados ateriormente
+        this.mesesEncontrados = [];
+        for (const key in baseDeDados) {
+            //nesse caso não preciso checar se o objeto tem alguma proriedade.
+            // if (Object.hasOwnProperty.call(object, key)) { 
+                this.anosEncontrados.push(`${key}`);
+                for (const chave in baseDeDados[key]){
+                    this.mesesEncontrados.push(`${chave}`)
+                }
+            // }
+        }
+    },
+
+    addEventsNosMeses: function(){
         const checboxAno = document.querySelectorAll('input[type=checkbox]');
         const liMeses = document.querySelectorAll('.link-mes');
         
         for(let ind = 0; ind < checboxAno.length; ind++){
-            checboxAno[ind].addEventListener('change', abirFecharLinkAno);
+            checboxAno[ind].addEventListener('change', abrirFecharLinkAno);
         }
         for(let ind = 0; ind < liMeses.length; ind++){
             liMeses[ind].addEventListener('click', mudarMesTabelas.selecionaAnoMesClicado.bind(mudarMesTabelas, liMeses[ind]))
@@ -136,7 +139,7 @@ const mudarMesTabelas = {
      
 }
 
-function abirFecharLinkAno(){
+function abrirFecharLinkAno(){
     const ulPai = this.closest('ul');
     const ulPaiID = this.closest('ul').getAttribute('id');
     const sinalAbrirFechar = document.querySelector(`#${ulPaiID} .sinal-abir-fechar`);
@@ -166,5 +169,4 @@ function abirFecharLinkAno(){
     anoAnteriorSelecionado = anoAtualSelecionado;
 };
 
-
-carregaLinksNav.buscaAnosMeses();
+carregaLinksNav.carregaLinksNavNoDOM();

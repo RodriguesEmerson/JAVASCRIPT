@@ -2,52 +2,45 @@ export let categorias = [
    ['Alimentação', 'Pessoal', 'Casa', 'Saúde'],
    ['Receitas'],
 ]
+
 export let baseDeDados = {
-   despesas: {
-      2024: {
-         JAN: [
-            { desc: 'Desp1', data: 'Data', categoria:'Ctgr', valor: '151', id: '2' },
-            { desc: 'Desp2', data: 'Data', categoria:'Ctgr', valor: '2', id: '3' },
-            { desc: 'Desp3', data: 'Data', categoria:'Ctgr', valor: '3', id: '4' },
+   2024: {
+      JAN: {
+         despesas: [
+            { desc: 'Desp1', data: '06/01/2024', categoria:'Ctgr', valor: '151', id: '2' },
+            { desc: 'Desp2', data: '05/01/2024', categoria:'Ctgr', valor: '2', id: '3' },
+            { desc: 'Desp3', data: '03/01/2024', categoria:'Ctgr', valor: '3', id: '4' },
          ],
-         FEV: [
-            { desc: 'Desp1', data: 'FEVER', categoria:'Ctgr', valor: '15', id: '2' },
-            { desc: 'Desp2', data: 'FEVER', categoria:'Ctgr', valor: '20', id: '3' },
-            { desc: 'Desp3', data: 'FEVER', categoria:'Ctgr', valor: '30', id: '4' },
-         ]
-      }
-   },
-   receitas: {
-      2024: {
-         JAN: [
+         receitas: [
             { desc: 'Rece1', data: 'Data', valor: '4', id: '2' },
             { desc: 'Rece2', data: 'Data', valor: '5', id: '3' },
             { desc: 'Rece3', data: 'Data', valor: '6', id: '4' },
          ],
-         FEV: [
-            { desc: 'Rece1', data: 'FEVER', valor: '40', id: '2' },
-            { desc: 'Rece2', data: 'FEVER', valor: '50', id: '3' },
-            { desc: 'Rece3', data: 'FEVER', valor: '60', id: '4' },
-         ]
-      }
-   },
-   fixos: {
-      2024: {
-         JAN: [
+         fixos: [
             { desc: 'Fixo1', data: 'Data', valor: '7', id: '2' },
             { desc: 'Fixo2', data: 'Data', valor: '8', id: '3' },
             { desc: 'Fixo3', data: 'Data', valor: '09', id: '4' },
+         ]
+      },
+      FEV: {
+         despesas: [
+            { desc: 'Desp1', data: 'FEV', categoria:'Ctgr', valor: '100', id: '2' },
+            { desc: 'Desp2', data: 'FEV', categoria:'Ctgr', valor: '28', id: '3' },
+            { desc: 'Desp3', data: 'FEV', categoria:'Ctgr', valor: '34', id: '4' },
          ],
-         FEV: [
-            { desc: 'Rece1', data: 'FEVER', valor: '10', id: '2' },
-            { desc: 'Rece2', data: 'FEVER', valor: '20', id: '3' },
-            { desc: 'Rece3', data: 'FEVER', valor: '30', id: '4' },
+         receitas: [
+            { desc: 'Rece1', data: 'FEV', valor: '46', id: '2' },
+            { desc: 'Rece2', data: 'FEV', valor: '77', id: '3' },
+            { desc: 'Rece3', data: 'FEV', valor: '68', id: '4' },
+         ],
+         fixos: [
+            { desc: 'Fixo1', data: 'FEV', valor: '71', id: '2' },
+            { desc: 'Fixo2', data: 'FEV', valor: '82', id: '3' },
+            { desc: 'Fixo3', data: 'FEV', valor: '23', id: '4' },
          ]
       }
-   }
-   
+   },
 }
-
 
 
 // function carregaDespesas() {
