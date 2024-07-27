@@ -1,13 +1,19 @@
-$cor-despesas:  rgba(173, 0, 0, 0.934);
-$cor-receitas:green;
-$cor-fixos:rgb(255, 115, 0);
+@import 'declaracoes' ;
 
 .tabelas{
     display: flex;
     flex-wrap: wrap;
-    height: 100%;
+    margin-top: 1px;
     min-width: 764.65px;
-    background-color: orange;
+    height: calc(100% - 1px);
+
+
+    div:nth-child(2){
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
 }
 .despesas-tabela, .receitas-tabela, .fixos-tabela{
     border-collapse: collapse;
@@ -40,7 +46,7 @@ $cor-fixos:rgb(255, 115, 0);
 }
 
 .cabecalho-tabela{
-    height: 30PX;
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -66,12 +72,13 @@ $cor-fixos:rgb(255, 115, 0);
 
 .despesas{
     position: relative;
-    border: 1px solid rgb(207, 207, 207);
-    background-color: rgb(255, 255, 255);
-    border-radius: 5px;
     height: 100%;
-    margin-right: 3px;
+    border-radius: 5px;
+    margin: 0 4px 0 2px;
     min-width: 461.44px;
+    overflow: hidden;
+    background-color: rgb(255, 255, 255);
+    box-shadow: $shadow;
     tr td:first-child{
         max-width: 202px;
     }
@@ -92,12 +99,13 @@ $cor-fixos:rgb(255, 115, 0);
 
 .receitas{
     position: relative;
-    border: 1px solid rgb(207, 207, 207);
-    border-radius: 5px;
-    background-color: rgb(255, 255, 255);
+    border-radius: 3px;
+    overflow: hidden;
     width: 300px;
-    height: 60%;
+    height: 59.9%;
     margin-bottom: 3px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: $shadow;
     .cabecalho-tabela{
         background-color: $cor-receitas;
     }
@@ -130,10 +138,12 @@ $cor-fixos:rgb(255, 115, 0);
 }
 .gastos-fixos{
     position: relative;
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgb(207, 207, 207);
     border-radius: 5px;
+    overflow: hidden ;
     height: 39.5%;
+    background-color: rgb(255, 255, 255);
+    box-shadow: $shadow;
+    display: block !important;
     .cabecalho-tabela{
         background-color: $cor-fixos;
     }

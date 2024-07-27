@@ -1,18 +1,17 @@
 *{
+    @import 'declaracoes';
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
 }
-body{
-    background-color: rgb(255, 244, 230);
-}
 header{
     height: 50px;
     text-align: center;
     line-height: 50px;
-    background-color: rgb(28, 28, 28);
+    background-color: $cor-padrao;
     color: white;
+    border-bottom: 1px solid lighten($cor-padrao, 9);
 }
 .container{
     position: relative;

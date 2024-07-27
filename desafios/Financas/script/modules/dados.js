@@ -7,36 +7,36 @@ export let baseDeDados = {
    2024: {
       JAN: {
          despesas: [
-            { desc: 'Desp1', data: '06/01/2024', categoria:'Ctgr', valor: '151', id: '2' },
-            { desc: 'Desp2', data: '05/01/2024', categoria:'Ctgr', valor: '2', id: '3' },
-            { desc: 'Desp3', data: '03/01/2024', categoria:'Ctgr', valor: '3', id: '4' },
+            { desc: 'Desp1', data: '21/01/2024', categoria:'Ctgr', valor: '151', id: '22' },
+            { desc: 'Desp2', data: '15/01/2024', categoria:'Ctgr', valor: '2', id: '32' },
+            { desc: 'Desp3', data: '14/01/2024', categoria:'Ctgr', valor: '3', id: '42' },
          ],
          receitas: [
-            { desc: 'Rece1', data: 'Data', valor: '4', id: '2' },
-            { desc: 'Rece2', data: 'Data', valor: '5', id: '3' },
-            { desc: 'Rece3', data: 'Data', valor: '6', id: '4' },
+            { desc: 'Rece1', data: '14/01/2024', valor: '4', id: '21' },
+            { desc: 'Rece2', data: '05/01/2024', valor: '5', id: '32' },
+            { desc: 'Rece3', data: '03/01/2024', valor: '6', id: '43' },
          ],
          fixos: [
-            { desc: 'Fixo1', data: 'Data', valor: '7', id: '2' },
-            { desc: 'Fixo2', data: 'Data', valor: '8', id: '3' },
-            { desc: 'Fixo3', data: 'Data', valor: '09', id: '4' },
+            { desc: 'Fixo1', data: '12/01/2024', valor: '7', id: '25' },
+            { desc: 'Fixo2', data: '13/01/2024', valor: '8', id: '36' },
+            { desc: 'Fixo3', data: '02/01/2024', valor: '09', id: '47' },
          ]
       },
       FEV: {
          despesas: [
-            { desc: 'Desp1', data: 'FEV', categoria:'Ctgr', valor: '100', id: '2' },
-            { desc: 'Desp2', data: 'FEV', categoria:'Ctgr', valor: '28', id: '3' },
-            { desc: 'Desp3', data: 'FEV', categoria:'Ctgr', valor: '34', id: '4' },
+            { desc: 'Desp1', data: '06/02/2024', categoria:'Ctgr', valor: '151', id: '28' },
+            { desc: 'Desp2', data: '05/02/2024', categoria:'Ctgr', valor: '2', id: '39' },
+            { desc: 'Desp3', data: '03/02/2024', categoria:'Ctgr', valor: '3', id: '49' },
          ],
          receitas: [
-            { desc: 'Rece1', data: 'FEV', valor: '46', id: '2' },
-            { desc: 'Rece2', data: 'FEV', valor: '77', id: '3' },
-            { desc: 'Rece3', data: 'FEV', valor: '68', id: '4' },
+            { desc: 'Rece1', data: '06/02/2024', valor: '4', id: '12' },
+            { desc: 'Rece2', data: '05/02/2024', valor: '5', id: '13' },
+            { desc: 'Rece3', data: '03/02/2024', valor: '6', id: '14' },
          ],
          fixos: [
-            { desc: 'Fixo1', data: 'FEV', valor: '71', id: '2' },
-            { desc: 'Fixo2', data: 'FEV', valor: '82', id: '3' },
-            { desc: 'Fixo3', data: 'FEV', valor: '23', id: '4' },
+            { desc: 'Fixo1', data: '09/02/2024', valor: '7', id: '62' },
+            { desc: 'Fixo2', data: '06/02/2024', valor: '8', id: '73' },
+            { desc: 'Fixo3', data: '02/02/2024', valor: '09', id: '84' },
          ]
       }
    },
@@ -96,4 +96,21 @@ export let baseDeDados = {
 //         if (element.id == trID) objNaBaseDeDados = element;
 //     });
 
+// }
+
+//*************************Só funciona com data menores que dia 13**************************/
+// const ordernarPorData = {
+//     buscarDados: function () {
+//         for (const ano in baseDeDados) {
+//             for (const mes in baseDeDados[ano]) {
+//                 for(const chave in baseDeDados[ano][mes]){
+//                     baseDeDados[ano][mes][chave].sort((a, b) => {
+//                         const dataA = new Date(a.data).getTime();
+//                         const dataB = new Date(b.data).getTime();
+//                         return dataA - dataB;
+//                     });
+//                 }
+//             }
+//         }
+//     }    
 // }

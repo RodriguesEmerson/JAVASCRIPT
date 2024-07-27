@@ -5,7 +5,7 @@ import { criar, carregaTabelas } from './main.js';
 const form = document.querySelector('.dados-box');
 const selectCategorias = document.querySelector('#lancar-categoria');
 const formBox = document.querySelector('.lancar-container');
-const btnAbirForm = document.querySelector('#abir-lancar');
+const btnAbrirForm = document.querySelector('#abrir-lancar');
 const btnFecharForm = document.querySelector('#fechar-form');
 const radiosTipo = document.getElementsByTagName('tipo');
 const txtDescricao = document.getElementById('lancar-descricao');
@@ -18,7 +18,7 @@ form.addEventListener('submit', event => {
     event.preventDefault();
     novoLancamento.lancarNovoDadoCriado();
 });
-const abirForm = {
+const abrirForm = {
     tornarFormVisivel: function(){
         formBox.classList.remove('hidden');
         this.carregaCategorias();
@@ -107,7 +107,7 @@ const novoLancamento = {
 
 //Se não for colocado o '.bind', o this em tonarFormVisil irá se referir ao
 //próprio método tonarFormVisil e não ao abrirForm;
-btnAbirForm.addEventListener('click', abirForm.tornarFormVisivel.bind(abirForm))
+btnAbrirForm.addEventListener('click', abrirForm.tornarFormVisivel.bind(abrirForm))
 
 btnFecharForm.addEventListener('click', () => {
     formBox.classList.add('hidden');

@@ -100,21 +100,26 @@ export const carregaTabelas = {
 
 
 const ordernarPorData = {
-    anosBD: [],
-    mesesBD: [],
     buscarDados: function () {
+        // let tabelas = ['despesas', 'receitas', 'meses']
         for (const ano in baseDeDados) {
             for (const mes in baseDeDados[ano]) {
-                baseDeDados[ano][mes]['despesas'].sort((a, b) => {
-                    const dataA = new Date(a.data).getTime();
-                    const dataB = new Date(b.data).getTime();
-                    return dataA - dataB;
-                })
+                let objetosOrdenados = [];
+                for(const tipo in baseDeDados[ano][mes]){
+                    objetosOrdenados = [];
+                    for(let ind = 1; ind <= 31; ind++){
+                        baseDeDados[ano][mes][tipo].forEach(element =>{
+                            const dia = element.data.slice(0,2);
+                            if(dia == ind) objetosOrdenados.push(element)
+                        })
+                    }
+                    console.log(baseDeDados[ano][mes][tipo])
+                    baseDeDados[ano][mes][tipo] = objetosOrdenados;
+                }
+                console.log('********************')
             }
         }
-        console.log(baseDeDados)
-    },
-
+    }
 }
 ordernarPorData.buscarDados()
 const apagarDado = {
@@ -156,7 +161,8 @@ const apagarDado = {
         //Os dados já foram selecionados pelo event 'contextmenu' de 
         //cada tr, criados em carregarTabelas.addEventClickDireito.
         let index = baseDeDados[ano][mes][this.elementoClicado.tabelaBD]
-            .indexOf(this.elementoClicado.obj);
+            .indexOf(this.elementoClicado.objNaBaseDeDados);
+            console.log(this.elementoClicado.objNaBaseDeDados)
 
         this.elementoClicado.tabelaDOMClicada
             .removeChild(this.elementoClicado.trClicada);
