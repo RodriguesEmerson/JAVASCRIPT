@@ -1,4 +1,4 @@
-.lancar-container{
+.lancar-container {
     position: absolute;
     width: 100vw;
     height: calc(100vh - 50px);
@@ -8,18 +8,27 @@
     justify-content: center;
     z-index: 10;
 }
-.lancar-dado{
+
+.lancar-dado {
+    position: relative;
     width: 400px;
     height: 300px;
-    background-color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    position: relative;
+    background-color: white;
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.268);
-    #fechar-form{
+
+    .lancar-dado-titulo {
+        position: absolute;
+        top: 7px;
+        left: 10px;
+        font-size: 14px;
+    }
+
+    #fechar-form {
         position: absolute;
         top: 0;
         right: 0;
@@ -31,41 +40,58 @@
         border-radius: 0 5px 0 5px;
         cursor: pointer;
         transition: 0.3s;
-        &:hover{
-            background-color:rgb(117, 2, 2); ;
+
+        &:hover {
+            background-color: rgb(117, 2, 2);
+            ;
         }
     }
-    .radios{
+
+    .radios {
         margin-bottom: 3px;
         border-style: none;
         margin-bottom: 10px;
-        input, label{
+
+        input,
+        label {
             cursor: pointer;
         }
-        label{
+
+        label {
             margin-left: -3px;
         }
     }
-    .lancar-txt{
+
+    .lancar-txt {
         margin-bottom: 5px;
         height: 30px;
         border: 1px solid rgb(207, 207, 207);
         border-radius: 3px;
         padding: 0 10px;
     }
-    select, #lancar-data{
+
+    select,
+    #lancar-data {
         width: 184px;
     }
-    #lancar-descricao{
+
+    #lancar-descricao {
         width: 98%;
     }
-    #lancar-data{
+
+    #lancar-data {
         width: 184px;
     }
+
+    #lancar-valor {
+        margin-left: 189px;
+    }
 }
-.dados-box{
+
+.dados-box {
     position: relative;
-     #lancar{
+
+    #lancar {
         width: 372px;
         height: 35px;
         margin: auto;
@@ -76,8 +102,74 @@
         border-radius: 3px;
         cursor: pointer;
         transition: 0.4s;
-        &:hover{
-            background-color: rgb(2, 73, 139); 
+
+        &:hover {
+            background-color: rgb(2, 73, 139);
         }
     }
+}
+
+.red {
+    border: 1px solid red !important;
+}
+
+.confirma-dado-lancado{
+    color: white;
+    height: 0px;
+}
+
+.loader {
+    position: absolute;
+    right: 12px;
+    bottom: 10px;
+    height: 35px;
+    width: 35px;
+    padding: 4px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: rgb(2, 101, 194);
+ 
+    --_m:
+        conic-gradient(#0000 10%, #000),
+        linear-gradient(#000 0 0) content-box;
+    -webkit-mask: var(--_m);
+    mask: var(--_m);
+    -webkit-mask-composite: source-out;
+    mask-composite: subtract;
+    animation: l3 0.4s linear;
+}
+
+@keyframes l3 {
+    to {
+        transform: rotate(1turn)
+    }
+}
+
+.loader-ok{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    right: 12px;
+    bottom: 10px;
+    height: 35px;
+    width: 35px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: rgb(2, 101, 194);
+    color: white;
+    overflow: hidden !important;
+}
+
+.tamp{
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    background-color: rgb(2, 101, 194) ;
+    animation: l4 0.3s  forwards;
+}
+
+@keyframes l4 {
+    to{margin-left: 80px;}
 }

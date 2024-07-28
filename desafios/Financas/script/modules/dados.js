@@ -1,5 +1,5 @@
 export let categorias = [
-   ['Alimentação', 'Pessoal', 'Casa', 'Saúde'],
+   ['*Selecionar*','Alimentação', 'Pessoal', 'Casa', 'Saúde'],
    ['Receitas'],
 ]
 

@@ -193,16 +193,22 @@ header {
 }
 
 .lancar-dado {
+  position: relative;
   width: 400px;
   height: 300px;
-  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  position: relative;
+  background-color: white;
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.268);
+}
+.lancar-dado .lancar-dado-titulo {
+  position: absolute;
+  top: 7px;
+  left: 10px;
+  font-size: 14px;
 }
 .lancar-dado #fechar-form {
   position: absolute;
@@ -225,7 +231,8 @@ header {
   border-style: none;
   margin-bottom: 10px;
 }
-.lancar-dado .radios input, .lancar-dado .radios label {
+.lancar-dado .radios input,
+.lancar-dado .radios label {
   cursor: pointer;
 }
 .lancar-dado .radios label {
@@ -238,7 +245,8 @@ header {
   border-radius: 3px;
   padding: 0 10px;
 }
-.lancar-dado select, .lancar-dado #lancar-data {
+.lancar-dado select,
+.lancar-dado #lancar-data {
   width: 184px;
 }
 .lancar-dado #lancar-descricao {
@@ -246,6 +254,9 @@ header {
 }
 .lancar-dado #lancar-data {
   width: 184px;
+}
+.lancar-dado #lancar-valor {
+  margin-left: 189px;
 }
 
 .dados-box {
@@ -267,6 +278,70 @@ header {
   background-color: rgb(2, 73, 139);
 }
 
+.red {
+  border: 1px solid red !important;
+}
+
+.confirma-dado-lancado {
+  color: white;
+  height: 0px;
+}
+
+.loader {
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  height: 35px;
+  width: 35px;
+  padding: 4px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: rgb(2, 101, 194);
+  --_m:
+      conic-gradient(#0000 10%, #000),
+      linear-gradient(#000 0 0) content-box;
+  -webkit-mask: var(--_m);
+  mask: var(--_m);
+  -webkit-mask-composite: source-out;
+  mask-composite: subtract;
+  animation: l3 0.4s linear;
+}
+
+@keyframes l3 {
+  to {
+    transform: rotate(1turn);
+  }
+}
+.loader-ok {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  right: 12px;
+  bottom: 10px;
+  height: 35px;
+  width: 35px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: rgb(2, 101, 194);
+  color: white;
+  overflow: hidden !important;
+}
+
+.tamp {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  background-color: rgb(2, 101, 194);
+  animation: l4 0.3s forwards;
+}
+
+@keyframes l4 {
+  to {
+    margin-left: 80px;
+  }
+}
 #deleteBox {
   position: absolute;
   overflow: hidden;

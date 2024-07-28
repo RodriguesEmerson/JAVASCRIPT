@@ -42,9 +42,10 @@
         <section class="lancar-container hidden">
             <div class="lancar-dado">
                 <input type="button" value="Fechar" id="fechar-form">
+                <span class="lancar-dado-titulo">Novo Lançamento</span>
                 <form class="dados-box" autocomplete="on" action="" method="post">
                     <fieldset class="radios">
-                        <input type="radio" name="tipo" id="despesas-radio" value="despesas">
+                        <input type="radio" name="tipo" id="despesas-radio" value="despesas" checked>
                         <label for="despesas-radio">Despesa</label>
                         <input type="radio" name="tipo" id="receitas-radio" value="receitas">
                         <label for="receitas-radio">Receita</label>
@@ -52,11 +53,15 @@
                         <label for="fixos-radio">Gasto Fixo</label>
                     </fieldset>
                     <input type="text" class="lancar-txt" id="lancar-descricao" placeholder="Descrição" name="desc" required>
-                    <input type="text"  class="lancar-txt" id="lancar-data" placeholder="Data" name="data" required>
+                    <input type="text" maxlength="10" class="lancar-txt" id="lancar-data" placeholder="Data" name="data" required>
                     <select class="lancar-txt" id="lancar-categoria" placeholder="Categoria" name="categoria" required></select>
                     <input type="text" class="lancar-txt" id="lancar-valor" placeholder="Valor" name="valor" required>
                     <input type="submit" value="Lançar" id="lancar">
                 </form>
+                <div class="confirma-dado-lancado">
+                    <span>✔</span>
+                    <span class="slide-confirma"></span>
+                </div>
             </div>
         </section>
         <section class="dash-board">

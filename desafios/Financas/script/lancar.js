@@ -12,6 +12,9 @@ const txtDescricao = document.getElementById('lancar-descricao');
 const txtData = document.getElementById('lancar-data');
 const txtCategoria = document.getElementById('lancar-categoria');
 const txtValor = document.getElementById('lancar-valor');
+const confirmaDadoLancado = document.querySelector('.confirma-dado-lancado');
+const slideConfirm = document.querySelector('.slide-confirma');
+const btnLancar = document.getElementById('lancar')
 let categoriasCarregadas = false;
 
 form.addEventListener('submit', event => {
@@ -26,6 +29,7 @@ const abrirForm = {
     tornarFormVisivel: function(){
         formBox.classList.remove('hidden');
         this.carregaCategorias();
+        this.preencheDataHoje();
     },
     carregaCategorias: function(){
         if(!categoriasCarregadas){
@@ -38,16 +42,15 @@ const abrirForm = {
             });
         };
     },
-}
-
-const preFormataData = {
-    formata: function(event){
-        console.log(event.key)
+    preencheDataHoje: function(){
+        txtData.value = new Date()
+            .toLocaleDateString('pt-br', {day: '2-digit', month: '2-digit', year: 'numeric'});
+    },
+    autoAdicionaBarra: function(event){
         if(isNaN(`${event.key}`)) return
-        console.log(txtData.value.length)
-        const digits = txtData.value
-        if(digits.length == 2 || digits.length == 4) txtData.value = `${txtData.value}/`
-    }
+        const digits = txtData.value.length
+        if(digits == 2 || digits == 5) txtData.value = `${txtData.value}/`
+    },
 }
 
 const novoLancamento = {
@@ -55,6 +58,10 @@ const novoLancamento = {
     ano: '',
     mes: '',
     lancarNovoDadoCriado: function(){
+        if(txtCategoria.value == '*Selecionar*'){
+            txtCategoria.classList.add('red')
+            return
+        }
         this.pegarDadosForm();
         this.pegarMesEAnoData(this.dadosDoFormulario.data);
         this.checaSeExisteNaBD();
@@ -65,8 +72,14 @@ const novoLancamento = {
         
         this.ordernarPorData()
         carregaTabelas.insereDados(this.dadosDoFormulario.tipo)//DOM 
-        //Atualiza Navigation
         carregaLinksNav.carregaLinksNavNoDOM(); //navigation.js
+
+        //Animação confirmação de laçamento
+        confirmaDadoLancado.classList.add('loader');
+        btnLancar.setAttribute('disabled', '');
+        setTimeout(() => {
+            this.animacaoConfirmLacamento();
+        }, 410);
     },
     
     pegarDadosForm: function(){
@@ -134,6 +147,18 @@ const novoLancamento = {
         let id = Math.floor(Math.random() * (max - min) + min);
         let newId = `${ano}${data.replaceAll('/', '')}${id}`;
         return newId;
+    },
+
+    animacaoConfirmLacamento: function(){
+        confirmaDadoLancado.classList.remove('loader')
+        confirmaDadoLancado.classList.add('loader-ok')
+        slideConfirm.classList.add('tamp')
+
+        setTimeout(() => {
+            confirmaDadoLancado.classList.remove('loader-ok');
+            slideConfirm.classList.remove('tamp');
+            btnLancar.removeAttribute('disabled')
+        }, 1000);
     }
 }
 
@@ -145,7 +170,7 @@ btnAbrirForm.addEventListener('click', abrirForm.tornarFormVisivel.bind(abrirFor
 btnFecharForm.addEventListener('click', () => {
     formBox.classList.add('hidden');
 });
-txtData.addEventListener('keyup', preFormataData.formata)
+txtData.addEventListener('keyup', abrirForm.autoAdicionaBarra)
 
 
 /******PROXIMO PASSOS*********
