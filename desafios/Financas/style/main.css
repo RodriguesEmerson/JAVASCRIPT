@@ -238,39 +238,18 @@ header {
   border-radius: 3px;
   padding: 0 10px;
 }
-.lancar-dado select {
+.lancar-dado select, .lancar-dado #lancar-data {
   width: 184px;
 }
 .lancar-dado #lancar-descricao {
   width: 98%;
 }
-.lancar-dado #lancar-valor {
-  margin-left: 188px;
+.lancar-dado #lancar-data {
+  width: 184px;
 }
 
 .dados-box {
   position: relative;
-}
-.dados-box .titulos-txt {
-  position: absolute;
-  font-size: 14px;
-  color: gray;
-}
-.dados-box #titulos-txt-1 {
-  top: 5px;
-  left: 10px;
-}
-.dados-box #titulos-txt-2 {
-  top: 42px;
-  left: 10px;
-}
-.dados-box #titulos-txt-3 {
-  top: 43px;
-  left: 198px;
-}
-.dados-box #titulos-txt-4 {
-  top: 77px;
-  left: 198px;
 }
 .dados-box #lancar {
   width: 372px;
@@ -354,8 +333,8 @@ header {
 }
 .nav-bar p {
   text-align: center;
-  background-color: #202939;
   padding: 5px 0;
+  margin-bottom: -7px;
 }
 .nav-bar ul {
   list-style-type: none;
@@ -425,8 +404,17 @@ header {
 }
 .nav-bar #abrir-lancar {
   width: 100%;
-  height: 30px;
+  height: 35px;
   margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.4s;
+  color: white;
+  border: 1px solid #364461;
+  background-color: #2d3950;
+}
+.nav-bar #abrir-lancar:hover {
+  background-color: #364461;
 }
 
 .hidden {

@@ -71,7 +71,7 @@ export const carregaTabelas = {
         const totalTabela = document.getElementById(`total-${tabelaBD}`);
         totalTabela.textContent = this.formataMoeda(total);
     },
-
+    
     //Adiciona eventos em cada tr das tabelas;
     addEventClickDireito: function () {
         let tabelasDOM = [tabelaDespesas, tabelaReceitas, tabelaFixos];
@@ -98,10 +98,8 @@ export const carregaTabelas = {
     }
 }
 
-
 const ordernarPorData = {
     buscarDados: function () {
-        // let tabelas = ['despesas', 'receitas', 'meses']
         for (const ano in baseDeDados) {
             for (const mes in baseDeDados[ano]) {
                 let objetosOrdenados = [];
@@ -113,10 +111,8 @@ const ordernarPorData = {
                             if(dia == ind) objetosOrdenados.push(element)
                         })
                     }
-                    console.log(baseDeDados[ano][mes][tipo])
                     baseDeDados[ano][mes][tipo] = objetosOrdenados;
                 }
-                console.log('********************')
             }
         }
     }

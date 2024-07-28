@@ -18,6 +18,10 @@ form.addEventListener('submit', event => {
     event.preventDefault();
     novoLancamento.lancarNovoDadoCriado();
 });
+
+
+
+
 const abrirForm = {
     tornarFormVisivel: function(){
         formBox.classList.remove('hidden');
@@ -36,6 +40,16 @@ const abrirForm = {
     },
 }
 
+const preFormataData = {
+    formata: function(event){
+        console.log(event.key)
+        if(isNaN(`${event.key}`)) return
+        console.log(txtData.value.length)
+        const digits = txtData.value
+        if(digits.length == 2 || digits.length == 4) txtData.value = `${txtData.value}/`
+    }
+}
+
 const novoLancamento = {
     dadosDoFormulario: '',
     ano: '',
@@ -45,21 +59,22 @@ const novoLancamento = {
         this.pegarMesEAnoData(this.dadosDoFormulario.data);
         this.checaSeExisteNaBD();
         const novoDado = this.criarNovoDado()
-
+        
         baseDeDados[this.ano][this.mes][this.dadosDoFormulario.tipo]
         .push(novoDado);
+        
+        this.ordernarPorData()
         carregaTabelas.insereDados(this.dadosDoFormulario.tipo)//DOM 
-
         //Atualiza Navigation
         carregaLinksNav.carregaLinksNavNoDOM(); //navigation.js
     },
-
+    
     pegarDadosForm: function(){
         const formData = new FormData(form);
         this.dadosDoFormulario = Object.fromEntries(formData);
     },
     
-
+    
     criarNovoDado: function(){
         let ordemDasChaves = ['desc', 'data', 'categoria', 'valor'];
         if (this.dadosDoFormulario.tipo != 'despesas') ordemDasChaves = ['desc', 'data', 'valor'];;
@@ -75,7 +90,7 @@ const novoLancamento = {
         if(!baseDeDados[this.ano]){ //checa se existe o ano na 'badeDeDados'.
             baseDeDados[this.ano] = {}; //Se não existir, cria o objeto do novo ano inserido.
         }
-         //checa se existe o mês na 'badeDeDados'.
+        //checa se existe o mês na 'badeDeDados'.
         if(!baseDeDados[this.ano][this.mes]){ 
             //Se não existir, cria o objeto do novo mês inserido.
             baseDeDados[this.ano][this.mes] = {
@@ -85,14 +100,32 @@ const novoLancamento = {
             }; 
         }
     },
-
+    
     pegarMesEAnoData: function(data){
         let dataArray = data.split('/')//input dd/mm/aaaa 
         let dataReverse = `${dataArray[2]}/${dataArray[1]}/${dataArray[0]}` //==> autput aaaa/mm/dd
-
+        
         this.ano = new Date(dataReverse).toLocaleDateString('pt-br', {year: 'numeric'});
         let mes = new Date(dataReverse).toLocaleDateString('pt-br', {month: 'short'});
         this.mes = mes.slice(0, 3).toUpperCase();
+    },
+    
+    ordernarPorData: function(){
+        for (const ano in baseDeDados) {
+            for (const mes in baseDeDados[ano]) {
+                let objetosOrdenados = [];
+                for(const tipo in baseDeDados[ano][mes]){
+                    objetosOrdenados = [];
+                    for(let ind = 1; ind <= 31; ind++){
+                        baseDeDados[ano][mes][tipo].forEach(element =>{
+                            const dia = element.data.slice(0,2);
+                            if(dia == ind) objetosOrdenados.push(element)
+                            })
+                    }
+                    baseDeDados[ano][mes][tipo] = objetosOrdenados;
+                }
+            }
+        }
     },
     
     radomID: function(ano, data){
@@ -107,30 +140,18 @@ const novoLancamento = {
 
 //Se não for colocado o '.bind', o this em tonarFormVisil irá se referir ao
 //próprio método tonarFormVisil e não ao abrirForm;
-btnAbrirForm.addEventListener('click', abrirForm.tornarFormVisivel.bind(abrirForm))
+btnAbrirForm.addEventListener('click', abrirForm.tornarFormVisivel.bind(abrirForm));
 
 btnFecharForm.addEventListener('click', () => {
     formBox.classList.add('hidden');
-})
+});
+txtData.addEventListener('keyup', preFormataData.formata)
 
 
 /******PROXIMO PASSOS*********
 / /Validar os dados lançados;
-/ /Mudar categorias de acordo o tipo de lançamento selecionado;     [x]
-/ /Tamanho máximo e mínimo das td's das tables;                 
+/ /Mudar categorias de acordo o tipo de lançamento selecionado;     
+/ /Tamanho máximo e mínimo das td's das tables;                     [x]       
 / /Pegar mês da data para lancar na base de dados de acordo o mês;  [x]
 / /Trasformar essas funções em objetos e métodos;                   [x]
 */
-
-
-// *(function  pegarMesEAno(){
-//     let data = '2024/10/25'
-//     let dataArray = data.split('/')
-//     let dataReverse = `${dataArray[2]}/${dataArray[1]}/${dataArray[0]}`
-//     let dataMes = new Date(data).toLocaleDateString('pt-br',{month: 'short'});
-//     console.log(dataMes.slice(0, 3).toUpperCase())
-//     console.log(dataReverse)
-// }())
-
-// new Date().toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
-// "Friday, Jul 2, 2021"
