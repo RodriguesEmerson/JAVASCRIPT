@@ -50,17 +50,31 @@ const abrirForm = {
         const digits = txtData.value.length
         if(digits == 2 || digits == 5) txtData.value = `${txtData.value}/`
     },
-    digitoAnterior: '',
-    digits: 1,
+    digits: [],
     autoAdicionaPontoVirgulaValor: function(event){
-        event.preventDefault()
-        const digit = event.data;
-        if(this.digits == 1) txtValor.value = `0,0${digit}`;
-        if(this.digits == 2) txtValor.value = `0,${this.digitoAnterior}${digit}`
-        if(this.digits == 3) txtValor.value = `${digit},${txtValor.value.splice(3,4)}`
-        this.digitoAnterior = digit;
-        this.digits++
-        
+        const digit = event.data;   
+        if(event.inputType == 'deleteContentBackward'){
+            if(['0,0', '0,', '0', ''].includes(txtValor.value)){
+                this.digits = [];
+                txtValor.value ='0,00';
+                return
+            } 
+            this.digits.pop();
+        }else{
+            if(/[^0-9]/.test(digit)){
+                txtValor.value = txtValor.value.replace(/[a-zA-Z]/g, '');
+                return;
+            } 
+            this.digits.push(digit);
+            if(this.digits.length > 6) this.digits.pop()
+        };
+        let digits = this.digits
+        if(digits.length == 1) txtValor.value = `0,0${digits[0]}`;
+        if(digits.length == 2) txtValor.value = `0,${digits[0]}${digits[1]}`;
+        if(digits.length == 3) txtValor.value = `${digits[0]},${digits[1]}${digits[2]}`;
+        if(digits.length == 4) txtValor.value = `${digits[0]}${digits[1]},${digits[2]}${digits[3]}`;
+        if(digits.length == 5) txtValor.value = `${digits[0]}${digits[1]}${digits[2]},${digits[3]}${digits[4]}`;
+        if(digits.length == 6) txtValor.value = `${digits[0]}.${digits[1]}${digits[2]}${digits[3]},${digits[4]}${digits[5]}`;
     }
 }
 
@@ -106,9 +120,10 @@ const novoLancamento = {
         ordemDasChaves.forEach(element => {
             novoDado[element] = this.dadosDoFormulario[element];
         });
+        //Input 0.000,00 => Output 0000.00
+        novoDado.valor = novoDado.valor.replace(',', '.');
+        novoDado.valor = novoDado.valor.replace('.', '')
 
-        novoDado.valor = novoDado.valor.replace(',','.')
-        console.log(novoDado.valor)
         novoDado.id = this.radomID(2024, novoDado.data);
         return novoDado;
     },
@@ -190,7 +205,7 @@ txtValor.addEventListener('input', abrirForm.autoAdicionaPontoVirgulaValor.bind(
 
 
 /******PROXIMO PASSOS*********
-/ /Validar os dados lançados;
+/ /Validar os dados lançados;                                       [x]
 / /Mudar categorias de acordo o tipo de lançamento selecionado;     
 / /Tamanho máximo e mínimo das td's das tables;                     [x]       
 / /Pegar mês da data para lancar na base de dados de acordo o mês;  [x]

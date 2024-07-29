@@ -257,6 +257,7 @@ header {
 }
 .lancar-dado #lancar-valor {
   margin-left: 189px;
+  text-align: end;
 }
 
 .dados-box {
