@@ -9,7 +9,7 @@ const container = document.querySelector('.container');
 let deleteBoxSlide; //será a div dentro da caixa 'pop up' deletar;
 
 import { baseDeDados } from "./modules/dados.js";
-import { ano, mes } from "./modules/navigation.js";
+import { ano, mes } from "./navigation.js";
 
 export const carregaTabelas = {
 

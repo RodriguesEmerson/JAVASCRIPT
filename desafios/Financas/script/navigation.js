@@ -1,5 +1,5 @@
-import { carregaTabelas, criar } from "../main.js";
-import { baseDeDados } from "./dados.js";
+import { carregaTabelas, criar } from "./main.js";
+import { baseDeDados } from "./modules/dados.js";
 const navLinks = document.querySelector('.nav-links')
 
 let anoAnteriorSelecionado;
@@ -11,21 +11,25 @@ export {ano, mes}
 export const carregaLinksNav = {
     anosEncontrados: [],
     mesesEncontrados: [],
-    carregaLinksNavNoDOM: function(){
+    carregaLinksNavNoDOM: function(ANO, MES){
         navLinks.innerHTML = '';
         
-        this.buscaAnosMeses();
+        // if(ANO){
+        //    ano = ANO; mes = MES;
+        // }
         //Cria <ul> com os anos encontrados;
-        this.anosEncontrados.forEach(element => {
+        this.buscaAnosNaBD();
+        this.anosEncontrados.forEach(ANO => {
+            this.buscaMesesNaBD(ANO);
             const ulAno = criar('ul');
             ulAno.setAttribute('class', 'nav-link-ano');
-            ulAno.setAttribute('id', `A${element}`);
+            ulAno.setAttribute('id', `A${ANO}`);
             ulAno.innerHTML = 
                 `<li class="link-ano">
-                    <input type="checkbox" name="ano" id="ano${element}">
-                        <label for="ano${element}">
+                    <input type="checkbox" name="ano" id="ano${ANO}">
+                        <label for="ano${ANO}">
                             <span class="sinal-abir-fechar">+</span> 
-                            ${element}
+                            ${ANO}
                             <span></span>
                         </label>
                     </li>`;
@@ -34,11 +38,11 @@ export const carregaLinksNav = {
             const olMes = criar('ol');
             olMes.setAttribute('class', 'nav-link-mes');
             ulAno.appendChild(olMes)
-            this.mesesEncontrados.forEach(element => {
+            this.mesesEncontrados.forEach(MES => {
                 const liMes = criar('li')
-                liMes.setAttribute('value', `${element}`);
+                liMes.setAttribute('value', `${MES}`);
                 liMes.setAttribute('class', 'link-mes');
-                liMes.textContent = `${this.mesSemAbrev(element, false )}` //(mes, abriviado)
+                liMes.textContent = `${this.mesSemAbrev(MES, false )}` //(mes, abriviado)
                 olMes.appendChild(liMes)
             });
 
@@ -47,17 +51,16 @@ export const carregaLinksNav = {
         this.addEventsNosMeses();
     },
 
-    buscaAnosMeses: function(){
-        this.anosEncontrados = []; //Limpa os antes encontrados ateriormente
+    buscaAnosNaBD: function(){
+        this.anosEncontrados = []; 
+        for (const ano in baseDeDados) { 
+            this.anosEncontrados.push(`${ano}`);
+        }
+    },
+    buscaMesesNaBD: function(ANO){
         this.mesesEncontrados = [];
-        for (const key in baseDeDados) {
-            //nesse caso não preciso checar se o objeto tem alguma proriedade.
-            // if (Object.hasOwnProperty.call(object, key)) { 
-                this.anosEncontrados.push(`${key}`);
-                for (const chave in baseDeDados[key]){
-                    this.mesesEncontrados.push(`${chave}`)
-                }
-            // }
+        for (const mes in baseDeDados[ANO]){
+            this.mesesEncontrados.push(`${mes}`);
         }
     },
 

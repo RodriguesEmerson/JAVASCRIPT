@@ -1,5 +1,5 @@
 import { baseDeDados, categorias } from './modules/dados.js';
-import { carregaLinksNav } from './modules/navigation.js';
+import { carregaLinksNav } from './navigation.js';
 import { criar, carregaTabelas } from './main.js';
 
 const form = document.querySelector('.dados-box');
@@ -21,9 +21,6 @@ form.addEventListener('submit', event => {
     event.preventDefault();
     novoLancamento.lancarNovoDadoCriado();
 });
-
-
-
 
 const abrirForm = {
     tornarFormVisivel: function(){
@@ -50,6 +47,7 @@ const abrirForm = {
         const digits = txtData.value.length
         if(digits == 2 || digits == 5) txtData.value = `${txtData.value}/`
     },
+
     digits: [],
     autoAdicionaPontoVirgulaValor: function(event){
         const digit = event.data;   
@@ -92,14 +90,12 @@ const novoLancamento = {
         this.checaSeExisteNaBD();
         const novoDado = this.criarNovoDado()
         
-        baseDeDados[this.ano][this.mes][this.dadosDoFormulario.tipo]
-        .push(novoDado);
+        baseDeDados[this.ano][this.mes][this.dadosDoFormulario.tipo].push(novoDado);
         
         this.ordernarPorData()
-        carregaTabelas.insereDados(this.dadosDoFormulario.tipo)//DOM 
+        carregaTabelas.insereDados(this.dadosDoFormulario.tipo)//main.js
         carregaLinksNav.carregaLinksNavNoDOM(); //navigation.js
 
-        //Animação confirmação de laçamento
         confirmaDadoLancado.classList.add('loader');
         btnLancar.setAttribute('disabled', '');
         setTimeout(() => {
@@ -122,15 +118,19 @@ const novoLancamento = {
         });
         //Input 0.000,00 => Output 0000.00
         novoDado.valor = novoDado.valor.replace(',', '.');
-        novoDado.valor = novoDado.valor.replace('.', '')
+        if(novoDado.valor.length > 6){
+            novoDado.valor = novoDado.valor.replace('.', '');            
+        }
 
-        novoDado.id = this.radomID(2024, novoDado.data);
+        novoDado.id = this.radomID(this.ano, novoDado.data);
         return novoDado;
     },
     
     checaSeExisteNaBD: function(){
-        if(!baseDeDados[this.ano]){ //checa se existe o ano na 'badeDeDados'.
-            baseDeDados[this.ano] = {}; //Se não existir, cria o objeto do novo ano inserido.
+        //checa se existe o ano na 'badeDeDados'.
+        if(!baseDeDados[this.ano]){ 
+            //Se não existir, cria o objeto do novo ano inserido.
+            baseDeDados[this.ano] = {}; 
         }
         //checa se existe o mês na 'badeDeDados'.
         if(!baseDeDados[this.ano][this.mes]){ 
@@ -204,7 +204,7 @@ txtValor.addEventListener('input', abrirForm.autoAdicionaPontoVirgulaValor.bind(
 
 
 
-/******PROXIMO PASSOS*********
+/******PRÓXIMOS PASSOS*********
 / /Validar os dados lançados;                                       [x]
 / /Mudar categorias de acordo o tipo de lançamento selecionado;     
 / /Tamanho máximo e mínimo das td's das tables;                     [x]       
