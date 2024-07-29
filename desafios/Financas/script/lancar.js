@@ -46,11 +46,22 @@ const abrirForm = {
         txtData.value = new Date()
             .toLocaleDateString('pt-br', {day: '2-digit', month: '2-digit', year: 'numeric'});
     },
-    autoAdicionaBarra: function(event){
-        if(isNaN(`${event.key}`)) return
+    autoAdicionaBarraData: function(){
         const digits = txtData.value.length
         if(digits == 2 || digits == 5) txtData.value = `${txtData.value}/`
     },
+    digitoAnterior: '',
+    digits: 1,
+    autoAdicionaPontoVirgulaValor: function(event){
+        event.preventDefault()
+        const digit = event.data;
+        if(this.digits == 1) txtValor.value = `0,0${digit}`;
+        if(this.digits == 2) txtValor.value = `0,${this.digitoAnterior}${digit}`
+        if(this.digits == 3) txtValor.value = `${digit},${txtValor.value.splice(3,4)}`
+        this.digitoAnterior = digit;
+        this.digits++
+        
+    }
 }
 
 const novoLancamento = {
@@ -95,6 +106,9 @@ const novoLancamento = {
         ordemDasChaves.forEach(element => {
             novoDado[element] = this.dadosDoFormulario[element];
         });
+
+        novoDado.valor = novoDado.valor.replace(',','.')
+        console.log(novoDado.valor)
         novoDado.id = this.radomID(2024, novoDado.data);
         return novoDado;
     },
@@ -170,7 +184,9 @@ btnAbrirForm.addEventListener('click', abrirForm.tornarFormVisivel.bind(abrirFor
 btnFecharForm.addEventListener('click', () => {
     formBox.classList.add('hidden');
 });
-txtData.addEventListener('keyup', abrirForm.autoAdicionaBarra)
+txtData.addEventListener('input', abrirForm.autoAdicionaBarraData);
+txtValor.addEventListener('input', abrirForm.autoAdicionaPontoVirgulaValor.bind(abrirForm));
+
 
 
 /******PROXIMO PASSOS*********
