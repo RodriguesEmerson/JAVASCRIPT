@@ -150,8 +150,6 @@ const apagarDado = {
         this.elementoClicado.trClicada = trClicada;
         this.elementoClicado.tabelaBD = tabelaBD;
         this.elementoClicado.objNaBaseDeDados = objNaBaseDeDados;
-        console.log(this.elementoClicado)
-
     },
     apagar: function () {
         //Os dados já foram selecionados pelo event 'contextmenu' de 
@@ -187,6 +185,12 @@ btnApagarSim.addEventListener('click', () => {
     apagarDado.apagar();
     deleteBox.classList.add('hidden');
     deleteBoxSlide.style.marginLeft = '0px';
+})
+container.addEventListener('click', (event) => {
+    if(!deleteBox.classList.contains('hidden')){
+        /////terminar isso aqui 
+        deleteBox.classList.add('hidden')
+    }
 })
 
 carregaTabelas.insereDados('despesas');

@@ -7,7 +7,7 @@ const selectCategorias = document.querySelector('#lancar-categoria');
 const formBox = document.querySelector('.lancar-container');
 const btnAbrirForm = document.querySelector('#abrir-lancar');
 const btnFecharForm = document.querySelector('#fechar-form');
-const radiosTipo = document.getElementsByTagName('tipo');
+const radiosTipo = document.getElementsByName('tipo');
 const txtDescricao = document.getElementById('lancar-descricao');
 const txtData = document.getElementById('lancar-data');
 const txtCategoria = document.getElementById('lancar-categoria');
@@ -15,7 +15,6 @@ const txtValor = document.getElementById('lancar-valor');
 const confirmaDadoLancado = document.querySelector('.confirma-dado-lancado');
 const slideConfirm = document.querySelector('.slide-confirma');
 const btnLancar = document.getElementById('lancar')
-let categoriasCarregadas = false;
 
 form.addEventListener('submit', event => {
     event.preventDefault();
@@ -23,65 +22,82 @@ form.addEventListener('submit', event => {
 });
 
 const abrirForm = {
-    tornarFormVisivel: function(){
+    tornarFormVisivel: function () {
         formBox.classList.remove('hidden');
         this.carregaCategorias();
         this.preencheDataHoje();
+        this.mudarCaregorias();
+        txtDescricao.focus();
     },
-    carregaCategorias: function(){
-        if(!categoriasCarregadas){
-            categorias[0].forEach(element => {
-                const option = criar('option');
-                option.setAttribute('value', element);
-                option.innerText = element;
-                selectCategorias.appendChild(option);
-                categoriasCarregadas = true;
-            });
-        };
+
+    carregaCategorias: function (categoriaIndex) {
+        if ([undefined, 2].includes(categoriaIndex)){
+            categoriaIndex = 0;
+        } 
+
+        selectCategorias.innerHTML = '';
+
+        categorias[categoriaIndex].forEach(element => {
+            const option = criar('option');
+            option.setAttribute('value', element);
+            option.innerText = element;
+
+            selectCategorias.appendChild(option);
+        });
     },
-    preencheDataHoje: function(){
+
+    preencheDataHoje: function () {
         txtData.value = new Date()
-            .toLocaleDateString('pt-br', {day: '2-digit', month: '2-digit', year: 'numeric'});
+            .toLocaleDateString('pt-br', { day: '2-digit', month: '2-digit', year: 'numeric' });
     },
-    autoAdicionaBarraData: function(){
+
+    autoAdicionaBarraData: function () {
         const digits = txtData.value.length
-        if(digits == 2 || digits == 5) txtData.value = `${txtData.value}/`
+        if (digits == 2 || digits == 5) txtData.value = `${txtData.value}/`
     },
 
     digits: [],
-    autoAdicionaPontoVirgulaValor: function(event){
-        const digit = event.data;   
-        if(event.inputType == 'deleteContentBackward'){
-            if(['0,0', '0,', '0', ''].includes(txtValor.value)){
+    autoAdicionaPontoVirgulaValor: function (event) {
+        const digit = event.data;
+        if (event.inputType == 'deleteContentBackward') {
+            if (['0,0', '0,', '0', ''].includes(txtValor.value)) {
                 this.digits = [];
-                txtValor.value ='0,00';
+                txtValor.value = '0,00';
                 return
-            } 
+            }
             this.digits.pop();
-        }else{
-            if(/[^0-9]/.test(digit)){
+        } else {
+            if (/[^0-9]/.test(digit)) {
                 txtValor.value = txtValor.value.replace(/[a-zA-Z]/g, '');
                 return;
-            } 
+            }
             this.digits.push(digit);
-            if(this.digits.length > 6) this.digits.pop()
+            if (this.digits.length > 6) this.digits.pop()
         };
         let digits = this.digits
-        if(digits.length == 1) txtValor.value = `0,0${digits[0]}`;
-        if(digits.length == 2) txtValor.value = `0,${digits[0]}${digits[1]}`;
-        if(digits.length == 3) txtValor.value = `${digits[0]},${digits[1]}${digits[2]}`;
-        if(digits.length == 4) txtValor.value = `${digits[0]}${digits[1]},${digits[2]}${digits[3]}`;
-        if(digits.length == 5) txtValor.value = `${digits[0]}${digits[1]}${digits[2]},${digits[3]}${digits[4]}`;
-        if(digits.length == 6) txtValor.value = `${digits[0]}.${digits[1]}${digits[2]}${digits[3]},${digits[4]}${digits[5]}`;
-    }
+        if (digits.length == 1) txtValor.value = `0,0${digits[0]}`;
+        if (digits.length == 2) txtValor.value = `0,${digits[0]}${digits[1]}`;
+        if (digits.length == 3) txtValor.value = `${digits[0]},${digits[1]}${digits[2]}`;
+        if (digits.length == 4) txtValor.value = `${digits[0]}${digits[1]},${digits[2]}${digits[3]}`;
+        if (digits.length == 5) txtValor.value = `${digits[0]}${digits[1]}${digits[2]},${digits[3]}${digits[4]}`;
+        if (digits.length == 6) txtValor.value = `${digits[0]}.${digits[1]}${digits[2]}${digits[3]},${digits[4]}${digits[5]}`;
+    },
+
+    mudarCaregorias: function () {
+        for (let ind = 0; ind <= 2; ind++) {
+            radiosTipo[ind].addEventListener('click', () => {
+                this.carregaCategorias(ind);
+            });
+        }
+    },
 }
 
 const novoLancamento = {
     dadosDoFormulario: '',
     ano: '',
     mes: '',
-    lancarNovoDadoCriado: function(){
-        if(txtCategoria.value == '*Selecionar*'){
+    lancarNovoDadoCriado: function () {
+        if (txtCategoria.value == '*Selecionar*') {
             txtCategoria.classList.add('red')
             return
         }
@@ -89,9 +105,9 @@ const novoLancamento = {
         this.pegarMesEAnoData(this.dadosDoFormulario.data);
         this.checaSeExisteNaBD();
         const novoDado = this.criarNovoDado()
-        
+
         baseDeDados[this.ano][this.mes][this.dadosDoFormulario.tipo].push(novoDado);
-        
+
         this.ordernarPorData()
         carregaTabelas.insereDados(this.dadosDoFormulario.tipo)//main.js
         carregaLinksNav.carregaLinksNavNoDOM(); //navigation.js
@@ -101,15 +117,17 @@ const novoLancamento = {
         setTimeout(() => {
             this.animacaoConfirmLacamento();
         }, 410);
+
+        this.limparForm();
+
     },
-    
-    pegarDadosForm: function(){
+
+    pegarDadosForm: function () {
         const formData = new FormData(form);
         this.dadosDoFormulario = Object.fromEntries(formData);
     },
-    
-    
-    criarNovoDado: function(){
+
+    criarNovoDado: function () {
         let ordemDasChaves = ['desc', 'data', 'categoria', 'valor'];
         if (this.dadosDoFormulario.tipo != 'despesas') ordemDasChaves = ['desc', 'data', 'valor'];;
         let novoDado = {};
@@ -118,59 +136,59 @@ const novoLancamento = {
         });
         //Input 0.000,00 => Output 0000.00
         novoDado.valor = novoDado.valor.replace(',', '.');
-        if(novoDado.valor.length > 6){
-            novoDado.valor = novoDado.valor.replace('.', '');            
+        if (novoDado.valor.length > 6) {
+            novoDado.valor = novoDado.valor.replace('.', '');
         }
 
         novoDado.id = this.radomID(this.ano, novoDado.data);
         return novoDado;
     },
-    
-    checaSeExisteNaBD: function(){
+
+    checaSeExisteNaBD: function () {
         //checa se existe o ano na 'badeDeDados'.
-        if(!baseDeDados[this.ano]){ 
+        if (!baseDeDados[this.ano]) {
             //Se não existir, cria o objeto do novo ano inserido.
-            baseDeDados[this.ano] = {}; 
+            baseDeDados[this.ano] = {};
         }
         //checa se existe o mês na 'badeDeDados'.
-        if(!baseDeDados[this.ano][this.mes]){ 
+        if (!baseDeDados[this.ano][this.mes]) {
             //Se não existir, cria o objeto do novo mês inserido.
             baseDeDados[this.ano][this.mes] = {
-                despesas:[],
-                receitas:[],
-                fixos:[]
-            }; 
+                despesas: [],
+                receitas: [],
+                fixos: []
+            };
         }
     },
-    
-    pegarMesEAnoData: function(data){
+
+    pegarMesEAnoData: function (data) {
         let dataArray = data.split('/')//input dd/mm/aaaa 
         let dataReverse = `${dataArray[2]}/${dataArray[1]}/${dataArray[0]}` //==> autput aaaa/mm/dd
-        
-        this.ano = new Date(dataReverse).toLocaleDateString('pt-br', {year: 'numeric'});
-        let mes = new Date(dataReverse).toLocaleDateString('pt-br', {month: 'short'});
+
+        this.ano = new Date(dataReverse).toLocaleDateString('pt-br', { year: 'numeric' });
+        let mes = new Date(dataReverse).toLocaleDateString('pt-br', { month: 'short' });
         this.mes = mes.slice(0, 3).toUpperCase();
     },
-    
-    ordernarPorData: function(){
+
+    ordernarPorData: function () {
         for (const ano in baseDeDados) {
             for (const mes in baseDeDados[ano]) {
                 let objetosOrdenados = [];
-                for(const tipo in baseDeDados[ano][mes]){
+                for (const tipo in baseDeDados[ano][mes]) {
                     objetosOrdenados = [];
-                    for(let ind = 1; ind <= 31; ind++){
-                        baseDeDados[ano][mes][tipo].forEach(element =>{
-                            const dia = element.data.slice(0,2);
-                            if(dia == ind) objetosOrdenados.push(element)
-                            })
+                    for (let ind = 1; ind <= 31; ind++) {
+                        baseDeDados[ano][mes][tipo].forEach(element => {
+                            const dia = element.data.slice(0, 2);
+                            if (dia == ind) objetosOrdenados.push(element)
+                        })
                     }
                     baseDeDados[ano][mes][tipo] = objetosOrdenados;
                 }
             }
         }
     },
-    
-    radomID: function(ano, data){
+
+    radomID: function (ano, data) {
         let min = Math.ceil(10);
         let max = Math.floor(1000);
         let id = Math.floor(Math.random() * (max - min) + min);
@@ -178,7 +196,7 @@ const novoLancamento = {
         return newId;
     },
 
-    animacaoConfirmLacamento: function(){
+    animacaoConfirmLacamento: function () {
         confirmaDadoLancado.classList.remove('loader')
         confirmaDadoLancado.classList.add('loader-ok')
         slideConfirm.classList.add('tamp')
@@ -188,7 +206,15 @@ const novoLancamento = {
             slideConfirm.classList.remove('tamp');
             btnLancar.removeAttribute('disabled')
         }, 1000);
-    }
+    },
+
+    limparForm: function () {
+        txtDescricao.value = '';
+        txtCategoria.value = '*Selecionar*'
+        txtValor.value = '';
+        abrirForm.digits = [];
+        txtDescricao.focus();
+    },
 }
 
 
@@ -206,7 +232,7 @@ txtValor.addEventListener('input', abrirForm.autoAdicionaPontoVirgulaValor.bind(
 
 /******PRÓXIMOS PASSOS*********
 / /Validar os dados lançados;                                       [x]
-/ /Mudar categorias de acordo o tipo de lançamento selecionado;     
+/ /Mudar categorias de acordo o tipo de lançamento selecionado;     [x]
 / /Tamanho máximo e mínimo das td's das tables;                     [x]       
 / /Pegar mês da data para lancar na base de dados de acordo o mês;  [x]
 / /Trasformar essas funções em objetos e métodos;                   [x]

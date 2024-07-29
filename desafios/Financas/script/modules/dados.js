@@ -1,6 +1,6 @@
 export let categorias = [
    ['*Selecionar*','Alimentação', 'Pessoal', 'Casa', 'Saúde'],
-   ['Receitas'],
+   ['*Selecionar*', 'Receitas', 'Outros1', 'Outros2'],
 ]
 
 export let baseDeDados = {

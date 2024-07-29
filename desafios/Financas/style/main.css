@@ -425,7 +425,7 @@ header {
   cursor: pointer;
 }
 .nav-bar li:hover {
-  color: white;
+  color: white !important;
 }
 .nav-bar .nav-link-ano {
   padding-top: 5px;
