@@ -1,5 +1,5 @@
 import { baseDeDados, categorias } from './modules/dados.js';
-import { carregaLinksNav } from './navigation.js';
+import { carregaLinksNav, meses } from './navigation.js';
 import { criar, carregaTabelas } from './main.js';
 
 const form = document.querySelector('.dados-box');
@@ -92,7 +92,7 @@ const abrirForm = {
     },
 }
 
-const novoLancamento = {
+export const novoLancamento = {
     dadosDoFormulario: '',
     ano: '',
     mes: '',
@@ -107,9 +107,9 @@ const novoLancamento = {
         const novoDado = this.criarNovoDado()
 
         baseDeDados[this.ano][this.mes][this.dadosDoFormulario.tipo].push(novoDado);
-
-        this.ordernarPorData()
-        carregaTabelas.insereDados(this.dadosDoFormulario.tipo)//main.js
+        console.log('FOI', baseDeDados)
+        this.ordenarPeloMes();
+        carregaTabelas.insereDados(this.dadosDoFormulario.tipo);//main.js
         carregaLinksNav.carregaLinksNavNoDOM(); //navigation.js
 
         confirmaDadoLancado.classList.add('loader');
@@ -170,19 +170,37 @@ const novoLancamento = {
         this.mes = mes.slice(0, 3).toUpperCase();
     },
 
-    ordernarPorData: function () {
+    ordenarPeloMes: function(){
+        const meses = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 
+                       'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'
+                    ]
+
+        let itensOrdenadosPeloMes = {};
+        for(const ano in baseDeDados){
+            itensOrdenadosPeloMes = [];
+            meses.forEach( mes =>{
+                if(baseDeDados[ano][mes]){
+                    itensOrdenadosPeloMes[mes] = baseDeDados[ano][mes];
+                }
+            })
+            baseDeDados[ano] = itensOrdenadosPeloMes;
+        }
+        this.ordenarPeloDia();
+    },
+    
+    ordenarPeloDia: function () {
         for (const ano in baseDeDados) {
             for (const mes in baseDeDados[ano]) {
-                let objetosOrdenados = [];
+                let itensOrdenadosPeloDia = [];
                 for (const tipo in baseDeDados[ano][mes]) {
-                    objetosOrdenados = [];
+                    itensOrdenadosPeloDia = [];
                     for (let ind = 1; ind <= 31; ind++) {
                         baseDeDados[ano][mes][tipo].forEach(element => {
                             const dia = element.data.slice(0, 2);
-                            if (dia == ind) objetosOrdenados.push(element)
+                            if (dia == ind) itensOrdenadosPeloDia.push(element)
                         })
                     }
-                    baseDeDados[ano][mes][tipo] = objetosOrdenados;
+                    baseDeDados[ano][mes][tipo] = itensOrdenadosPeloDia;
                 }
             }
         }

@@ -4,8 +4,8 @@ const navLinks = document.querySelector('.nav-links')
 
 let anoAnteriorSelecionado;
 let anoAtivo;
-let ano = 2024;
-let mes = 'JAN';
+let ano;
+let mes;
 export {ano, mes}
 
 export const carregaLinksNav = {
@@ -77,13 +77,7 @@ export const carregaLinksNav = {
     },
 
     mesSemAbrev: function (mes, abreviado){
-        const meses = {
-            JAN: 'Janeiro', FEV: 'Fevereiro', MAR: 'Março', ABR: 'Abril',
-            MAI: 'Maio', JUN: 'Junho', JUL: 'Julho', AGO: 'Agosto',
-            SET: 'Setembro', OUT: 'Outubro', NOV: 'Novembro', DEZ: 'Dezemto'
-        }
-
-        //Retorna o mes sem abreviatura;
+            //Retorna o mes sem abreviatura;
         if(!abreviado){
             for(const key in meses){
                 if(`${key}` == mes){
@@ -100,6 +94,11 @@ export const carregaLinksNav = {
     },
 }
 
+export const meses = {
+    JAN: 'Janeiro', FEV: 'Fevereiro', MAR: 'Março', ABR: 'Abril',
+    MAI: 'Maio', JUN: 'Junho', JUL: 'Julho', AGO: 'Agosto',
+    SET: 'Setembro', OUT: 'Outubro', NOV: 'Novembro', DEZ: 'Dezemto'
+}
 
 const mudarMesTabelas = {
     mesAnteriorSelecionado: '',

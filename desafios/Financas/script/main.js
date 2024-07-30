@@ -9,34 +9,37 @@ const container = document.querySelector('.container');
 let deleteBoxSlide; //será a div dentro da caixa 'pop up' deletar;
 
 import { baseDeDados } from "./modules/dados.js";
-import { ano, mes } from "./navigation.js";
+import { ano, mes, carregaLinksNav } from "./navigation.js";
 
 export const carregaTabelas = {
-
     insereDados: function (tabelaBD) {
-        if (baseDeDados == '') return;
-        let tabelaDOM = this.selecionaTabelaNoDOM(tabelaBD);
-        this.formataTabelaDOM(tabelaBD, tabelaDOM);
-
-        //Cria so elementos <tr> e <td> nas tabelas do DOM
-        baseDeDados[ano][mes][tabelaBD].forEach(element => {
-            const tr = criar('tr');
-            for (const chave in element) {
-                if (chave == 'id') {
-                    tr.setAttribute('id', `${element[chave]}`);
-                } else {
-                    let td = criar('td');
-                    td.textContent = element[chave];
-                    if (chave == 'valor') {
-                        td.textContent = this.formataMoeda(element[chave]);
-                    }
-                    tr.appendChild(td);
+        try{
+            let tabelaDOM = this.selecionaTabelaNoDOM(tabelaBD);
+            this.formataTabelaDOM(tabelaBD, tabelaDOM);
+    
+            //Cria so elementos <tr> e <td> nas tabelas do DOM
+            baseDeDados[ano][mes][tabelaBD].forEach(element => {
+                const tr = criar('tr');
+                for (const chave in element) {
+                    if (chave == 'id') {
+                        tr.setAttribute('id', `${element[chave]}`);
+                    } else {
+                        let td = criar('td');
+                        td.textContent = element[chave];
+                        if (chave == 'valor') {
+                            td.textContent = this.formataMoeda(element[chave]);
+                        }
+                        tr.appendChild(td);
+                    };
                 };
-            };
-            tabelaDOM.appendChild(tr);
-        })
-        this.somaTotalDaTabela(ano, mes, tabelaBD);
-        this.addEventClickDireito();
+                tabelaDOM.appendChild(tr);
+            })
+            this.somaTotalDaTabela(ano, mes, tabelaBD);
+            this.addEventClickDireito();
+        }catch(error){
+            console.error()
+        }
+       
     },
 
     selecionaTabelaNoDOM: function (tabelaBD) {
@@ -98,26 +101,6 @@ export const carregaTabelas = {
     }
 }
 
-const ordernarPorData = {
-    buscarDados: function () {
-        for (const ano in baseDeDados) {
-            for (const mes in baseDeDados[ano]) {
-                let objetosOrdenados = [];
-                for(const tipo in baseDeDados[ano][mes]){
-                    objetosOrdenados = [];
-                    for(let ind = 1; ind <= 31; ind++){
-                        baseDeDados[ano][mes][tipo].forEach(element =>{
-                            const dia = element.data.slice(0,2);
-                            if(dia == ind) objetosOrdenados.push(element)
-                        })
-                    }
-                    baseDeDados[ano][mes][tipo] = objetosOrdenados;
-                }
-            }
-        }
-    }
-}
-ordernarPorData.buscarDados()
 const apagarDado = {
     elementoClicado: {},
     selecionarDadosClicados: function (event) {
