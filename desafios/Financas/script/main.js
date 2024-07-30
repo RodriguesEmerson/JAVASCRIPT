@@ -168,30 +168,43 @@ const apagarDado = {
 }
 
 export function criar(tipo) {
-    return document.createElement(`${tipo}`)
+    return document.createElement(`${tipo}`);
 }
 
 
 btnApagar.addEventListener('click', (event) => {
     deleteBoxSlide = event.target.closest('div');
     deleteBoxSlide.style.marginLeft = '-205px'
-})
+});
 
 btnApagarNao.addEventListener('click', () => {
     deleteBox.classList.add('hidden');
     deleteBoxSlide.style.marginLeft = '0px';
-})
+});
+
 btnApagarSim.addEventListener('click', () => {
     apagarDado.apagar();
     deleteBox.classList.add('hidden');
     deleteBoxSlide.style.marginLeft = '0px';
-})
+});
+
 container.addEventListener('click', (event) => {
+    //Fecha a DeleteBox se for clicado fora dela.
+    const classes = ['deleteBox', 'slide', 'delete-box-confirm', 'deleteBox-buttons'];
+    
+    if(event.target.classList.contains('slide')) return;
+    
+    for(const classe of classes){
+        if(event.target.parentElement.classList.contains(classe)){
+            return;
+        };
+    };
+
     if(!deleteBox.classList.contains('hidden')){
-        /////terminar isso aqui 
-        deleteBox.classList.add('hidden')
-    }
-})
+        deleteBox.classList.add('hidden');
+        deleteBoxSlide.style.marginLeft = '0px';
+    };
+});
 
 carregaTabelas.insereDados('despesas');
 carregaTabelas.insereDados('receitas');
