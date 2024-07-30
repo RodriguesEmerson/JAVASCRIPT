@@ -107,7 +107,7 @@ export const novoLancamento = {
         const novoDado = this.criarNovoDado()
 
         baseDeDados[this.ano][this.mes][this.dadosDoFormulario.tipo].push(novoDado);
-        console.log('FOI', baseDeDados)
+
         this.ordenarPeloMes();
         carregaTabelas.insereDados(this.dadosDoFormulario.tipo);//main.js
         carregaLinksNav.carregaLinksNavNoDOM(); //navigation.js
@@ -173,7 +173,7 @@ export const novoLancamento = {
     ordenarPeloMes: function(){
         const meses = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 
                        'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'
-                    ]
+                    ];
 
         let itensOrdenadosPeloMes = {};
         for(const ano in baseDeDados){
@@ -236,6 +236,9 @@ export const novoLancamento = {
 }
 
 
+
+
+
 //Se não for colocado o '.bind', o this em tonarFormVisil irá se referir ao
 //próprio método tonarFormVisil e não ao abrirForm;
 btnAbrirForm.addEventListener('click', abrirForm.tornarFormVisivel.bind(abrirForm));
@@ -248,10 +251,3 @@ txtValor.addEventListener('input', abrirForm.autoAdicionaPontoVirgulaValor.bind(
 
 
 
-/******PRÓXIMOS PASSOS*********
-/ /Validar os dados lançados;                                       [x]
-/ /Mudar categorias de acordo o tipo de lançamento selecionado;     [x]
-/ /Tamanho máximo e mínimo das td's das tables;                     [x]       
-/ /Pegar mês da data para lancar na base de dados de acordo o mês;  [x]
-/ /Trasformar essas funções em objetos e métodos;                   [x]
-*/
