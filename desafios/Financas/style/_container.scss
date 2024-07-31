@@ -17,4 +17,11 @@ header{
     position: relative;
     display: flex;
     flex-direction: row;
+    .dash-board{
+        display: flex;
+        justify-content: center;
+        align-items: top;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
 }

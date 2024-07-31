@@ -6,6 +6,7 @@ const btnApagar = document.querySelector('#deletar-btn');
 const btnApagarNao = document.querySelector('#deletar-nao');
 const btnApagarSim = document.querySelector('#deletar-sim');
 const container = document.querySelector('.container');
+const dashBoard = document.querySelector('.dash-board');
 let deleteBoxSlide; //será a div dentro da caixa 'pop up' deletar;
 
 import { baseDeDados } from "./modules/dados.js";
@@ -16,7 +17,7 @@ export const carregaTabelas = {
         try{
             let tabelaDOM = this.selecionaTabelaNoDOM(tabelaBD);
             this.formataTabelaDOM(tabelaBD, tabelaDOM);
-    
+            
             //Cria so elementos <tr> e <td> nas tabelas do DOM
             baseDeDados[ano][mes][tabelaBD].forEach(element => {
                 const tr = criar('tr');
@@ -37,7 +38,7 @@ export const carregaTabelas = {
             this.somaTotalDaTabela(ano, mes, tabelaBD);
             this.addEventClickDireito();
         }catch(error){
-            console.error()
+           console.log(error);
         }
        
     },
@@ -173,20 +174,24 @@ btnApagarSim.addEventListener('click', () => {
 
 container.addEventListener('click', (event) => {
     //Fecha a DeleteBox se for clicado fora dela.
-    const classes = ['deleteBox', 'slide', 'delete-box-confirm', 'deleteBox-buttons'];
-    
-    if(event.target.classList.contains('slide')) return;
-    
-    for(const classe of classes){
-        if(event.target.parentElement.classList.contains(classe)){
-            return;
+    try{
+        const classes = ['deleteBox', 'slide', 'delete-box-confirm', 'deleteBox-buttons'];
+        
+        if(event.target.classList.contains('slide')) return;
+        
+        for(const classe of classes){
+            if(event.target.parentElement.classList.contains(classe)){
+                return;
+            };
         };
-    };
-
-    if(!deleteBox.classList.contains('hidden')){
-        deleteBox.classList.add('hidden');
-        deleteBoxSlide.style.marginLeft = '0px';
-    };
+    
+        if(!deleteBox.classList.contains('hidden')){
+            deleteBox.classList.add('hidden');
+            deleteBoxSlide.style.marginLeft = '0px';
+        };
+    }catch(error){
+        console.log(error)
+    }
 });
 
 carregaTabelas.insereDados('despesas');

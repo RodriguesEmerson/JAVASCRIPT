@@ -131,15 +131,16 @@
                 </div>
             </div>
             <div class="graficos">
-                <div class="grafico-despesas">
-
+                <div>
+                    <canvas class="grafico-despesas">
+                    </canvas>
+                    <span id="legend"></span>
+                    <canvas class="grafico-receitas">
+                    </canvas>
                 </div>
-                <div class="grafico-receitas">
+                <canvas class="grafico-resumo">
 
-                </div>
-                <div class="grafico-resumo">
-
-                </div>
+                </canvas>
             </div>
         </section>
     </main>
@@ -149,7 +150,8 @@
     <script src="script/main.js" type="module"></script>
     <script src="script/lancar.js" type="module"></script>
     <script src="script/navigation.js" type="module"></script>
-    <script src="script/modules/savarAPI.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script/graficos.js" type="module"></script>
 </body>
 
 </html>

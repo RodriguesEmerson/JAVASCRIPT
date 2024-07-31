@@ -1,0 +1,23 @@
+@import 'declaracoes' ;
+
+.graficos{
+    position: relative;
+    width: 540px;
+    box-shadow: $shadow;
+    border-radius: 7px;
+    margin-left: 10px;
+    padding: 10px;
+    color:  rgb(222, 0, 0);
+    
+    div{
+        display: flex;
+        width: 300px;
+        height: 200px;
+
+        .grafico-receitas{
+            margin-left: 10px;
+        }
+    }
+ 
+}
+
