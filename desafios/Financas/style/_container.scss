@@ -16,12 +16,13 @@ header{
 .container{
     position: relative;
     display: flex;
-    flex-direction: row;
+    align-items: start;
+    justify-content: start;
+    background-color: black;
     .dash-board{
         display: flex;
-        justify-content: center;
-        align-items: top;
-        flex-direction: row;
         flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
     }
 }

@@ -5,7 +5,7 @@
     flex-wrap: wrap;
     margin-top: 1px;
     min-width: 764.65px;
-    height: calc(100% - 1px);
+    min-height: calc(100vh - 1px);
 
 
     div:nth-child(2){
