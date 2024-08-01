@@ -1,11 +1,9 @@
 @import 'declaracoes' ;
 .navigation{
-    // position: absolute;
-    // margin-left: -200px;
     width: 200px;
-    height: 100% ;
     background-color: $cor-padrao; 
     padding: 10px;
+    min-height: calc(100% - 50px);
 }
 .nav-bar{
     color: white;

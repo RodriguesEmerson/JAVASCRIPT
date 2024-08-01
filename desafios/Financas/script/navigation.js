@@ -8,6 +8,13 @@ let ano;
 let mes;
 export {ano, mes}
 
+(function () {
+    ano = new Date().toLocaleDateString('pt-br', { year: 'numeric' });
+    mes = new Date().toLocaleDateString('pt-br', { month: 'short' });
+    mes = mes.slice(0, 3).toUpperCase();
+})();
+
+
 export const carregaLinksNav = {
     anosEncontrados: [],
     mesesEncontrados: [],

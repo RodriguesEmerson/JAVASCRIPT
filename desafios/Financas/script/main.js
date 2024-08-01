@@ -14,7 +14,7 @@ import { ano, mes, carregaLinksNav } from "./navigation.js";
 
 export const carregaTabelas = {
     insereDados: function (tabelaBD) {
-        try{
+        // try{
             let tabelaDOM = this.selecionaTabelaNoDOM(tabelaBD);
             this.formataTabelaDOM(tabelaBD, tabelaDOM);
             
@@ -37,9 +37,9 @@ export const carregaTabelas = {
             })
             this.somaTotalDaTabela(ano, mes, tabelaBD);
             this.addEventClickDireito();
-        }catch(error){
-           console.log(error);
-        }
+        // }catch(error){
+        //    console.log(error);
+        // }
        
     },
 
