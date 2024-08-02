@@ -8,8 +8,8 @@ export let baseDeDados = {
       JAN: {
          despesas: [
             { desc: 'Desp1', data: '21/01/2024', categoria:'Mercado', valor: '151', id: '22' },
-            { desc: 'Desp2', data: '15/01/2024', categoria:'Alimentação', valor: '2', id: '32' },
-            { desc: 'Desp3', data: '14/01/2024', categoria:'Mercado', valor: '3', id: '42' },
+            { desc: 'Desp2', data: '15/01/2024', categoria:'Alimentação', valor: '200', id: '32' },
+            { desc: 'Desp3', data: '14/01/2024', categoria:'Mercado', valor: '100', id: '42' },
          ],
          receitas: [
             { desc: 'Rece1', data: '14/01/2024', valor: '4', id: '21' },

@@ -9,55 +9,57 @@ let cor1 = 'rgb(200, 0, 0)';
 const tabelas = ['despesas', 'receitas', 'fixos'];
 let llabel = ['Alimentação', 'Saúde', 'Casa', 'Pessoal'];
 
+let arrLabels, arrData = [];
 
 const carregaGraficos = {
     labels: [],
-    data: {
-        despesas: {},
-        receitas: {},
-        fixos: {},
-    },
-    buscarDados: function(){
-        tabelas.forEach(tabela =>{
+    data: {},
+    buscarDados: function(tabela){
             this.labels = [];
-            this.data = {
-                despesas: {},
-                receitas: {},
-                fixos: {},
-            }
-            
+            this.data = {}
+            arrData = [];
+            arrLabels = [];
+            console.log(`'**********${tabela}***********'`)
             baseDeDados[ano][mes][tabela].forEach(element => {
-                //Pega as categoria ou descrição dos elemento.
                 let atributo = 'desc';
                 if(tabela == 'despesas') atributo = 'categoria';
+                
+                //Pega as categoria ou descrição dos elemento.
                 if(this.labels.indexOf(element[atributo]) == -1){
                     this.labels.push(element[atributo]);                 
                 }
 
                 //Soma os valores de acordo cada categoria ou descrição.
-                if(!this.data[tabela][element[atributo]]){
-                    this.data[tabela][element[atributo]] = 0;
+                if(!this.data[element[atributo]]){
+                    this.data[element[atributo]] = 0;
                 }
-                this.data[tabela][element[atributo]] += Number(element.valor); 
+                this.data[element[atributo]] += Number(element.valor); 
             });
+            this.organizaOsDados()
             console.log(this.labels);
-            console.log(this.data)
-            console.log(tabelas[0].charAt(0).toUpperCase() + tabelas[0].substring(1))
-        });
-       
+            console.log(arrLabels)
+            // console.log(tabelas[0].charAt(0).toUpperCase() + tabelas[0].substring(1));
     },
 
-    
+    organizaOsDados: function(){
+        const data = this.data;
+        for(const categoria in data){
+            arrData.push(data[categoria])
+        }
+
+        arrLabels = this.labels
+    }
 }
-carregaGraficos.buscarDados()
-let ctxGraficoDespesas = new Chart(graficoDespesas, {
+
+let ctxGraficoDespesas = new Chart(graficoDespesas,  {
+    Dados:carregaGraficos.buscarDados('despesas'),
     type: 'bar',
     data: {
         // labels: ['JAN', 'FEV', 'MAR']
-        labels: llabel,
+        labels: arrLabels,
         datasets: [{
             label: 'Gasto',
-            data: ['134', '492', '432', '134'],
+            data: arrData,
             borderWidth: 1,
         }]
     },
@@ -84,13 +86,14 @@ let ctxGraficoDespesas = new Chart(graficoDespesas, {
     }
 });
 let ctxGraficoReceitas = new Chart(graficoReceitas, {
+    Dados:carregaGraficos.buscarDados('receitas'),
     type: 'doughnut',
     data: {
         // labels: ['JAN', 'FEV', 'MAR']
-        labels: llabel,
+        labels: arrLabels,
         datasets: [{
             label: 'Receita',
-            data: ['134', '492', '432'],
+            data: arrData,
             borderWidth: 1,
         }]
     },
@@ -117,13 +120,14 @@ let ctxGraficoReceitas = new Chart(graficoReceitas, {
 })
 
 let ctxGraficoResumo = new Chart(graficoResumo, {
-    type: 'doughnut',
+    Dados:carregaGraficos.buscarDados('fixos'),
+    type: 'line',
     data: {
         // labels: ['JAN', 'FEV', 'MAR']
-        labels: llabel,
+        labels: arrLabels,
         datasets: [{
             label: 'Gasto Fixo',
-            data: ['134', '492', '432'],
+            data: arrData,
             borderWidth: 1,
         }]
     },
@@ -143,7 +147,6 @@ let ctxGraficoResumo = new Chart(graficoResumo, {
         },
         backgroundColor: [
             cor1,
-            'rgb(54, 162, 235)',
             'rgb(255, 205, 86)'
         ],
     }
