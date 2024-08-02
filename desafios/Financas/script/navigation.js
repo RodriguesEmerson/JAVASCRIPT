@@ -4,15 +4,15 @@ const navLinks = document.querySelector('.nav-links')
 
 let anoAnteriorSelecionado;
 let anoAtivo;
-let ano;
-let mes;
+let ano = 2024;
+let mes = 'JAN';
 export {ano, mes}
 
-(function () {
-    ano = new Date().toLocaleDateString('pt-br', { year: 'numeric' });
-    mes = new Date().toLocaleDateString('pt-br', { month: 'short' });
-    mes = mes.slice(0, 3).toUpperCase();
-})();
+// (function () {
+//     ano = new Date().toLocaleDateString('pt-br', { year: 'numeric' });
+//     mes = new Date().toLocaleDateString('pt-br', { month: 'short' });
+//     mes = mes.slice(0, 3).toUpperCase();
+// })();
 
 
 export const carregaLinksNav = {

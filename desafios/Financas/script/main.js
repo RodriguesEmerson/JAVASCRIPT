@@ -18,7 +18,7 @@ export const carregaTabelas = {
             let tabelaDOM = this.selecionaTabelaNoDOM(tabelaBD);
             this.formataTabelaDOM(tabelaBD, tabelaDOM);
             
-            //Cria so elementos <tr> e <td> nas tabelas do DOM
+            //Cria os elementos <tr> e <td> nas tabelas do DOM
             baseDeDados[ano][mes][tabelaBD].forEach(element => {
                 const tr = criar('tr');
                 for (const chave in element) {
