@@ -58,7 +58,7 @@ let ctxGraficoDespesas = new Chart(graficoDespesas,  {
         // labels: ['JAN', 'FEV', 'MAR']
         labels: arrLabels,
         datasets: [{
-            label: 'Gasto',
+            label: arrLabels,
             data: arrData,
             borderWidth: 1,
         }]
@@ -92,7 +92,7 @@ let ctxGraficoReceitas = new Chart(graficoReceitas, {
         // labels: ['JAN', 'FEV', 'MAR']
         labels: arrLabels,
         datasets: [{
-            label: 'Receita',
+            label: arrLabels,
             data: arrData,
             borderWidth: 1,
         }]
@@ -126,7 +126,7 @@ let ctxGraficoResumo = new Chart(graficoResumo, {
         // labels: ['JAN', 'FEV', 'MAR']
         labels: arrLabels,
         datasets: [{
-            label: 'Gasto Fixo',
+            label:arrLabels,
             data: arrData,
             borderWidth: 1,
         }]
