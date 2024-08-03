@@ -7,14 +7,14 @@ export let baseDeDados = {
    2024: {
       JAN: {
          despesas: [
-            { desc: 'Desp1', data: '21/01/2024', categoria:'Mercado', valor: '151', id: '22' },
+            { desc: 'Desp1', data: '21/01/2024', categoria:'Mercado', valor: '1541', id: '22' },
             { desc: 'Desp2', data: '15/01/2024', categoria:'Alimentação', valor: '200', id: '32' },
-            { desc: 'Desp3', data: '14/01/2024', categoria:'Mercado', valor: '100', id: '42' },
+            { desc: 'Desp3', data: '14/01/2024', categoria:'Mercado', valor: '1000', id: '42' },
          ],
          receitas: [
-            { desc: 'Rece1', data: '14/01/2024', valor: '4', id: '21' },
-            { desc: 'Rece2', data: '05/01/2024', valor: '5', id: '32' },
-            { desc: 'Rece3', data: '03/01/2024', valor: '6', id: '43' },
+            { desc: 'Rece1', data: '14/01/2024', valor: '2000.5', id: '21' },
+            { desc: 'Rece2', data: '05/01/2024', valor: '1000.54', id: '32' },
+            { desc: 'Rece3', data: '03/01/2024', valor: '2000.44', id: '43' },
          ],
          fixos: [
             { desc: 'Fixo1', data: '12/01/2024', valor: '7', id: '25' },

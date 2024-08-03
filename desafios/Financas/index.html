@@ -2,158 +2,166 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Organizze 2.0</title>
-    <link rel="stylesheet" href="style/main.css">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Organizze 2.0</title>
+   <link rel="stylesheet" href="style/main.css">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 </head>
 
 <body>
-    <header>
-        <h1>Organizze 2.0</h1>
-    </header>
-    <main class="container">
-        <aside class="navigation">
-            <div class="logo">
+   <header>
+      <h1>Organizze 2.0</h1>
+   </header>
+   <main class="container">
+      <aside class="navigation">
+         <div class="menu-button">
+            <span class="material-symbols-outlined">
+               menu
+            </span>
+         </div>
+         <div class="logo">
 
+         </div>
+         <nav class="nav-bar">
+            <h2>Minhas Finanças</h2>
+            <p>Seleionar Tabela </p>
+            <div class="nav-links">
+               <ul class="nav-link-ano" id="A2024">
+                  <li class="link-ano">
+                     <input type="checkbox" name="ano" id="ano2024">
+                     <label for="ano2024">
+                        <span class="sinal-abir-fechar">+</span>
+                        2024
+                        <span></span>
+                     </label>
+                  </li>
+                  <ol class="nav-link-mes">
+                     <li value="JAN" class="link-mes">Janeiro</li>
+                     <li value="FEV" class="link-mes">Fevereiro</li>
+                  </ol>
+               </ul>
             </div>
-            <nav class="nav-bar">
-                <h2>Minhas Finanças</h2>
-                <p>Seleionar Tabela </p>                
-                <div class="nav-links">
-                    <ul class="nav-link-ano" id="A2024">
-                        <li class="link-ano">
-                            <input type="checkbox" name="ano" id="ano2024">
-                            <label for="ano2024">
-                                <span class="sinal-abir-fechar">+</span> 
-                                2024
-                                <span></span>
-                            </label>
-                        </li>
-                        <ol class="nav-link-mes">
-                            <li value="JAN" class="link-mes">Janeiro</li>
-                            <li value="FEV" class="link-mes">Fevereiro</li>
-                        </ol>
-                    </ul>
-                </div>
-                <input type="button" value="Novo Lançamento" id="abrir-lancar">
-            </nav>
-        </aside>
-        <section class="lancar-container hidden">
-            <div class="lancar-dado">
-                <input type="button" value="Fechar" id="fechar-form">
-                <span class="lancar-dado-titulo">Novo Lançamento</span>
-                <form class="dados-box" autocomplete="on" action="" method="post">
-                    <fieldset class="radios">
-                        <input type="radio" name="tipo" id="despesas-radio" value="despesas" checked>
-                        <label for="despesas-radio">Despesa</label>
-                        <input type="radio" name="tipo" id="receitas-radio" value="receitas">
-                        <label for="receitas-radio">Receita</label>
-                        <input type="radio" name="tipo" id="fixos-radio" value="fixos">
-                        <label for="fixos-radio">Gasto Fixo</label>
-                    </fieldset>
-                    <input type="text" minlength="3" class="lancar-txt" id="lancar-descricao" placeholder="Descrição" name="desc" required>
-                    <input type="text" pattern="\d{2}\/\d{2}\/\d{4}$" maxlength="10" class="lancar-txt" id="lancar-data" placeholder="Data" name="data" required>
-                    <select class="lancar-txt" id="lancar-categoria" placeholder="Categoria" name="categoria" required></select>
-                    <input type="text" minlength="1" class="lancar-txt" id="lancar-valor" placeholder="0,00" autocomplete="off" name="valor" required>
-                    <input type="submit" value="Lançar" id="lancar">
-                </form>
-                <div class="confirma-dado-lancado">
-                    <span>✔</span>
-                    <span class="slide-confirma"></span>
-                </div>
+            <input type="button" value="Novo Lançamento" id="abrir-lancar">
+         </nav>
+      </aside>
+      <section class="lancar-container hidden">
+         <div class="lancar-dado">
+            <input type="button" value="Fechar" id="fechar-form">
+            <span class="lancar-dado-titulo">Novo Lançamento</span>
+            <form class="dados-box" autocomplete="on" action="" method="post">
+               <fieldset class="radios">
+                  <input type="radio" name="tipo" id="despesas-radio" value="despesas" checked>
+                  <label for="despesas-radio">Despesa</label>
+                  <input type="radio" name="tipo" id="receitas-radio" value="receitas">
+                  <label for="receitas-radio">Receita</label>
+                  <input type="radio" name="tipo" id="fixos-radio" value="fixos">
+                  <label for="fixos-radio">Gasto Fixo</label>
+               </fieldset>
+               <input type="text" minlength="3" class="lancar-txt" id="lancar-descricao" placeholder="Descrição"
+                  name="desc" required>
+               <input type="text" pattern="\d{2}\/\d{2}\/\d{4}$" maxlength="10" class="lancar-txt" id="lancar-data"
+                  placeholder="Data" name="data" required>
+               <select class="lancar-txt" id="lancar-categoria" placeholder="Categoria" name="categoria"
+                  required></select>
+               <input type="text" minlength="1" class="lancar-txt" id="lancar-valor" placeholder="0,00"
+                  autocomplete="off" name="valor" required>
+               <input type="submit" value="Lançar" id="lancar">
+            </form>
+            <div class="confirma-dado-lancado">
+               <span>✔</span>
+               <span class="slide-confirma"></span>
             </div>
-        </section>
-        <section class="dash-board">
-            <div id="deleteBox" class="hidden">
-                <div class="slide">
-                    <button id="deletar-btn">Deletar Despesa</button>
-                    <div class="delete-box-confirm">
-                        <span>Deseja deletar essa 'Despesa'?</span>
-                        <div class="deleteBox-buttons">
-                            <button id="deletar-sim">Sim</button>
-                            <button id="deletar-nao">Não</button>
-                        </div>
-                    </div>
-                </div>
+         </div>
+      </section>
+      <section class="dash-board">
+         <div id="deleteBox" class="hidden">
+            <div class="slide">
+               <button id="deletar-btn">Deletar Despesa</button>
+               <div class="delete-box-confirm">
+                  <span>Deseja deletar essa 'Despesa'?</span>
+                  <div class="deleteBox-buttons">
+                     <button id="deletar-sim">Sim</button>
+                     <button id="deletar-nao">Não</button>
+                  </div>
+               </div>
             </div>
-            <div class="tabelas">
-                <div class="despesas">
-                    <div class="cabecalho-tabela">
-                        <span>DESPESAS</span>
-                    </div>
-                    <table class="table despesas-tabela">
-                        <tr>
-                            <th>DESCRIÇÃO</th>
-                            <th>DATA</th>
-                            <th>CATEGORIA</th>
-                            <th>VALOR</th>
-                        </tr>
-                    </table>
-                    <div class="soma-total total-despesas">
-                        <span>Total</span>
-                        <span id="total-despesas">0,00</span>
-                    </div>
-                </div>
-                <div>
-                    <div class="receitas">
-                        <div class="cabecalho-tabela">
-                            <span>RECEITAS</span>
-                        </div>
-                        <table class="table receitas-tabela">
-                            <tr>
-                                <th>DESCRIÇÃO</th>
-                                <th>DATA</th>
-                                <th>VALOR</th>
-                            </tr>
-                        </table>
-                        <div class="soma-total total-receitas">
-                            <span>Total</span>
-                            <span id="total-receitas">0,00</span>
-                        </div>
-                    </div>
-                    <div class="gastos-fixos">
-                        <div class="cabecalho-tabela">
-                            <span>GASTOS FIXOS</span>
-                        </div>
-                        <table class="table fixos-tabela">
-                            <tr>
-                                <th>DESCRIÇÃO</th>
-                                <th>DATA</th>
-                                <th>VALOR</th>
-                            </tr>
-                        </table>
-                        <div class="soma-total total-fixos">
-                            <span>Total</span>
-                            <span id="total-fixos">0,00</span>
-                        </div>
-                    </div>
-                </div>
+         </div>
+         <div class="tabelas">
+            <div class="despesas">
+               <div class="cabecalho-tabela">
+                  <span>DESPESAS</span>
+               </div>
+               <table class="table despesas-tabela">
+                  <tr>
+                     <th>DESCRIÇÃO</th>
+                     <th>DATA</th>
+                     <th>CATEGORIA</th>
+                     <th>VALOR</th>
+                  </tr>
+               </table>
+               <div class="soma-total total-despesas">
+                  <span>Total</span>
+                  <span id="total-despesas">0,00</span>
+               </div>
             </div>
-            <div class="graficos">
-                <div  class="desp-rec">
-                    <canvas class="grafico-despesas">
-                    </canvas>
-                    <span id="legend"></span>
-                    <canvas class="grafico-receitas">
-                    </canvas>
-                </div>
-                <div class="res">
-                    <canvas class="grafico-resumo">
-    
-                    </canvas>
-                </div>
+            <div>
+               <div class="receitas">
+                  <div class="cabecalho-tabela">
+                     <span>RECEITAS</span>
+                  </div>
+                  <table class="table receitas-tabela">
+                     <tr>
+                        <th>DESCRIÇÃO</th>
+                        <th>DATA</th>
+                        <th>VALOR</th>
+                     </tr>
+                  </table>
+                  <div class="soma-total total-receitas">
+                     <span>Total</span>
+                     <span id="total-receitas">0,00</span>
+                  </div>
+               </div>
+               <div class="gastos-fixos">
+                  <div class="cabecalho-tabela">
+                     <span>GASTOS FIXOS</span>
+                  </div>
+                  <table class="table fixos-tabela">
+                     <tr>
+                        <th>DESCRIÇÃO</th>
+                        <th>DATA</th>
+                        <th>VALOR</th>
+                     </tr>
+                  </table>
+                  <div class="soma-total total-fixos">
+                     <span>Total</span>
+                     <span id="total-fixos">0,00</span>
+                  </div>
+               </div>
             </div>
-        </section>
-    </main>
-    <footer>
+         </div>
+         <div class="graficos">
+            <div class="desp-rec">
+               <canvas class="grafico-despesas">
+               </canvas>
+               <canvas class="grafico-receitas">
+               </canvas>
+            </div>
+            <div class="res">
+               <canvas class="grafico-resumo">
+               </canvas>
+            </div>
+         </div>
+      </section>
+   </main>
+   <footer>
 
-    </footer>
-    <script src="script/main.js" type="module"></script>
-    <script src="script/lancar.js" type="module"></script>
-    <script src="script/navigation.js" type="module"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="script/graficos.js" type="module"></script>
+   </footer>
+   <script src="script/main.js" type="module"></script>
+   <script src="script/lancar.js" type="module"></script>
+   <script src="script/navigation.js" type="module"></script>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   <script src="script/graficos.js" type="module"></script>
 </body>
 
 </html>

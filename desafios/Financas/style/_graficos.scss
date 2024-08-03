@@ -2,7 +2,7 @@
 
 .graficos{
     position: relative;
-    width: 540px;
+    width: 691px;
     box-shadow: $shadow;
     border-radius: 7px;
     margin-left: 10px;
@@ -11,8 +11,9 @@
     
     .desp-rec{
         display: flex;
-        width: 260px;
+        width: 340px;
         height: 200px;
+        margin-bottom: 20px;
 
         .grafico-receitas{
             margin-left: 10px;
@@ -20,7 +21,8 @@
     }
     .res{
         margin: auto;
-        width: 400px;
+        width: 500px;
+        height: 250px;
     }
  
 }

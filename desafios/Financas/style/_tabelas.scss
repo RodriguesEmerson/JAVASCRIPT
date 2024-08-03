@@ -78,7 +78,7 @@
     background-color: rgb(255, 255, 255);
     box-shadow: $shadow;
     tr td:first-child{
-        max-width: 202px;
+        max-width: 150px;
     }
     .despesas-tabela{
         width: 100%;
@@ -87,7 +87,8 @@
             color: white;
         }
         tr td:first-child{
-            width: 202px;
+            width: 150px;
+            text-overflow: ellipsis !important;
         }
         tr td:nth-child(2){
             width: 100px;
