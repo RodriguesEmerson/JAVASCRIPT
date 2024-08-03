@@ -1,6 +1,7 @@
 import { ano, mes } from "./navigation.js";
 import { baseDeDados } from "./modules/dados.js";
 
+const graficos = document.querySelector('.graficos');
 const graficoDespesas = document.querySelector('.grafico-despesas');
 const graficoReceitas = document.querySelector('.grafico-receitas');
 const graficoResumo = document.querySelector('.grafico-resumo');

@@ -1,6 +1,7 @@
 import { baseDeDados, categorias } from './modules/dados.js';
 import { carregaLinksNav, meses } from './navigation.js';
 import { criar, carregaTabelas } from './main.js';
+import { geraGraficosDOM } from './graficos.js';
 
 const form = document.querySelector('.dados-box');
 const selectCategorias = document.querySelector('#lancar-categoria');
@@ -111,6 +112,7 @@ export const novoLancamento = {
         this.ordenarPeloMes();
         carregaTabelas.insereDados(this.dadosDoFormulario.tipo);//main.js
         carregaLinksNav.carregaLinksNavNoDOM(); //navigation.js
+        geraGraficosDOM(); //graficos.js
 
         confirmaDadoLancado.classList.add('loader');
         btnLancar.setAttribute('disabled', '');

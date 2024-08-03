@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
 }
 header{
     height: 50px;
@@ -12,6 +12,7 @@ header{
     background-color: $cor-padrao;
     color: white;
     border-bottom: 1px solid lighten($cor-padrao, 9);
+    font-family: Arial, Helvetica, sans-serif;
 }
 .container{
     position: relative;

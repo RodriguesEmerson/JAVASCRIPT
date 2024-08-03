@@ -8,18 +8,20 @@
   }
   
 
-.navigation{
+.nav-bar{
     position: absolute;
     z-index: 10;
     left: -150px;
     width: 200px;
     background-color: $cor-padrao; 
-    padding: 45px 10px 10px 10px;
+    padding: 55px 10px 10px 10px;
     min-height: 100%;
+    transition: 0.4s;
 }
-.nav-bar{
+.navigation{
     color: white;
     font-size: 14px;
+    transition: 0.4s;
     h2{
         font-size: 18px;
         border-bottom: 1px solid gray;
@@ -136,10 +138,10 @@
     }
 }
 
-.hidden-navigation{
-    
+.show-nav-bar{
+    left: 0;
 }
 
-.show-nav-bar{
-    margin-left: 0;
+.shadow{
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.221);
 }

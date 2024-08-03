@@ -1,7 +1,9 @@
 import { carregaTabelas, criar } from "./main.js";
 import { baseDeDados } from "./modules/dados.js";
+const menuButton = document.querySelector('.menu-button');
+const navBar = document.querySelector('.nav-bar');
+const navigation = document.querySelector('.navigation');
 const navLinks = document.querySelector('.nav-links');
-const menuButton = document.querySelector('.menu-button')
 
 let anoAnteriorSelecionado;
 let anoAtivo;
@@ -15,8 +17,16 @@ export { ano, mes };
 //     mes = mes.slice(0, 3).toUpperCase();
 // })();
 
+//Abre e fecha a barra de navegação!
 menuButton.addEventListener('click', () => {
-   
+   navBar.classList.toggle('show-nav-bar');
+   navBar.classList.toggle('shadow')
+   navigation.classList.toggle('hidden');
+   if(navBar.classList.contains('show-nav-bar')){
+      menuButton.innerHTML = '<span class="material-symbols-outlined">close</span>'
+   }else{
+      menuButton.innerHTML = '<span class="material-symbols-outlined">menu</span>';
+   }
 })
 
 
