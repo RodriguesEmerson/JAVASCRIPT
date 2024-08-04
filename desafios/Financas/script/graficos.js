@@ -10,7 +10,7 @@ let coresReceitas = ['#10454F', '#C72673', '#2BB22E', '#F2B035', '#543486', '#F2
 const arrGraficos = ['despesas', 'receitas'];
 let llabel = ['Alimentação', 'Saúde', 'Casa', 'Pessoal'];
 
-let arrLabels, arrData, arrDataDespesas, arrDataReceitas = [];
+let arrLabels, arrData, arrLabelsDatasResumo = [];
 let totalDespesas, totalReceitas;
 
 export const carregaGraficos = {
@@ -18,7 +18,7 @@ export const carregaGraficos = {
    data: {},
    buscarDados: function (tabela) {
       this.labels = [];
-      this.data = {}
+      this.data = {};
       arrData = [];
       arrLabels = [];
 
@@ -43,8 +43,6 @@ export const carregaGraficos = {
          arrData.push(data[categoria])
       }
       arrLabels = this.labels
-      if(tabela = 'despesas') return arrDataDespesas =  arrData;
-      arrDataReceitas = arrData;
    },
 
    somaValoresCategorias: function(categoria, element){
@@ -60,12 +58,10 @@ export const carregaGraficos = {
          arrData.reduce((acc, curr) =>{
             return totalDespesas = acc + curr;
          })
-         console.log('Despesas: ' + totalDespesas)
       }else{
          arrData.reduce((acc, curr) => {
             return totalReceitas = acc + curr;
          })
-         console.log('Receitas: ' + totalReceitas);
       }
    },
 
@@ -89,8 +85,8 @@ export const carregaGraficos = {
          ctxGraficoReceitas.update();
       }
       //Grafico Resumo 
-      ctxGraficoResumo.data.datasets[0].data = [0, -totalDespesas];
-      ctxGraficoResumo.data.datasets[2].data = [0, totalReceitas]
+      ctxGraficoResumo.data.datasets[0].data = [0, totalDespesas];
+      ctxGraficoResumo.data.datasets[1].data = [0, totalReceitas]
       ctxGraficoResumo.update();
    },
 }
@@ -160,25 +156,16 @@ let ctxGraficoReceitas = new Chart(graficoReceitas, {
 let ctxGraficoResumo = new Chart(graficoResumo, {
    type: 'line',
    data: {
-      labels: ['Despesas', 'Receitas'],
+      labels:['Resumo', 'Resumo'],//pontos do gráficos.
       datasets: [{
-         label: 'Despesas',
+         label: 'Despesas', //legendas acima do gráfico.
          data: [],
-         borderColor: '#A02020',
+         borderColor: '#A02020', //red
          fill: false,
          cubicInterpolationMode: 'monotone',
          tension: 0.4,
-         backgroundColor: '#A02020',
+         backgroundColor: '#A02020', //red
 
-      },
-      {
-         label: '0',
-         data: [0, 0],
-         borderColor: 'gray',
-         fill: false,
-         cubicInterpolationMode: 'monotone',
-         tension: 0.4,
-         backgroundColor: 'gray',
       },
       {
          label: 'Receitas',
@@ -208,9 +195,9 @@ let ctxGraficoResumo = new Chart(graficoResumo, {
             display: false,
          },
          y: {
-            // beginAtZero: true
-            suggestedMin: -10,
-            suggestedMax: totalReceitas + 50,
+            beginAtZero: true,
+            // suggestedMin: -10,
+            // suggestedMax: totalReceitas + 50,
          },
       },
       // color: 'white',
