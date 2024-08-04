@@ -1,23 +1,23 @@
 import { carregaTabelas, criar } from "./main.js";
 import { baseDeDados } from "./modules/dados.js";
+
 const menuButton = document.querySelector('.menu-button');
 const navBar = document.querySelector('.nav-bar');
 const navigation = document.querySelector('.navigation');
 const navLinks = document.querySelector('.nav-links');
 
 let anoAnteriorSelecionado;
-let anoAtivo;
 let ano = 2024;
 let mes = 'JAN';
 export { ano, mes };
+// import { carregaGraficos } from "./graficos.js";
 
-// (function () {
-//     ano = new Date().toLocaleDateString('pt-br', { year: 'numeric' });
-//     mes = new Date().toLocaleDateString('pt-br', { month: 'short' });
-//     mes = mes.slice(0, 3).toUpperCase();
-// })();
+export function mudaMesEAno(mesSelecionado, anoSelecionado){
+   mes = mesSelecionado;
+   ano = anoSelecionado;
+}
 
-//Abre e fecha a barra de navegação!
+//Abre e fecha a barra de navegação (menu)!
 menuButton.addEventListener('click', () => {
    navBar.classList.toggle('show-nav-bar');
    navBar.classList.toggle('shadow')
@@ -35,13 +35,9 @@ export const carregaLinksNav = {
    mesesEncontrados: [],
    carregaLinksNavNoDOM: function (ANO, MES) {
       navLinks.innerHTML = '';
-
-      // if(ANO){
-      //    ano = ANO; mes = MES;
-      // }
-      //Cria <ul> com os anos encontrados;
       this.buscaAnosNaBD();
       this.anosEncontrados.forEach(ANO => {
+         //Cria <ul> com os anos encontrados;
          this.buscaMesesNaBD(ANO);
          const ulAno = criar('ul');
          ulAno.setAttribute('class', 'nav-link-ano');
@@ -70,7 +66,7 @@ export const carregaLinksNav = {
 
          navLinks.appendChild(ulAno);
       });
-      this.addEventsNosMeses();
+      this.addEventsNosLinks();
    },
 
    buscaAnosNaBD: function () {
@@ -86,7 +82,7 @@ export const carregaLinksNav = {
       }
    },
 
-   addEventsNosMeses: function () {
+   addEventsNosLinks: function () {
       const checboxAno = document.querySelectorAll('input[type=checkbox]');
       const liMeses = document.querySelectorAll('.link-mes');
 
@@ -136,7 +132,19 @@ const mudarMesTabelas = {
       this.mudaCores();
    },
 
-   //mudar a cor do mês e do ano através do mês clicado.
+   mudarParaMesSelecionado: function () {
+      const tabelas = ['despesas', 'receitas', 'fixos']
+      ano = this.anoClicadoID;
+      mes = this.mesClicadoValue;
+      tabelas.forEach(element => {
+         carregaTabelas.insereDados(element); //../script
+      });
+
+      // carregaGraficos.atualizaDadosDosGrafico();
+   },
+   
+   //mudar a cor do mês e do ano através do mês clicado
+   //para indicar o mês selecionado.
    mudaCores: function () {
       const anoAtualSelecionado = document.querySelector(`#A${this.anoClicadoID} .link-ano`);
       this.mesAtualSelecionado.style.color = 'white';
@@ -151,16 +159,6 @@ const mudarMesTabelas = {
       anoAnteriorSelecionado = anoAtualSelecionado;
       this.mudarParaMesSelecionado();
    },
-
-   mudarParaMesSelecionado: function () {
-      const tabelas = ['despesas', 'receitas', 'fixos']
-      ano = this.anoClicadoID;
-      mes = this.mesClicadoValue;
-      tabelas.forEach(element => {
-         carregaTabelas.insereDados(element); //../script
-      });
-   }
-
 }
 
 function abrirFecharLinkAno() {
@@ -194,3 +192,4 @@ function abrirFecharLinkAno() {
 };
 
 carregaLinksNav.carregaLinksNavNoDOM();
+

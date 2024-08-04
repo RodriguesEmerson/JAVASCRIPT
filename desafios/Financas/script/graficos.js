@@ -12,10 +12,23 @@ let llabel = ['Alimentação', 'Saúde', 'Casa', 'Pessoal'];
 
 let arrLabels, arrData, arrLabelsDatasResumo = [];
 let totalDespesas, totalReceitas;
+let despesasSomadas = false;
 
 export const carregaGraficos = {
    labels: [],
    data: {},
+
+   atualizaDadosDosGrafico: function(){
+      arrGraficos.forEach(grafico => {
+         this.buscarDados(grafico);
+         this.organizaOsDados(); 
+         this.somaValoresDaTabela();
+         despesasSomadas = true;
+         this.renderizaGraficosNoDOM(grafico);
+      });
+      despesasSomadas = false;
+   },
+
    buscarDados: function (tabela) {
       this.labels = [];
       this.data = {};
@@ -27,22 +40,13 @@ export const carregaGraficos = {
          let atributo = 'desc';
          if (tabela == 'despesas') atributo = 'categoria';
          let categoria = element[atributo];
-         //Pega as categoria ou descrição dos elementos.
-         if (this.labels.indexOf(categoria) == -1) {
+
+         //Pega as keys categoria ou descrição dos elementos e lança em arrLabels.
+         if (this.labels.indexOf(categoria) == -1) { //verifica se já existe no array.
             this.labels.push(categoria);
          }
          this.somaValoresCategorias(categoria, element);
       });
-      this.organizaOsDados(tabela); 
-      this.somaValoresDaTabela();
-   },
-
-   organizaOsDados: function (tabela) {
-      const data = this.data;
-      for (const categoria in data) {
-         arrData.push(data[categoria])
-      }
-      arrLabels = this.labels
    },
 
    somaValoresCategorias: function(categoria, element){
@@ -53,8 +57,17 @@ export const carregaGraficos = {
       this.data[categoria] += Number(element.valor);
    },
 
+   organizaOsDados: function () {
+      //Pega o valor somado de cada categoria e lança no arrData.
+      const data = this.data;
+      for (const categoria in data) {
+         arrData.push(data[categoria])
+      }
+      arrLabels = this.labels
+   },
+
    somaValoresDaTabela: function() {
-      if(!totalDespesas){
+      if(!despesasSomadas){
          arrData.reduce((acc, curr) =>{
             return totalDespesas = acc + curr;
          })
@@ -63,13 +76,6 @@ export const carregaGraficos = {
             return totalReceitas = acc + curr;
          })
       }
-   },
-
-   atualizaDadosDosGrafico: function(){
-      arrGraficos.forEach(grafico => {
-         this.buscarDados(grafico);
-         this.renderizaGraficosNoDOM(grafico);
-      });
    },
 
    renderizaGraficosNoDOM: function(grafico){
@@ -156,7 +162,7 @@ let ctxGraficoReceitas = new Chart(graficoReceitas, {
 let ctxGraficoResumo = new Chart(graficoResumo, {
    type: 'line',
    data: {
-      labels:['Resumo', 'Resumo'],//pontos do gráficos.
+      labels:['Resumo', 'Resumo'],//pontos do gráfico.
       datasets: [{
          label: 'Despesas', //legendas acima do gráfico.
          data: [],
@@ -165,7 +171,6 @@ let ctxGraficoResumo = new Chart(graficoResumo, {
          cubicInterpolationMode: 'monotone',
          tension: 0.4,
          backgroundColor: '#A02020', //red
-
       },
       {
          label: 'Receitas',
