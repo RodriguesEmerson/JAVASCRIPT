@@ -7,13 +7,13 @@ const graficoReceitas = document.querySelector('.grafico-receitas');
 const graficoResumo = document.querySelector('.grafico-resumo');
 const legend = document.querySelector('#legend');
 let coresReceitas = ['#10454F', '#C72673', '#2BB22E', '#F2B035', '#543486', '#F24C27', '#086AA8'];
-const tabelas = ['despesas', 'receitas', 'fixos'];
+const arrGraficos = ['despesas', 'receitas'];
 let llabel = ['Alimentação', 'Saúde', 'Casa', 'Pessoal'];
 
 let arrLabels, arrData = [];
 let totalDespesas, totalReceitas;
 
-const carregaGraficos = {
+export const carregaGraficos = {
    labels: [],
    data: {},
    buscarDados: function (tabela) {
@@ -21,6 +21,7 @@ const carregaGraficos = {
       this.data = {}
       arrData = [];
       arrLabels = [];
+
       console.log(`'**********${tabela}***********'`)
       baseDeDados[ano][mes][tabela].forEach(element => {
          let atributo = 'desc';
@@ -37,10 +38,8 @@ const carregaGraficos = {
          }
          this.data[element[atributo]] += Number(element.valor);
       });
-      this.organizaOsDados()
-      console.log(this.labels);
-      console.log(arrLabels)
-      // console.log(tabelas[0].charAt(0).toUpperCase() + tabelas[0].substring(1));
+      this.organizaOsDados(); 
+      this.somaValoresDaTabela();
    },
 
    organizaOsDados: function () {
@@ -49,7 +48,6 @@ const carregaGraficos = {
          arrData.push(data[categoria])
       }
       arrLabels = this.labels
-      this.somaValoresDaTabela()
    },
 
    somaValoresDaTabela: function() {
@@ -60,15 +58,40 @@ const carregaGraficos = {
          console.log('Despesas: ' + totalDespesas)
       }else{
          arrData.reduce((acc, curr) => {
-            return totalReceitas = acc + curr
+            return totalReceitas = acc + curr;
          })
-         console.log('Receitas: ' + totalReceitas)
+         console.log('Receitas: ' + totalReceitas);
       }
-   }
+   },
+
+   atualizaDadosDosGrafico: function(){
+      arrGraficos.forEach(grafico => {
+         this.buscarDados(grafico);
+         this.renderizaGraficosNoDOM(grafico);
+      });
+   },
+
+   renderizaGraficosNoDOM: function(grafico){
+      if(grafico == 'despesas'){
+         ctxGraficoDespesas.data.labels = arrLabels;
+         ctxGraficoDespesas.data.datasets[0].data = arrData;
+         ctxGraficoDespesas.update();
+      } 
+      
+      if(grafico == 'receitas'){
+         ctxGraficoReceitas.data.labels = arrLabels;
+         ctxGraficoReceitas.data.datasets[0].data = arrData;
+         ctxGraficoReceitas.update();
+      }
+      //Grafico Resumo 
+      console.log(totalDespesas)
+      ctxGraficoResumo.data.datasets[0].data = [0, -totalDespesas];
+      ctxGraficoResumo.data.datasets[2].data = [0, totalReceitas]
+      ctxGraficoResumo.update();
+   },
 }
 
 let ctxGraficoDespesas = new Chart(graficoDespesas, {
-   Dados: carregaGraficos.buscarDados('despesas'),
    type: 'bar',
    data: {
       labels: arrLabels,
@@ -100,8 +123,8 @@ let ctxGraficoDespesas = new Chart(graficoDespesas, {
       ],
    }
 });
+
 let ctxGraficoReceitas = new Chart(graficoReceitas, {
-   Dados: carregaGraficos.buscarDados('receitas'),
    type: 'doughnut',
    data: {
       labels: arrLabels,
@@ -191,3 +214,6 @@ let ctxGraficoResumo = new Chart(graficoResumo, {
       // backgroundColor: ['red', 'gray', 'green'],
    }
 })
+
+carregaGraficos.atualizaDadosDosGrafico();
+

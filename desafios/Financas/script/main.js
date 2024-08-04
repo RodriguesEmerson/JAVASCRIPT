@@ -190,7 +190,6 @@ container.addEventListener('click', (event) => {
          deleteBoxSlide.style.marginLeft = '0px';
       };
    } catch (error) {
-      console.log(error)
    }
 });
 
