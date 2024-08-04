@@ -1,6 +1,6 @@
 import { baseDeDados, categorias } from './modules/dados.js';
 import { carregaLinksNav, meses } from './navigation.js';
-import { criar, carregaTabelas } from './main.js';
+import { criar, carregaTabelas } from './modules/utils.js';
 import { carregaGraficos } from './graficos.js';
 
 const form = document.querySelector('.dados-box');

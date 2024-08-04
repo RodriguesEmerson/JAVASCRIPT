@@ -1,5 +1,6 @@
-import { carregaTabelas, criar } from "./main.js";
+import { carregaTabelas, criar, mudaMesEAno } from "./modules/utils.js";
 import { baseDeDados } from "./modules/dados.js";
+import { carregaGraficos } from "./graficos.js";
 
 const menuButton = document.querySelector('.menu-button');
 const navBar = document.querySelector('.nav-bar');
@@ -7,15 +8,8 @@ const navigation = document.querySelector('.navigation');
 const navLinks = document.querySelector('.nav-links');
 
 let anoAnteriorSelecionado;
-let ano = 2024;
-let mes = 'JAN';
-export { ano, mes };
 // import { carregaGraficos } from "./graficos.js";
 
-export function mudaMesEAno(mesSelecionado, anoSelecionado){
-   mes = mesSelecionado;
-   ano = anoSelecionado;
-}
 
 //Abre e fecha a barra de navegação (menu)!
 menuButton.addEventListener('click', () => {
@@ -28,7 +22,6 @@ menuButton.addEventListener('click', () => {
       menuButton.innerHTML = '<span class="material-symbols-outlined">menu</span>';
    }
 })
-
 
 export const carregaLinksNav = {
    anosEncontrados: [],
@@ -134,13 +127,13 @@ const mudarMesTabelas = {
 
    mudarParaMesSelecionado: function () {
       const tabelas = ['despesas', 'receitas', 'fixos']
-      ano = this.anoClicadoID;
-      mes = this.mesClicadoValue;
+      // ano = this.anoClicadoID;
+      // mes = this.mesClicadoValue;
+      mudaMesEAno(this.mesClicadoValue, this.anoClicadoID);
       tabelas.forEach(element => {
          carregaTabelas.insereDados(element); //../script
       });
-
-      // carregaGraficos.atualizaDadosDosGrafico();
+      carregaGraficos.atualizaDadosDosGrafico()
    },
    
    //mudar a cor do mês e do ano através do mês clicado

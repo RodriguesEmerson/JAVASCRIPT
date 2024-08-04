@@ -1,5 +1,5 @@
-import { ano, mes } from "./navigation.js";
-import { baseDeDados, categorias } from "./modules/dados.js";
+import { ano, mes } from "./modules/utils.js";
+import { baseDeDados } from "./modules/dados.js";
 
 const graficos = document.querySelector('.graficos');
 const graficoDespesas = document.querySelector('.grafico-despesas');

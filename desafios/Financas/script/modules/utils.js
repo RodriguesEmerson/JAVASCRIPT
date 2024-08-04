@@ -1,3 +1,6 @@
+import { baseDeDados } from "./dados.js";
+import { apagarDado } from "../main.js";
+
 const tabelaDespesas = document.querySelector('.despesas-tabela');
 const tabelaReceitas = document.querySelector('.receitas-tabela');
 const tabelaFixos = document.querySelector('.fixos-tabela');
@@ -9,6 +12,10 @@ export { ano, mes };
 export function mudaMesEAno(mesSelecionado, anoSelecionado) {
    mes = mesSelecionado;
    ano = anoSelecionado;
+}
+
+export function criar(tipo) {
+   return document.createElement(`${tipo}`);
 }
 
 export const carregaTabelas = {
