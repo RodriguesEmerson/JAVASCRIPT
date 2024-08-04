@@ -25,6 +25,7 @@ header {
   flex-direction: row;
   justify-content: center;
   margin-left: 50px;
+  width: 100%;
 }
 
 .tabelas {
