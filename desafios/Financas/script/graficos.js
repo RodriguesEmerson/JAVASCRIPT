@@ -1,5 +1,5 @@
 import { ano, mes } from "./navigation.js";
-import { baseDeDados } from "./modules/dados.js";
+import { baseDeDados, categorias } from "./modules/dados.js";
 
 const graficos = document.querySelector('.graficos');
 const graficoDespesas = document.querySelector('.grafico-despesas');
@@ -10,7 +10,7 @@ let coresReceitas = ['#10454F', '#C72673', '#2BB22E', '#F2B035', '#543486', '#F2
 const arrGraficos = ['despesas', 'receitas'];
 let llabel = ['Alimentação', 'Saúde', 'Casa', 'Pessoal'];
 
-let arrLabels, arrData = [];
+let arrLabels, arrData, arrDataDespesas, arrDataReceitas = [];
 let totalDespesas, totalReceitas;
 
 export const carregaGraficos = {
@@ -22,32 +22,37 @@ export const carregaGraficos = {
       arrData = [];
       arrLabels = [];
 
-      console.log(`'**********${tabela}***********'`)
+      //Pega os dados em baseDeDados -- dados.js.
       baseDeDados[ano][mes][tabela].forEach(element => {
          let atributo = 'desc';
          if (tabela == 'despesas') atributo = 'categoria';
-
-         //Pega as categoria ou descrição dos elemento.
-         if (this.labels.indexOf(element[atributo]) == -1) {
-            this.labels.push(element[atributo]);
+         let categoria = element[atributo];
+         //Pega as categoria ou descrição dos elementos.
+         if (this.labels.indexOf(categoria) == -1) {
+            this.labels.push(categoria);
          }
-         
-         //Soma os valores de acordo cada categoria ou descrição.
-         if (!this.data[element[atributo]]) {
-            this.data[element[atributo]] = 0;
-         }
-         this.data[element[atributo]] += Number(element.valor);
+         this.somaValoresCategorias(categoria, element);
       });
-      this.organizaOsDados(); 
+      this.organizaOsDados(tabela); 
       this.somaValoresDaTabela();
    },
 
-   organizaOsDados: function () {
+   organizaOsDados: function (tabela) {
       const data = this.data;
       for (const categoria in data) {
          arrData.push(data[categoria])
       }
       arrLabels = this.labels
+      if(tabela = 'despesas') return arrDataDespesas =  arrData;
+      arrDataReceitas = arrData;
+   },
+
+   somaValoresCategorias: function(categoria, element){
+      //Se não tiver, cria uma categoria em this.data e soma seu valor.
+      if (!this.data[categoria]) {
+         this.data[categoria] = 0;
+      }
+      this.data[categoria] += Number(element.valor);
    },
 
    somaValoresDaTabela: function() {
@@ -84,7 +89,6 @@ export const carregaGraficos = {
          ctxGraficoReceitas.update();
       }
       //Grafico Resumo 
-      console.log(totalDespesas)
       ctxGraficoResumo.data.datasets[0].data = [0, -totalDespesas];
       ctxGraficoResumo.data.datasets[2].data = [0, totalReceitas]
       ctxGraficoResumo.update();
@@ -159,7 +163,7 @@ let ctxGraficoResumo = new Chart(graficoResumo, {
       labels: ['Despesas', 'Receitas'],
       datasets: [{
          label: 'Despesas',
-         data: [0, -totalDespesas],
+         data: [],
          borderColor: '#A02020',
          fill: false,
          cubicInterpolationMode: 'monotone',
@@ -178,7 +182,7 @@ let ctxGraficoResumo = new Chart(graficoResumo, {
       },
       {
          label: 'Receitas',
-         data: [0, totalReceitas],
+         data: [],
          borderColor: 'green',
          fill: false,
          cubicInterpolationMode: 'monotone',
@@ -202,7 +206,6 @@ let ctxGraficoResumo = new Chart(graficoResumo, {
       scales: {
          x:{
             display: false,
-            color: 'white'
          },
          y: {
             // beginAtZero: true
@@ -210,7 +213,7 @@ let ctxGraficoResumo = new Chart(graficoResumo, {
             suggestedMax: totalReceitas + 50,
          },
       },
-      color: 'white',
+      // color: 'white',
       // backgroundColor: ['red', 'gray', 'green'],
    }
 })
