@@ -68,14 +68,27 @@ export const carregaGraficos = {
 
    somaValoresDaTabela: function() {
       if(!despesasSomadas){
+         if(baseDeDados[ano][mes]['despesas'].length == 0){
+            totalDespesas = [];
+            return;
+         } 
          arrData.reduce((acc, curr) =>{
             return totalDespesas = acc + curr;
          })
+
       }else{
+         if(baseDeDados[ano][mes]['receitas'].length == 0){
+            totalReceitas = [];
+            console.log('Nada')
+            return;
+         }
          arrData.reduce((acc, curr) => {
             return totalReceitas = acc + curr;
          })
       }
+      console.log('Total Despesas: '+totalDespesas);
+      console.log('Total Receitas: '+totalReceitas);
+
    },
 
    renderizaGraficosNoDOM: function(grafico){
