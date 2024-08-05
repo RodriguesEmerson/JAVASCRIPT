@@ -70,24 +70,24 @@ export const carregaGraficos = {
       if(!despesasSomadas){
          if(baseDeDados[ano][mes]['despesas'].length == 0){
             totalDespesas = [];
-            return;
-         } 
-         arrData.reduce((acc, curr) =>{
-            return totalDespesas = acc + curr;
-         })
+         }else{
+            if(arrData.length == 1) return totalDespesas = arrData[0]
+            arrData.reduce((acc, curr) =>{
+               return totalDespesas = acc + curr;
+            })
+         }
 
       }else{
          if(baseDeDados[ano][mes]['receitas'].length == 0){
             totalReceitas = [];
             console.log('Nada')
             return;
+         }else{
+            arrData.reduce((acc, curr) => {
+               return totalReceitas = acc + curr;
+            })
          }
-         arrData.reduce((acc, curr) => {
-            return totalReceitas = acc + curr;
-         })
       }
-      console.log('Total Despesas: '+totalDespesas);
-      console.log('Total Receitas: '+totalReceitas);
 
    },
 
