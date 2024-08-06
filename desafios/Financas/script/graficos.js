@@ -71,7 +71,7 @@ export const carregaGraficos = {
          if(baseDeDados[ano][mes]['despesas'].length == 0){
             totalDespesas = [];
          }else{
-            if(arrData.length == 1) return totalDespesas = arrData[0]
+            if(arrData.length == 1) return totalDespesas = arrData[0];
             arrData.reduce((acc, curr) =>{
                return totalDespesas = acc + curr;
             })
@@ -80,9 +80,9 @@ export const carregaGraficos = {
       }else{
          if(baseDeDados[ano][mes]['receitas'].length == 0){
             totalReceitas = [];
-            console.log('Nada')
             return;
          }else{
+            if(arrData.length == 1) return totalReceitas = arrData[0];
             arrData.reduce((acc, curr) => {
                return totalReceitas = acc + curr;
             })
