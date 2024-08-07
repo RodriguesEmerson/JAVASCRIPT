@@ -1,4 +1,4 @@
-import { carregaTabelas, criar, mudaMesEAno } from "./modules/utils.js";
+import { carregaTabelas, criar, mudaMesEAno, meses } from "./modules/utils.js";
 import { baseDeDados } from "./modules/dados.js";
 import { carregaGraficos } from "./graficos.js";
 
@@ -105,13 +105,7 @@ export const carregaLinksNav = {
    },
 }
 
-export const meses = {
-   JAN: 'Janeiro', FEV: 'Fevereiro', MAR: 'Março', ABR: 'Abril',
-   MAI: 'Maio', JUN: 'Junho', JUL: 'Julho', AGO: 'Agosto',
-   SET: 'Setembro', OUT: 'Outubro', NOV: 'Novembro', DEZ: 'Dezemto'
-}
-
-const mudarMesTabelas = {
+ export const mudarMesTabelas = {
    mesAnteriorSelecionado: '',
    mesAtualSelecionado: '',
    anoClicadoID: '',
@@ -154,7 +148,7 @@ const mudarMesTabelas = {
    },
 }
 
-function abrirFecharLinkAno() {
+export function abrirFecharLinkAno() {
    const ulPai = this.closest('ul');
    const ulPaiID = this.closest('ul').getAttribute('id');
    const sinalAbrirFechar = document.querySelector(`#${ulPaiID} .sinal-abir-fechar`);

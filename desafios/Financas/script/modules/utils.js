@@ -5,6 +5,7 @@ const tabelaDespesas = document.querySelector('.despesas-tabela');
 const tabelaReceitas = document.querySelector('.receitas-tabela');
 const tabelaFixos = document.querySelector('.fixos-tabela');
 
+
 let ano = 2024;
 let mes = 'JAN';
 export { ano, mes };
@@ -108,84 +109,8 @@ export const carregaTabelas = {
    }
 }
 
-export const carregaLinksNav = {
-   anosEncontrados: [],
-   mesesEncontrados: [],
-   carregaLinksNavNoDOM: function (ANO, MES) {
-      navLinks.innerHTML = '';
-      this.buscaAnosNaBD();
-      this.anosEncontrados.forEach(ANO => {
-         //Cria <ul> com os anos encontrados;
-         this.buscaMesesNaBD(ANO);
-         const ulAno = criar('ul');
-         ulAno.setAttribute('class', 'nav-link-ano');
-         ulAno.setAttribute('id', `A${ANO}`);
-         ulAno.innerHTML =
-            `<li class="link-ano">
-                     <input type="checkbox" name="ano" id="ano${ANO}">
-                         <label for="ano${ANO}">
-                             <span class="sinal-abir-fechar">+</span> 
-                             ${ANO}
-                             <span></span>
-                         </label>
-                     </li>`;
-
-         //Cria <ol> com os meses encontrados;
-         const olMes = criar('ol');
-         olMes.setAttribute('class', 'nav-link-mes');
-         ulAno.appendChild(olMes)
-         this.mesesEncontrados.forEach(MES => {
-            const liMes = criar('li')
-            liMes.setAttribute('value', `${MES}`);
-            liMes.setAttribute('class', 'link-mes');
-            liMes.textContent = `${this.mesSemAbrev(MES, false)}` //(mes, abriviado)
-            olMes.appendChild(liMes)
-         });
-
-         navLinks.appendChild(ulAno);
-      });
-      this.addEventsNosLinks();
-   },
-
-   buscaAnosNaBD: function () {
-      this.anosEncontrados = [];
-      for (const ano in baseDeDados) {
-         this.anosEncontrados.push(`${ano}`);
-      }
-   },
-   buscaMesesNaBD: function (ANO) {
-      this.mesesEncontrados = [];
-      for (const mes in baseDeDados[ANO]) {
-         this.mesesEncontrados.push(`${mes}`);
-      }
-   },
-
-   addEventsNosLinks: function () {
-      const checboxAno = document.querySelectorAll('input[type=checkbox]');
-      const liMeses = document.querySelectorAll('.link-mes');
-
-      for (let ind = 0; ind < checboxAno.length; ind++) {
-         checboxAno[ind].addEventListener('change', abrirFecharLinkAno);
-      }
-      for (let ind = 0; ind < liMeses.length; ind++) {
-         liMeses[ind].addEventListener('click', mudarMesTabelas.selecionaAnoMesClicado.bind(mudarMesTabelas, liMeses[ind]))
-      }
-   },
-
-   mesSemAbrev: function (mes, abreviado) {
-      //Retorna o mes sem abreviatura;
-      if (!abreviado) {
-         for (const key in meses) {
-            if (`${key}` == mes) {
-               return meses[key];
-            }
-         }
-      } else {
-         for (const key in meses) {
-            if (`${meses[key]}` == mes) {
-               return `${key}`;
-            }
-         }
-      }
-   },
+export const meses = {
+   JAN: 'Janeiro', FEV: 'Fevereiro', MAR: 'Março', ABR: 'Abril',
+   MAI: 'Maio', JUN: 'Junho', JUL: 'Julho', AGO: 'Agosto',
+   SET: 'Setembro', OUT: 'Outubro', NOV: 'Novembro', DEZ: 'Dezemto'
 }
