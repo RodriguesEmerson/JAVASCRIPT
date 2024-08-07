@@ -3,9 +3,10 @@
 .tabelas{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     margin-top: 1px;
     min-width: 764.65px;
-    height: calc(100vh - 51px);
+    min-height: calc(100vh - 51px);
 
 }
 .despesas-tabela, .receitas-tabela, .fixos-tabela{
@@ -91,11 +92,7 @@
     }
 }
 
-.rec-fix{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-}
+
 .receitas{ 
     position: relative;
     border-radius: 3px;
@@ -158,7 +155,7 @@
             max-width: 94px;
         }
         tr:nth-child(odd){
-            background-color: rgba(255, 115, 0, 0.221) ;
+            background-color: rgba(111, 111, 111, 0.221) ;
         }
         tr:first-child{
             background-color: darken($cor-fixos, 7);
@@ -173,5 +170,35 @@
 }
 
 @media (max-width: 850px) {
-    
+    .tabelas{
+        min-width: 544px;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        gap: 5px;
+    }
+    .tabel{
+        width: 100%;
+    }
+    .despesas{
+        width: 601px
+    }
+    .rec-fix{
+        display: flex;
+        width: 601px;
+        gap: 5px;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+    .receitas, .gastos-fixos{
+ 
+        max-width: 320px;
+        width: 49.5%;
+    }
+
+    .despesas, .receitas, .gastos-fixos{
+        height: 400px;
+        overflow-y: scroll;
+    }
 }

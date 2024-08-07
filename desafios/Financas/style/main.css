@@ -28,12 +28,18 @@ header {
   width: calc(100% - 51px);
 }
 
+@media (max-width: 850px) {
+  .dash-board {
+    flex-direction: column !important;
+  }
+}
 .tabelas {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   margin-top: 1px;
   min-width: 764.65px;
-  height: calc(100vh - 51px);
+  min-height: calc(100vh - 51px);
 }
 
 .despesas-tabela, .receitas-tabela, .fixos-tabela {
@@ -117,12 +123,6 @@ header {
   width: 100px;
 }
 
-.rec-fix {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-}
-
 .receitas {
   position: relative;
   border-radius: 3px;
@@ -172,10 +172,10 @@ header {
   display: block !important;
 }
 .gastos-fixos .cabecalho-tabela {
-  background-color: rgba(190, 101, 28, 0.934);
+  background-color: rgba(109, 43, 43, 0.934);
 }
 .gastos-fixos .soma-total {
-  background-color: rgba(190, 101, 28, 0.934);
+  background-color: rgba(109, 43, 43, 0.934);
 }
 .gastos-fixos .fixos-tabela {
   width: 100%;
@@ -184,16 +184,47 @@ header {
   max-width: 94px;
 }
 .gastos-fixos .fixos-tabela tr:nth-child(odd) {
-  background-color: rgba(255, 115, 0, 0.221);
+  background-color: rgba(111, 111, 111, 0.221);
 }
 .gastos-fixos .fixos-tabela tr:first-child {
-  background-color: rgba(159, 84, 23, 0.934);
+  background-color: rgba(83, 33, 33, 0.934);
   color: white;
 }
 .gastos-fixos .fixos-tabela tr:nth-child(even) td:first-child {
   border-left: none;
 }
 
+@media (max-width: 850px) {
+  .tabelas {
+    min-width: 544px;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 5px;
+  }
+  .tabel {
+    width: 100%;
+  }
+  .despesas {
+    width: 601px;
+  }
+  .rec-fix {
+    display: flex;
+    width: 601px;
+    gap: 5px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+  .receitas, .gastos-fixos {
+    max-width: 320px;
+    width: 49.5%;
+  }
+  .despesas, .receitas, .gastos-fixos {
+    height: 400px;
+    overflow-y: scroll;
+  }
+}
 .lancar-container {
   position: absolute;
   width: 100vw;
@@ -562,11 +593,18 @@ header {
 }
 .graficos .desp-rec .grafico-receitas {
   margin-left: 10px;
+  border-left: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
 }
 .graficos .res {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: auto;
   width: 500px;
-  height: 250px;
+  height: 350px;
+  border-left: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
 }
 
 .hidden {

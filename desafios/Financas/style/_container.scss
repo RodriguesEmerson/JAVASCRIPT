@@ -27,4 +27,8 @@ header{
     }
 }
 
-
+@media (max-width: 850px) {
+    .dash-board{
+        flex-direction: column !important;
+    }
+}

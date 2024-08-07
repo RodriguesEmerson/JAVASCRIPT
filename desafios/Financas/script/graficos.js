@@ -104,8 +104,8 @@ export const carregaGraficos = {
          ctxGraficoReceitas.update();
       }
       //Grafico Resumo 
-      ctxGraficoResumo.data.datasets[0].data = [0, totalDespesas];
-      ctxGraficoResumo.data.datasets[1].data = [0, totalReceitas]
+      ctxGraficoResumo.data.datasets[0].data = [totalDespesas, totalReceitas];
+      // ctxGraficoResumo.data.datasets[1].data = [0, totalReceitas]
       ctxGraficoResumo.update();
    },
 }
@@ -165,7 +165,8 @@ let ctxGraficoReceitas = new Chart(graficoReceitas, {
       },
       scales: {
          y: {
-            beginAtZero: true
+            beginAtZero: true,
+            display: false,
          }
       },
       backgroundColor: coresReceitas,
@@ -173,27 +174,26 @@ let ctxGraficoReceitas = new Chart(graficoReceitas, {
 })
 
 let ctxGraficoResumo = new Chart(graficoResumo, {
-   type: 'line',
+   type: 'doughnut',
    data: {
-      labels:['Resumo', 'Resumo'],//pontos do gráfico.
+      labels:['Receitas', 'Despesas'],//pontos do gráfico.
       datasets: [{
          label: 'Despesas', //legendas acima do gráfico.
          data: [],
-         borderColor: '#A02020', //red
-         fill: false,
-         cubicInterpolationMode: 'monotone',
+         fill: true,
+         // cubicInterpolationMode: 'monotone',
          tension: 0.4,
-         backgroundColor: '#A02020', //red
+         backgroundColor: ['green', '#A02020']//red
       },
-      {
-         label: 'Receitas',
-         data: [],
-         borderColor: 'green',
-         fill: false,
-         cubicInterpolationMode: 'monotone',
-         tension: 0.4,
-         backgroundColor: 'green'
-      }
+      // {
+      //    label: 'Receitas',
+      //    data: [],
+      //    borderColor: 'green',
+      //    fill: false,
+      //    cubicInterpolationMode: 'monotone',
+      //    tension: 0.4,
+      //    backgroundColor: 'green'
+      // }
       ]
    },
    options: {
@@ -213,7 +213,8 @@ let ctxGraficoResumo = new Chart(graficoResumo, {
             display: false,
          },
          y: {
-            beginAtZero: true,
+            display: false,
+            // beginAtZero: true,
             // suggestedMin: -10,
             // suggestedMax: totalReceitas + 50,
          },
